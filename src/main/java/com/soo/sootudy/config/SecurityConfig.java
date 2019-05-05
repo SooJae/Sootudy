@@ -46,7 +46,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-
+//
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		//UTF-8로 인코딩 하기위해
