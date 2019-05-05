@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.soo.sootudy.mapper.ReplyMapper">
+
+	<select id="list" resultType="com.soo.sootudy.domain.ReplyVO">
+		SELECT *
+			FROM TBL_REPLY2
+	</select>
+	<select id="read" resultType="com.soo.sootudy.domain.ReplyVO">
+		SELECT * 
+			FROM TBL_REPLY2
+			WHERE RNO = #{rno}
+	</select>
+	
+	<insert id="insert">
+		INSERT INTO TBL_REPLY2
+				( BNO
+				, REPLYTEXT
+				, REPLYER)
+			VALUES( #{bno}
+				,	#{replyText}
+				, 	#{replyer})
+	</insert>
+	
+	<delete id="delete">
+		DELETE FROM TBL_REPLY2
+				WHERE RNO = #{rno}
+	</delete>
+	
+	<update id="update">
+		UPDATE TBL_REPLY2 
+			SET REPLYTEXT = #{replyText}
+			WHERE RNO = #{rno}
+	</update>
+	<!-- 
+	<select id="getListWithPaging" resultType="com.soo.sootudy.domain.ReplyVO">
+		SELECT 
+			 RNO
+			,BNO
+			,REPLYTEXT
+			,REPLYER
+			,REPLYDATE
+			,REPLYudt_dt
+		FROM TBL_REPLY2
+		WHERE BNO = #{bno}
+		ORDER BY RNO DESC
+	</select>
+	 -->
+	<select id="getListWithPaging" resultType="com.soo.sootudy.domain.ReplyVO">
+		SELECT 
+			 RNO
+			,BNO
+			,REPLYTEXT
+			,REPLYER
+			,REPLYDATE
+			,REPLYudt_dt
+		FROM TBL_REPLY2
+		WHERE BNO = #{bno}
+		ORDER BY RNO DESC
+		<!-- limit #{pageStart}, #{perPageNum} -->
+		limit #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="getCountByBno" resultType="int">
+		select count(rno) from tbl_reply2 where bno = #{bno}
+	</select>
+	
+	
+<!-- 	
+	<update id="update">
+		UPDATE TBL_REPLY
+			SET REPLYTEXT = #{replytext}
+			 ,	udt_dt = NOW()
+			 WHERE RNO = #{rno}
+	</update>
+	
+	<delete id="delete">
+		DELETE FROM TBL_REPLY
+			WHERE RNO = #{rno}
+	</delete>
+	
+	<select id="listPage" resultType="ReplyVO">
+		SELECT *
+		FROM TBL_REPLY
+		WHERE BNO = #{bno}
+		ORDER BY RNO DESC
+		LIMIT #{cri.pageStart}, #{cri.perPageNum}
+	</select>
+	
+	<select id="count" resultType="int">
+		SELECT COUNT(BNO)
+		FROM TBL_REPLY
+		WHERE BNO = #{bno}
+	</select>
+	 -->
+	 
+	<!--   <insert id="insertBoard6Reply" parameterType="com.soo.sootudy.domain.ReplyVO" >
+        <selectKey resultType="String" keyProperty="rno" order="BEFORE">
+            SELECT IFNULL(MAX(RNO),0)+1 FROM TBL_REPLY2
+        </selectKey>
+    
+        INSERT INTO TBL_REPLY2(BNO, RNO, REPLYER, REPLYORDER, REPLYPARENT, REPLYDEPTH)
+        VALUES (#{bno}, #{rno}, #{replyer}, #{replyOrder},
+                   <choose>
+                       <when test="replyParent==null">#{rno}, 0</when>
+                       <otherwise>#{replyParent}, #{replyDepth}</otherwise>
+                   </choose>
+               )
+    </insert>
+
+    <select id="selectBoard6ReplyParent" resultType="com.soo.sootudy.domain.ReplyVO" parameterType="String">
+        SELECT BNO, REPLYDEPTH+1 REPLYDEPTH, REPLYORDER 
+          FROM TBL_REPLY2
+         WHERE RNO=#{replyParent}
+    </select>
+
+    <update id="updateBoard6ReplyOrder" parameterType="com.soo.sootudy.domain.ReplyVO"> 
+        UPDATE TBL_REPLY2
+           SET REPLYORDER = REPLYORDER + 1 
+         WHERE BNO=#{bno} AND REPLYORDER>#{replyOrder}       
+    </update> 
+
+    <select id="selectBoard6ReplyMaxOrder" resultType="Integer" parameterType="String">
+        SELECT IFNULL(MAX(REPLYORDER),0)+1
+          FROM TBL_REPLY2
+         WHERE BNO=#{bno}
+    </select> -->
+</mapper>
+
+

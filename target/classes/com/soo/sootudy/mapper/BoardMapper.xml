@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soo.sootudy.mapper.BoardMapper">
+
+<!-- 
+<insert id="insert">
+	insert into board (title,content,writer)
+	values (#{title}, #{content}, #{writer})
+</insert>
+ -->
+
+<insert id="insertSelectKey">
+<selectKey keyProperty="bno" resultType="int" order="AFTER">
+  SELECT LAST_INSERT_ID()
+</selectKey>
+insert into board (title,content,writer,bname)
+values (#{title}, #{content}, #{writer},#{bname})
+</insert>
+
+ <!-- 
+<insert id="insertSelectKey">
+insert into board (title,content,writer)
+values ( #{title}, #{content}, #{writer})
+</insert>
+ -->
+
+<!-- 
+<insert id="insertSelectKey">
+		<selectKey keyProperty="bno" order="BEFORE"
+			resultType="long">
+			SELECT MAX(bno)+1 FROM board    
+		</selectKey>
+		insert into board (bno,title,content, writer)
+		values (#{bno},
+		#{title}, #{content}, #{writer})
+</insert>
+ -->
+<select id="read" resultType="com.soo.sootudy.domain.BoardVO">
+		select * from board  
+		where delete_flag ='0' and bno = #{bno}
+</select>
+
+<!-- <select id="read" resultType="com.soo.sootudy.domain.BoardVO">
+		select * from board  
+		where delete_flag ='0' and bname=#{bname} and bno = #{bno}
+</select> -->
+
+<!-- 
+<delete id="delete">
+		delete from board where bno = #{bno}
+</delete>
+ -->
+ 
+<delete id="delete">
+	update board set delete_flag = '1' where bno =#{bno}
+</delete>
+<update id="update">
+		update board 
+		set title = #{title},
+		content = #{content},
+		writer = #{writer}
+		where delete_flag ='0' and bno = #{bno}
+</update>
+
+<update id="updateReplyCnt">
+	UPDATE board SET reply_cnt = reply_cnt + #{amount} where bno = #{bno}
+</update>
+<!-- <select id="getListWithPaging" resultType="com.soo.sootudy.domain.BoardVO">
+ select 
+   bno, title, content, writer, dt, udt_dt 
+ from 
+   board 
+ where bno &gt; 0 
+ order by bno desc, dt desc
+ limit #{pageStart}, #{perPageNum}
+ </select> -->
+
+
+
+<select id="getListWithPaging" resultType="com.soo.sootudy.domain.BoardVO">
+ select 
+   bno, title, content, writer, dt, udt_dt, reply_cnt
+ from 
+   board where delete_flag ='0'
+
+<include refid="criteria"></include>
+  order by bno desc, dt desc
+  limit #{pageStart}, #{perPageNum}
+</select>
+ 
+ 
+ <select id="getTotalCount" resultType="int">
+ 	select count(*) from board where delete_flag ='0' 
+ 	<include refid="criteria"></include>
+ </select>
+ 
+
+<sql id="criteria">
+  <trim prefix="AND (" suffix=") " prefixOverrides="AND |OR">
+  <if test="bname != null and bname !='' ">
+    bname = #{bname}
+   </if>
+  </trim>
+
+	<trim prefix="AND (" suffix=") " prefixOverrides="AND |OR">
+		<foreach item="type" collection="typeArr">
+			<trim prefix="OR">
+				<choose>
+					<when test="type == 'T'.toString()">
+						title like CONCAT('%', #{keyword}, '%')
+	 				</when>
+	 				<when test="type == 'C'.toString()">
+	 					content like CONCAT('%', #{keyword}, '%')
+	 				</when>
+	 				<when test="type == 'W'.toString()">
+	 					writer like CONCAT('%', #{keyword}, '%')
+	 				</when>
+				</choose>
+			</trim>
+		</foreach>
+	</trim>
+</sql>
+
+
+<!-- 
+<trim prefix="where (" suffix=")"  prefixOverrides="OR | AND">
+ 	<foreach item='type' collection="typeArr">
+ 		<trim prefix="OR">
+ 			<choose>
+ 				<when test="type == 'T'.toString()">
+ 					title like CONCAT('%', #{keyword}, '%')
+ 				</when>
+ 				<when test="type == 'C'.toString()">
+ 					content like CONCAT('%', #{keyword}, '%')
+ 				</when>
+ 				<when test="type == 'W'.toString()">
+ 					writer like CONCAT('%', #{keyword}, '%')
+ 				</when>
+ 			</choose>
+ 		</trim> -->
+
+
+
+
+	<!-- 
+
+
+	<delete id="delete">
+		delete tbl_board where bno = #{bno}
+	</delete>
+
+	<update id="update">
+		update tbl_board
+		set title= #{title},
+		content=#{content},
+		writer = #{writer},
+		udt_dt = sysdate
+		where bno =
+		#{bno}
+	</update>
+
+	<select id="getListWithPaging" resultType="com.soo.sootudy.domain.BoardVO"> 
+		<![CDATA[ select bno, title, content, writer, dt, udt_dt from ( 
+		select /*+INDEX_DESC(tbl_board pk_board) */ rownum rn, bno, title, content, 
+		writer, dt, udt_dt from tbl_board where rownum <= #{pageNum} * #{amount} 
+		) where rn > (#{pageNum} -1) * #{amount} ]]> </select>
+
+
+	<select id="getListWithPaging"
+		resultType="com.soo.sootudy.domain.BoardVO">
+  <![CDATA[
+  select 
+    bno, title, content, writer, dt, udt_dt
+  from 
+      (
+      select /*+INDEX_DESC(tbl_board pk_board) */
+        rownum rn, bno, title, content, writer, dt, udt_dt 
+      from 
+        tbl_board
+      where 
+  ]]>
+		<trim prefix="(" suffix=") AND " prefixOverrides="OR">
+			<foreach item='type' collection="typeArr">
+				<trim prefix="OR">
+					<choose>
+						<when test="type == 'T'.toString()">
+							title like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'C'.toString()">
+							content like '%'||#{keyword}||'%'
+						</when>
+						<when test="type == 'W'.toString()">
+							writer like '%'||#{keyword}||'%'
+						</when>
+					</choose>
+				</trim>
+			</foreach>
+		</trim>
+      
+  <![CDATA[    
+      rownum <= #{pageNum} * #{amount}
+      )
+  where rn > (#{pageNum} -1) * #{amount}   
+  ]]>
+	</select>
+
+
+
+
+	<select id="getTotalCount" resultType="int">
+		select count(*) from tbl_board where 
+		
+		<include refid="criteria"></include> 
+		
+		bno > 0
+		
+	</select>
+ -->
+</mapper>

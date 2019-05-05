@@ -1,0 +1,258 @@
+@charset "utf-8";
+/* @import url(https://fonts.googleapis.com/earlyaccess/nanumgothic.css);
+@import url(http://fonts.googleapis.com/earlyaccess/hanna.css);
+@import url(//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css); */
+
+* {
+	font-family: 'Spoqa Han Sans', 'Nanum Gothic', 'Sans-serif';
+	
+}
+
+
+h4{	font-family:'Hanna';}
+
+h5{font-family : 'Spoqa Han Sans'; font-size:16px; margin-top:0.5rem;}
+.form-head{
+	text-align:center; 
+	border-bottom: solid 3px gray;
+} 
+body{
+	background-color:#f8f8f8;
+}
+label{
+	font-size:12px;
+}
+.btn {
+	font-size:14px;
+}
+.success-form>label{
+	color: limegreen;
+}
+.success-form>input, .success-form>.form-control:focus{
+	border : 1.5px solid limegreen;
+	box-shadow :0px 0px 3.5px limegreen;
+}
+.danger-form>label{
+	color: red;
+}
+.danger-form>input, .danger-form>.form-control:focus{
+	border : 1.5px solid red;
+	box-shadow : 0px 0px 3.5px red;
+}
+
+.default-form>label{
+	color: black;
+}
+.default-form>input{
+	border : 1.5px solid lightgray;
+}
+
+
+.form-group {
+    position: relative;
+}
+.checkIcon {
+    color: limegreen;
+    position: absolute;
+    margin: -10.5% 0 0 88.5%;
+    font-size:1.4rem;
+}
+.timesIcon {
+    color: red;
+    position: absolute;
+    margin: -10.5% 0 0 88.5%;
+    font-size:1.4rem;
+}
+
+
+.inputDnD .form-control-file {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  min-height: 6em;
+  outline: none;
+  visibility: hidden;
+  cursor: pointer;
+  background-color: #c61c23;
+  box-shadow: 0 0 5px solid currentColor;
+}
+.inputDnD .form-control-file:before {
+  content: attr(data-title);
+  position: absolute;
+  left: 0;
+  width: 100%;
+  min-height: 3rem;
+  line-height: 1rem;
+  padding: 5%;
+  opacity: 1;
+  visibility: visible;
+  text-align: center;
+  border: 0.25em dashed currentColor;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  overflow: hidden;
+}
+.inputDnD .form-control-file:hover:before {
+  border-style: solid;
+  box-shadow: inset 0px 0px 0px 0px currentColor;
+}
+.board-list{
+	font-size:0.85rem;
+	width:70%;
+ 	
+}
+
+.board-list .board-list-head{
+	font-weight:bold;
+	border:1px solid lightgray;
+	padding-top: 12px;
+	padding-bottom : 12px;
+	border-top-left-radius: 4px;
+  border-top-right-radius: 4px;
+
+}
+.board-list .board-list-body{
+	padding: 8px;
+	border-bottom: 1px solid lightgray;
+	border-left: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+	padding-right:0;
+	padding-left:0;
+
+}
+.board-list .board-list-body:last-child{
+	border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+
+
+.board-whole{
+	width:70%;
+}
+
+.board-detail{
+	/* font-size:1.1rem; */
+	/* width:70%; */
+}
+
+.board-detail .board-detail-head{
+	border:1px solid lightgray;
+	border-bottom:none;
+	padding-top: 12px;
+	padding-bottom : 4px; 
+	border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+}
+.board-detail .board-detail-headbt{
+	border:1px solid lightgray;
+	background:#f6f6f6;
+	padding-top: 12px;
+	padding-bottom : 12px;
+	background:#f6f6f6;
+	
+}
+.board-detail .board-detail-body{
+	border-left:1px solid lightgray;
+	border-right:1px solid lightgray;
+	padding:20px;
+}
+
+
+.board-content img{
+	max-width:100%;
+}
+
+.vote-btn{
+	border-left:1px solid lightgray;
+	border-right:1px solid lightgray;
+}
+.board-detail-bottom{
+	border:1px solid lightgray;
+	background:#f6f6f6;
+	border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+
+.comment-header{
+	background-color:lightgray;
+	border: 1px solid lightgray;
+	
+}
+.comment-body{
+	border: 1px solid lightgray;
+	border-bottom-left-radius: 4px;
+    border-bottom-right-radius: 4px;
+}
+.card-detail{
+	border:1px solid lightgray;
+	border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+    padding-top: 12px;
+	padding-bottom : 12px;
+}
+
+a, a:hover{
+	color:inherit;
+}
+
+
+.row-no-padding > [class*="col-"] {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+    
+
+.ellipsis {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.white{
+	padding:0;
+	background-color:white;
+}
+
+.title a:visited {
+	color:DarkViolet;
+}
+
+
+p {
+overflow-wrap: break-word;
+   word-break: break-all;
+}
+
+
+
+@media (max-width: 767.98px) { 
+	
+.in-visible{
+	display:none;
+	}
+.m-full{
+	width:100%;
+}	
+#date, #count{
+	padding:0;
+}
+
+.board-list-body #nick:before{
+	font-family: 'Font Awesome 5 Free';
+	margin-right: 5px;
+	content:"\f2bd";
+	font-weight: 900;
+	
+	}	
+.board-list-body #date:before{
+	font-family: 'Font Awesome 5 Free';
+	margin-right: 5px;
+	content:"\f017";
+	
+	}
+.board-list-body #count:before{
+	font-family: 'Font Awesome 5 Free';
+	margin-right: 5px;
+	content:"\f06e";
+	}
+}
