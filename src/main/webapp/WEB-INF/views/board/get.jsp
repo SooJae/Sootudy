@@ -405,8 +405,6 @@ $(function(){
 			 <sec:authorize access="isAuthenticated()">
 			 replyer = '<sec:authentication property="principal.username"/>';
 			 </sec:authorize>	
-
-
 		 	
 			 var reply = {
 					replyText: replyForm.find("input[name='replyText']").val(),
@@ -451,7 +449,6 @@ $(function(){
 			
 			
 			if(replyer != originalReplyer){
-				alert(replyer+"안뇽"+originalReplyer);
 				return;
 			}
 			

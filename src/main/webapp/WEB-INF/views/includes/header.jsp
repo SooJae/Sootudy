@@ -103,7 +103,7 @@
 	      <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
 	        <ul class="navbar-nav ">
 	          <li class="nav-item active">
-	            <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+	            <a class="nav-link" href="/member/join" id="joinBtn">회원가입 <span class="sr-only">(current)</span></a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link" href="#">Features</a>
@@ -120,5 +120,15 @@
 	<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
+<script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 
+<script type="text/javascript">
+$(document).ready(function(){
+$("#joinBtn").on("click", function(){
+	e.preventDefault();
+       self.location = "/member/join";
+     });
+	
+});
 
+</script>

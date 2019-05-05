@@ -29,4 +29,32 @@
 	WHERE mem.userid = #{userid} 
   </select>
 
+  <select id="get" resultType="com.soo.sootudy.domain.MemberVO">
+  SELECT * FROM member
+    <where>
+      <if test="checkArg == 'id'.toString()">
+       ID = #{val}
+      </if>
+      <if test="checkArg == 'nm'.toString()">
+       NM = #{val}
+      </if>
+      <if test="checkArg == 'email'.toString()">
+       EMAIL = #{val}
+      </if>
+    </where>
+  </select>
+  
+  <insert id="insert">
+  INSERT INTO member
+       ( ID
+       , PW
+       , NM
+       , EMAIL) 
+    VALUES(#{id}
+       ,   #{pw}
+       ,   #{nickName}
+       ,   #{email})
+  </insert>
+  
+  
 </mapper>
