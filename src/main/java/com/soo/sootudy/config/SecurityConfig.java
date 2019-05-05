@@ -41,23 +41,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.passwordEncoder(passwordEncoder());
 	}
 	
-	/*
-	 * @Override protected void configure(AuthenticationManagerBuilder auth) throws
-	 * Exception{ log.info("configure.............. JDBC .....................");
-	 * 
-	 * String queryUser =
-	 * "select userid, userpw, enabled from tbl_member where userid = ?"; String
-	 * queryDetails = "select userid, auth from tbl_member_auth where userid = ?";
-	 * 
-	 * auth.jdbcAuthentication() .dataSource(dataSource)
-	 * .passwordEncoder(passwordEncoder()) .usersByUsernameQuery(queryUser)
-	 * .authoritiesByUsernameQuery(queryDetails); }
-	 */
-	
-	/*
-	 * @Bean public AuthenticationSuccessHandler loginSuccessHandler() { return new
-	 * CustomLoginSuccessHandler(); }
-	 */
 	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
