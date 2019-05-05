@@ -39,11 +39,6 @@ public class BoardController {
 	private BoardService service;
 	
 	
-	/*
-	 * @GetMapping("list") public String list(Criteria cri, Model model) {
-	 * log.info("list"); model.addAttribute("list", service.getList(cri)); return
-	 * "/board/list"; }
-	 */
 	@GetMapping("/list")
 	public String list(Criteria cri, Model model) {
 		
