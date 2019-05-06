@@ -27,7 +27,7 @@ public class MemberMapperTests {
 	public void checkTest() {
 		Map<String, String>  map = new HashMap<>();
 		
-		log.info(mapper.get("email","checkArg"));
+		//log.info(mapper.get("email","checkArg"));
 	}
 	
 	@Test @Ignore
