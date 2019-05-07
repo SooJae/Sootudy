@@ -1,12 +1,35 @@
+class Form{
+	success(focus){
+		focus.parent().removeClass().addClass("form-group success-form");
+		focus.siblings("i").removeClass().addClass("fas fa-times-circle checkIcon");
+	}
+	fail(focus){
+		console.log(focus);
+    	focus.parent().removeClass().addClass("form-group danger-form");
+		focus.siblings("i").removeClass().addClass("fas fa-times-circle timesIcon");
+	}
+}
 
-var joinCheckService =(function(){
+class selectForm extends Form{
+	
+}
+
+
+let joinCheckService =(function(){
     
+	
+	/*let successForm = function(focus){
+		focus.parent().removeClass().addClass("form-group success-form");
+		focus.siblings("i").removeClass().addClass("fas fa-times-circle checkIcon");
+	};*/
+	
     async function checkForm(focus){
-        var formGroup = focus.parent().parent();
-        var pwCheck = formGroup.find("#pw2");
-        var pw =formGroup.find("#pw");
-        var focusID = focus.attr("id");
-         
+    	let f = new Form();
+        let formGroup = focus.parent().parent();
+        let pwCheck = formGroup.find("#pw2");
+        let pw =formGroup.find("#pw");
+        let focusID = focus.attr("id");
+        
         try{
             if(focusID === "id"){
 	            let res = await checkRexID(focus);
@@ -32,12 +55,13 @@ var joinCheckService =(function(){
         } catch (e){
             //return "메롱";
             //return e.message;
+        	f.fail(focus);
             focus.siblings("label").text(e.message);
         }
     }
 
-    var checkRexID = function(focus){
-         var reg = /[^a-z0-9]/gi; //영어 숫자만 가능
+    let checkRexID = function(focus){
+         let reg = /[^a-z0-9]/gi; //영어 숫자만 가능
 
         if(reg.test(focus.val())){
             focus.val(focus.val().replace(reg , ""));
@@ -48,17 +72,15 @@ var joinCheckService =(function(){
         } 
           	 	
         else {
-        	focus.parent().removeClass().addClass("form-group danger-form");
-    		focus.siblings("i").removeClass().addClass("fas fa-times-circle timesIcon");
     		throw new Error("아이디를 입력해주세요 (영어+숫자조합 4~12자))");
             
         }  
 
     };
 
-    var checkRexNickName = function(focus){
+    let checkRexNickName = function(focus){
         //특수문자 사용불가
-        var reg = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; 
+        let reg = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; 
             if(reg.test(focus.val())){
                 focus.val(focus.val().replace(reg , ""));
                 throw new Error("특수문자는 사용하실 수 없습니다");
@@ -67,54 +89,57 @@ var joinCheckService =(function(){
                 return focus.val();
             }
             else{
-            	focus.parent().removeClass().addClass("form-group danger-form");
-        		focus.siblings("i").removeClass().addClass("fas fa-times-circle timesIcon");
                 throw new Error("닉네임 입력해주세요 (2~8자)");
                 }
     }
 
 
-    var checkPW = function(focus, pwCheck){
+    let checkPW = function(focus, pwCheck){
          if(8<=focus.val().length && focus.val().length <=16){
             
-         console.log(pwCheck.val().length);
             if(pwCheck.val().length>0){
                  if(focus.val()!=pwCheck.val()){
-                	 
-                 	focus.parent().removeClass().addClass("form-group danger-form");
-            		focus.siblings("i").removeClass().addClass("fas fa-times-circle timesIcon");
                 	 
                 	 pwCheck.siblings("label").text("비밀번호가 일치하지 않습니다.")
                        throw new Error("비밀번호가 일치하지 않습니다");
                     }
                  if(focus.val() == pwCheck.val()){
+                	 f.success(focus);
+                	 f.success(pwCheck);
+            		
                      focus.siblings("label").text("비밀번호가 일치합니다.");
                      pwCheck.siblings("label").text("비밀번호가 일치합니다.");
                 }
             }
             else{
+            	focus.parent().removeClass().addClass("form-group success-form");
+        		focus.siblings("i").removeClass().addClass("fas fa-times-circle checkIcon");
                 focus.siblings("label").text("사용 가능한 비밀번호입니다");
             }
          }else{
-	         	focus.parent().removeClass().addClass("form-group danger-form");
-	    		focus.siblings("i").removeClass().addClass("fas fa-times-circle timesIcon");
+
                 throw new Error("비밀번호를 입력해주세요 (8~16자)");
          }
     }
         
-    var checkPW2 = function(focus,pw){
+    let checkPW2 = function(focus,pw){
         if(focus.val() != pw.val()){
+        	f.fail(focus);
+    		
         	pw.siblings("label").text("비밀번호가 일치하지않습니다.");
             throw new Error("비밀번호가 일치하지 않습니다");
         }
         else{
+        	f.success(focus);
+        	f.success(pw);
+    		
             focus.siblings("label").text("비밀번호가 일치합니다");
             pw.siblings("label").text("비밀번호가 일치합니다");
         }
     }
 
-    var checkRexEmail =  function(focus){
-    var reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
+    let checkRexEmail =  function(focus){
+    let reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
 	    if(!reg.test(focus.val())){
 	       throw new Error("이메일의 형식에 맞게 작성해주세요");
 	    }
@@ -123,11 +148,11 @@ var joinCheckService =(function(){
 	    }
     }
         
-    var checkDuplication= function(focus,checkArg){
-    	var data ={"val" : focus,
+    let checkDuplication= function(focus,checkArg){
+    	let data ={"val" : focus,
     				"checkArg" : checkArg};
     	console.log(focus,checkArg);
-        var promise = $.ajax({
+        let promise = $.ajax({
             type:'POST',
             contentType:"application/json; charset=utf-8",
             url: '/member/check',
@@ -143,17 +168,19 @@ var joinCheckService =(function(){
         
     }
     
-    
-    var designForm = function(focus,res2){
+    let obj = {id :"아이디",nm:"닉네임",email:"이메일"};
+   
+    let designForm = function(focus,res2){
+    	
+    	let select = (()=> obj[focus.attr("id")])();
+    	
     	if(res2 == 0 ){
-        	focus.parent().removeClass().addClass("form-group danger-form");
-    		focus.siblings("i").removeClass().addClass("fas fa-times-circle timesIcon");
-    		focus.siblings("label").text("이미 사용중인 아이디입니다.");
+    		f.fail(focus);
+    		focus.siblings("label").text("이미 사용중인 "+select+"입니다.");
     	}
     	if(res2 == 1){
-        	focus.parent().removeClass().addClass("form-group success-form");
-    		focus.siblings("i").removeClass().addClass("fas fa-times-circle checkIcon");
-    		focus.siblings("label").text("사용 가능한 아이디입니다");
+    		f.success(focus);
+    		focus.siblings("label").text("사용 가능한 "+select+"입니다");
     	}
     };
     

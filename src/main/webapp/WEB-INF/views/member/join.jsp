@@ -13,27 +13,27 @@
     <form class="formCheck" method="post" action="/member/join" id="joinForm" name="userInfo" onsubmit="return checkJoinForm();">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
       <div class="form-group" id="idForm">
-        <label for="ID">아이디를 입력해주세요(영어+숫자조합 4~10자)</label>
+        <label for="id">아이디를 입력해주세요(영어+숫자조합 4~10자)</label>
         <input type="text" id="id" name="memberID" class="form-control" style="ime-mode:inactive;" minlength="4" maxlength="12" size="12" >   
         <i></i>
       </div>
       <div class="form-group" id="nickNameForm">
-        <label for="NickName">닉네임을 입력해주세요 (2~8자)</label>
+        <label for="nm">닉네임을 입력해주세요 (2~8자)</label>
         <input type="text" id="nm" name="memberNickName" class="form-control"  minlength="2" maxlength="8" size="11"> 
         <i></i>
       </div>
       <div class="form-group" id="pwForm">
-        <label for="PW">비밀번호를 입력해주세요 (8~16자)</label>
+        <label for="pw">비밀번호를 입력해주세요 (8~16자)</label>
         <input type="password" id="pw" name="memberPW" class="form-control valid"  minlength="8" maxlength="16" size="16">
         <i></i>
       </div>
       <div class="form-group" id="pw2Form">
-        <label for="PW2">비밀번호를 확인해주세요</label>
+        <label for="pw2">비밀번호를 확인해주세요</label>
         <input type="password" id="pw2" name="memberPW2" class="form-control"   minlength="8" maxlength="16" size="16">
         <i></i>
       </div>
       <div class="form-group" id="emailForm">
-        <label for="Email">이메일을 입력해주세요</label>
+        <label for="email">이메일을 입력해주세요</label>
         <input type="text" id="email" name="memberEmail" class="form-control">
         <i></i>
         <small id="emailHelp" class="form-text text-muted">이메일은 비밀번호 찾기에 사용됩니다</small>
