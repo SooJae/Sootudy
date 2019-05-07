@@ -58,26 +58,30 @@ $(function(){
 var csrfHeaderName="${_csrf.headerName}";
 var csrfTokenValue="${_csrf.token}";
 
+
 //ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
 	$(document).ajaxSend(function(e, xhr, options){
 	  xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 	});
-	console.log("조인폼");
-	var defaultForm = "default-Form";
-	var dangerForm = "danger-Form";
-	var successForm = "success-Form";
-		$(".formCheck").keyup(function(){
+	
+//디바운싱을 위한 타이머 설정
+var timer;
+		$(".formCheck").keyup(function(e){
+			if (timer) {
+			    clearTimeout(timer);
+			  }
+ timer = setTimeout(function() { 		
 			var focus = $(":focus");
-			//var focusGroup = $(":focus").parent();
-			
-			console.log(focus.val());
-			joinCheckService.checkForm(focus);
+				joinCheckService.checkForm(focus);
+			},200); 
 		});
 	
 		$(".btn-success").on("click", function(e){
 			e.preventDefault();
 			$("form").submit();
 		});
+		
+		
 });
 </script>
 

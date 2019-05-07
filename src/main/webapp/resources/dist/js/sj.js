@@ -1,30 +1,45 @@
+//let instance = null;
+let obj = {id :"아이디",nm:"닉네임",email:"이메일"};
 class Form{
-	success(focus){
-		focus.parent().removeClass().addClass("form-group success-form");
-		focus.siblings("i").removeClass().addClass("fas fa-times-circle checkIcon");
+	constructor(focus){
+		this.focus=focus;
+/*		if(!instance){
+			instance = this;
+		}
+		return instance;*/
 	}
-	fail(focus){
-		console.log(focus);
-    	focus.parent().removeClass().addClass("form-group danger-form");
-		focus.siblings("i").removeClass().addClass("fas fa-times-circle timesIcon");
+	success(){
+		this.focus.parent().removeClass().addClass("form-group success-form");
+		this.focus.siblings("i").removeClass().addClass("fas fa-check-circle checkIcon");
+	}
+	fail(){
+		this.focus.parent().removeClass().addClass("form-group danger-form");
+		this.focus.siblings("i").removeClass().addClass("fas fa-times-circle timesIcon");
 	}
 }
 
-class selectForm extends Form{
+class SelectForm extends Form{
+	constructor(focus){
+		super(focus);
+	}
 	
+	selectSuccess(){
+		this.focus.siblings("label").text("사용 가능한 "+obj[this.focus.attr("id")]+"입니다");
+		super.success();
+	}
+	
+	selectFail() {
+		this.focus.siblings("label").text("이미 사용중인 "+obj[this.focus.attr("id")]+"입니다.");
+		super.fail();
+	}
 }
 
 
 let joinCheckService =(function(){
     
 	
-	/*let successForm = function(focus){
-		focus.parent().removeClass().addClass("form-group success-form");
-		focus.siblings("i").removeClass().addClass("fas fa-times-circle checkIcon");
-	};*/
-	
-    async function checkForm(focus){
-    	let f = new Form();
+    let checkForm =  async (focus)=>{
+    	let f = new Form(focus);
         let formGroup = focus.parent().parent();
         let pwCheck = formGroup.find("#pw2");
         let pw =formGroup.find("#pw");
@@ -53,14 +68,12 @@ let joinCheckService =(function(){
                 return await designForm(focus,res2);
             }
         } catch (e){
-            //return "메롱";
-            //return e.message;
-        	f.fail(focus);
+        	f.fail();
             focus.siblings("label").text(e.message);
         }
     }
 
-    let checkRexID = function(focus){
+    let checkRexID = focus=>{
          let reg = /[^a-z0-9]/gi; //영어 숫자만 가능
 
         if(reg.test(focus.val())){
@@ -78,7 +91,7 @@ let joinCheckService =(function(){
 
     };
 
-    let checkRexNickName = function(focus){
+    let checkRexNickName = focus=>{
         //특수문자 사용불가
         let reg = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; 
             if(reg.test(focus.val())){
@@ -94,26 +107,28 @@ let joinCheckService =(function(){
     }
 
 
-    let checkPW = function(focus, pwCheck){
+    let checkPW = (focus, pwCheck)=>{
          if(8<=focus.val().length && focus.val().length <=16){
             
             if(pwCheck.val().length>0){
                  if(focus.val()!=pwCheck.val()){
-                	 
+                	 pwCheck.parent().removeClass().addClass("form-group danger-form");
+                	 pwCheck.siblings("i").removeClass().addClass("fas fa-times-circle timesIcon");
                 	 pwCheck.siblings("label").text("비밀번호가 일치하지 않습니다.")
-                       throw new Error("비밀번호가 일치하지 않습니다");
-                    }
+                  }
                  if(focus.val() == pwCheck.val()){
-                	 f.success(focus);
-                	 f.success(pwCheck);
+             		focus.parent().removeClass().addClass("form-group success-form");
+            		focus.siblings("i").removeClass().addClass("fas fa-check-circle checkIcon");
             		
-                     focus.siblings("label").text("비밀번호가 일치합니다.");
-                     pwCheck.siblings("label").text("비밀번호가 일치합니다.");
+                     /*focus.siblings("label").text("비밀번호가 일치합니다.");*/
+             		pwCheck.parent().removeClass().addClass("form-group success-form");
+             		pwCheck.siblings("i").removeClass().addClass("fas fa-check-circle checkIcon");
+                    pwCheck.siblings("label").text("비밀번호가 일치합니다.");
                 }
             }
             else{
             	focus.parent().removeClass().addClass("form-group success-form");
-        		focus.siblings("i").removeClass().addClass("fas fa-times-circle checkIcon");
+        		focus.siblings("i").removeClass().addClass("fas fa-check-circle checkIcon");
                 focus.siblings("label").text("사용 가능한 비밀번호입니다");
             }
          }else{
@@ -122,23 +137,22 @@ let joinCheckService =(function(){
          }
     }
         
-    let checkPW2 = function(focus,pw){
+    let checkPW2 = (focus,pw)=>{
         if(focus.val() != pw.val()){
-        	f.fail(focus);
+    		focus.parent().removeClass().addClass("form-group danger-form");
+    		focus.siblings("i").removeClass().addClass("fas fa-times-circle timesIcon");
     		
-        	pw.siblings("label").text("비밀번호가 일치하지않습니다.");
             throw new Error("비밀번호가 일치하지 않습니다");
         }
         else{
-        	f.success(focus);
-        	f.success(pw);
+    		focus.parent().removeClass().addClass("form-group success-form");
+    		focus.siblings("i").removeClass().addClass("fas fa-check-circle checkIcon");
     		
             focus.siblings("label").text("비밀번호가 일치합니다");
-            pw.siblings("label").text("비밀번호가 일치합니다");
         }
     }
 
-    let checkRexEmail =  function(focus){
+    let checkRexEmail =  focus => {
     let reg = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i; 
 	    if(!reg.test(focus.val())){
 	       throw new Error("이메일의 형식에 맞게 작성해주세요");
@@ -148,7 +162,7 @@ let joinCheckService =(function(){
 	    }
     }
         
-    let checkDuplication= function(focus,checkArg){
+    let checkDuplication= (focus,checkArg)=>{
     	let data ={"val" : focus,
     				"checkArg" : checkArg};
     	console.log(focus,checkArg);
@@ -161,26 +175,19 @@ let joinCheckService =(function(){
         });
         
         return promise.then(function(result){
-        	
         	return result;
         });
         
         
     }
     
-    let obj = {id :"아이디",nm:"닉네임",email:"이메일"};
-   
-    let designForm = function(focus,res2){
-    	
-    	let select = (()=> obj[focus.attr("id")])();
-    	
+    let designForm = (focus,res2)=>{
+    	var f2 = new SelectForm(focus);
     	if(res2 == 0 ){
-    		f.fail(focus);
-    		focus.siblings("label").text("이미 사용중인 "+select+"입니다.");
+    		f2.selectFail();
     	}
     	if(res2 == 1){
-    		f.success(focus);
-    		focus.siblings("label").text("사용 가능한 "+select+"입니다");
+    		f2.selectSuccess();
     	}
     };
     

@@ -37,31 +37,11 @@
 			<div class="row board-detail-body" style="min-height:300px;">
 				<div class="board-content">
 			${board.board_Content}
-		 	<!-- <i class="fas fa-star"></i><i class="far fa-star"></i><i class="fas fa-star-half-alt"></i><i class="fas fa-trash-alt"></i>
-			<i class="far fa-image fa-rotate-90"></i><i class="fas fa-image"></i> 댓글 <i class="fas fa-reply fa-rotate-180"></i>
-			<i class="far fa-star"></i><i class="fas fa-star-half-alt"></i><i class="fas fa-burn"></i>
-			<i class="fas fa-cloud-rain"></i><i class="fas fa-cloud-sun"></i>
-			<i class="fas fa-fire"></i><i class="far fa-gem"></i><i class="fas fa-tint"></i><i class="fas fa-sun"></i> <i class="fab fa-hotjar"></i> <br>
-			<i class="fas fa-cloud-sun"></i><i class="fas fa-cloud-moon"></i> 
-			<i class="fas fa-sun"></i> -->
 				</div>
 			</div>
-			<!-- <div class="row vote-btn pb-5 mb-5">
-					<button type="button" class="btn btn-outline-danger btn-lg" style="margin: 0 auto;" onclick="hit();"><i class="fas fa-fire"></i> 추천</button>
-			</div> -->
 			<div class="row vote-btn p-3">
 					<button type="button" class="btn btn-outline-danger btn-lg" style="margin: 0 auto;" onclick="hit();"><i class="fas fa-fire"></i> 추천</button>
 			</div>
-			
-<%-- 			<div class="row board-detail-bottom justify-content-end p-1">
-				<div>
-				 <button type="button" class="btn btn-outline-dark btn-sm" onclick="javascript:location.href='BoardListAction.bo?page=${pageNum}'">&nbsp;목록</button>
-				</div>
-				<div class="pr-2">
-				<button type="button" class="btn btn-outline-dark btn-sm" onclick="doAction(0)"><i class="far fa-edit"></i>&nbsp;수정</button>
-				<button type="button" class="btn btn-outline-dark btn-sm" onclick="boDeleteOpen()"><i class="far fa-trash-alt"></i>&nbsp;삭제</button>
-				</div>
-			</div> --%>
 			<div class="row board-detail-bottom p-1">
 				<div>
 				 <button type="button" class="btn btn-outline-dark btn-sm" onclick="doAction(0);"><i class="fas fa-clipboard-list"></i>&nbsp;목록</button>
