@@ -14,22 +14,22 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
       <div class="form-group" id="idForm">
         <label for="id">아이디를 입력해주세요(영어+숫자조합 4~10자)</label>
-        <input type="text" id="id" name="memberID" class="form-control" style="ime-mode:inactive;" minlength="4" maxlength="12" size="12" >   
+        <input type="text" id="id" name="memberID" class="form-control" maxlength="10" size="10" >   
         <i></i>
       </div>
       <div class="form-group" id="nickNameForm">
         <label for="nm">닉네임을 입력해주세요 (2~8자)</label>
-        <input type="text" id="nm" name="memberNickName" class="form-control"  minlength="2" maxlength="8" size="11"> 
+        <input type="text" id="nm" name="memberNickName" class="form-control" maxlength="8" size="8"> 
         <i></i>
       </div>
       <div class="form-group" id="pwForm">
         <label for="pw">비밀번호를 입력해주세요 (8~16자)</label>
-        <input type="password" id="pw" name="memberPW" class="form-control valid"  minlength="8" maxlength="16" size="16">
+        <input type="password" id="pw" name="memberPW" class="form-control valid" maxlength="16" size="16">
         <i></i>
       </div>
       <div class="form-group" id="pw2Form">
         <label for="pw2">비밀번호를 확인해주세요</label>
-        <input type="password" id="pw2" name="memberPW2" class="form-control"   minlength="8" maxlength="16" size="16">
+        <input type="password" id="pw2" name="memberPW2" class="form-control"  maxlength="16" size="16">
         <i></i>
       </div>
       <div class="form-group" id="emailForm">
@@ -72,8 +72,9 @@ var timer;
 			  }
  timer = setTimeout(function() { 		
 			var focus = $(":focus");
+			var focusedInputID = $(":focus").attr("id");
 				joinCheckService.checkForm(focus);
-			},200); 
+			},150); 
 		});
 	
 		$(".btn-success").on("click", function(e){

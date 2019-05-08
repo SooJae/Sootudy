@@ -3,6 +3,7 @@ package com.soo.sootudy.config;
 import javax.sql.DataSource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -17,7 +18,7 @@ import org.springframework.security.web.authentication.rememberme.PersistentToke
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
-import com.soo.sootudy.security.CustomUserDetailsService;
+import com.soo.sootudy.security.direct.CustomUserDetailsService;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -29,6 +30,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Autowired
 	private DataSource dataSource;
+	
+	//OAuth2용
+	//@Autowired
+	//ApplicationContext context;
 	
 	@Bean
 	public UserDetailsService customUserService() {
@@ -64,6 +69,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		http.formLogin()
 		.loginPage("/customLogin")
 		.loginProcessingUrl("/login");
+		//.loginProcessingUrl("/login/auth");
 		
 		http.logout()
 		.logoutUrl("/customLogout")
@@ -74,7 +80,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.key("SooJae")
 			.tokenRepository(persistentTokenRepository())
 			.tokenValiditySeconds(604800);
-			
+		/*
+		 * .and()
+		 * 
+		 * .addFilterBefore((Filter)context.getBean("sso.filter"),
+		 * BasicAuthenticationFilter.class);
+		 */
 	}
 //자동 로그인 설정
 	private PersistentTokenRepository persistentTokenRepository() {

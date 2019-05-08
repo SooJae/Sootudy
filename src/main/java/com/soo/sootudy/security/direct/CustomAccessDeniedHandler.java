@@ -1,4 +1,4 @@
-package com.soo.sootudy.security;
+package com.soo.sootudy.security.direct;
 
 import java.io.IOException;
 

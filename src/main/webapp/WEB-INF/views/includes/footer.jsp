@@ -3,14 +3,36 @@
 </div>
   <!-- /.content-wrapper -->
  
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2019 Sootudy.</strong> All rights
-    reserved.
-  </footer>
+    <div class="footer-wrapper">
+		  <footer class="footer mt-auto py-3">
+		    <strong>Copyright &copy; 2019 Sootudy.</strong> All rights
+		    reserved.
+		  </footer>
+    </div>
 
 </div>
 <!-- ./wrapper -->
+<style>
+.footer-wrapper{
+  margin-top :40px;
+}
+.footer {
+  background-color: #f5f5f5;
+  text-align:center;
+  color:#fff;
+  background: #083c9a;
 
+}
+
+.footer > .container {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+code {
+  font-size: 80%;
+}
+</style>
 
 <!-- jQuery first, then Popper.js, then Bootstrap JS -->
 <!-- <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script> -->

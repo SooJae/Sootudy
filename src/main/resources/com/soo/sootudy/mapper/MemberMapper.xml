@@ -6,10 +6,12 @@
 
 
   <resultMap type="com.soo.sootudy.domain.MemberVO" id="memberMap">
-    <id property="userid" column="userid"/>
-    <result property="userid" column="userid"/>
-    <result property="userpw" column="userpw"/>
-    <result property="userName" column="username"/>
+    <id property="id" column="id"/>
+    <result property="id" column="id"/>
+    <result property="pw" column="pw"/>
+    <result property="nm" column="nm"/>
+    <result property="email" column="email"/>
+    <result property="type" column="type"/>
     <result property="dt" column="dt"/>
     <result property="udt_dt" column="udt_dt"/>
     <collection property="authList" resultMap="authMap">
@@ -17,19 +19,43 @@
   </resultMap>
   
   <resultMap type="com.soo.sootudy.domain.AuthVO" id="authMap">
-    <result property="userid" column="userid"/>
+    <result property="id" column="id"/>
     <result property="auth" column="auth"/>
   </resultMap>
   
-  <select id="read" resultMap="memberMap">
+  
+  <select id="readByID" resultMap="memberMap">
 	SELECT 
-	  mem.userid,  userpw, username, enabled, dt, udt_dt, auth
-	FROM 
-	  tbl_member mem LEFT OUTER JOIN tbl_member_auth auth on mem.userid = auth.userid 
-	WHERE mem.userid = #{userid} 
+	      mem.id,  
+	      pw, 
+	      nm, 
+	      email,
+	      type, 
+	      dt, 
+	      udt_dt, 
+	      auth
+	 FROM 
+	      member mem left outer join member_auth auth 
+	 ON mem.userid = auth.userid 
+	 WHERE mem.userid = #{userid} 
   </select>
 
-  <select id="get" resultType="com.soo.sootudy.domain.MemberVO">
+  <select id="readByOAuthID" resultMap="memberMap">
+	 SELECT 
+        mem.id,  
+        pw, 
+        nm, 
+        email,
+        type, 
+        dt, 
+        udt_dt, 
+        auth
+   FROM 
+        member mem left outer join member_auth auth 
+   ON mem.userid = auth.userid 
+   WHERE mem.userid = #{userid} 
+  </select>
+  <select id="check" resultType="com.soo.sootudy.domain.MemberVO">
   SELECT * FROM member
     <where>
       <if test="checkArg == 'id'.toString()">
@@ -55,6 +81,7 @@
        ,   #{nickName}
        ,   #{email})
   </insert>
+  
   
   
 </mapper>

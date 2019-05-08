@@ -1,4 +1,4 @@
-package com.soo.sootudy.security;
+package com.soo.sootudy.security.direct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -11,6 +11,6 @@ public interface MemberMapper {
 	public MemberVO read(String userid);
 	
 
-	public MemberVO get(Map<String, String> map);
+	public MemberVO check(Map<String, String> map);
 	
 }

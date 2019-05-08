@@ -19,7 +19,7 @@ public class Criteria {
 	private String bname;
 	
 	public Criteria() {
-		this(1,10);
+		this(1,30);
 	}
 	
 	public Criteria(int page, int perPageNum) {

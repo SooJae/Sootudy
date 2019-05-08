@@ -38,7 +38,7 @@ public class MemberController {
 	public int readMember(@RequestBody Map<String, String> map) {
 
 		
-		MemberVO readCount = service.read(map);
+		MemberVO readCount = service.checkMember(map);
 		
 		return readCount ==null? 1 :0;
 		 

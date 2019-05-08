@@ -12,6 +12,7 @@ public class MemberVO {
 	private String pw;
 	private String nm;
 	private String email;
+	private String type; 
 	private boolean flag;
 	
 	private Date dt;

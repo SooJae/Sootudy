@@ -17,10 +17,17 @@ public class MemberServiceImpl implements MemberService {
 	public void register(MemberVO vo) {
 		
 	}
-
 	@Override
-	public MemberVO read(Map<String,String> map) {
-		return mapper.get(map);
+	public MemberVO checkMember(Map<String,String> map) {
+		return mapper.check(map);
 		
+	}
+	@Override
+	public MemberVO getMemberByID(String id) {
+		return null;
+	}
+	@Override
+	public MemberVO getMemberByOAuthID(String type, String id) {
+		return null;
 	}
 }

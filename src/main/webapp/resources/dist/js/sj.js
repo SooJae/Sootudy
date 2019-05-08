@@ -36,8 +36,6 @@ class SelectForm extends Form{
 
 
 let joinCheckService =(function(){
-    
-	
     let checkForm =  async (focus)=>{
     	let f = new Form(focus);
         let formGroup = focus.parent().parent();
@@ -86,9 +84,7 @@ let joinCheckService =(function(){
           	 	
         else {
     		throw new Error("아이디를 입력해주세요 (영어+숫자조합 4~12자))");
-            
         }  
-
     };
 
     let checkRexNickName = focus=>{
@@ -120,7 +116,6 @@ let joinCheckService =(function(){
              		focus.parent().removeClass().addClass("form-group success-form");
             		focus.siblings("i").removeClass().addClass("fas fa-check-circle checkIcon");
             		
-                     /*focus.siblings("label").text("비밀번호가 일치합니다.");*/
              		pwCheck.parent().removeClass().addClass("form-group success-form");
              		pwCheck.siblings("i").removeClass().addClass("fas fa-check-circle checkIcon");
                     pwCheck.siblings("label").text("비밀번호가 일치합니다.");
@@ -165,7 +160,6 @@ let joinCheckService =(function(){
     let checkDuplication= (focus,checkArg)=>{
     	let data ={"val" : focus,
     				"checkArg" : checkArg};
-    	console.log(focus,checkArg);
         let promise = $.ajax({
             type:'POST',
             contentType:"application/json; charset=utf-8",
@@ -177,8 +171,6 @@ let joinCheckService =(function(){
         return promise.then(function(result){
         	return result;
         });
-        
-        
     }
     
     let designForm = (focus,res2)=>{
