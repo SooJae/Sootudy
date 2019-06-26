@@ -63,7 +63,7 @@
       </select>
   
       <input type="text" size="20" name="keyword" class="form-control" style="width:10rem" value='<c:out value="${pageMaker.cri.keyword}"/>'/>&nbsp; 
-      <input type="hidden" name="bname" value='<c:out value="${pageMaker.cri.bname}"/>'/>
+     <%--  <input type="hidden" name="bname" value='<c:out value="${pageMaker.cri.bname}"/>'/> --%>
       <input type="hidden" name="page" value='<c:out value="${pageMaker.cri.page}"/>'/>
 	    <input type="hidden" name="perPageNum" value='<c:out value="${pageMaker.cri.perPageNum}"/>'/>
       <button class="btn btn-primary">검색</button>
@@ -73,7 +73,7 @@
 <!-- /search -->
 
 <form id='actionForm' action="/board/list" method='get'>
-   <input type="hidden" name="bname" value='<c:out value="${pageMaker.cri.bname}"/>'/>
+  <%--  <input type="hidden" name="bname" value='<c:out value="${pageMaker.cri.bname}"/>'/> --%>
    <input type="hidden" name="type" value='<c:out value="${pageMaker.cri.type}"/>'>
    <input type="hidden" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'/>
    <input type="hidden" name="page" value='<c:out value="${pageMaker.cri.page}"/>'/>

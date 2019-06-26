@@ -29,7 +29,6 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void register(BoardVO board) {
 		log.info("register......" + board);
-
 		mapper.insertSelectKey(board);
 		
 		if(board.getAttachList() == null || board.getAttachList().isEmpty()) {
@@ -44,9 +43,9 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public BoardVO get(int bno, Criteria cri) {
-		log.info("get......."+bno + "cri"+cri.getBname());
+		log.info("get......."+bno );
 		
-		return mapper.read(bno, cri.getBname());
+		return mapper.read(bno);
 	}
 
 	@Override

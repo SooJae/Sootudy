@@ -16,7 +16,6 @@ public class Criteria {
 	
 	private String type;
 	private String keyword;
-	private String bname;
 	
 	public Criteria() {
 		this(1,30);
@@ -47,7 +46,6 @@ public class Criteria {
 	
 	public String getListLink() {
 		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")
-				.queryParam("bname",this.bname)
 				.queryParam("page", this.page)
 				.queryParam("perPageNum", this.perPageNum)
 				.queryParam("type", this.type)

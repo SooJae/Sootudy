@@ -15,8 +15,8 @@
 <selectKey keyProperty="bno" resultType="int" order="AFTER">
   SELECT LAST_INSERT_ID()
 </selectKey>
-insert into board (title,content,writer,bname)
-values (#{title}, #{content}, #{writer},#{bname})
+insert into board (title,content,writer)
+values (#{title}, #{content}, #{writer})
 </insert>
 
 <select id="read" resultType="com.soo.sootudy.domain.BoardVO">
@@ -62,9 +62,9 @@ values (#{title}, #{content}, #{writer},#{bname})
 
 <sql id="criteria">
   <trim prefix="AND (" suffix=") " prefixOverrides="AND |OR">
-  <if test="bname != null and bname !='' ">
+<!--   <if test="bname != null and bname !='' ">
     bname = #{bname}
-   </if>
+   </if> -->
   </trim>
 
 	<trim prefix="AND (" suffix=") " prefixOverrides="AND |OR">

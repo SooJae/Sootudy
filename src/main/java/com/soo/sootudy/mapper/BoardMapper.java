@@ -15,7 +15,7 @@ public interface BoardMapper {
 	
 	public void insertSelectKey(BoardVO board);
 	
-	public BoardVO read(@Param("bno") int bno, @Param("bname") String bname);
+	public BoardVO read(@Param("bno") int bno);
 	
 	public int delete(int bno);
 	

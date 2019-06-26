@@ -10,37 +10,38 @@
   <div class="card">
   <div class="card-body"> 
   <h3 class="mb-4 form-head">회원가입</h3>
-    <form class="formCheck" method="post" action="/member/join" id="joinForm" name="userInfo" onsubmit="return checkJoinForm();">
+<!--     <form class="formCheck" method="post" action="/member/join" id="joinForm" name="userInfo" onsubmit="return checkJoinForm();"> -->
+    <form class="formCheck" method="post" action="/member/join" id="joinForm" name="userInfo">
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
       <div class="form-group" id="idForm">
         <label for="id">아이디를 입력해주세요(영어+숫자조합 4~10자)</label>
-        <input type="text" id="id" name="memberID" class="form-control" maxlength="10" size="10" >   
+        <input type="text" id="id" name="id" class="form-control" maxlength="10" size="10" >   
         <i></i>
       </div>
       <div class="form-group" id="nickNameForm">
         <label for="nm">닉네임을 입력해주세요 (2~8자)</label>
-        <input type="text" id="nm" name="memberNickName" class="form-control" maxlength="8" size="8"> 
+        <input type="text" id="nm" name="nm" class="form-control" maxlength="8" size="8"> 
         <i></i>
       </div>
       <div class="form-group" id="pwForm">
         <label for="pw">비밀번호를 입력해주세요 (8~16자)</label>
-        <input type="password" id="pw" name="memberPW" class="form-control valid" maxlength="16" size="16">
+        <input type="password" id="pw" name="pw" class="form-control valid" maxlength="16" size="16">
         <i></i>
       </div>
       <div class="form-group" id="pw2Form">
         <label for="pw2">비밀번호를 확인해주세요</label>
-        <input type="password" id="pw2" name="memberPW2" class="form-control"  maxlength="16" size="16">
+        <input type="password" id="pw2" name="pw2" class="form-control"  maxlength="16" size="16">
         <i></i>
       </div>
       <div class="form-group" id="emailForm">
         <label for="email">이메일을 입력해주세요</label>
-        <input type="text" id="email" name="memberEmail" class="form-control">
+        <input type="text" id="email" name="email" class="form-control">
         <i></i>
         <small id="emailHelp" class="form-text text-muted">이메일은 비밀번호 찾기에 사용됩니다</small>
         
       </div>
       
-        <button type="submit" id="btn1" class="btn btn-secondary btn-lg btn-block mt-5">회원가입</button>
+        <button type="button" id="btn1" class="btn btn-secondary btn-lg btn-block mt-5">회원가입</button>
       <button type="button" id="btn2" class="btn btn-success btn-lg btn-block mt-3" onclick="changeForm(1)">로그인</button>
     </form>
   </div>
@@ -77,10 +78,10 @@ var timer;
 			},150); 
 		});
 	
-		$(".btn-success").on("click", function(e){
-			e.preventDefault();
-			$("form").submit();
-		});
+$(".btn-secondary").on("click", function(e){
+	e.preventDefault();
+	$("form").submit();
+});
 		
 		
 });

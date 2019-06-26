@@ -102,7 +102,7 @@ ul > li { list-style: none }
                   <!-- text input -->
                   <form role="form" action="/board/modify" method="post">
 	                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-	                  <input type="hidden" name="bname" value="${pageMaker.cri.bname}"/>
+	                  <%-- <input type="hidden" name="bname" value="${pageMaker.cri.bname}"/> --%>
 	                  <input type='hidden' name="page" value='<c:out value="${cri.page}"/>'>
 	                  <input type='hidden' name="perPageNum" value='<c:out value="${cri.perPageNum}"/>'>
 	                  <input type='hidden' name="type" value='<c:out value="${cri.type}"/>'>

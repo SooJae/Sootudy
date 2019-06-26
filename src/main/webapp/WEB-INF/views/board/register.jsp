@@ -90,12 +90,12 @@
                 <form role="form" action="/board/register" method="post">
                   <!-- text input -->
                   <div class="form-group">
-                  <select class="custom-select" name="bname">
+                <!--   <select class="custom-select" name="bname">
 					  <option selected>게시물 유형</option>
 					  <option value="free">자유</option>
 					  <option value="info">정보</option>
 					  <option value="qna">질문</option>
-					</select>
+					</select> -->
 					</div>
                   <div class="form-group">
                     <label>Title</label>

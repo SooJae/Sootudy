@@ -12,5 +12,4 @@ public interface MemberService {
 		
 		public MemberVO getMemberByID(String id);
 		
-		public MemberVO getMemberByOAuthID(String type, String id);
 }

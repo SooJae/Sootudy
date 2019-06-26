@@ -111,7 +111,7 @@ ul > li { list-style: none }
 	                  <button data-oper="list" class="btn btn-info"> List </button>
                   
                <form id="operForm" action="/boad/modify" method="get">
-				  <input type='hidden' id='bname' name='bname' value='<c:out value="${board.bname}"/>'>
+				<%--   <input type='hidden' id='bname' name='bname' value='<c:out value="${board.bname}"/>'> --%>
 				  <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
 				  <input type='hidden' name='page' value='<c:out value="${cri.page}"/>'>
 				  <input type='hidden' name='perPageNum' value='<c:out value="${cri.perPageNum}"/>'>
