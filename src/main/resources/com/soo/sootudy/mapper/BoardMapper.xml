@@ -12,28 +12,28 @@
  -->
 
 <insert id="insertSelectKey">
-<selectKey keyProperty="bno" resultType="int" order="AFTER">
-  SELECT LAST_INSERT_ID()
-</selectKey>
-insert into board (title,content,writer)
-values (#{title}, #{content}, #{writer})
+	<selectKey keyProperty="bno" resultType="int" order="AFTER">
+	  SELECT LAST_INSERT_ID()
+	</selectKey>
+	  INSERT INTO board (title,content,writer)
+    VALUES (#{title}, #{content}, #{writer})
 </insert>
 
 <select id="read" resultType="com.soo.sootudy.domain.BoardVO">
-		select * from board  
-		where delete_flag ='0' and bno = #{bno}
+		SELECT * FROM board  
+		WHERE delete_flag ='0' AND bno = #{bno}
 </select>
 
  
 <delete id="delete">
-	update board set delete_flag = '1' where bno =#{bno}
+	update board set delete_flag = '1' WHERE bno =#{bno}
 </delete>
 <update id="update">
 		update board 
 		set title = #{title},
 		content = #{content},
 		writer = #{writer}
-		where delete_flag ='0' and bno = #{bno}
+		where delete_flag ='0' AND bno = #{bno}
 </update>
 
 <update id="updateReplyCnt">

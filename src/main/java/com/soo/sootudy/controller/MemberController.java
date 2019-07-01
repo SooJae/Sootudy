@@ -33,7 +33,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/join")
-	public String join(MemberVO vo,Model model){
+	public String join(MemberVO vo){
 		log.info(""+vo);
 		service.register(vo);
 		return "redirect:/board/list";

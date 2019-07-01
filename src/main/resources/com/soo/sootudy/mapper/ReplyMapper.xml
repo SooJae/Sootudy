@@ -7,16 +7,16 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="list" resultType="com.soo.sootudy.domain.ReplyVO">
 		SELECT *
-			FROM TBL_REPLY2
+			FROM TBL_REPLY
 	</select>
 	<select id="read" resultType="com.soo.sootudy.domain.ReplyVO">
 		SELECT * 
-			FROM TBL_REPLY2
+			FROM TBL_REPLY
 			WHERE RNO = #{rno}
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO TBL_REPLY2
+		INSERT INTO TBL_REPLY
 				( BNO
 				, REPLYTEXT
 				, REPLYER)
@@ -26,12 +26,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</insert>
 	
 	<delete id="delete">
-		DELETE FROM TBL_REPLY2
+		DELETE FROM TBL_REPLY
 				WHERE RNO = #{rno}
 	</delete>
 	
 	<update id="update">
-		UPDATE TBL_REPLY2 
+		UPDATE TBL_REPLY 
 			SET REPLYTEXT = #{replyText}
 			WHERE RNO = #{rno}
 	</update>
@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,REPLYER
 			,REPLYDATE
 			,REPLYudt_dt
-		FROM TBL_REPLY2
+		FROM TBL_REPLY
 		WHERE BNO = #{bno}
 		ORDER BY RNO DESC
 	</select>
@@ -57,7 +57,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,REPLYER
 			,REPLYDATE
 			,REPLYudt_dt
-		FROM TBL_REPLY2
+		FROM TBL_REPLY
 		WHERE BNO = #{bno}
 		ORDER BY RNO DESC
 		<!-- limit #{pageStart}, #{perPageNum} -->
@@ -65,7 +65,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getCountByBno" resultType="int">
-		select count(rno) from tbl_reply2 where bno = #{bno}
+		select count(rno) from TBL_REPLY where bno = #{bno}
 	</select>
 	
 	
@@ -99,10 +99,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	 
 	<!--   <insert id="insertBoard6Reply" parameterType="com.soo.sootudy.domain.ReplyVO" >
         <selectKey resultType="String" keyProperty="rno" order="BEFORE">
-            SELECT IFNULL(MAX(RNO),0)+1 FROM TBL_REPLY2
+            SELECT IFNULL(MAX(RNO),0)+1 FROM TBL_REPLY
         </selectKey>
     
-        INSERT INTO TBL_REPLY2(BNO, RNO, REPLYER, REPLYORDER, REPLYPARENT, REPLYDEPTH)
+        INSERT INTO TBL_REPLY(BNO, RNO, REPLYER, REPLYORDER, REPLYPARENT, REPLYDEPTH)
         VALUES (#{bno}, #{rno}, #{replyer}, #{replyOrder},
                    <choose>
                        <when test="replyParent==null">#{rno}, 0</when>
@@ -113,19 +113,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectBoard6ReplyParent" resultType="com.soo.sootudy.domain.ReplyVO" parameterType="String">
         SELECT BNO, REPLYDEPTH+1 REPLYDEPTH, REPLYORDER 
-          FROM TBL_REPLY2
+          FROM TBL_REPLY
          WHERE RNO=#{replyParent}
     </select>
 
     <update id="updateBoard6ReplyOrder" parameterType="com.soo.sootudy.domain.ReplyVO"> 
-        UPDATE TBL_REPLY2
+        UPDATE TBL_REPLY
            SET REPLYORDER = REPLYORDER + 1 
          WHERE BNO=#{bno} AND REPLYORDER>#{replyOrder}       
     </update> 
 
     <select id="selectBoard6ReplyMaxOrder" resultType="Integer" parameterType="String">
         SELECT IFNULL(MAX(REPLYORDER),0)+1
-          FROM TBL_REPLY2
+          FROM TBL_REPLY
          WHERE BNO=#{bno}
     </select> -->
 </mapper>
