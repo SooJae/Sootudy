@@ -36,7 +36,7 @@ public class MemberController {
 	public String join(MemberVO vo,Model model){
 		log.info(""+vo);
 		service.register(vo);
-		return "redirect:/";
+		return "redirect:/board/list";
 	}
 	
 	
