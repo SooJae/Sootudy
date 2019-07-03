@@ -3,7 +3,13 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.soo.sootudy.mapper.MemberAuthMapper">
-
+<insert id="insert" parameterType="map">
+  INSERT INTO member_auth
+              (ID
+              ,AUTH)
+        VALUES(#{id}
+              ,#{auth})
+</insert>
   
   
   

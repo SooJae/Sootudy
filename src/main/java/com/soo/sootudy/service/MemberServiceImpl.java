@@ -22,7 +22,7 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	@Transactional
 	public void register(MemberVO vo) {
-		HashMap<String, String> map = new HashMap<String, String>();
+		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id",vo.getId());
 		map.put("auth","member");
 		mapper.insert(vo);
@@ -35,8 +35,8 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.check(map);
 		
 	}
-	@Override
-	public MemberVO getMemberByID(String id) {
-		return null;
-	}
+//	@Override
+//	public MemberVO getMemberByID(String id) {
+//		return null;
+//	}
 }

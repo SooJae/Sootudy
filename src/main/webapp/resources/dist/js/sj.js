@@ -11,10 +11,12 @@ class Form{
 	success(){
 		this.focus.parent().removeClass().addClass("form-group success-form");
 		this.focus.siblings("i").removeClass().addClass("fas fa-check-circle checkIcon");
+		this.focus.attr("validCheck","1");
 	}
 	fail(){
 		this.focus.parent().removeClass().addClass("form-group danger-form");
 		this.focus.siblings("i").removeClass().addClass("fas fa-times-circle timesIcon");
+		this.focus.attr("validCheck","0");
 	}
 }
 
@@ -92,6 +94,7 @@ let joinCheckService =(function(){
         let reg = /[ \{\}\[\]\/?.,;:|\)*~`!^\-_+┼<>@\#$%&\'\"\\\(\=]/gi; 
             if(reg.test(focus.val())){
                 focus.val(focus.val().replace(reg , ""));
+                this.focus.attr("validCheck","0");
                 throw new Error("특수문자는 사용하실 수 없습니다");
             }
             if(2<=focus.val().length && focus.val().length<=8){
@@ -110,6 +113,7 @@ let joinCheckService =(function(){
                  if(focus.val()!=pwCheck.val()){
                 	 pwCheck.parent().removeClass().addClass("form-group danger-form");
                 	 pwCheck.siblings("i").removeClass().addClass("fas fa-times-circle timesIcon");
+//                	 pwCheck.attr("validCheck","0");
                 	 pwCheck.siblings("label").text("비밀번호가 일치하지 않습니다.")
                   }
                  if(focus.val() == pwCheck.val()){
@@ -118,14 +122,16 @@ let joinCheckService =(function(){
             		
              		pwCheck.parent().removeClass().addClass("form-group success-form");
              		pwCheck.siblings("i").removeClass().addClass("fas fa-check-circle checkIcon");
-                    pwCheck.siblings("label").text("비밀번호가 일치합니다.");
+             		pwCheck.attr("validCheck","1");
+             		pwCheck.siblings("label").text("비밀번호가 일치합니다.");
                 }
             }
-            else{
+//            else{
             	focus.parent().removeClass().addClass("form-group success-form");
         		focus.siblings("i").removeClass().addClass("fas fa-check-circle checkIcon");
+        		focus.attr("validCheck","1");
                 focus.siblings("label").text("사용 가능한 비밀번호입니다");
-            }
+//            }
          }else{
 
                 throw new Error("비밀번호를 입력해주세요 (8~16자)");
@@ -136,13 +142,13 @@ let joinCheckService =(function(){
         if(focus.val() != pw.val()){
     		focus.parent().removeClass().addClass("form-group danger-form");
     		focus.siblings("i").removeClass().addClass("fas fa-times-circle timesIcon");
-    		
+    		focus.attr("validCheck","0");
             throw new Error("비밀번호가 일치하지 않습니다");
         }
         else{
     		focus.parent().removeClass().addClass("form-group success-form");
     		focus.siblings("i").removeClass().addClass("fas fa-check-circle checkIcon");
-    		
+    		focus.attr("validCheck","1");
             focus.siblings("label").text("비밀번호가 일치합니다");
         }
     }

@@ -4,5 +4,5 @@ import java.util.Map;
 
 public interface MemberAuthMapper {
 
-	public void insert(Map map); 
+	public void insert(Map<String,Object> map); 
 }

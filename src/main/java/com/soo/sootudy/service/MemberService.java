@@ -10,6 +10,6 @@ public interface MemberService {
 		
 		public MemberVO checkMember(Map<String,String> map);
 		
-		public MemberVO getMemberByID(String id);
+//		public MemberVO getMemberByID(String id);
 		
 }

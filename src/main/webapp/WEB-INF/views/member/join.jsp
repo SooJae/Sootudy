@@ -15,27 +15,27 @@
     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
       <div class="form-group" id="idForm">
         <label for="id">아이디를 입력해주세요(영어+숫자조합 4~10자)</label>
-        <input type="text" id="id" name="id" class="form-control" maxlength="10" size="10" >   
+        <input type="text" id="id" name="id" class="form-control" maxlength="10" size="10" validCheck="0">   
         <i></i>
       </div>
       <div class="form-group" id="nickNameForm">
         <label for="nm">닉네임을 입력해주세요 (2~8자)</label>
-        <input type="text" id="nm" name="nm" class="form-control" maxlength="8" size="8"> 
+        <input type="text" id="nm" name="nm" class="form-control" maxlength="8" size="8" validCheck="0"> 
         <i></i>
       </div>
       <div class="form-group" id="pwForm">
         <label for="pw">비밀번호를 입력해주세요 (8~16자)</label>
-        <input type="password" id="pw" name="pw" class="form-control valid" maxlength="16" size="16">
+        <input type="password" id="pw" name="pw" class="form-control valid" maxlength="16" size="16" validCheck="0">
         <i></i>
       </div>
       <div class="form-group" id="pw2Form">
         <label for="pw2">비밀번호를 확인해주세요</label>
-        <input type="password" id="pw2" name="pw2" class="form-control"  maxlength="16" size="16">
+        <input type="password" id="pw2" name="pw2" class="form-control"  maxlength="16" size="16" validCheck="0">
         <i></i>
       </div>
       <div class="form-group" id="emailForm">
         <label for="email">이메일을 입력해주세요</label>
-        <input type="text" id="email" name="email" class="form-control">
+        <input type="text" id="email" name="email" class="form-control" validCheck="0">
         <i></i>
         <small id="emailHelp" class="form-text text-muted">이메일은 비밀번호 찾기에 사용됩니다</small>
         
@@ -80,6 +80,24 @@ var timer;
 	
 $(".btn-secondary").on("click", function(e){
 	e.preventDefault();
+	
+	var array=[];
+	array.push($("#id").attr("validCheck"));
+	array.push($("#nm").attr("validCheck"));
+	array.push($("#pw").attr("validCheck"));
+	array.push($("#pw2").attr("validCheck"));
+	array.push($("#email").attr("validCheck"));
+
+	for(var i in array){
+	      if(array[i]!=1){
+/* 	        $("#dangerAlert").html("<strong>회원가입 폼</strong>을 확인해주세요");
+	          $("#dangerAlert").addClass("show");
+	          $("html").stop().animate({scrollTop: 0}, 100); */
+	         alert("회원가입폼을 확인해주세요.");
+	        return false;
+	      }
+	    }
+	
 	$("form").submit();
 });
 		
