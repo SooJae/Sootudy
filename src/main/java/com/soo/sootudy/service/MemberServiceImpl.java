@@ -23,7 +23,8 @@ public class MemberServiceImpl implements MemberService {
 	@Transactional
 	public void register(MemberVO vo) {
 		HashMap<String, String> map = new HashMap<String, String>();
-		map.put(vo.getId(),"member");
+		map.put("id",vo.getId());
+		map.put("auth","member");
 		mapper.insert(vo);
 		authmapper.insert(map);
 		
