@@ -53,7 +53,7 @@
 <%@ include file="../includes/footer.jsp" %>
 
 <script type="text/javascript" src="/resources/dist/js/sj.js"></script>
-<script>
+<script> 
 $(function(){
 	
 var csrfHeaderName="${_csrf.headerName}";
