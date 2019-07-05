@@ -22,11 +22,11 @@
 				        <h3 class="mb-4 form-head">로그인</h3>
 				      <div class="form-group">
 				        <label>아이디를 입력해주세요.</label>
-				        <input type="text" id="id" name="id" class="form-control" > 
+				        <input type="text" id="id" name="userid" class="form-control" > 
 				      </div>
 				      <div class="form-group">
 				        <label>비밀번호를 입력해주세요.</label>
-				        <input type="password" id="pw" name="pw" class="form-control" >
+				        <input type="password" id="pw" name="password" class="form-control" >
 				        <small id="emailHelp" class="form-text text-muted"><a href="CheckIDForm.do">비밀번호 찾기</a></small>
 				      </div>
 				      
