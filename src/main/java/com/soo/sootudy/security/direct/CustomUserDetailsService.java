@@ -19,14 +19,14 @@ public class CustomUserDetailsService implements UserDetailsService {
 	private MemberMapper memberMapper;
 
 	@Override
-	public UserDetails loadUserByUsername(String userName) throws UsernameNotFoundException {
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-		log.warn("Load User By UserName : " + userName);
+		log.warn("아이디 : " + username);
 
-		// userName means userid
-		MemberVO vo = memberMapper.read(userName);
+		// userName means id
+		MemberVO vo = memberMapper.read(username);
 
-		log.warn("queried by member mapper: " + vo);
+		log.warn("멤버 정보 가져오기 " + vo);
 
 		return vo == null ? null : new CustomUser(vo);
 	} 

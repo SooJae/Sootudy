@@ -8,7 +8,7 @@ public interface MemberMapper {
 	
 	public void insert(MemberVO vo);
 	
-	public MemberVO read(String userid);
+	public MemberVO read(String username);
 	
 
 	public MemberVO check(Map<String, String> map);

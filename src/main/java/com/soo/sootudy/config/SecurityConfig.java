@@ -31,27 +31,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private DataSource dataSource;
 	
-	//OAuth2용
-	//@Autowired
-	//ApplicationContext context;
-	
 	@Bean
 	public UserDetailsService customUserService() {
 		return new CustomUserDetailsService();
 	}
 	
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception{
-		auth.userDetailsService(customUserService())
-			.passwordEncoder(passwordEncoder());
-	}
-	//
-	
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
-//
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		//UTF-8로 인코딩 하기위해
@@ -67,7 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.antMatchers("/sample/member").access("hasRole('MEMBER')");
 		
 		http.formLogin()
-		.loginPage("/customLogin")
+		.loginPage("/member/login")
 		.loginProcessingUrl("/login");
 		//.loginProcessingUrl("/login/auth");
 		

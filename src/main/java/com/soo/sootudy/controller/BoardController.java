@@ -87,7 +87,7 @@ public class BoardController {
 		
 		log.info("cri"+cri);
 		
-		
+		log.info("보드값"+service.get(bno, cri));
 		model.addAttribute("board",service.get(bno, cri));
 	}
 	

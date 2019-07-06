@@ -3,7 +3,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
-<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file="../includes/header.jsp" %>
 <style>
@@ -74,43 +73,35 @@ ul > li { list-style: none }
         </div>
       </div><!-- /.container-fluid -->
     </section>
-<section>
-<div class="container board-whole m-full white">
- 	<div class="container board-detail">
-<!-- 			<div class="row board-head in-visible row-no-padding"> -->
-			<div class="row board-detail-head pb-3 pt-3">
-				<div class="col-12 col-md-12"><h3>${board.title}</h3></div>
-			</div>
-			<div class="row board-detail-headbt">
-				<div class="col-6 col-md-2" style="font-weigth:bold; text-alingh:left;"><i class="fas fa-user-circle"></i>${board.writer}</div>
-<%-- 				<div class="col-6 col-md-4"><i class="far fa-clock"></i> ${fn:substring(board.udt_dt,5,16)}</div> --%>
-				<div class="col-6 col-md-4"><i class="far fa-clock"></i> <fmt:formatDate value="${board.udt_dt}" type="both" pattern="MM-dd hh:mm"/></div>
-				<div class="col-md-2"></div> 
-				<div class="col-9 col-md-2 " style="text-align:right"><i class="far fa-eye"></i> ${board.delete_flag}</div>
-				<div class="col-3 col-md-2" style="text-align:right"><i class="fas fa-sun"></i>${board.reply_cnt}</div>
-			</div>
-			<div class="row board-detail-body" style="min-height:300px;">
-				<div class="board-content">
-			${board.content}
-				</div>
-			</div>
-			<div class="row vote-btn p-3">
-					<button type="button" class="btn btn-outline-danger btn-lg" style="margin: 0 auto;" onclick="hit();"><i class="fas fa-fire"></i> 추천</button>
-			</div>
-			<div class="row board-detail-bottom p-1">
-				<div>
-				 <button type="button" class="btn btn-outline-dark btn-sm" onclick="doAction(0);"><i class="fas fa-clipboard-list"></i>&nbsp;목록</button>
-				</div>
-				<div class="ml-auto">
-				<button type="button" class="btn btn-outline-dark btn-sm" onclick="doAction(1);"><i class="far fa-edit"></i>&nbsp;수정</button>
-				<button type="button" class="btn btn-outline-dark btn-sm" onclick="boDeleteOpen();"><i class="far fa-trash-alt"></i>&nbsp;삭제</button>
-				</div>
-			</div>
-			
-			
-			
-			
 
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- right column -->
+          <div class="col-md-12">
+            <!-- general form elements disabled -->
+            <div class="card card-warning">
+              <div class="card-header">
+                <h3 class="card-title">General Elements</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body getbody">
+                  <!-- text input -->
+                  <div class="form-group">
+                    <label>Title</label>
+                    <input type="text" class="form-control" name="title" value='<c:out value="${board.title}"/>' readonly="readonly">
+                  </div>
+                  <!-- textarea -->
+                  <div class="form-group">
+                    <label>Textarea</label>
+                    <textarea class="form-control" rows="3" name="content" readonly="readonly"><c:out value="${board.content}"/></textarea>
+                  <!-- textarea는 value가 없다. -->
+                  </div>
+                  <div class="form-group">
+                    <label>Writer</label>
+                    <input class="form-control" name="writer" value='<c:out value="${board.writer}"/>' readonly="readonly"/>
+                  </div>
                   <sec:authentication property="principal" var="pinfo"/>
                   	<sec:authorize access="isAuthenticated()">
                   		<c:if test="${pinfo.username eq board.writer}">
@@ -131,9 +122,9 @@ ul > li { list-style: none }
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-        <!--   </div> -->
+          </div>
           <!--/.col (right) -->
-        <!-- </div> -->
+        </div>
         <!-- /.row -->
         
 	  <div class="row">
@@ -240,7 +231,7 @@ ul > li { list-style: none }
         
         
         
-<!--       </div> -->
+      </div>
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
@@ -316,7 +307,7 @@ $(function(){
 	      
 	     var realEnd = Math.ceil(replyCnt/10.0);
 	     
-	     if(realEnd < endPage ) {
+	     if(realEnd < endPage ){
 	    	 endPage = realEnd;
 	     }
 	    var prev = startPage > 1;

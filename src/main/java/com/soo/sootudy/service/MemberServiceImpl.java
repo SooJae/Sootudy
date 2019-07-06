@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,12 +20,18 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberAuthMapper authmapper;
 	
+	@Autowired
+	private PasswordEncoder pwEncoder;
+	
 	@Override
 	@Transactional
 	public void register(MemberVO vo) {
+		
+		vo.setPw(pwEncoder.encode(vo.getPw()));
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id",vo.getId());
-		map.put("auth","member");
+		map.put("auth","MEMBER");
 		mapper.insert(vo);
 		authmapper.insert(map);
 		
