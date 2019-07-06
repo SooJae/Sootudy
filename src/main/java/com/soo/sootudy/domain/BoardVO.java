@@ -11,10 +11,10 @@ public class BoardVO {
 	private String title;
 	private String content;
 	private String writer;
-	private Date date;
-	private Date updateDate;
-	
-	private int replyCnt;
+	private Date dt;
+	private Date udt_dt;
+	private String delete_flag;
+	private int reply_cnt;
 	
 	private List<BoardAttachVO> attachList;
 

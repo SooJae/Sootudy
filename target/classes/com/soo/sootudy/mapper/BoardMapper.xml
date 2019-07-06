@@ -13,49 +13,56 @@
 
 <insert id="insertSelectKey">
 	<selectKey keyProperty="bno" resultType="int" order="AFTER">
-	  SELECT LAST_INSERT_ID()
+		SELECT LAST_INSERT_ID()
 	</selectKey>
-	  INSERT INTO board (title,content,writer)
-    VALUES (#{title}, #{content}, #{writer})
+		INSERT INTO board (title,content,writer)
+		VALUES (#{title}, #{content}, #{writer})
 </insert>
 
 <select id="read" resultType="com.soo.sootudy.domain.BoardVO">
-		SELECT * FROM board  
-		WHERE delete_flag ='0' AND bno = #{bno}
+	SELECT * FROM board  
+	WHERE delete_flag ='0' 
+	AND bno = #{bno}
 </select>
 
  
 <delete id="delete">
-	update board set delete_flag = '1' WHERE bno =#{bno}
+	UPDATE board 
+	SET delete_flag = '1' 
+	WHERE bno =#{bno}
 </delete>
 <update id="update">
-		update board 
-		set title = #{title},
-		content = #{content},
-		writer = #{writer}
-		where delete_flag ='0' AND bno = #{bno}
+	UPDATE board 
+	SET title = #{title},
+	content = #{content},
+	writer = #{writer}
+	WHERE delete_flag ='0' AND bno = #{bno}
 </update>
 
 <update id="updateReplyCnt">
-	UPDATE board SET reply_cnt = reply_cnt + #{amount} where bno = #{bno}
+	UPDATE board 
+	SET reply_cnt = reply_cnt + #{amount} 
+	WHERE bno = #{bno}
 </update>
 
 
 
 <select id="getListWithPaging" resultType="com.soo.sootudy.domain.BoardVO">
- select 
-   bno, title, content, writer, dt, udt_dt, reply_cnt
- from 
-   board where delete_flag ='0'
+	SELECT 
+	  bno, title, content, writer, dt, udt_dt, reply_cnt
+	FROM board 
+	WHERE delete_flag ='0'
 
 <include refid="criteria"></include>
-  order by bno desc, dt desc
-  limit #{pageStart}, #{perPageNum}
+	ORDER BY bno desc, dt desc
+	LIMIT #{pageStart}, #{perPageNum}
 </select>
  
  
  <select id="getTotalCount" resultType="int">
- 	select count(*) from board where delete_flag ='0' 
+	SELECT count(*) 
+	FROM board 
+	WHERE delete_flag ='0' 
  	<include refid="criteria"></include>
  </select>
  

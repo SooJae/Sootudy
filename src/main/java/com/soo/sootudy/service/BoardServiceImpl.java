@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
 @Service
 @AllArgsConstructor
 public class BoardServiceImpl implements BoardService {
-	@Setter(onMethod_=@Autowired)
+	@Autowired
 	private BoardMapper mapper;
 	
 	@Autowired
@@ -59,9 +59,10 @@ public class BoardServiceImpl implements BoardService {
 			  
 		  board.getAttachList().forEach(attach -> {
 		  
-		  attach.setBno(board.getBno()); attachMapper.insert(attach); }); 
-		  
-		  }
+		  attach.setBno(board.getBno()); 
+		  attachMapper.insert(attach); 
+		  }); 
+		}
 		 
 
 		return modifyResult;

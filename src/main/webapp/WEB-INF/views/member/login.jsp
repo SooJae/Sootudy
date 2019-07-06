@@ -22,7 +22,7 @@
 				        <h3 class="mb-4 form-head">로그인</h3>
 				      <div class="form-group">
 				        <label>아이디를 입력해주세요.</label>
-				        <input type="text" id="id" name="userid" class="form-control" > 
+				        <input type="text" id="id" name="username" class="form-control" > 
 				      </div>
 				      <div class="form-group">
 				        <label>비밀번호를 입력해주세요.</label>

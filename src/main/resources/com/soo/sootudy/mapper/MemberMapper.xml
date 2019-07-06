@@ -35,7 +35,7 @@
 		 FROM 
 		      member mem LEFT OUTER JOIN member_auth auth 
 		 ON mem.id = auth.id 
-		 WHERE mem.id = #{userid} 
+		 WHERE mem.id = #{username} 
   </select>
 
   <select id="check" resultType="com.soo.sootudy.domain.MemberVO">
