@@ -120,6 +120,45 @@
 	<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
 
+<c:if test="${!empty requestScope.fail||!empty requestScope.success}">
+		<c:choose>
+			<c:when test="${!empty requestScope.fail}">
+				<c:set var="errorMsg" value="${requestScope.fail}"/>
+			</c:when>
+			<c:otherwise>
+				<c:set var="successMsg" value="${requestScope.success}"/>
+			</c:otherwise>
+		</c:choose>
+	</c:if>
+	
+	
+	<c:choose>
+		<c:when test="${!empty errorMsg}">
+		<div class="container mt-2">
+		 	<div class="alert alert-danger alert-dismissible show fade" id="dangerAlert" role="alert" style="text-align:center; padding:1%;">
+			<strong>${errorMsg}</strong>
+  
+</div>
+			</div> 
+		</div>
+		</c:when>
+		<c:when test="${!empty successMsg}">
+			<div class="container mt-2">
+				<div class="alert alert-success alert-dismissible show fade" id="successAlert" role="alert" style="text-align:center; padding:1%;">
+				<strong>${successMsg}</strong>
+				</div>
+			</div>
+		</c:when>
+		<c:otherwise>
+			<div class="container mt-2">
+				<div class="alert alert-danger alert-dismissible fade" id="dangerAlert" role="alert" style="text-align:center; padding:1%;">
+				</div>
+			</div>
+		</c:otherwise>
+	</c:choose>
+
+
+
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 
 <script type="text/javascript">

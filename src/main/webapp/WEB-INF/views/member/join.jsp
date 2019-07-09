@@ -42,7 +42,7 @@
       </div>
       
         <button type="button" id="btn1" class="btn btn-secondary btn-lg btn-block mt-5">회원가입</button>
-      <button type="button" id="btn2" class="btn btn-success btn-lg btn-block mt-3" onclick="changeForm(1)">로그인</button>
+      <button type="button" id="btn2" class="btn btn-success btn-lg btn-block mt-3">로그인</button>
     </form>
   </div>
   </div>
@@ -90,16 +90,20 @@ $(".btn-secondary").on("click", function(e){
 
 	for(var i in array){
 	      if(array[i]!=1){
-/* 	        $("#dangerAlert").html("<strong>회원가입 폼</strong>을 확인해주세요");
+	        $("#dangerAlert").html("<strong>회원가입 폼</strong>을 확인해주세요");
 	          $("#dangerAlert").addClass("show");
-	          $("html").stop().animate({scrollTop: 0}, 100); */
-	         alert("회원가입폼을 확인해주세요.");
+	          $("html, body").stop().animate({scrollTop: 0}, 100); 
+	          
 	        return false;
 	      }
 	    }
 	
 	$("form").submit();
 });
+
+$("#btn2").on("click", function(){
+    self.location = "/member/login";
+  });
 		
 		
 });

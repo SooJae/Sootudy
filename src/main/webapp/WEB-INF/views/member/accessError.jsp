@@ -15,5 +15,10 @@
 <h2><c:out value="${SPRING_SECURITY_403_EXCEPTION.getMessage()}"/></h2>
 <h2><c:out value="${msg}"/></h2>
 
+<script>
+$(function(){
+	alert("메롱");
+});
+</script>
 </body>
 </html>

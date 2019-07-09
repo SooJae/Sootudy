@@ -36,7 +36,6 @@
 					  	</div>
 				      <button type="submit" class="btn btn-success btn-lg btn-block mt-4" onclick="return checkValue();">로그인</button> 
 				      <button type="button" class="btn btn-secondary btn-lg btn-block mt-3" id="join">회원가입</button>
-					  	<a href="index.html" class="btn btn-lg btn-success btn-block">Login</a>
 					
 					</fieldset>
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
@@ -66,13 +65,28 @@
 
 <script>
 
+function checkValue(){
+    if(!$("#id").val()){
+    	$("#dangerAlert").html("<strong>아이디</strong>를 입력해주세요");
+    	$("#dangerAlert").addClass("show");
+    	$("html, body").stop().animate({scrollTop: 0}, 100);
+    	return false;
+  }
+    else if(!$("#pw").val()){
+   	$("#dangerAlert").html("<strong>비밀번호</strong>를 입력해주세요");
+    	$("#dangerAlert").addClass("show");
+    	$("html, body").stop().animate({scrollTop: 0}, 100);
+		return false;
+    }
+}
+
 $(function(){
 	
-	$(".btn-success").on("click", function(e){
+	/* $(".btn-success").on("click", function(e){
 		
 		e.preventDefault();
 		$("form").submit();
-	});
+	}); */
 	
 	 $("#join").on("click", function(){
 	     self.location = "/member/join";
