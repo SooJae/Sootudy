@@ -52,14 +52,14 @@ public class BoardController {
 		return "/board/list";
 	}
 	
-	@GetMapping("/register2")
-	public String register2() {
-		return "/board/register2";
+	@GetMapping("/register")
+	public String register() {
+		return "/board/register";
 	}
 	
 	
 //	@PreAuthorize("isAuthenticated()")
-	@PostMapping("/register2")
+	@PostMapping("/register")
 	public String register2(@ModelAttribute("cri") Criteria cri, BoardVO board, RedirectAttributes rttr) {
 		log.info("======================");
 		

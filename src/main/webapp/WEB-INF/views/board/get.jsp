@@ -66,7 +66,7 @@ ul > li { list-style: none }
 
 </style>
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+   <%--  <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
@@ -80,7 +80,7 @@ ul > li { list-style: none }
           </div>
         </div>
       </div><!-- /.container-fluid -->
-    </section>
+    </section> --%>
 <section>
 <div class="container board-whole m-full white">
  	<div class="container board-detail getbody">

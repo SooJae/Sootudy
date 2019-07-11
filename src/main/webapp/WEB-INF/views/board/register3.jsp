@@ -48,79 +48,50 @@
 .bigPicture img {
 	width:600px;
 }
+
+.card-header{
+ border :1px solid rgba(0,0,0,.125);
+}
+
+.card-body{
+ border : 1px solid rgba(0,0,0,.125);
+}
 </style>
 
 <%@ include file="../includes/header.jsp" %>
    <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>General Form</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">General Form</li>
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
 
  <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- right column -->
-          <div class="col-md-12">
-            <!-- general form elements disabled -->
-            <div class="card card-warning">
-              <div class="card-header">
-                <h3 class="card-title">General Elements</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-                <form role="form" action="/board/register" method="post">
-                  <!-- text input -->
-                  <div class="form-group">
-                <!--   <select class="custom-select" name="bname">
-					  <option selected>게시물 유형</option>
-					  <option value="free">자유</option>
-					  <option value="info">정보</option>
-					  <option value="qna">질문</option>
-					</select> -->
-					</div>
-                  <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" class="form-control" placeholder="Enter ..." name="title">
-                  </div>
-                  <!-- textarea -->
-                  <div class="form-group">
-                    <label>Textarea</label>
-                    <textarea class="form-control" rows="3" placeholder="Enter ..." name="content"></textarea>
-                  </div>
-                  <div class="form-group">
-                    <label>Writer</label>
-                    <input class="form-control" name="writer" value='<sec:authentication property="principal.username"/>' readonly="readonly">
-                  </div>
-                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-                  <%-- <input type="hidden" name="bname" value="${pageMaker.cri.bname}"/> --%>
-                  <button type="submit" class="btn btn-default"> Submit Button</button>
-                  <button type="reset" class="btn btn-default"> Reset Button</button>
-         	</form>
-         	</div>
-          <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-          <!--/.col (right) -->
+ 
+ 
+ <section>
+ <div class="container board-whole m-full white">
+ <div class="container board-detail getbody" style="padding : 0px;">
+  <!-- section : 본문역할 -->
+  <div class="board-detail-body" style="border-top: 1px solid lightgray;">
+    <form method="post" role="form" action="/board/register">
+	      <div class="form-group">
+	      <input class="form-control" type="text" maxlength="100" name="title" placeholder="글 제목을 입력하세요">
+	      </div>
+	      <div class="form-group">
+	       <textarea class="form-control" rows="10" placeholder="Enter ..." name="content"></textarea>
+	      </div>
+	      <div class="form-group">
+	         <label>Writer</label>
+	         <input class="form-control" name="writer" >
         </div>
-        <!-- /.row -->
-        
+	         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	         <%-- <input type="hidden" name="bname" value="${pageMaker.cri.bname}"/> --%>
+	         <button type="submit" class="btn btn-default"> Submit Button</button>
+	         <button type="reset" class="btn btn-default"> Reset Button</button>
+      <!-- <button type="submit" class="btn btn-success btn-lg btn-block mt-5" onclick="return checkWriteForm()">글 쓰기</button> -->
+    </form>
+  </div>
+</div>
+ 
         <div class="row">
 	      	<div class="col-lg-12">
-	      		<div class="card card-warning">
+	      		<div class="card m-full white">
 	      			<div class="card-header">File Attach</div>
 			      		<!-- /.card-heading -->
 			      		<div class="card-body">
@@ -138,11 +109,9 @@
 	      	<!-- /.card-body -->
 	      </div>  
         <!--/.card  -->
-      </div>
-      <!-- /.container-fluid -->
+        </div>
     </section>
-    <!-- /.content -->
-    
+    <!-- section -->
     
 <script>
 $(function(){
