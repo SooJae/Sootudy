@@ -55,7 +55,14 @@ ul > li { list-style: none }
 .bigPicture img {
   width:600px;
 }
+.card-header{
+ border :1px solid rgba(0,0,0,.125);
+ margin-top: 10px;
+}
 
+.card-body{
+ border : 1px solid rgba(0,0,0,.125);
+}
 
 </style>
     <!-- Content Header (Page header) -->
@@ -76,7 +83,7 @@ ul > li { list-style: none }
     </section>
 <section>
 <div class="container board-whole m-full white">
- 	<div class="container board-detail">
+ 	<div class="container board-detail getbody">
 <!-- 			<div class="row board-head in-visible row-no-padding"> -->
 			<div class="row board-detail-head pb-3 pt-3">
 				<div class="col-12 col-md-12"><h3>${board.title}</h3></div>
@@ -99,7 +106,7 @@ ul > li { list-style: none }
 			</div>
 			<div class="row board-detail-bottom p-1">
 				<div>
-				 <button type="button" class="btn btn-outline-dark btn-sm" onclick="doAction(0);"><i class="fas fa-clipboard-list"></i>&nbsp;목록</button>
+				 <button type="button" class="btn btn-outline-dark btn-sm"  data-oper="list"><i class="fas fa-clipboard-list"></i>&nbsp;목록</button> 
 				</div>
 				<div class="ml-auto">
 				<button type="button" class="btn btn-outline-dark btn-sm" onclick="doAction(1);"><i class="far fa-edit"></i>&nbsp;수정</button>
@@ -117,9 +124,9 @@ ul > li { list-style: none }
 	                  		<button data-oper="modify" class="btn btn-default "> Modify </button>
 	                  	</c:if>
 	                </sec:authorize>
-	                  <button data-oper="list" class="btn btn-info"> List </button>
+	                 
                   
-               <form id="operForm" action="/boad/modify" method="get">
+               <form id="operForm" action="/board/modify" method="get">
 				<%--   <input type='hidden' id='bname' name='bname' value='<c:out value="${board.bname}"/>'> --%>
 				  <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
 				  <input type='hidden' name='page' value='<c:out value="${cri.page}"/>'>
@@ -138,8 +145,8 @@ ul > li { list-style: none }
         
 	  <div class="row">
 		  <div class="col-lg-12">
-		    <div class="card card-secondary">
-		
+		    <!-- <div class="card card-secondary"> -->
+			<div class="container board-whole m-full white">
 		      <div class="card-header">Files</div>
 		      <!-- /.panel-heading -->
 		      <div class="card-body">
@@ -167,7 +174,7 @@ ul > li { list-style: none }
           <!-- right column -->
           <div class="col-md-12">
             <!-- general form elements disabled -->
-            <div class="card card-secondary">
+            <div class="container board-whole m-full white">
               <div class="card-header">
                 <i class="fa fa-comments fa-fw"></i>Reply
               </div>
@@ -379,18 +386,16 @@ $(function(){
 			//replyForm.remove();
 			
 
-			
-			document.body.appendChild(operForm[0]);
-			
+			//operForm을 담아서 보냄
 			var operation = $(this).data("oper");
-			
+			console.log(operation);
 			if(operation === "modify"){
 				operForm.attr("action","/board/modify");
-				//document.body.appendChild(operForm[0]);
+				document.body.appendChild(operForm[0]);
 			} else if(operation ==="list"){
 			    operForm.find("#bno").remove();
 			    operForm.attr("action","/board/list");
-			   //document.body.appendChild(operForm[0]);
+			    document.body.appendChild(operForm[0]);
 			    
 			}
 

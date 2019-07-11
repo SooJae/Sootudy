@@ -118,7 +118,7 @@
 	      </div>
 	    </nav>
 	<!-- Content Wrapper. Contains page content -->
-<div class="content-wrapper">
+<%-- <div class="content-wrapper">
 
 <c:if test="${!empty requestScope.fail||!empty requestScope.success}">
 		<c:choose>
@@ -155,7 +155,7 @@
 				</div>
 			</div>
 		</c:otherwise>
-	</c:choose>
+	</c:choose> --%>
 
 
 

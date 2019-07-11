@@ -34,7 +34,7 @@
 				<div class="col-9 col-md-2 " style="text-align:right"><i class="far fa-eye"></i> ${board.board_Count}</div>
 				<div class="col-3 col-md-2" style="text-align:right"><i class="fas fa-sun"></i>${board.board_Hit}</div>
 			</div>
-			<div class="row board-detail-body" style="min-height:300px;">
+			<div class="row board-detail-body getbody" style="min-height:300px;">
 				<div class="board-content">
 			${board.board_Content}
 				</div>

@@ -49,15 +49,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.addFilterBefore(filter,CsrfFilter.class);
 		//
 		
-		http.authorizeRequests()
-		.antMatchers("/sample/all").permitAll()
-		.antMatchers("/sample/admin").access("hasRole('ADMIN')")
-		.antMatchers("/sample/member").access("hasRole('MEMBER')");
+//		http.authorizeRequests()
+//		.antMatchers("/sample/all").permitAll()
+//		.antMatchers("/sample/admin").access("hasRole('ADMIN')")
+//		.antMatchers("/sample/member").access("hasRole('MEMBER')");
 		
 		http.formLogin()
 		.loginPage("/member/login")
 		.loginProcessingUrl("/login");
-		//.loginProcessingUrl("/login/auth");
 		
 		http.logout()
 		.logoutUrl("/customLogout")

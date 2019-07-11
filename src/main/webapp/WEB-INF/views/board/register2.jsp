@@ -9,29 +9,24 @@
 	width: 100%;
 	background-color: gray;
 }
-
 .uploadResult ul {
 	display: flex;
 	flex-flow: row;
 	justify-content: center;
 	align-items: center;
 }
-
 .uploadResult ul li {
 	list-style: none;
 	padding: 10px;
 	align-content:center;
 	text-align:center;
 }
-
 .uploadResult ul li img {
 	width: 100px;
 }
-
 .uploadResult ul li span{
 	color:white;
 }
-
 .bigPictureWrapper {
   position: absolute;
   display: none;
@@ -44,7 +39,6 @@
   z-index: 100;
   background:rgba(255,255,255,0.5);
 }
-
 .bigPicture {
   position: relative;
   display:flex;
@@ -274,7 +268,6 @@ $(function(){
 					str += "</div>";
 					str +"</li>";
 				}
-
 		    });
 		    
 		    uploadUL.append(str);
@@ -283,7 +276,6 @@ $(function(){
 	  $(".uploadResult").on("click","button",function(e){
 			var targetFile = $(this).data("file");
 			var type = $(this).data("type");
-
 			var targetLi = $(this).closest("li");
 			
 			$.ajax({

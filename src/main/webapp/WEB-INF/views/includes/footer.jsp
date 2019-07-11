@@ -51,7 +51,6 @@ $(document).ready(function(){
     });
 });
 
-//Login 
 $("#logout").on("click", function(e) {
 	e.preventDefault();
 
