@@ -78,9 +78,8 @@
         </div>
 	         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	         <%-- <input type="hidden" name="bname" value="${pageMaker.cri.bname}"/> --%>
-	         <button type="submit" class="btn btn-default"> Submit Button</button>
-	         <button type="reset" class="btn btn-default"> Reset Button</button>
-      <!-- <button type="submit" class="btn btn-success btn-lg btn-block mt-5" onclick="return checkWriteForm()">글 쓰기</button> -->
+	        <!--  <button type="submit" class="btn btn-default"> Submit Button</button> -->
+           <button type="submit" class="btn btn-success btn-lg btn-block mt-5" onclick="return checkWriteForm()">글 쓰기</button>
     </form>
   </div>
 </div>
