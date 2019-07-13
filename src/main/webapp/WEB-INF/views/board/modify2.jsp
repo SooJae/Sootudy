@@ -68,71 +68,106 @@ ul > li { list-style: none }
 </style>
 
 
-<section>
-
-<div class="container board-whole m-full white">
- <div class="container board-detail getbody" style="padding : 0px;">
-  <!-- section : 본문역할 -->
-  <div class="board-detail-body" style="border-top: 1px solid lightgray;">
-    <form role="form" action="/board/modify" method="post">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-        <%-- <input type="hidden" name="bname" value="${pageMaker.cri.bname}"/> --%>
-        <input type='hidden' name="page" value='<c:out value="${cri.page}"/>'>
-        <input type='hidden' name="perPageNum" value='<c:out value="${cri.perPageNum}"/>'>
-        <input type='hidden' name="type" value='<c:out value="${cri.type}"/>'>
-        <input type='hidden' name="keyword" value='<c:out value="${cri.keyword}"/>'>
-        <input type='hidden' name="bno" value='<c:out value="${board.bno}"/>'>
-        <input type='hidden' name="writer" value='<c:out value="${board.writer}"/>'>
-        
-         <div class="form-group">
-           <label>Title</label>
-           <input type="text" class="form-control"  maxlength="100" name="title" value='<c:out value="${board.title}"/>'>
-         </div>
-
-         <!-- textarea -->
-         <div class="form-group">
-           <label>Textarea</label>
-           <textarea class="form-control" rows="3" name="content"><c:out value="${board.content}"/></textarea>
-         <!-- textarea는 value가 없다. -->
-         </div>
-         
-         <sec:authentication property="principal" var="pinfo"/>
-         <sec:authorize access="isAuthenticated()">
-           <c:if test="${pinfo.username eq board.writer}">
-             <button type="submit" data-oper="modify" class="btn btn-default"> Modify</button>
-             <button type="submit" data-oper="remove" class="btn btn-danger"> Remove </button>
-           </c:if>
-         </sec:authorize>
-         
-         <button type="submit" data-oper="list" class="btn btn-info"> List </button>
-        
-    </form>
-  </div>
-</div>
- 
-        <div class="row">
-          <div class="col-lg-12">
-            <div class="card m-full white">
-              <div class="card-header">File Attach</div>
-                <!-- /.card-heading -->
-                <div class="card-body">
-                  <div class="form-group uploadDiv">
-                    <input type="file" name='uploadFile' multiple>
-                  </div>
-                  
-                  <div class="uploadResult">
-                    <ul>
-                    </ul>
-                  </div>
-                </div>
-            </div>
+   <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>General Form</h1>
           </div>
-          <!-- /.card-body -->
-        </div>  
-        <!--/.card  -->
+          <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">General Form</li>
+            </ol>
+          </div>
         </div>
-</section>
+      </div><!-- /.container-fluid -->
+    </section>
 
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <!-- right column -->
+          <div class="col-md-12">
+            <!-- general form elements disabled -->
+            <div class="card card-warning">
+              <div class="card-header">
+                <h3 class="card-title">General Elements</h3>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+              
+                  <!-- text input -->
+                  <form role="form" action="/board/modify" method="post">
+	                  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	                  <%-- <input type="hidden" name="bname" value="${pageMaker.cri.bname}"/> --%>
+	                  <input type='hidden' name="page" value='<c:out value="${cri.page}"/>'>
+	                  <input type='hidden' name="perPageNum" value='<c:out value="${cri.perPageNum}"/>'>
+	                  <input type='hidden' name="type" value='<c:out value="${cri.type}"/>'>
+	                  <input type='hidden' name="keyword" value='<c:out value="${cri.keyword}"/>'>
+	                  <div class="form-group">
+	                    <label>Title</label>
+	                    <input type="text" class="form-control" name="bno" value='<c:out value="${board.bno}"/>' readonly="readonly">
+	                  </div>
+	                  
+	                  <div class="form-group">
+	                    <label>Title</label>
+	                    <input type="text" class="form-control" name="title" value='<c:out value="${board.title}"/>'>
+	                  </div>
+	
+	                  <!-- textarea -->
+	                  <div class="form-group">
+	                    <label>Textarea</label>
+	                    <textarea class="form-control" rows="3" name="content"><c:out value="${board.content}"/></textarea>
+	                  <!-- textarea는 value가 없다. -->
+	                  </div>
+	                  <div class="form-group">
+	                    <label>Writer</label>
+	                    <input class="form-control" name="writer" value='<c:out value="${board.writer}"/>' readonly="readonly"></input>
+	                  </div>
+	                  <sec:authentication property="principal" var="pinfo"/>
+	                  <sec:authorize access="isAuthenticated()">
+		                  <c:if test="${pinfo.username eq board.writer}">
+			                  <button type="submit" data-oper="modify" class="btn btn-default"> Modify</button>
+			                  <button type="submit" data-oper="remove" class="btn btn-danger"> Remove </button>
+		                  </c:if>
+	                  </sec:authorize>
+	                  
+	                  <button type="submit" data-oper="list" class="btn btn-info"> List </button>
+                  </form>
+                  </div>
+         	   <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+          <!--/.col (right) -->
+        </div>
+        <!-- /.row -->
+        
+        
+      	  <div class="row">
+		  <div class="col-lg-12">
+		    <div class="card card-secondary">
+		
+		      <div class="card-header">Files</div>
+		      <!-- /.panel-heading -->
+		      <div class="card-body">
+		        
+		        <div class='uploadResult'> 
+		          <ul>
+		          </ul>
+		        </div>
+		      </div>
+		      <!--  end panel-body -->
+		    </div>
+		    <!--  end panel-body -->
+		  </div>
+		  <!-- end panel -->
+	</div>
+	<!-- /.row -->
+        
         <div class='bigPictureWrapper'>
 		  <div class='bigPicture'>
 		  </div>
@@ -141,7 +176,11 @@ ul > li { list-style: none }
         
         
         
+      </div>
       
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
 <%@ include file="../includes/footer.jsp" %>
 
 <script>
