@@ -3,7 +3,9 @@ package com.soo.sootudy.controller;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -72,11 +74,15 @@ public class BoardController {
 		board.getAttachList().forEach(attach -> log.info(""+attach)); }
 		 
 		
-		log.info("======================");
+		log.info("=======================");
 		
 		service.register(board);
-		rttr.addFlashAttribute("result","글이 등록되었습니다.");
 		
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("flag","success");
+		map.put("msg","등록이 완료되었습니다");
+		
+		rttr.addFlashAttribute("result",map);
 		
 		return "redirect:/board/list" + cri.getListLink();
 	}
@@ -95,9 +101,17 @@ public class BoardController {
 	@PostMapping("/modify")
 	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri,RedirectAttributes rttr) {
 		log.info("modify :"+ board);
+		Map<String, Object> map = new HashMap<String,Object>();
 		if(service.modify(board)) {
-			rttr.addFlashAttribute("result", "수정이 완료되었습니다.");
+			map.put("flag","success");
+			map.put("msg","수정이 완료되었습니다");
+			
+		} else {
+			map.put("flag","false");
+			map.put("msg","수정에 실패하였습니다");
+			
 		}
+		rttr.addFlashAttribute("result",map);
 		
 		return "redirect:/board/list" + cri.getListLink();
 	}
@@ -115,7 +129,11 @@ public class BoardController {
 			//delete Attach Files
 			deleteFiles(attachList);
 
-			rttr.addFlashAttribute("result","삭제가 완료되었습니다.");
+			Map<String, Object> map = new HashMap<String,Object>();
+			map.put("flag","success");
+			map.put("msg","삭제가 완료되었습니다");
+			
+			rttr.addFlashAttribute("result",map);
 		}
 		//UriComponentsBuilder 덕분에 일일이 파라미터를 추가할 필요가 없다.
 		/* 

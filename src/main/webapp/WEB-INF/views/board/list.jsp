@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="../includes/header.jsp" %>
@@ -150,22 +149,7 @@
 <script>
   
   $(function(){
-   var result = '<c:out value="${result}"/>';
-   
-   checkModal(result);
-   
-   history.replaceState({},null,null);
-   
-   function checkModal(result) {
-     if(result ==='' || history.state){
-       return;
-     }
-     if(result){
-      // $(".modal-body").html("게시글 "+parseInt(result)+ "번이 등록되었습니다.");
-       $(".modal-body").html(result);
-     }
-     $("#myModal").modal("show");
-   }
+
    
    $("#regBtn").on("click", function(){
      self.location = "/board/register";

@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 <!DOCTYPE html>
 <html>
@@ -10,6 +11,11 @@
 <title>Sootudy</title>
 <!-- Tell the browser to be responsive to screen width -->
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<!-- Bootstrap CSS -->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!-- Sidebar CSS -->
+<link rel="stylesheet" href="/resources/dist/css/sidebar.css">
+<link rel="stylesheet" href="/resources/dist/css/custom.css">
 
 <!-- Font Awesome -->
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css" integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -20,11 +26,6 @@
 <link href='//spoqa.github.io/spoqa-han-sans/css/SpoqaHanSans-kr.css' rel='stylesheet' type='text/css'>
 <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/earlyaccess/hanna.css">
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-<!-- Sidebar CSS -->
-<link rel="stylesheet" href="/resources/dist/css/sidebar.css">
-<link rel="stylesheet" href="/resources/dist/css/custom.css">
 </head>
 
 
@@ -103,10 +104,10 @@
 	      <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
 	        <ul class="navbar-nav ">
 	          <li class="nav-item active">
-	            <a class="nav-link" href="/member/join" id="joinBtn">회원가입 <span class="sr-only">(current)</span></a>
+	            <a class="nav-link" href="#" data-oper="join">회원가입 <span class="sr-only">(current)</span></a>
 	          </li>
 	          <li class="nav-item">
-	            <a class="nav-link" href="#">Features</a>
+	            <a class="nav-link" href="#" data-oper="board">게시판 <span class="sr-only"></span></a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link" href="#">Pricing</a>
@@ -118,9 +119,9 @@
 	      </div>
 	    </nav>
 	<!-- Content Wrapper. Contains page content -->
-<%-- <div class="content-wrapper">
-
-<c:if test="${!empty requestScope.fail||!empty requestScope.success}">
+<div class="content-wrapper">
+ 
+<%-- <c:if test="${!empty requestScope.fail||!empty requestScope.success}">
 		<c:choose>
 			<c:when test="${!empty requestScope.fail}">
 				<c:set var="errorMsg" value="${requestScope.fail}"/>
@@ -155,19 +156,68 @@
 				</div>
 			</div>
 		</c:otherwise>
-	</c:choose> --%>
-
+	</c:choose> 
+	 --%>
+	 
+ <%-- <c:if test="${!empty result}">  --%>
+<div class="alertForm container mt-2">
+<!-- 
+	<div class="alert alert-danger alert-dismissible show" role="alert">
+	
+	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+	    <span aria-hidden="true">&times;</span>
+	  </button>
+	</div>
+	 -->
+</div>
+<%-- </c:if> --%>
 
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
-$(document).ready(function(){
-$("#joinBtn").on("click", function(){
-	e.preventDefault();
-       self.location = "/member/join";
-     });
+$(function(){
 	
-});
+	$(".navbar-nav").find(".nav-link").on("click",function(e){
+		e.preventDefault();
+		
+		let operation = $(this).data("oper");
+		console.log(operation);
+		let loc;
+		if(operation === "board"){
+			loc = "/board/list";
+		} else if(operation ==="join"){
+		    loc = "/member/join" 
+		}
+		self.location=loc;
+	});
+	
+var result = '<c:out value="${result}"/>';  
+var resultFlag = '<c:out value="${result.flag}"/>';
+var resultMsg = '<c:out value="${result.msg}"/>';
+ 
+checkAlert(result);
+
+history.replaceState({},null,null);
+
+function checkAlert(result) {
+	
+	  if(result ==='' || history.state){
+	    return;
+	  }
+	   if(result){ 
+		  if(resultFlag === "false"){
+			  var alert=`<div class="alert alert-danger fade show" role="alert" style="text-align:center; padding:1%;"> <strong>`+resultMsg+`<strong> <div>`;
+		  }else{
+			  var alert=`<div class="alert alert-success fade show" role="alert" style="text-align:center; padding:1%;"><strong>`+resultMsg+`<strong><div>`;
+		  }
+			  $(".alertForm").html(alert);
+	   } 
+	}
+
+	$(".alert").on("click",function(){
+		$('.alert').alert('close');
+	})
+}); 
 
 </script>

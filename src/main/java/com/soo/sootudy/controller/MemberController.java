@@ -1,5 +1,6 @@
 package com.soo.sootudy.controller;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.soo.sootudy.domain.MemberVO;
 import com.soo.sootudy.service.MemberService;
@@ -33,9 +35,16 @@ public class MemberController {
 	}
 	
 	@PostMapping("/join")
-	public String join(MemberVO vo){
+	public String join(MemberVO vo, RedirectAttributes rttr){
 		log.info(""+vo);
 		service.register(vo);
+		
+		Map<String, Object> map = new HashMap<String,Object>();
+		map.put("flag","success");
+		map.put("msg","가입에 성공하였습니다");
+		
+		rttr.addFlashAttribute("result",map);
+		
 		return "redirect:/board/list";
 	}
 	

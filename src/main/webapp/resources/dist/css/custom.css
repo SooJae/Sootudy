@@ -233,6 +233,7 @@ overflow-wrap: break-word;
 	display:none;
 	}
 .m-full{
+	border-top:1px solid lightgray;
 	width:100%;
 }	
 #date, #count{
