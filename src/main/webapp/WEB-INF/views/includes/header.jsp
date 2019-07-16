@@ -92,10 +92,10 @@
 
      
 <!-- <div class="content"> -->
-	 <nav class="navbar navbar-expand-lg navbar-light bg-light">
+	 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#0945b3;">
 	
 	<button type="button" id="sidebarCollapse" class="btn">
-	    <i class="fa fa-align-justify"></i> <span></span>
+	    <i class="fa fa-align-justify" style="color:white;"></i> <span></span>
 	</button>
 	    <!-- <a class="navbar-brand" href="#">Navbar</a> -->
 	      <button class="navbar-toggler" id="pc-navbar" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -104,16 +104,13 @@
 	      <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
 	        <ul class="navbar-nav ">
 	          <li class="nav-item active">
-	            <a class="nav-link" href="#" data-oper="join">회원가입 <span class="sr-only">(current)</span></a>
+	            <a class="nav-link" href="#" data-oper="join">회원가입</a>
 	          </li>
 	          <li class="nav-item">
-	            <a class="nav-link" href="#" data-oper="board">게시판 <span class="sr-only"></span></a>
+	            <a class="nav-link" href="#" data-oper="board">게시판</a>
 	          </li>
 	          <li class="nav-item">
-	            <a class="nav-link" href="#">Pricing</a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link disabled">Disabled</a>
+	            <a class="nav-link" href="#" data-oper="study">스터디</a>
 	          </li>
 	        </ul>
 	      </div>
