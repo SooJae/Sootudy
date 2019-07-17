@@ -29,6 +29,13 @@
 </head>
 
 
+<style>
+/* .far fa-user{
+font-size : 0.95rem;
+} */
+
+</style>
+
 <body>
   <div class="wrapper">
      <div class="overlay"></div>
@@ -104,17 +111,26 @@
 	      <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
 	        <ul class="navbar-nav ">
 	          <li class="nav-item">
-	            <a class="nav-link" href="#" data-oper="board">게시판</a>
+	            <a class="nav-link btnc" href="#" data-oper="board">게시판</a>
 	          </li>
 	          <li class="nav-item">
-	            <a class="nav-link" href="#" data-oper="study">스터디</a>
+	            <a class="nav-link btnc" href="#" data-oper="study">스터디2</a>
 	          </li>
-	          <li class="nav-item active">
-	            <a class="nav-link" href="#" data-oper="join"><i class="far fa-user"></i></a>
-	          </li>
+	          
+	          <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-user"></i></a>
+					    <div class="dropdown-menu">
+					      <a class="dropdown-item" href="#">회원 설정</a>
+					       <a class="dropdown-item btnc" href="#" data-oper="join">회원가입</a>
+					      <div class="dropdown-divider"></div>
+					       <a class="dropdown-item btnc" href="#" data-oper="login">로그인</a>
+					    </div>
+					  </li>
+					  
 	        </ul>
 	      </div>
 	    </nav>
+	    
 	<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
  
@@ -175,7 +191,7 @@
 <script type="text/javascript">
 $(function(){
 	
-	$(".navbar-nav").find(".nav-link").on("click",function(e){
+	$(".navbar-nav").find(".btnc").on("click",function(e){
 		e.preventDefault();
 		
 		let operation = $(this).data("oper");
@@ -185,7 +201,9 @@ $(function(){
 			loc = "/board/list";
 		} else if(operation ==="join"){
 		    loc = "/member/join" 
-		}
+		} else if(operation ==="login"){
+	        loc = "/member/login" 
+	    }
 		self.location=loc;
 	});
 	

@@ -124,13 +124,15 @@ a[aria-expanded="true"]{
 a[data-toggle="collapse"]{
     position:relative;
 }
-.dropdown-toggle:after{
+
+
+/* .dropdown-toggle:after{
     display: block;
     position: absolute;
     top: 60%;
     right: 20px;
     transform: translateY(-50%);
-}
+} */
 
 ul ul a{
     font-size: 0.9em !important;
@@ -183,9 +185,18 @@ a.article:hover{
 
 
 @media(max-width:1024px){
-    #pc-navbar{
-        display:none;
-    }
+   #pc-navbar{
+       display:none;
+   }
+    
+  .dropdown-toggle:after{
+    display: block;
+    position: absolute;
+    top: 60%;
+    right: 20px;
+    transform: translateY(-50%);
+  }
+  
 }
 
 @media(min-width:1024px){

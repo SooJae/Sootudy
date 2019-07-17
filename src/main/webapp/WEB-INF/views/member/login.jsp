@@ -32,7 +32,7 @@
 				      
 				       
 					  	<div class="checkbox">
-					  		<label><input name="remember-me" type="checkbox">Remember Me</label>
+					  		<label><input name="remember-me" type="checkbox">아이디 기억하기</label>
 					  	</div>
 				      <button type="submit" class="btn btn-success btn-lg btn-block mt-4" onclick="return checkValue();">로그인</button> 
 				      <button type="button" class="btn btn-secondary btn-lg btn-block mt-3" id="join">회원가입</button>

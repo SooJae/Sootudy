@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
+<%@ include file="../includes/header.jsp" %>
 <style>
 .uploadResult {
 	width: 100%;
@@ -53,7 +54,7 @@
 
 </style>
 
-<%@ include file="../includes/header.jsp" %>
+
    <!-- Content Header (Page header) -->
 
  <!-- Main content -->
