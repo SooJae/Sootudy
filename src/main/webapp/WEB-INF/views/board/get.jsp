@@ -191,13 +191,13 @@ ul > li { list-style: none }
 				                  <!-- text input -->
 				                  <div class="form-group">
 				                    <label>댓글 쓰기</label>
-				                    <input type="text" class="form-control" placeholder="Enter ..." name="replyText">
+				                    <input type="text" class="form-control" placeholder="Enter ..." name="reply">
 				                  </div>
-				                  <div class="form-group">
+				                 <%--  <div class="form-group">
 				                    <label>댓글자</label>
 				                    <input class="form-control" name="writer" value='<c:out value="${pinfo.username}"/>' readonly="readonly"/>
-				                   <%--  <input class="form-control" name="writer" value='<c:out value="${pinfo.member.userName}"/>' readonly="readonly"/> --%>
-				                  </div>
+				                    <input class="form-control" name="writer" value='<c:out value="${pinfo.member.userName}"/>' readonly="readonly"/>
+				                  </div> --%>
 				                  <!-- <div class="form-group">
 				                    <label>댓글날짜</label>
 				                    <input type="text" class="form-control" placeholder="Enter ..." name="replyDate">
@@ -297,11 +297,11 @@ $(function(){
 				for(var i = 0, len = list.length||0; i<len; i++){
 					str+="<li class='left clearfix' data-rno='"+list[i].rno+"' style='border-bottom:1px solid gray; margin-top:20px; margin-left: <c:out value='"+${20*list[i].replyDepth}+"'/>px;'>";
 					str+="<div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>";
-					str+="<small class='pull-right text-muted'>"+replyService.displayTime(list[i].replyDate)+"</small>";
+					str+="<small class='pull-right text-muted'>"+replyService.displayTime(list[i].reply_udt_dt)+"</small>";
 /* 					str+="<small class='pull-right text-muted replyDelete'><a href='#'>삭제&nbsp;</a></small></div>"; */
 					str+="<sec:authentication property='principal' var='pinfo'/><sec:authorize access='isAuthenticated()'><c:if test='${pinfo.username eq board.writer}'>";
 					str+="<a href='#'><small class='pull-right text-muted replyDelete'>삭제&nbsp;</small></a></div></c:if></sec:authorize>";
-					str+="<p>"+list[i].replyText+"</p></div></li>";
+					str+="<p>"+list[i].reply+"</p></div></li>";
 				}
 				replyUL.html(str);
 				
@@ -421,14 +421,13 @@ $(function(){
 			 </sec:authorize>	
 		 	
 			 var reply = {
-					replyText: replyForm.find("input[name='replyText']").val(),
+					reply: replyForm.find("input[name='reply']").val(),
 			 		replyer : replyer,
 			 		bno:bnoValue
 			 };
 			 replyService.add(reply,function(result){
 				
-				 replyForm.find("input[name='replyText']").val("");
-				 replyForm.find("input[name='replyer']").val("");
+				 replyForm.find("input[name='reply']").val("");
 				 
 				 
 				 alert(result);

@@ -7,32 +7,32 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
 	<select id="list" resultType="com.soo.sootudy.domain.ReplyVO">
 		SELECT *
-			FROM TBL_REPLY
+			FROM board_reply
 	</select>
 	<select id="read" resultType="com.soo.sootudy.domain.ReplyVO">
 		SELECT * 
-			FROM TBL_REPLY
+			FROM board_reply
 			WHERE RNO = #{rno}
 	</select>
 	
 	<insert id="insert">
-		INSERT INTO TBL_REPLY
+		INSERT INTO board_reply
 				( BNO
-				, REPLYTEXT
+				, REPLY
 				, REPLYER)
 			VALUES( #{bno}
-				,	#{replyText}
+				,	#{reply}
 				, 	#{replyer})
 	</insert>
 	
 	<delete id="delete">
-		DELETE FROM TBL_REPLY
+		DELETE FROM board_reply
 				WHERE RNO = #{rno}
 	</delete>
 	
 	<update id="update">
-		UPDATE TBL_REPLY 
-			SET REPLYTEXT = #{replyText}
+		UPDATE board_reply 
+			SET REPLY = #{reply}
 			WHERE RNO = #{rno}
 	</update>
 	<!-- 
@@ -44,7 +44,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			,REPLYER
 			,REPLYDATE
 			,REPLYudt_dt
-		FROM TBL_REPLY
+		FROM board_reply
 		WHERE BNO = #{bno}
 		ORDER BY RNO DESC
 	</select>
@@ -53,11 +53,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		SELECT 
 			 RNO
 			,BNO
-			,REPLYTEXT
+			,REPLY
 			,REPLYER
-			,REPLYDATE
-			,REPLYudt_dt
-		FROM TBL_REPLY
+			,REPLY_DT
+			,REPLY_UDT_DT
+		FROM board_reply
 		WHERE BNO = #{bno}
 		ORDER BY RNO DESC
 		<!-- limit #{pageStart}, #{perPageNum} -->
@@ -65,26 +65,26 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	</select>
 	
 	<select id="getCountByBno" resultType="int">
-		select count(rno) from TBL_REPLY where bno = #{bno}
+		select count(rno) from board_reply where bno = #{bno}
 	</select>
 	
 	
 <!-- 	
 	<update id="update">
-		UPDATE TBL_REPLY
+		UPDATE board_reply
 			SET REPLYTEXT = #{replytext}
 			 ,	udt_dt = NOW()
 			 WHERE RNO = #{rno}
 	</update>
 	
 	<delete id="delete">
-		DELETE FROM TBL_REPLY
+		DELETE FROM board_reply
 			WHERE RNO = #{rno}
 	</delete>
 	
 	<select id="listPage" resultType="ReplyVO">
 		SELECT *
-		FROM TBL_REPLY
+		FROM board_reply
 		WHERE BNO = #{bno}
 		ORDER BY RNO DESC
 		LIMIT #{cri.pageStart}, #{cri.perPageNum}
@@ -92,17 +92,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	
 	<select id="count" resultType="int">
 		SELECT COUNT(BNO)
-		FROM TBL_REPLY
+		FROM board_reply
 		WHERE BNO = #{bno}
 	</select>
 	 -->
 	 
 	<!--   <insert id="insertBoard6Reply" parameterType="com.soo.sootudy.domain.ReplyVO" >
         <selectKey resultType="String" keyProperty="rno" order="BEFORE">
-            SELECT IFNULL(MAX(RNO),0)+1 FROM TBL_REPLY
+            SELECT IFNULL(MAX(RNO),0)+1 FROM board_reply
         </selectKey>
     
-        INSERT INTO TBL_REPLY(BNO, RNO, REPLYER, REPLYORDER, REPLYPARENT, REPLYDEPTH)
+        INSERT INTO board_reply(BNO, RNO, REPLYER, REPLYORDER, REPLYPARENT, REPLYDEPTH)
         VALUES (#{bno}, #{rno}, #{replyer}, #{replyOrder},
                    <choose>
                        <when test="replyParent==null">#{rno}, 0</when>
@@ -113,19 +113,19 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     <select id="selectBoard6ReplyParent" resultType="com.soo.sootudy.domain.ReplyVO" parameterType="String">
         SELECT BNO, REPLYDEPTH+1 REPLYDEPTH, REPLYORDER 
-          FROM TBL_REPLY
+          FROM board_reply
          WHERE RNO=#{replyParent}
     </select>
 
     <update id="updateBoard6ReplyOrder" parameterType="com.soo.sootudy.domain.ReplyVO"> 
-        UPDATE TBL_REPLY
+        UPDATE board_reply
            SET REPLYORDER = REPLYORDER + 1 
          WHERE BNO=#{bno} AND REPLYORDER>#{replyOrder}       
     </update> 
 
     <select id="selectBoard6ReplyMaxOrder" resultType="Integer" parameterType="String">
         SELECT IFNULL(MAX(REPLYORDER),0)+1
-          FROM TBL_REPLY
+          FROM board_reply
          WHERE BNO=#{bno}
     </select> -->
 </mapper>
