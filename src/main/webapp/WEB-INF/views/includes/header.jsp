@@ -92,7 +92,7 @@
 
      
 <!-- <div class="content"> -->
-	 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#0945b3;">
+	 <nav class="navbar navbar-expand-lg navbar-dark">
 	
 	<button type="button" id="sidebarCollapse" class="btn">
 	    <i class="fa fa-align-justify" style="color:white;"></i> <span></span>
@@ -103,14 +103,14 @@
 	      </button>
 	      <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
 	        <ul class="navbar-nav ">
-	          <li class="nav-item active">
-	            <a class="nav-link" href="#" data-oper="join">회원가입</a>
-	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link" href="#" data-oper="board">게시판</a>
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link" href="#" data-oper="study">스터디</a>
+	          </li>
+	          <li class="nav-item active">
+	            <a class="nav-link" href="#" data-oper="join"><i class="far fa-user"></i></a>
 	          </li>
 	        </ul>
 	      </div>

@@ -25,7 +25,7 @@
       </div>
       <div class="form-group" id="pwForm">
         <label for="pw">비밀번호를 입력해주세요 (8~16자)</label>
-        <input type="password" id="pw" name="pw" class="form-control valid" maxlength="16" size="16" validCheck="0">
+        <input type="password" id="pw" name="pw" class="form-control" maxlength="16" size="16" validCheck="0">
         <i></i>
       </div>
       <div class="form-group" id="pw2Form">
