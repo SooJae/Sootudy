@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <!DOCTYPE html>
 <html>
@@ -117,6 +118,7 @@ font-size : 0.95rem;
 	            <a class="nav-link btnc" href="#" data-oper="study">스터디2</a>
 	          </li>
 	          
+	          <sec:authorize access ="isAuthenticated()">
 	          <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-user"></i></a>
 					    <div class="dropdown-menu">
@@ -126,6 +128,8 @@ font-size : 0.95rem;
 					       <a class="dropdown-item btnc" href="#" data-oper="login">로그인</a>
 					    </div>
 					  </li>
+					  </sec:authorize>
+					  <%-- <sec:authorize access="isAnonymous()"> --%>
 					  
 	        </ul>
 	      </div>

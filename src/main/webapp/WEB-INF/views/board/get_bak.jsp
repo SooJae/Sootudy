@@ -14,6 +14,7 @@ ul > li { list-style: none }
   width:100%;
   background-color: gray;
 }
+
 .uploadResult ul{
   display:flex;
   flex-flow: row;
