@@ -47,7 +47,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setEncoding("UTF-8");
         filter.setForceEncoding(true);
         http.addFilterBefore(filter,CsrfFilter.class);
-		//
 		
 //		http.authorizeRequests()
 //		.antMatchers("/sample/all").permitAll()
@@ -59,7 +58,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		.loginProcessingUrl("/login");
 		
 		http.logout()
-		.logoutUrl("/customLogout")
+		.logoutUrl("/logout")
 		.invalidateHttpSession(true)
 		.deleteCookies("remember-me","JSESSION_ID");
 		

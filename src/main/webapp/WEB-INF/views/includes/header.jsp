@@ -34,7 +34,9 @@
 /* .far fa-user{
 font-size : 0.95rem;
 } */
-
+.m-p{
+color:white;
+}
 </style>
 
 <body>
@@ -46,7 +48,12 @@ font-size : 0.95rem;
          </div>
 
          <ul class="list-unstyled components">
-             <p>로그인을 해주세요</p>
+             <sec:authorize access ="isAnonymous()">
+              <p class="m-p btnc" data-oper="login">로그인을 해주세요</p>
+             </sec:authorize>
+              <sec:authorize access ="isAuthenticated()">
+                   <p class="m-p btnc" data-oper="logout">로그아웃</p>
+             </sec:authorize>
              <li class="active">
                  <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
                  <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -63,7 +70,7 @@ font-size : 0.95rem;
              </li>
 
              <li>
-                 <a href="#">About</a>
+                 <a class="btnc" href="#" data-oper="board">게시판</a>
              </li>    
 
              <li>
@@ -118,17 +125,20 @@ font-size : 0.95rem;
 	            <a class="nav-link btnc" href="#" data-oper="study">스터디2</a>
 	          </li>
 	          
-	          <sec:authorize access ="isAuthenticated()">
+	         
 	          <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-user"></i></a>
 					    <div class="dropdown-menu">
 					      <a class="dropdown-item" href="#">회원 설정</a>
-					       <a class="dropdown-item btnc" href="#" data-oper="join">회원가입</a>
 					      <div class="dropdown-divider"></div>
-					       <a class="dropdown-item btnc" href="#" data-oper="login">로그인</a>
+					        <sec:authorize access ="isAnonymous()">
+  					       <a class="dropdown-item btnc" href="#" data-oper="login">로그인</a>
+								  </sec:authorize>
+								  <sec:authorize access ="isAuthenticated()">
+  					       <a class="dropdown-item btnc" href="#" data-oper="logout">로그아웃</a>
+								  </sec:authorize>
 					    </div>
 					  </li>
-					  </sec:authorize>
 					  <%-- <sec:authorize access="isAnonymous()"> --%>
 					  
 	        </ul>
@@ -195,7 +205,7 @@ font-size : 0.95rem;
 <script type="text/javascript">
 $(function(){
 	
-	$(".navbar-nav").find(".btnc").on("click",function(e){
+	$(".btnc").on("click",function(e){
 		e.preventDefault();
 		
 		let operation = $(this).data("oper");
@@ -203,11 +213,13 @@ $(function(){
 		let loc;
 		if(operation === "board"){
 			loc = "/board/list";
-		} else if(operation ==="join"){
-		    loc = "/member/join" 
+		} else if(operation ==="study"){
+		    loc = "/study/list" 
 		} else if(operation ==="login"){
 	        loc = "/member/login" 
-	    }
+    } else if(operation ==="logout"){
+	          loc = "/member/customLogout" 
+     }
 		self.location=loc;
 	});
 	
