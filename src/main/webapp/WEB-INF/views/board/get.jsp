@@ -541,46 +541,4 @@ $(function(){
 </script>
 
 
-<!-- 
-<script type="text/javascript">
-	var bnoValue='<c:out value="${board.bno}"/>';
-	
- 	replyService.add(
-			{bno:bnoValue, replytext:"JS Test", replyer:"tester"}
-			,
-			function(result){
-				alert("RESULT:"+result);
-			});  
-			
-		
-	replyService.getList({bno:bnoValue,page:1}, function(list){
-	 		list.forEach(function(i){
-				console.log(i);
-				}
-			); 
-		});
-			
-	replyService.remove(22, function(count){
-			console.log(count);
-			if(count === "success"){
-				alert("REMOVED");
-			}
-		}, function(err){
-			alert("ERROR...");
-		});
-		
-	replyService.update({
-			rno : 24,
-			bno : bnoValue,
-			replytext : "Modified Reply..."
-		}, function(result){
-			alert("수정완료");
-		});
-	replyService.get(10,function(data){
-		console.log(data);
-	});
-		
-		
-</script> 
--->
 

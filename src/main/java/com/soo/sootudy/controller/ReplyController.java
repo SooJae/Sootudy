@@ -71,8 +71,8 @@ public class ReplyController {
 		return new ResponseEntity<>(service.get(rno), HttpStatus.OK);
 	}
 	
-	//@PreAuthorize("principal.username == #vo.replyer")
-	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("principal.username == #vo.replyer")
+	/* @PreAuthorize("isAuthenticated()") */
 	@DeleteMapping(value="/{rno}")
 	public ResponseEntity<String> remove(@RequestBody ReplyVO vo, @PathVariable("rno") int rno){
 		log.info("remove"+rno);

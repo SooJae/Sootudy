@@ -218,7 +218,7 @@ $(function(){
 		} else if(operation ==="login"){
 	        loc = "/member/login" 
     } else if(operation ==="logout"){
-	          loc = "/member/customLogout" 
+	          loc = "/member/logout" 
      }
 		self.location=loc;
 	});

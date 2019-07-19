@@ -84,11 +84,11 @@ public class MemberController {
 		}
 	}
 	
-	@GetMapping("/customlogout")
+	@GetMapping("/logout")
 	public void logoutGET() {
 		log.info("custom logout");
 	}
-	@PostMapping("/customlogout")
+	@PostMapping("/logout")
 	public void logoutPost() {
 		log.info("post custom logout");
 	}

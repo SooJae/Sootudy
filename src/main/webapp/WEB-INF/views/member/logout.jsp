@@ -10,7 +10,7 @@
 <h1>Logout Page</h1>
 
 
-<form method='post' action="/logout">
+<form method='post' action="/member/logout">
     <input type="hidden" name="${_csrf.parameterName}"
     value="${_csrf.token}" />
   <button>로그아웃</button>
