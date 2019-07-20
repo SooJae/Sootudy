@@ -51,7 +51,10 @@ color:white;
              <sec:authorize access ="isAnonymous()">
               <p class="m-p btnc" data-oper="login">로그인을 해주세요</p>
              </sec:authorize>
+              <sec:authorize access ="isAuthenticated()">
+             <i class="far fa-user"></i> <sec:authentication property="principal.username"/>
              
+             </sec:authorize>
              <li class="active">
                  <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
                  <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -222,9 +225,9 @@ $(function(){
 		if(operation === "board"){
 			loc = "/board/list";
 		} else if(operation ==="study"){
-			loc = "/study/list" 
+			loc = "/study/list" ;
 		} else if(operation ==="login"){
-      loc = "/member/login" 
+      loc = "/member/login"; 
     } else if(operation ==="logout"){
     	$(this).html(`<form action='<c:url value='/member/logout'/>' method="POST">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
