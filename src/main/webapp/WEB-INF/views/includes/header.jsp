@@ -51,9 +51,7 @@ color:white;
              <sec:authorize access ="isAnonymous()">
               <p class="m-p btnc" data-oper="login">로그인을 해주세요</p>
              </sec:authorize>
-              <sec:authorize access ="isAuthenticated()">
-                   <p class="m-p btnc" data-oper="logout">로그아웃</p>
-             </sec:authorize>
+             
              <li class="active">
                  <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
                  <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -97,7 +95,14 @@ color:white;
 
          <ul class="list-unstyled CTAs">
              <li>
-                 <a href="#" class="download">Download code</a>
+	                 <a href="#" class="download">
+                  <sec:authorize access ="isAuthenticated()">
+	                   <span class="btnc" data-oper="logout">로그아웃</span>
+                 </sec:authorize>
+                 <sec:authorize access ="isAnonymous()">
+                     <span class="btnc" data-oper="login">로그인</span>
+                 </sec:authorize> 
+                  </a>
              </li>
              <li>
                  <a href="#" class="article">article</a>
@@ -136,6 +141,9 @@ color:white;
 								  </sec:authorize>
 								  <sec:authorize access ="isAuthenticated()">
   					       <a class="dropdown-item btnc" href="#" data-oper="logout">로그아웃</a>
+											<%-- <form id="logout" action='<c:url value='/member/logout'/>' method="POST">
+											   <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+											</form> --%>
 								  </sec:authorize>
 					    </div>
 					  </li>
@@ -214,11 +222,15 @@ $(function(){
 		if(operation === "board"){
 			loc = "/board/list";
 		} else if(operation ==="study"){
-		    loc = "/study/list" 
+			loc = "/study/list" 
 		} else if(operation ==="login"){
-	        loc = "/member/login" 
+      loc = "/member/login" 
     } else if(operation ==="logout"){
-	          loc = "/member/logout" 
+    	$(this).html(`<form action='<c:url value='/member/logout'/>' method="POST">
+                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+                </form>`);
+    	$(this).find("form").submit();
+    	return;
      }
 		self.location=loc;
 	});
