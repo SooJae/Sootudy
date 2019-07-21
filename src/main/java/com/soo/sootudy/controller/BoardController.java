@@ -17,12 +17,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.soo.sootudy.domain.BoardAttachVO;
+import com.soo.sootudy.domain.BoardLikeVO;
 import com.soo.sootudy.domain.BoardVO;
 import com.soo.sootudy.domain.Criteria;
 import com.soo.sootudy.domain.PageDTO;
@@ -176,9 +178,39 @@ public class BoardController {
 				log.error("delete file error "+ e.getMessage());
 			}
 		});
+		
 	}
 	
+	@ResponseBody
+	@PostMapping(value="/upLike")
+	public ResponseEntity<String> upLike(
+			@RequestBody BoardLikeVO vo){
+		
+		return service.upLike(vo) ==1
+				? new ResponseEntity<>("success", HttpStatus.OK)
+				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
+	@ResponseBody
+	@PostMapping(value="/downLike")
+	public ResponseEntity<String> downLike(
+			@RequestBody BoardLikeVO vo){
+		
+		return service.downLike(vo) ==1
+				? new ResponseEntity<>("success", HttpStatus.OK)
+						: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
 
+	@ResponseBody
+	@PostMapping(value="/getLike",
+			produces = {MediaType.APPLICATION_XML_VALUE,
+					MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<BoardLikeVO> getLike(
+			@RequestBody BoardLikeVO vo){
+		
+		return new ResponseEntity<>(service.getLike(vo), HttpStatus.OK);
+	}
+	
 
 	
 

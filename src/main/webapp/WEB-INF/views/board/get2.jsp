@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <%@ include file="../includes/header.jsp" %>
 <style>
@@ -14,7 +15,6 @@ ul > li { list-style: none }
   width:100%;
   background-color: gray;
 }
-
 .uploadResult ul{
   display:flex;
   flex-flow: row;
@@ -55,11 +55,18 @@ ul > li { list-style: none }
 .bigPicture img {
   width:600px;
 }
+.card-header{
+ border :1px solid rgba(0,0,0,.125);
+ margin-top: 10px;
+}
 
+.card-body{
+ border : 1px solid rgba(0,0,0,.125);
+}
 
 </style>
     <!-- Content Header (Page header) -->
-    <section class="content-header">
+   <%--  <section class="content-header">
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
@@ -73,45 +80,53 @@ ul > li { list-style: none }
           </div>
         </div>
       </div><!-- /.container-fluid -->
-    </section>
+    </section> --%>
+<section>
+<div class="container board-whole m-full white">
+ 	<div class="container board-detail getbody">
+<!-- 			<div class="row board-head in-visible row-no-padding"> -->
+			<div class="row board-detail-head pb-3 pt-3">
+				<div class="col-12 col-md-12"><h3>${board.title}</h3></div>
+			</div>
+			<div class="row board-detail-headbt">
+				<div class="col-6 col-md-2" style="font-weigth:bold; text-alingh:left;"><i class="fas fa-user-circle"></i>${board.writer}</div>
+<%-- 				<div class="col-6 col-md-4"><i class="far fa-clock"></i> ${fn:substring(board.udt_dt,5,16)}</div> --%>
+				<div class="col-6 col-md-4"><i class="far fa-clock"></i> <fmt:formatDate value="${board.udt_dt}" type="both" pattern="MM-dd hh:mm"/></div>
+				<div class="col-md-2"></div> 
+				<div class="col-9 col-md-2 " style="text-align:right"><i class="far fa-eye"></i> ${board.delete_flag}</div>
+				<div class="col-3 col-md-2" style="text-align:right"><i class="fas fa-sun"></i>${board.reply_cnt}</div>
+			</div>
+			<div class="row board-detail-body" style="min-height:300px;">
+				<div class="board-content">
+			${board.content}
+				</div>
+			</div>
+			<div class="row vote-btn p-3">
+					<button type="button" class="btn btn-outline-danger btn-lg" style="margin: 0 auto;" onclick="hit();"><i class="fas fa-fire"></i> 추천</button>
+			</div>
+			<div class="row board-detail-bottom p-1">
+				<div>
+				 <button type="button" class="btn btn-outline-dark btn-sm"  data-oper="list"><i class="fas fa-clipboard-list"></i>&nbsp;목록</button> 
+				</div>
+				<div class="ml-auto">
+				<button type="button" class="btn btn-outline-dark btn-sm" onclick="doAction(1);"><i class="far fa-edit"></i>&nbsp;수정</button>
+				<button type="button" class="btn btn-outline-dark btn-sm" onclick="boDeleteOpen();"><i class="far fa-trash-alt"></i>&nbsp;삭제</button>
+				</div>
+			</div>
+			
+			
+			
+			
 
-    <!-- Main content -->
-    <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- right column -->
-          <div class="col-md-12">
-            <!-- general form elements disabled -->
-            <div class="card card-warning">
-              <div class="card-header">
-                <h3 class="card-title">General Elements</h3>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body getbody">
-                  <!-- text input -->
-                  <div class="form-group">
-                    <label>Title</label>
-                    <input type="text" class="form-control" name="title" value='<c:out value="${board.title}"/>' readonly="readonly">
-                  </div>
-                  <!-- textarea -->
-                  <div class="form-group">
-                    <label>Textarea</label>
-                    <textarea class="form-control" rows="3" name="content" readonly="readonly"><c:out value="${board.content}"/></textarea>
-                  <!-- textarea는 value가 없다. -->
-                  </div>
-                  <div class="form-group">
-                    <label>Writer</label>
-                    <input class="form-control" name="writer" value='<c:out value="${board.writer}"/>' readonly="readonly"/>
-                  </div>
                   <sec:authentication property="principal" var="pinfo"/>
                   	<sec:authorize access="isAuthenticated()">
                   		<c:if test="${pinfo.username eq board.writer}">
 	                  		<button data-oper="modify" class="btn btn-default "> Modify </button>
 	                  	</c:if>
 	                </sec:authorize>
-	                  <button data-oper="list" class="btn btn-info"> List </button>
+	                 
                   
-               <form id="operForm" action="/boad/modify" method="get">
+               <form id="operForm" action="/board/modify" method="get">
 				<%--   <input type='hidden' id='bname' name='bname' value='<c:out value="${board.bname}"/>'> --%>
 				  <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
 				  <input type='hidden' name='page' value='<c:out value="${cri.page}"/>'>
@@ -123,15 +138,15 @@ ul > li { list-style: none }
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
-          </div>
+        <!--   </div> -->
           <!--/.col (right) -->
-        </div>
+        <!-- </div> -->
         <!-- /.row -->
         
 	  <div class="row">
 		  <div class="col-lg-12">
-		    <div class="card card-secondary">
-		
+		    <!-- <div class="card card-secondary"> -->
+			<div class="container board-whole m-full white">
 		      <div class="card-header">Files</div>
 		      <!-- /.panel-heading -->
 		      <div class="card-body">
@@ -159,7 +174,7 @@ ul > li { list-style: none }
           <!-- right column -->
           <div class="col-md-12">
             <!-- general form elements disabled -->
-            <div class="card card-secondary">
+            <div class="container board-whole m-full white">
               <div class="card-header">
                 <i class="fa fa-comments fa-fw"></i>Reply
               </div>
@@ -175,14 +190,13 @@ ul > li { list-style: none }
 				              	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				                  <!-- text input -->
 				                  <div class="form-group">
-				                    <label>댓글 쓰기</label>
-				                    <input type="text" class="form-control" placeholder="Enter ..." name="replyText">
+				                    <input type="text" class="form-control" placeholder="댓글 쓰기" name="reply">
 				                  </div>
-				                  <div class="form-group">
-				                    <label>댓글자</label>
+				                 <%--  <div class="form-group">
 				                    <input class="form-control" name="writer" value='<c:out value="${pinfo.username}"/>' readonly="readonly"/>
-				                   <%--  <input class="form-control" name="writer" value='<c:out value="${pinfo.member.userName}"/>' readonly="readonly"/> --%>
-				                  </div>
+				                    <label>댓글자</label>
+				                    <input class="form-control" name="writer" value='<c:out value="${pinfo.member.userName}"/>' readonly="readonly"/>
+				                  </div> --%>
 				                  <!-- <div class="form-group">
 				                    <label>댓글날짜</label>
 				                    <input type="text" class="form-control" placeholder="Enter ..." name="replyDate">
@@ -232,7 +246,7 @@ ul > li { list-style: none }
         
         
         
-      </div>
+<!--       </div> -->
       <!-- /.container-fluid -->
     </section>
     <!-- /.content -->
@@ -282,11 +296,11 @@ $(function(){
 				for(var i = 0, len = list.length||0; i<len; i++){
 					str+="<li class='left clearfix' data-rno='"+list[i].rno+"' style='border-bottom:1px solid gray; margin-top:20px; margin-left: <c:out value='"+${20*list[i].replyDepth}+"'/>px;'>";
 					str+="<div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>";
-					str+="<small class='pull-right text-muted'>"+replyService.displayTime(list[i].replyDate)+"</small>";
+					str+="<small class='pull-right text-muted'>"+replyService.displayTime(list[i].reply_udt_dt)+"</small>";
 /* 					str+="<small class='pull-right text-muted replyDelete'><a href='#'>삭제&nbsp;</a></small></div>"; */
 					str+="<sec:authentication property='principal' var='pinfo'/><sec:authorize access='isAuthenticated()'><c:if test='${pinfo.username eq board.writer}'>";
 					str+="<a href='#'><small class='pull-right text-muted replyDelete'>삭제&nbsp;</small></a></div></c:if></sec:authorize>";
-					str+="<p>"+list[i].replyText+"</p></div></li>";
+					str+="<p>"+list[i].reply+"</p></div></li>";
 				}
 				replyUL.html(str);
 				
@@ -308,7 +322,7 @@ $(function(){
 	      
 	     var realEnd = Math.ceil(replyCnt/10.0);
 	     
-	     if(realEnd < endPage ){
+	     if(realEnd < endPage ) {
 	    	 endPage = realEnd;
 	     }
 	    var prev = startPage > 1;
@@ -371,18 +385,16 @@ $(function(){
 			//replyForm.remove();
 			
 
-			
-			document.body.appendChild(operForm[0]);
-			
+			//operForm을 담아서 보냄
 			var operation = $(this).data("oper");
-			
+			console.log(operation);
 			if(operation === "modify"){
 				operForm.attr("action","/board/modify");
-				//document.body.appendChild(operForm[0]);
+				document.body.appendChild(operForm[0]);
 			} else if(operation ==="list"){
 			    operForm.find("#bno").remove();
 			    operForm.attr("action","/board/list");
-			   //document.body.appendChild(operForm[0]);
+			    document.body.appendChild(operForm[0]);
 			    
 			}
 
@@ -408,14 +420,13 @@ $(function(){
 			 </sec:authorize>	
 		 	
 			 var reply = {
-					replyText: replyForm.find("input[name='replyText']").val(),
+					reply: replyForm.find("input[name='reply']").val(),
 			 		replyer : replyer,
 			 		bno:bnoValue
 			 };
 			 replyService.add(reply,function(result){
 				
-				 replyForm.find("input[name='replyText']").val("");
-				 replyForm.find("input[name='replyer']").val("");
+				 replyForm.find("input[name='reply']").val("");
 				 
 				 
 				 alert(result);
@@ -529,46 +540,4 @@ $(function(){
 </script>
 
 
-<!-- 
-<script type="text/javascript">
-	var bnoValue='<c:out value="${board.bno}"/>';
-	
- 	replyService.add(
-			{bno:bnoValue, replytext:"JS Test", replyer:"tester"}
-			,
-			function(result){
-				alert("RESULT:"+result);
-			});  
-			
-		
-	replyService.getList({bno:bnoValue,page:1}, function(list){
-	 		list.forEach(function(i){
-				console.log(i);
-				}
-			); 
-		});
-			
-	replyService.remove(22, function(count){
-			console.log(count);
-			if(count === "success"){
-				alert("REMOVED");
-			}
-		}, function(err){
-			alert("ERROR...");
-		});
-		
-	replyService.update({
-			rno : 24,
-			bno : bnoValue,
-			replytext : "Modified Reply..."
-		}, function(result){
-			alert("수정완료");
-		});
-	replyService.get(10,function(data){
-		console.log(data);
-	});
-		
-		
-</script> 
--->
 

@@ -6,10 +6,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.soo.sootudy.domain.BoardAttachVO;
+import com.soo.sootudy.domain.BoardLikeVO;
 import com.soo.sootudy.domain.BoardVO;
 import com.soo.sootudy.domain.Criteria;
 
 import com.soo.sootudy.mapper.BoardAttachMapper;
+import com.soo.sootudy.mapper.BoardLikeMapper;
 import com.soo.sootudy.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
@@ -24,6 +26,9 @@ public class BoardServiceImpl implements BoardService {
 	
 	@Autowired
 	private BoardAttachMapper attachMapper;
+	
+	@Autowired
+	private BoardLikeMapper likeMapper;
 	
 	@Transactional
 	@Override
@@ -94,6 +99,24 @@ public class BoardServiceImpl implements BoardService {
 
 		log.info("get Attach list by bno: "+ bno);
 		return attachMapper.findByBno(bno);
+	}
+
+	@Override
+	public int upLike(BoardLikeVO vo) {
+		log.info("upLike: "+ vo);
+		return likeMapper.create(vo);
+	}
+
+	@Override
+	public int downLike(BoardLikeVO vo) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public BoardLikeVO getLike(BoardLikeVO vo) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 	

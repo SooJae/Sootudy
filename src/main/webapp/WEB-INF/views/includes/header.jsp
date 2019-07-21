@@ -52,8 +52,9 @@ color:white;
               <p class="m-p btnc" data-oper="login">로그인을 해주세요</p>
              </sec:authorize>
               <sec:authorize access ="isAuthenticated()">
-             <i class="far fa-user"></i> <sec:authentication property="principal.username"/>
-             
+                <p class="m-p" style="font-size: 1.5rem; margin-left:10px"><i class="fas fa-user-circle"></i>
+                <sec:authentication property="principal.username"/>
+               </p> 
              </sec:authorize>
              <li class="active">
                  <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
@@ -120,7 +121,7 @@ color:white;
 	<button type="button" id="sidebarCollapse" class="btn">
 	    <i class="fa fa-align-justify" style="color:white;"></i> <span></span>
 	</button>
-	    <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+	     <a class="navbar-brand" href="#" style="color: #fff; border: 1.5px solid; padding: 1.5px 10px 1.5px 10px; border-radius: 8px; margin-left:8px;">S</a> 
 	      <button class="navbar-toggler" id="pc-navbar" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="navbar-toggler-icon"></span>
 	      </button>

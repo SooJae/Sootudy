@@ -117,14 +117,14 @@ ul > li { list-style: none }
 			
 			
 			
-
+<%-- 
                   <sec:authentication property="principal" var="pinfo"/>
                   	<sec:authorize access="isAuthenticated()">
                   		<c:if test="${pinfo.username eq board.writer}">
 	                  		<button data-oper="modify" class="btn btn-default "> Modify </button>
 	                  	</c:if>
 	                </sec:authorize>
-	                 
+	                  --%>
                   
                <form id="operForm" action="/board/modify" method="get">
 				<%--   <input type='hidden' id='bname' name='bname' value='<c:out value="${board.bname}"/>'> --%>
@@ -147,7 +147,7 @@ ul > li { list-style: none }
 		  <div class="col-lg-12">
 		    <!-- <div class="card card-secondary"> -->
 			<div class="container board-whole m-full white">
-		      <div class="card-header">Files</div>
+		      <div class="card-header">첨부 파일</div>
 		      <!-- /.panel-heading -->
 		      <div class="card-body">
 		        
@@ -176,7 +176,7 @@ ul > li { list-style: none }
             <!-- general form elements disabled -->
             <div class="container board-whole m-full white">
               <div class="card-header">
-                <i class="fa fa-comments fa-fw"></i>Reply
+                <i class="fa fa-comments fa-fw"></i>댓글
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -188,21 +188,16 @@ ul > li { list-style: none }
 				              <!-- 수정해야됌 -->
 				              <form role="form" id="replyForm" action="/board/modify" method="post">
 				              	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		                    <input type="hidden" name="writer" value='<c:out value="${pinfo.member.id}"/>' />
 				                  <!-- text input -->
-				                  <div class="form-group">
-				                    <label>댓글 쓰기</label>
-				                    <input type="text" class="form-control" placeholder="Enter ..." name="reply">
+				                  <div class="input-group mb-3">
+				                    <input type="text" class="form-control" placeholder="댓글을 입력하세요" name="reply">
+				                     <div class="input-group-append">
+				                     <button type="submit" data-oper="replyWrite" class="btn btn-primary" id="replyButton"><i class="fas fa-pencil-alt"></i> 쓰기</button>
+				                     </div>
 				                  </div>
-				                 <%--  <div class="form-group">
-				                    <label>댓글자</label>
-				                    <input class="form-control" name="writer" value='<c:out value="${pinfo.username}"/>' readonly="readonly"/>
-				                    <input class="form-control" name="writer" value='<c:out value="${pinfo.member.userName}"/>' readonly="readonly"/>
-				                  </div> --%>
-				                  <!-- <div class="form-group">
-				                    <label>댓글날짜</label>
-				                    <input type="text" class="form-control" placeholder="Enter ..." name="replyDate">
-				                  </div> -->
-				                	<button type="submit" data-oper="replyWrite" class="btn btn-info" id="replyButton"> 댓글쓰기 </button>
+				                    <%-- <input class="form-control" name="writer" value='<c:out value="${pinfo.username}"/>' readonly="readonly"/> --%>
+				                	
 				                </form>
                 			</c:when>
 			               	<c:otherwise>

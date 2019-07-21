@@ -3,6 +3,7 @@ package com.soo.sootudy.service;
 import java.util.List;
 
 import com.soo.sootudy.domain.BoardAttachVO;
+import com.soo.sootudy.domain.BoardLikeVO;
 import com.soo.sootudy.domain.BoardVO;
 import com.soo.sootudy.domain.Criteria;
 
@@ -21,4 +22,10 @@ public interface BoardService {
 	public int getTotal(Criteria cri);
 	 
 	public List<BoardAttachVO> getAttachList(int bno);
+
+	public int upLike(BoardLikeVO vo);
+
+	public int downLike(BoardLikeVO vo);
+
+	public BoardLikeVO getLike(BoardLikeVO vo);
 }
