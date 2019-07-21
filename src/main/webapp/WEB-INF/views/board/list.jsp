@@ -35,7 +35,7 @@
     <div class="col-md-2">닉네임</div>
     <div class="col-md-1">날짜</div>
     <div class="col-md-1">조회</div>
-  </div>
+  </div> 
 <c:forEach items="${list}" var="board">
  <div class="row board-list-body white">
   <div class="col-md-1 in-visible"><c:out value="${board.bno}"/></div>
