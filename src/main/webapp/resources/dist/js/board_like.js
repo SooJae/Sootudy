@@ -32,9 +32,8 @@ var boardLikeService=(function(){
 			url:'/board/getLike',
 			data:JSON.stringify({bno:bno}),
 			contentType:"application/json; charset=utf-8",
-			dataType:"text",
+			//dataType:"text",
 			success:function(result, status, xhr){
-				console.log("getLike22.res"+result);
 				if(callback){
 					callback(result);
 				}

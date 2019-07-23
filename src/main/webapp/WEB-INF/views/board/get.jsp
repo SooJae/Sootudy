@@ -106,7 +106,7 @@ ul > li { list-style: none }
 				<form id="likeForm">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				</form>
-					<button type="button" id="likeButton" class="btn btn-outline-danger btn-lg" style="margin: 0 auto;" ><i class="fas fa-fire"></i> 추천 <span class="badge badge-dark" id="likeCount">4</span></button> 
+					<button type="button" id="likeButton" class="btn btn-primary btn-lg" style="margin: 0 auto;" ><i class="fas fa-fire"></i> 추천 <span class="badge badge-light" id="likeCount">4</span></button> 
 			</div>
 			<div class="row board-detail-bottom p-1">
 				<div>
@@ -284,10 +284,12 @@ $(function(){
 		var likeCount=$("#likeCount");
 		
 		
+		boardLikeService.getLike(bnoValue,function(result){
 		var str=null;
-			str+=boardLikeService.getLike(bnoValue);
-		console.log("str"+str);
+		str+= result;
 		likeCount.html(str);
+		
+		});
 		
 	}
 	
@@ -449,9 +451,9 @@ $(function(){
 			
 			boardLikeService.like(like,function(result){
 				
-				alert(result);
+				//alert(result);
 				
-				
+				showLikes();
 			});
 				
 			

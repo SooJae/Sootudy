@@ -207,7 +207,7 @@ public class BoardController {
 	
 	@ResponseBody
 	@PostMapping(value="/getLike",
-	produces = {MediaType.APPLICATION_XML_VALUE,
+	produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE}
 			)
 	public ResponseEntity<Object> getLike(
