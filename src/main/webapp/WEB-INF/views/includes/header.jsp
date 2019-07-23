@@ -3,6 +3,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags"
 	prefix="sec"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
 
 <!DOCTYPE html>
 <html>
@@ -29,6 +30,15 @@
 </head>
 
 
+<style>
+/* .far fa-user{
+font-size : 0.95rem;
+} */
+.m-p{
+color:white;
+}
+</style>
+
 <body>
   <div class="wrapper">
      <div class="overlay"></div>
@@ -38,7 +48,14 @@
          </div>
 
          <ul class="list-unstyled components">
-             <p>로그인을 해주세요</p>
+             <sec:authorize access ="isAnonymous()">
+              <p class="m-p btnc" data-oper="login">로그인을 해주세요</p>
+             </sec:authorize>
+              <sec:authorize access ="isAuthenticated()">
+                <p class="m-p" style="font-size: 1.5rem; margin-left:10px"><i class="fas fa-user-circle"></i>
+                <sec:authentication property="principal.username"/>
+               </p> 
+             </sec:authorize>
              <li class="active">
                  <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
                  <ul class="collapse list-unstyled" id="homeSubmenu">
@@ -55,7 +72,7 @@
              </li>
 
              <li>
-                 <a href="#">About</a>
+                 <a class="btnc" href="#" data-oper="board">게시판</a>
              </li>    
 
              <li>
@@ -82,7 +99,14 @@
 
          <ul class="list-unstyled CTAs">
              <li>
-                 <a href="#" class="download">Download code</a>
+	                 <a href="#" class="download">
+                  <sec:authorize access ="isAuthenticated()">
+	                   <span class="btnc" data-oper="logout">로그아웃</span>
+                 </sec:authorize>
+                 <sec:authorize access ="isAnonymous()">
+                     <span class="btnc" data-oper="login">로그인</span>
+                 </sec:authorize> 
+                  </a>
              </li>
              <li>
                  <a href="#" class="article">article</a>
@@ -92,29 +116,47 @@
 
      
 <!-- <div class="content"> -->
-	 <nav class="navbar navbar-expand-lg navbar-dark" style="background-color:#0945b3;">
+	 <nav class="navbar navbar-expand-lg navbar-dark">
 	
 	<button type="button" id="sidebarCollapse" class="btn">
 	    <i class="fa fa-align-justify" style="color:white;"></i> <span></span>
 	</button>
-	    <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+	     <a class="navbar-brand" href="#" style="color: #fff; border: 1.5px solid; padding: 1.5px 10px 1.5px 10px; border-radius: 8px; margin-left:8px;">S</a> 
 	      <button class="navbar-toggler" id="pc-navbar" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="navbar-toggler-icon"></span>
 	      </button>
 	      <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
 	        <ul class="navbar-nav ">
-	          <li class="nav-item active">
-	            <a class="nav-link" href="#" data-oper="join">회원가입</a>
+	          <li class="nav-item">
+	            <a class="nav-link btnc" href="#" data-oper="board">게시판</a>
 	          </li>
 	          <li class="nav-item">
-	            <a class="nav-link" href="#" data-oper="board">게시판</a>
+	            <a class="nav-link btnc" href="#" data-oper="study">스터디2</a>
 	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="#" data-oper="study">스터디</a>
-	          </li>
+	          
+	         
+	          <li class="nav-item dropdown">
+					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-user"></i></a>
+					    <div class="dropdown-menu">
+					      <a class="dropdown-item" href="#">회원 설정</a>
+					      <div class="dropdown-divider"></div>
+					        <sec:authorize access ="isAnonymous()">
+  					       <a class="dropdown-item btnc" href="#" data-oper="login">로그인</a>
+								  </sec:authorize>
+								  <sec:authorize access ="isAuthenticated()">
+  					       <a class="dropdown-item btnc" href="#" data-oper="logout">로그아웃</a>
+											<%-- <form id="logout" action='<c:url value='/member/logout'/>' method="POST">
+											   <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+											</form> --%>
+								  </sec:authorize>
+					    </div>
+					  </li>
+					  <%-- <sec:authorize access="isAnonymous()"> --%>
+					  
 	        </ul>
 	      </div>
 	    </nav>
+	    
 	<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
  
@@ -175,7 +217,7 @@
 <script type="text/javascript">
 $(function(){
 	
-	$(".navbar-nav").find(".nav-link").on("click",function(e){
+	$(".btnc").on("click",function(e){
 		e.preventDefault();
 		
 		let operation = $(this).data("oper");
@@ -183,9 +225,17 @@ $(function(){
 		let loc;
 		if(operation === "board"){
 			loc = "/board/list";
-		} else if(operation ==="join"){
-		    loc = "/member/join" 
-		}
+		} else if(operation ==="study"){
+			loc = "/study/list" ;
+		} else if(operation ==="login"){
+      loc = "/member/login"; 
+    } else if(operation ==="logout"){
+    	$(this).html(`<form action='<c:url value='/member/logout'/>' method="POST">
+                <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
+                </form>`);
+    	$(this).find("form").submit();
+    	return;
+     }
 		self.location=loc;
 	});
 	

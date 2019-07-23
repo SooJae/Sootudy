@@ -32,7 +32,7 @@
 				      
 				       
 					  	<div class="checkbox">
-					  		<label><input name="remember-me" type="checkbox">Remember Me</label>
+					  		<label><input name="remember-me" type="checkbox">로그인 상태 유지</label>
 					  	</div>
 				      <button type="submit" class="btn btn-success btn-lg btn-block mt-4" onclick="return checkValue();">로그인</button> 
 				      <button type="button" class="btn btn-secondary btn-lg btn-block mt-3" id="join">회원가입</button>
@@ -80,61 +80,10 @@ function checkValue(){
     }
 }
 
-$(function(){
 	
-	/* $(".btn-success").on("click", function(e){
-		
-		e.preventDefault();
-		$("form").submit();
-	}); */
-	
-	 $("#join").on("click", function(){
-	     self.location = "/member/join";
-	   });
-});
+$("#join").on("click", function(){
+    self.location = "/member/join";
+  });
 </script>
 
-
-<!-- 
-<script type="text/javascript">
-	var bnoValue='<c:out value="${board.bno}"/>';
-	
- 	replyService.add(
-			{bno:bnoValue, replytext:"JS Test", replyer:"tester"}
-			,
-			function(result){
-				alert("RESULT:"+result);
-			});  
-			
-		
-	replyService.getList({bno:bnoValue,page:1}, function(list){
-	 		list.forEach(function(i){
-				console.log(i);
-				}
-			); 
-		});
-			
-	replyService.remove(22, function(count){
-			console.log(count);
-			if(count === "success"){
-				alert("REMOVED");
-			}
-		}, function(err){
-			alert("ERROR...");
-		});
-		
-	replyService.update({
-			rno : 24,
-			bno : bnoValue,
-			replytext : "Modified Reply..."
-		}, function(result){
-			alert("수정완료");
-		});
-	replyService.get(10,function(data){
-		console.log(data);
-	});
-		
-		
-</script> 
--->
 

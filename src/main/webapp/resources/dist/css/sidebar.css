@@ -25,13 +25,14 @@ a:focus{
     transition: all 0.3s;
 }
 .navbar{
-    padding: 15px 10px;
+    padding: 12px 10px;
     background: #fff;
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
     box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
-    
+    border-bottom: solid 3px #083c9a;
+    background-color:#0945b3;
 }
 
 .navbar-btn{
@@ -123,13 +124,15 @@ a[aria-expanded="true"]{
 a[data-toggle="collapse"]{
     position:relative;
 }
-.dropdown-toggle:after{
+
+
+/* .dropdown-toggle:after{
     display: block;
     position: absolute;
     top: 60%;
     right: 20px;
     transform: translateY(-50%);
-}
+} */
 
 ul ul a{
     font-size: 0.9em !important;
@@ -182,9 +185,18 @@ a.article:hover{
 
 
 @media(max-width:1024px){
-    #pc-navbar{
-        display:none;
-    }
+   #pc-navbar{
+       display:none;
+   }
+    
+  .dropdown-toggle:after{
+    display: block;
+    position: absolute;
+    top: 60%;
+    right: 20px;
+    transform: translateY(-50%);
+  }
+  
 }
 
 @media(min-width:1024px){

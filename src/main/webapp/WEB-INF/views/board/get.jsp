@@ -117,14 +117,14 @@ ul > li { list-style: none }
 			
 			
 			
-
+<%-- 
                   <sec:authentication property="principal" var="pinfo"/>
                   	<sec:authorize access="isAuthenticated()">
                   		<c:if test="${pinfo.username eq board.writer}">
 	                  		<button data-oper="modify" class="btn btn-default "> Modify </button>
 	                  	</c:if>
 	                </sec:authorize>
-	                 
+	                  --%>
                   
                <form id="operForm" action="/board/modify" method="get">
 				<%--   <input type='hidden' id='bname' name='bname' value='<c:out value="${board.bname}"/>'> --%>
@@ -147,7 +147,7 @@ ul > li { list-style: none }
 		  <div class="col-lg-12">
 		    <!-- <div class="card card-secondary"> -->
 			<div class="container board-whole m-full white">
-		      <div class="card-header">Files</div>
+		      <div class="card-header">첨부 파일</div>
 		      <!-- /.panel-heading -->
 		      <div class="card-body">
 		        
@@ -176,7 +176,7 @@ ul > li { list-style: none }
             <!-- general form elements disabled -->
             <div class="container board-whole m-full white">
               <div class="card-header">
-                <i class="fa fa-comments fa-fw"></i>Reply
+                <i class="fa fa-comments fa-fw"></i>댓글
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -188,21 +188,16 @@ ul > li { list-style: none }
 				              <!-- 수정해야됌 -->
 				              <form role="form" id="replyForm" action="/board/modify" method="post">
 				              	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+		                    <input type="hidden" name="writer" value='<c:out value="${pinfo.member.id}"/>' />
 				                  <!-- text input -->
-				                  <div class="form-group">
-				                    <label>댓글 쓰기</label>
-				                    <input type="text" class="form-control" placeholder="Enter ..." name="replyText">
+				                  <div class="input-group mb-3">
+				                    <input type="text" class="form-control" placeholder="댓글을 입력하세요" name="reply">
+				                     <div class="input-group-append">
+				                     <button type="submit" data-oper="replyWrite" class="btn btn-primary" id="replyButton"><i class="fas fa-pencil-alt"></i> 쓰기</button>
+				                     </div>
 				                  </div>
-				                  <div class="form-group">
-				                    <label>댓글자</label>
-				                    <input class="form-control" name="writer" value='<c:out value="${pinfo.username}"/>' readonly="readonly"/>
-				                   <%--  <input class="form-control" name="writer" value='<c:out value="${pinfo.member.userName}"/>' readonly="readonly"/> --%>
-				                  </div>
-				                  <!-- <div class="form-group">
-				                    <label>댓글날짜</label>
-				                    <input type="text" class="form-control" placeholder="Enter ..." name="replyDate">
-				                  </div> -->
-				                	<button type="submit" data-oper="replyWrite" class="btn btn-info" id="replyButton"> 댓글쓰기 </button>
+				                    <%-- <input class="form-control" name="writer" value='<c:out value="${pinfo.username}"/>' readonly="readonly"/> --%>
+				                	
 				                </form>
                 			</c:when>
 			               	<c:otherwise>
@@ -297,11 +292,11 @@ $(function(){
 				for(var i = 0, len = list.length||0; i<len; i++){
 					str+="<li class='left clearfix' data-rno='"+list[i].rno+"' style='border-bottom:1px solid gray; margin-top:20px; margin-left: <c:out value='"+${20*list[i].replyDepth}+"'/>px;'>";
 					str+="<div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>";
-					str+="<small class='pull-right text-muted'>"+replyService.displayTime(list[i].replyDate)+"</small>";
+					str+="<small class='pull-right text-muted'>"+replyService.displayTime(list[i].reply_udt_dt)+"</small>";
 /* 					str+="<small class='pull-right text-muted replyDelete'><a href='#'>삭제&nbsp;</a></small></div>"; */
 					str+="<sec:authentication property='principal' var='pinfo'/><sec:authorize access='isAuthenticated()'><c:if test='${pinfo.username eq board.writer}'>";
 					str+="<a href='#'><small class='pull-right text-muted replyDelete'>삭제&nbsp;</small></a></div></c:if></sec:authorize>";
-					str+="<p>"+list[i].replyText+"</p></div></li>";
+					str+="<p>"+list[i].reply+"</p></div></li>";
 				}
 				replyUL.html(str);
 				
@@ -421,14 +416,13 @@ $(function(){
 			 </sec:authorize>	
 		 	
 			 var reply = {
-					replyText: replyForm.find("input[name='replyText']").val(),
+					reply: replyForm.find("input[name='reply']").val(),
 			 		replyer : replyer,
 			 		bno:bnoValue
 			 };
 			 replyService.add(reply,function(result){
 				
-				 replyForm.find("input[name='replyText']").val("");
-				 replyForm.find("input[name='replyer']").val("");
+				 replyForm.find("input[name='reply']").val("");
 				 
 				 
 				 alert(result);
@@ -542,46 +536,4 @@ $(function(){
 </script>
 
 
-<!-- 
-<script type="text/javascript">
-	var bnoValue='<c:out value="${board.bno}"/>';
-	
- 	replyService.add(
-			{bno:bnoValue, replytext:"JS Test", replyer:"tester"}
-			,
-			function(result){
-				alert("RESULT:"+result);
-			});  
-			
-		
-	replyService.getList({bno:bnoValue,page:1}, function(list){
-	 		list.forEach(function(i){
-				console.log(i);
-				}
-			); 
-		});
-			
-	replyService.remove(22, function(count){
-			console.log(count);
-			if(count === "success"){
-				alert("REMOVED");
-			}
-		}, function(err){
-			alert("ERROR...");
-		});
-		
-	replyService.update({
-			rno : 24,
-			bno : bnoValue,
-			replytext : "Modified Reply..."
-		}, function(result){
-			alert("수정완료");
-		});
-	replyService.get(10,function(data){
-		console.log(data);
-	});
-		
-		
-</script> 
--->
 

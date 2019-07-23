@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec"%>
-
+<%@ include file="../includes/header.jsp" %>
 <style>
 .uploadResult {
 	width: 100%;
@@ -53,7 +53,7 @@
 
 </style>
 
-<%@ include file="../includes/header.jsp" %>
+
    <!-- Content Header (Page header) -->
 
  <!-- Main content -->
@@ -71,14 +71,10 @@
 	      <div class="form-group">
 	       <textarea class="form-control" rows="10" placeholder="Enter ..." name="content"></textarea>
 	      </div>
-	      <div class="form-group">
-	         <label>Writer</label>
-	         <input class="form-control" name="writer" >
 <%--    <input class="form-control" name="writer" value='<sec:authentication property="principal.username"/>' readonly="readonly"> --%>
-        </div>
 	         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+	         <input type="hidden" name="writer" value='<sec:authentication property="principal.username"/>'>
 	         <%-- <input type="hidden" name="bname" value="${pageMaker.cri.bname}"/> --%>
-	        <!--  <button type="submit" class="btn btn-default"> Submit Button</button> -->
            <button type="submit" class="btn btn-success btn-lg btn-block mt-5">글 쓰기</button>
     </form>
   </div>

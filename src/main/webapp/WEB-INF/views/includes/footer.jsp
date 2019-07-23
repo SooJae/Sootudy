@@ -51,19 +51,15 @@ $(document).ready(function(){
     });
 });
 
-$("#logout").on("click", function(e) {
+/* $("#logout").on("click", function(e) {
 	e.preventDefault();
 
-	//$(this).remove();
-	
 	var str = '<form method="post" id="logoutSubmit" action="/customLogout">';
 	str +='<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /></form>';
 	$(this).html(str);
 	$("#logoutSubmit").submit();
-	
-	//$(str).submit();
 
-});
+}); */
 </script>
 
 </body>

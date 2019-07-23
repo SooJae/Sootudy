@@ -35,14 +35,14 @@
     <div class="col-md-2">닉네임</div>
     <div class="col-md-1">날짜</div>
     <div class="col-md-1">조회</div>
-  </div>
+  </div> 
 <c:forEach items="${list}" var="board">
  <div class="row board-list-body white">
   <div class="col-md-1 in-visible"><c:out value="${board.bno}"/></div>
   <div class="col-2 col-md-1"><span class="badge badge-pill badge-secondary">${board.bno}</span></div>
-  <div class="col-10 col-md-6 ellipsis title" style="text-align:left; padding-left:0"><a class="move" href='<c:out value="${board.bno}"/>'><c:out value="${board.title}"/> <c:if test="${board.reply_cnt ne 0}">&nbsp;[ <c:out value="${board.reply_cnt}"/> ]</c:if></a></div>
+  <div class="col-10 col-md-6 ellipsis title" style="text-align:left; padding-left:0"><a class="move" href='<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a> <span style="color:blue;"><c:if test="${board.reply_cnt ne 0}">&nbsp;&nbsp;[<c:out value="${board.reply_cnt}"/>]</c:if></span></div>
   <div class="col-6 col-md-2 ellipsis" id="nick"><a href="#"><c:out value="${board.writer}"/></a></div>
-  <div class="col-3 col-md-1" id="date"><fmt:formatDate pattern="hh:mm" value="${board.udt_dt}"/></div>
+  <div class="col-3 col-md-1" id="date"><fmt:formatDate pattern="HH:mm" value="${board.udt_dt}"/></div>
   <div class="col-3 col-md-1" id="count"><c:out value="${board.reply_cnt}"/></div>
  </div>
 </c:forEach>
@@ -107,27 +107,6 @@
 </section>
 <!--./section  -->
 
-       <!-- Modal -->
-    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-      <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-               처리가 완료되었습니다.
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            <button type="button" class="btn btn-primary">Save changes</button>
-          </div>
-        </div>
-      </div>
-    </div>
-   
 
    
   <%@ include file="../includes/footer.jsp" %>

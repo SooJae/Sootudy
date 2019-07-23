@@ -47,19 +47,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         filter.setEncoding("UTF-8");
         filter.setForceEncoding(true);
         http.addFilterBefore(filter,CsrfFilter.class);
-		//
 		
-//		http.authorizeRequests()
-//		.antMatchers("/sample/all").permitAll()
-//		.antMatchers("/sample/admin").access("hasRole('ADMIN')")
-//		.antMatchers("/sample/member").access("hasRole('MEMBER')");
 		
 		http.formLogin()
 		.loginPage("/member/login")
 		.loginProcessingUrl("/login");
 		
 		http.logout()
-		.logoutUrl("/customLogout")
+		.logoutUrl("/member/logout")
 		.invalidateHttpSession(true)
 		.deleteCookies("remember-me","JSESSION_ID");
 		
