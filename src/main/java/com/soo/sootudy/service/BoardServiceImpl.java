@@ -102,21 +102,22 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int upLike(BoardLikeVO vo) {
-		log.info("upLike: "+ vo);
-		return likeMapper.create(vo);
+	@Transactional
+	public int like(BoardLikeVO vo) {
+		if(likeMapper.read(vo)!=null) {
+			log.info("uplike: "+ vo);
+			return likeMapper.delete(vo);
+		}else {
+			log.info("downlike: "+ vo);
+			return likeMapper.create(vo);
+		}
+		
 	}
 
 	@Override
-	public int downLike(BoardLikeVO vo) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public BoardLikeVO getLike(BoardLikeVO vo) {
-		// TODO Auto-generated method stub
-		return null;
+	public int getLike(int bno) {
+		log.info("get like: "+ bno);
+		return likeMapper.getLike(bno);
 	}
 	
 	

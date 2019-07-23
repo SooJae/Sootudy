@@ -182,33 +182,22 @@ public class BoardController {
 	}
 	
 	@ResponseBody
-	@PostMapping(value="/upLike")
+	@PostMapping(value="/like")
 	public ResponseEntity<String> upLike(
 			@RequestBody BoardLikeVO vo){
 		
-		return service.upLike(vo) ==1
+		return service.like(vo) ==1
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@ResponseBody
-	@PostMapping(value="/downLike")
-	public ResponseEntity<String> downLike(
-			@RequestBody BoardLikeVO vo){
-		
-		return service.downLike(vo) ==1
-				? new ResponseEntity<>("success", HttpStatus.OK)
-						: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	}
 
 	@ResponseBody
-	@PostMapping(value="/getLike",
-			produces = {MediaType.APPLICATION_XML_VALUE,
-					MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<BoardLikeVO> getLike(
-			@RequestBody BoardLikeVO vo){
-		
-		return new ResponseEntity<>(service.getLike(vo), HttpStatus.OK);
+	@PostMapping(value="/getLike")
+	public ResponseEntity<Integer> getLike(
+			@RequestParam("bno") int bno){
+		log.info("getLike"+bno);
+		return new ResponseEntity<>(service.getLike(bno), HttpStatus.OK);
 	}
 	
 
