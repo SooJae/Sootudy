@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -182,33 +183,42 @@ public class BoardController {
 	}
 	
 	@ResponseBody
-	@PostMapping(value="/upLike")
+	@PostMapping(value="/like")
 	public ResponseEntity<String> upLike(
 			@RequestBody BoardLikeVO vo){
 		
-		return service.upLike(vo) ==1
+		return service.like(vo) ==1
 				? new ResponseEntity<>("success", HttpStatus.OK)
 				: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
-	@ResponseBody
-	@PostMapping(value="/downLike")
-	public ResponseEntity<String> downLike(
-			@RequestBody BoardLikeVO vo){
-		
-		return service.downLike(vo) ==1
-				? new ResponseEntity<>("success", HttpStatus.OK)
-						: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-	}
 
+//	@ResponseBody
+//	@PostMapping(value="/getLike"
+//	)
+//	public int re(
+//			@RequestBody Map<String,Integer> map){
+//		
+//		int bnoKey= map.get("bno");
+//		
+//		log.info("getLike122 : "+bnoKey);
+//		return service.getLikes(bnoKey);
+//	}
+	
 	@ResponseBody
 	@PostMapping(value="/getLike",
-			produces = {MediaType.APPLICATION_XML_VALUE,
-					MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<BoardLikeVO> getLike(
-			@RequestBody BoardLikeVO vo){
+	produces = {MediaType.APPLICATION_XML_VALUE,
+			MediaType.APPLICATION_JSON_UTF8_VALUE}
+			)
+	public ResponseEntity<Object> getLike(
+			@RequestBody Map<String,Integer> map){
 		
-		return new ResponseEntity<>(service.getLike(vo), HttpStatus.OK);
+		int bnoKey= map.get("bno");
+		
+		log.info("getLike122 : "+bnoKey);
+		int result = service.getLikes(bnoKey);
+		log.info("result"+result);
+		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
 

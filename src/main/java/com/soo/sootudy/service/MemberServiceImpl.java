@@ -42,8 +42,4 @@ public class MemberServiceImpl implements MemberService {
 		return mapper.check(map);
 		
 	}
-//	@Override
-//	public MemberVO getMemberByID(String id) {
-//		return null;
-//	}
 }

@@ -24,6 +24,13 @@
     WHERE 
       bno = #{bno} AND id = #{id}
   </delete>
+  
+  <select id="getLikes" resultType="Integer">
+ 	SELECT count(*) FROM
+	  board_like 
+	WHERE
+	  bno = #{bno}
+  </select>
 
 
 </mapper>

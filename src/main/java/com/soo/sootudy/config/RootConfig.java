@@ -32,7 +32,7 @@ public class RootConfig {
 		
 		
 		hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
-		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mariadb://sootudy.c6v2froaotfn.ap-northeast-2.rds.amazonaws.com:3306/SOOTUDY");
+		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mariadb://sootudydb.c6v2froaotfn.ap-northeast-2.rds.amazonaws.com:3306/SOOTUDY");
 		 
 		hikariConfig.setUsername("SOOJAE");
 		hikariConfig.setPassword("tnwo3972!!");

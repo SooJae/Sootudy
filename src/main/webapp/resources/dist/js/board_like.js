@@ -1,14 +1,14 @@
-console.log("reply module...");
+console.log("boardlike module...");
 //
-var replyService=(function(){
+var boardLikeService=(function(){
 	
-	function add(reply,callback,error){
-		console.log("reply......");
+	function like(like,callback,error){
+		console.log("like......");
 
 	$.ajax({
 		type:'post',
-		url:'/replies/new',
-		data:JSON.stringify(reply),
+		url:'/board/like',
+		data:JSON.stringify(like),
 		contentType : "application/json; charset=utf-8",
 		success:function(result, status, xhr){
 			if(callback){
@@ -23,22 +23,28 @@ var replyService=(function(){
 		});
 	}
 	
-	function getList(param, callback, error){
+	function getLike(bno,callback, error){
 		
-		var bno = param.bno;
-		var page =param.page||1;
-		
-		$.getJSON("/replies/pages/"+bno+"/"+page+".json",
-				function(data){
-					if(callback){
-						//callback(data);
-						callback(data.replyCnt, data.list);
+		console.log("getLike......");
+
+		$.ajax({
+			type:'post',
+			url:'/board/getLike',
+			data:JSON.stringify({bno:bno}),
+			contentType:"application/json; charset=utf-8",
+			dataType:"text",
+			success:function(result, status, xhr){
+				console.log("getLike22.res"+result);
+				if(callback){
+					callback(result);
+				}
+			},
+			error : function(xhr, status, err){
+				if(error){
+					error(err);
 					}
-		}).fail(function(xhr,status,err){
-			if(error){
-				error();
-			}
-		});
+				}
+			});
 	}
 	
 	function remove(rno, replyer, callback, error){
@@ -46,6 +52,7 @@ var replyService=(function(){
 			type:'delete',
 			url:'/replies/'+rno,
 			data:JSON.stringify({rno:rno, replyer:replyer}),
+			
 			contentType:"application/json; charset=utf-8",
 			
 			success: function(deleteResult, status, xhr){
@@ -120,11 +127,7 @@ var replyService=(function(){
 		}
 	}
 return{
-	add: add,
-	getList:getList,
-	remove:remove,
-	update:update,
-	get:get,
-	displayTime : displayTime
+	like: like,
+	getLike:getLike,
 };
 })();

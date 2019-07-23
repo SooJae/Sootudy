@@ -49,9 +49,6 @@ public class MemberController {
 	}
 	
 	
-	/*			consumes = "application/json",
-			produces = {MediaType.APPLICATION_XML_VALUE,
-						MediaType.APPLICATION_JSON_UTF8_VALUE}*/
 	@ResponseBody
 	@PostMapping(value="/check")
 	public int readMember(@RequestBody Map<String, String> map) {

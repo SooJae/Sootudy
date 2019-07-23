@@ -9,4 +9,7 @@ public interface BoardLikeMapper {
 	public int delete(BoardLikeVO vo);
 	
 	public BoardLikeVO read(BoardLikeVO vo);
+
+
+	public int getLikes(int bno);
 }

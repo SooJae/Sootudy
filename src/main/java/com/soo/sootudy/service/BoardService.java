@@ -23,9 +23,9 @@ public interface BoardService {
 	 
 	public List<BoardAttachVO> getAttachList(int bno);
 
-	public int upLike(BoardLikeVO vo);
+	public int like(BoardLikeVO vo);
 
-	public int downLike(BoardLikeVO vo);
 
-	public BoardLikeVO getLike(BoardLikeVO vo);
+
+	public int getLikes(int bno);
 }

@@ -101,8 +101,12 @@ ul > li { list-style: none }
 			${board.content}
 				</div>
 			</div>
+<!-- 			<form id="likeForm" action="/board/like" method="post"> -->
 			<div class="row vote-btn p-3">
-					<button type="button" class="btn btn-outline-danger btn-lg" style="margin: 0 auto;" onclick="hit();"><i class="fas fa-fire"></i> 추천</button>
+				<form id="likeForm">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
+				</form>
+					<button type="button" id="likeButton" class="btn btn-outline-danger btn-lg" style="margin: 0 auto;" ><i class="fas fa-fire"></i> 추천 <span class="badge badge-dark" id="likeCount">4</span></button> 
 			</div>
 			<div class="row board-detail-bottom p-1">
 				<div>
@@ -185,7 +189,6 @@ ul > li { list-style: none }
 	              <sec:authorize access="isAuthenticated()"> 
 	             	 <c:choose>
              			 <c:when test="${pinfo.username ne null}">
-				              <!-- 수정해야됌 -->
 				              <form role="form" id="replyForm" action="/board/modify" method="post">
 				              	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 		                    <input type="hidden" name="writer" value='<c:out value="${pinfo.member.id}"/>' />
@@ -258,6 +261,7 @@ ul > li { list-style: none }
 <%@ include file="../includes/footer.jsp" %>
 
 <script type="text/javascript" src="/resources/dist/js/reply.js"></script>
+<script type="text/javascript" src="/resources/dist/js/board_like.js"></script>
 
 <script charset="UTF-8">
 
@@ -265,7 +269,27 @@ $(function(){
 	var bnoValue ='<c:out value="${board.bno}"/>';
 	var replyUL = $(".chat");
 	
+	//ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
+	 	var csrfHeaderName="${_csrf.headerName}";
+		var csrfTokenValue="${_csrf.token}";
+		$(document).ajaxSend(function(e, xhr, options){
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		}); 
+	
 	showList(1);
+	showLikes();
+	
+	
+	function showLikes(){
+		var likeCount=$("#likeCount");
+		
+		
+		var str=null;
+			str+=boardLikeService.getLike(bnoValue);
+		console.log("str"+str);
+		likeCount.html(str);
+		
+	}
 	
 	function showList(page){
 		replyService.getList({bno:bnoValue,page:page||1}, 
@@ -331,6 +355,7 @@ $(function(){
 	      if(endPage * displayPageNum < replyCnt){
       	    next = true;
 	      }  
+	      
 	     */
 	      var str = "<ul class='pagination justify-content-center'>";
 	      
@@ -373,12 +398,14 @@ $(function(){
 	
 		var operForm = $("#operForm"); 
 		var replyForm = $("#replyForm");
+		var likeForm = $("#likeForm");
 	  
 	 
-	  $(".getbody").find("button").on("click",function(e){
+	  $(".board-detail-bottom").find("button").on("click",function(e){
 			e.preventDefault();
 			
-			//replyForm.remove();
+			replyForm.remove();
+			likeForm.remove();
 			
 
 			//operForm을 담아서 보냄
@@ -391,23 +418,47 @@ $(function(){
 			    operForm.find("#bno").remove();
 			    operForm.attr("action","/board/list");
 			    document.body.appendChild(operForm[0]);
-			    
 			}
 
 			 operForm.submit();
 			 
 	  });
 	  
-	 	var csrfHeaderName="${_csrf.headerName}";
+	 /* 	var csrfHeaderName="${_csrf.headerName}";
 		var csrfTokenValue="${_csrf.token}";
 	  
 		//ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
 		$(document).ajaxSend(function(e, xhr, options){
 			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-		});
+		}); */
 		
+		
+		$("#likeButton").on("click",function(e){
+			e.preventDefault();
+			operForm.remove(); 
+			replyForm.remove();
+			 var id = null;
+			 <sec:authorize access="isAuthenticated()">
+			 id = '<sec:authentication property="principal.username"/>';
+			 </sec:authorize>	
+			
+			var like = {
+					bno:bnoValue,
+					id : id 
+			}
+			
+			boardLikeService.like(like,function(result){
+				
+				alert(result);
+				
+				
+			});
+				
+			
+		});
 	   $("#replyButton").on("click",function(e){
 			 e.preventDefault();
+			 likeForm.remove();
 			 operForm.remove(); 
 			 
 			 var replyer = null;
