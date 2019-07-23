@@ -11,5 +11,5 @@ public interface BoardLikeMapper {
 	public BoardLikeVO read(BoardLikeVO vo);
 
 
-	public int getLike(int bno);
+	public int getLikes(int bno);
 }

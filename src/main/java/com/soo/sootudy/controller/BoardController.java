@@ -16,6 +16,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -192,12 +193,32 @@ public class BoardController {
 	}
 	
 
+//	@ResponseBody
+//	@PostMapping(value="/getLike"
+//	)
+//	public int re(
+//			@RequestBody Map<String,Integer> map){
+//		
+//		int bnoKey= map.get("bno");
+//		
+//		log.info("getLike122 : "+bnoKey);
+//		return service.getLikes(bnoKey);
+//	}
+	
 	@ResponseBody
-	@PostMapping(value="/getLike")
-	public ResponseEntity<Integer> getLike(
-			@RequestParam("bno") int bno){
-		log.info("getLike"+bno);
-		return new ResponseEntity<>(service.getLike(bno), HttpStatus.OK);
+	@PostMapping(value="/getLike",
+	produces = {MediaType.APPLICATION_XML_VALUE,
+			MediaType.APPLICATION_JSON_UTF8_VALUE}
+			)
+	public ResponseEntity<Object> getLike(
+			@RequestBody Map<String,Integer> map){
+		
+		int bnoKey= map.get("bno");
+		
+		log.info("getLike122 : "+bnoKey);
+		int result = service.getLikes(bnoKey);
+		log.info("result"+result);
+		return new ResponseEntity<>(result, HttpStatus.OK);
 	}
 	
 

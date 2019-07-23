@@ -269,15 +269,24 @@ $(function(){
 	var bnoValue ='<c:out value="${board.bno}"/>';
 	var replyUL = $(".chat");
 	
+	//ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
+	 	var csrfHeaderName="${_csrf.headerName}";
+		var csrfTokenValue="${_csrf.token}";
+		$(document).ajaxSend(function(e, xhr, options){
+			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+		}); 
+	
 	showList(1);
 	showLikes();
+	
 	
 	function showLikes(){
 		var likeCount=$("#likeCount");
 		
 		
-		var str=boardLikeService.getLike(bnoValue);
-		
+		var str=null;
+			str+=boardLikeService.getLike(bnoValue);
+		console.log("str"+str);
 		likeCount.html(str);
 		
 	}
@@ -415,20 +424,19 @@ $(function(){
 			 
 	  });
 	  
-	 	var csrfHeaderName="${_csrf.headerName}";
+	 /* 	var csrfHeaderName="${_csrf.headerName}";
 		var csrfTokenValue="${_csrf.token}";
 	  
 		//ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
 		$(document).ajaxSend(function(e, xhr, options){
 			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-		});
+		}); */
 		
 		
 		$("#likeButton").on("click",function(e){
 			e.preventDefault();
 			operForm.remove(); 
 			replyForm.remove();
-			console.log("likebutton");
 			 var id = null;
 			 <sec:authorize access="isAuthenticated()">
 			 id = '<sec:authentication property="principal.username"/>';

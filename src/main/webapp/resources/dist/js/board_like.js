@@ -28,11 +28,13 @@ var boardLikeService=(function(){
 		console.log("getLike......");
 
 		$.ajax({
+			type:'post',
 			url:'/board/getLike',
-			data:bno,
-			dataType : "text",
+			data:JSON.stringify({bno:bno}),
+			contentType:"application/json; charset=utf-8",
+			dataType:"text",
 			success:function(result, status, xhr){
-				console.log("getLike22"+result);
+				console.log("getLike22.res"+result);
 				if(callback){
 					callback(result);
 				}

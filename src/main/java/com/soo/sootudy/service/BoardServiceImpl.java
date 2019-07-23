@@ -115,9 +115,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public int getLike(int bno) {
+	public int getLikes(int bno) {
 		log.info("get like: "+ bno);
-		return likeMapper.getLike(bno);
+		return likeMapper.getLikes(bno);
 	}
 	
 	

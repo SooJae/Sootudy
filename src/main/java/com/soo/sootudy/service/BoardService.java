@@ -27,5 +27,5 @@ public interface BoardService {
 
 
 
-	public int getLike(int bno);
+	public int getLikes(int bno);
 }

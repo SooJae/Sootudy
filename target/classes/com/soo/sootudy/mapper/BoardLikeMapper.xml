@@ -25,7 +25,7 @@
       bno = #{bno} AND id = #{id}
   </delete>
   
-  <select id="get" resultType="int">
+  <select id="getLikes" resultType="Integer">
  	SELECT count(*) FROM
 	  board_like 
 	WHERE
