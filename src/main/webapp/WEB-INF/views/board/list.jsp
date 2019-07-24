@@ -39,7 +39,18 @@
 <c:forEach items="${list}" var="board">
  <div class="row board-list-body white">
   <div class="col-md-1 in-visible"><c:out value="${board.bno}"/></div>
-  <div class="col-2 col-md-1"><span class="badge badge-pill badge-secondary">4</span></div>
+  <c:choose>
+  
+	  <c:when test="${board.like_cnt eq 0}">
+	    <div class="col-2 col-md-1"></div>
+	  </c:when>
+	  
+	  <c:otherwise>
+		  <div class="col-2 col-md-1"><span class="badge badge-pill badge-secondary">
+		  <c:out value="${board.like_cnt}"/></span></div>
+	  </c:otherwise>
+	  
+  </c:choose>
   <div class="col-10 col-md-6 ellipsis title" style="text-align:left; padding-left:0"><a class="move" href='<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a> <span style="color:blue;"><c:if test="${board.reply_cnt ne 0}">&nbsp;&nbsp;[<c:out value="${board.reply_cnt}"/>]</c:if></span></div>
   <div class="col-6 col-md-2 ellipsis" id="nick"><a href="#"><c:out value="${board.writer}"/></a></div>
   <div class="col-3 col-md-1" id="date"><fmt:formatDate pattern="HH:mm" value="${board.udt_dt}"/></div>
@@ -109,27 +120,13 @@
 
 
    
-  <%@ include file="../includes/footer.jsp" %>
- 
-<!--  <script>
- $(document).ready(function(){
-     $('#sidebarCollapse').on('click', function(){
-         $('#sidebar').addClass('active');
-         $('.overlay').fadeIn();
-     });
-     $('.overlay').on('click',function(){
-         $('#sidebar').removeClass('active');
-         $('.overlay').fadeOut();
-     });
- });
- </script> -->
- 
+<%@ include file="../includes/footer.jsp" %>
+
+<script type="text/javascript" src="/resources/dist/js/board_like.js"></script>
  
 <script>
-  
-  $(function(){
 
-   
+   $(function(){
    $("#regBtn").on("click", function(){
      self.location = "/board/register";
    });

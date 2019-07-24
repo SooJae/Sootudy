@@ -45,11 +45,16 @@
 	WHERE bno = #{bno}
 </update>
 
+<update id="updateLikeCnt">
+  UPDATE board
+  SET like_cnt = like_cnt + #{amount}
+  WHERE bno=#{bno}
+</update>
 
 
 <select id="getListWithPaging" resultType="com.soo.sootudy.domain.BoardVO">
 	SELECT 
-	  bno, title, content, writer, dt, udt_dt, reply_cnt
+	  bno, title, content, writer, dt, udt_dt, reply_cnt, like_cnt
 	FROM board 
 	WHERE delete_flag ='0'
 

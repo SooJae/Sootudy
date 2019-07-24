@@ -94,9 +94,6 @@ public class BoardController {
 	public void get(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri ,Model model) {
 		log.info("/get or modify");
 		
-		log.info("cri"+cri);
-		
-		log.info("보드값"+service.get(bno, cri));
 		model.addAttribute("board",service.get(bno, cri));
 	}
 	
@@ -214,11 +211,7 @@ public class BoardController {
 			@RequestBody Map<String,Integer> map){
 		
 		int bnoKey= map.get("bno");
-		
-		log.info("getLike122 : "+bnoKey);
-		int result = service.getLikes(bnoKey);
-		log.info("result"+result);
-		return new ResponseEntity<>(result, HttpStatus.OK);
+		return new ResponseEntity<>(service.getLikes(bnoKey), HttpStatus.OK);
 	}
 	
 
