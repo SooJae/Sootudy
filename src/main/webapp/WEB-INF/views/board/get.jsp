@@ -94,7 +94,7 @@ ul > li { list-style: none }
 				<div class="col-6 col-md-4"><i class="far fa-clock"></i> <fmt:formatDate value="${board.udt_dt}" type="both" pattern="MM-dd hh:mm"/></div>
 				<div class="col-md-2"></div> 
 				<div class="col-9 col-md-2 " style="text-align:right"><i class="far fa-eye"></i> ${board.v_cnt}</div>
-				<div class="col-3 col-md-2"><i class="fas fa-sun"></i>${board.like_cnt}</div>
+				<div class="col-3 col-md-2"><i class="fas fa-fire"></i>${board.like_cnt}</div>
 			</div>
 			<div class="row board-detail-body" style="min-height:300px;">
 				<div class="board-content">
