@@ -47,9 +47,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	@Transactional
 	public BoardVO get(int bno, Criteria cri) {
-		log.info("get......."+bno );
-		
+		mapper.updateViewCnt(bno, 1);
 		return mapper.read(bno);
 	}
 

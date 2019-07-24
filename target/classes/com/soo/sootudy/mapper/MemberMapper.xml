@@ -25,17 +25,17 @@
   
   <select id="read" resultMap="memberMap">
 		SELECT 
-		      mem.id,  
-		      pw, 
-		      nm, 
-		      email,
-		      dt, 
-		      udt_dt, 
-		      auth
+		      MEM.ID,  
+		      PW, 
+		      NM, 
+		      EMAIL,
+		      DT, 
+		      UDT_DT, 
+		      AUTH
 		 FROM 
-		      member mem LEFT OUTER JOIN member_auth auth 
-		 ON mem.id = auth.id 
-		 WHERE mem.id = #{username} 
+		      member MEM LEFT OUTER JOIN member_auth AUTH 
+		 ON MEM.ID = AUTH.ID 
+		 WHERE MEM.ID = #{username} 
   </select>
 
   <select id="check" resultType="com.soo.sootudy.domain.MemberVO">

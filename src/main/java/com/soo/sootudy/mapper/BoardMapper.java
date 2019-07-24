@@ -26,4 +26,6 @@ public interface BoardMapper {
 	public void updateReplyCnt(@Param("bno") int bno, @Param("amount") int amount);
 	
 	public void updateLikeCnt(@Param("bno") int bno, @Param("amount") int amount);
+	
+	public void updateViewCnt(@Param("bno") int bno, @Param("amount") int amount);
 }

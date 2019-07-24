@@ -54,7 +54,7 @@
   <div class="col-10 col-md-6 ellipsis title" style="text-align:left; padding-left:0"><a class="move" href='<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a> <span style="color:blue;"><c:if test="${board.reply_cnt ne 0}">&nbsp;&nbsp;[<c:out value="${board.reply_cnt}"/>]</c:if></span></div>
   <div class="col-6 col-md-2 ellipsis" id="nick"><a href="#"><c:out value="${board.writer}"/></a></div>
   <div class="col-3 col-md-1" id="date"><fmt:formatDate pattern="HH:mm" value="${board.udt_dt}"/></div>
-  <div class="col-3 col-md-1" id="count"><c:out value="${board.reply_cnt}"/></div>
+  <div class="col-3 col-md-1" id="count"><c:out value="${board.v_cnt}"/></div>
  </div>
 </c:forEach>
 

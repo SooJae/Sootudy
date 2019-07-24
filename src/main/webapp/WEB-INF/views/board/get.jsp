@@ -93,8 +93,8 @@ ul > li { list-style: none }
 <%-- 				<div class="col-6 col-md-4"><i class="far fa-clock"></i> ${fn:substring(board.udt_dt,5,16)}</div> --%>
 				<div class="col-6 col-md-4"><i class="far fa-clock"></i> <fmt:formatDate value="${board.udt_dt}" type="both" pattern="MM-dd hh:mm"/></div>
 				<div class="col-md-2"></div> 
-				<div class="col-9 col-md-2 " style="text-align:right"><i class="far fa-eye"></i> ${board.delete_flag}</div>
-				<div class="col-3 col-md-2" style="text-align:right"><i class="fas fa-sun"></i>${board.reply_cnt}</div>
+				<div class="col-9 col-md-2 " style="text-align:right"><i class="far fa-eye"></i> ${board.v_cnt}</div>
+				<div class="col-3 col-md-2"><i class="fas fa-sun"></i>${board.like_cnt}</div>
 			</div>
 			<div class="row board-detail-body" style="min-height:300px;">
 				<div class="board-content">
@@ -106,7 +106,7 @@ ul > li { list-style: none }
 				<form id="likeForm">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				</form>
-					<button type="button" id="likeButton" class="btn btn-primary btn-lg" style="margin: 0 auto;" ><i class="fas fa-fire"></i> 추천 <span class="badge badge-light" id="likeCount">4</span></button> 
+					<button type="button" id="likeButton" class="btn btn-primary btn-lg" style="margin: 0 auto;" ><i class="fas fa-fire"></i> 추천 <span class="badge badge-light" id="likeCount"></span></button> 
 			</div>
 			<div class="row board-detail-bottom p-1">
 				<div>

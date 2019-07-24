@@ -5,10 +5,10 @@
 <mapper namespace="com.soo.sootudy.mapper.MemberAuthMapper">
 <insert id="insert" parameterType="map">
   INSERT INTO member_auth
-              (ID
-              ,AUTH)
-        VALUES(#{id}
-              ,#{auth})
+              ( id
+              , auth  )
+        VALUES( #{id}
+              , #{auth} )
 </insert>
   
   

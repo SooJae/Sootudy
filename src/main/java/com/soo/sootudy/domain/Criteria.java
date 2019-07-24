@@ -58,7 +58,7 @@ public class Criteria {
 				.queryParam("perPageNum", this.perPageNum)
 				.queryParam("type", this.type)
 				.queryParam("keyword", this.keyword)
-				.queryParam("filter_mode",this.filter_mode);
+				.queryParam("filter_mode", this.filter_mode);
 		
 		return builder.toUriString();
 	}
