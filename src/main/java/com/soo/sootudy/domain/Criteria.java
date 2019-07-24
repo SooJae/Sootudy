@@ -14,6 +14,7 @@ import lombok.extern.slf4j.Slf4j;
 public class Criteria {
 	private int page;
 	private int perPageNum;
+	private String filter_mode;
 	
 	private String type;
 	private String keyword;
@@ -25,6 +26,12 @@ public class Criteria {
 	public Criteria(int page, int perPageNum) {
 		this.page = page;
 		this.perPageNum = perPageNum;
+	}
+	
+	public Criteria(int page, int perPageNum, String filter_mode) {
+		this.page = page;
+		this.perPageNum = perPageNum;
+		this.filter_mode = filter_mode;
 	}
 	
 //	public Criteria(int page, int perPageNum, String bname) {
@@ -50,7 +57,8 @@ public class Criteria {
 				.queryParam("page", this.page)
 				.queryParam("perPageNum", this.perPageNum)
 				.queryParam("type", this.type)
-				.queryParam("keyword", this.keyword);
+				.queryParam("keyword", this.keyword)
+				.queryParam("filter_mode",this.filter_mode);
 		
 		return builder.toUriString();
 	}

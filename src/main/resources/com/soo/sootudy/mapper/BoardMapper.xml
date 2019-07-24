@@ -58,7 +58,8 @@
 	FROM board 
 	WHERE delete_flag ='0'
 
-<include refid="criteria"></include>
+	<include refid="criteria"></include>
+	<include refid="filter_mode"></include>
 	ORDER BY bno desc, dt desc
 	LIMIT #{pageStart}, #{perPageNum}
 </select>
@@ -69,16 +70,18 @@
 	FROM board 
 	WHERE delete_flag ='0' 
  	<include refid="criteria"></include>
+ 	<include refid="filter_mode"></include>
  </select>
  
 
 <sql id="criteria">
+<!--
   <trim prefix="AND (" suffix=") " prefixOverrides="AND |OR">
-<!--   <if test="bname != null and bname !='' ">
+   <if test="bname != null and bname !='' ">
     bname = #{bname}
-   </if> -->
+   </if> 
   </trim>
-
+-->
 	<trim prefix="AND (" suffix=") " prefixOverrides="AND |OR">
 		<foreach item="type" collection="typeArr">
 			<trim prefix="OR">
@@ -96,6 +99,15 @@
 			</trim>
 		</foreach>
 	</trim>
+</sql>
+
+<sql id="filter_mode">
+  <trim prefix="AND (" suffix=") " prefixOverrides="AND | OR">
+    <if test="filter_mode == 'best'.toString()">
+      like_cnt &gt; 0
+    </if>
+  
+  </trim>
 </sql>
 
 
