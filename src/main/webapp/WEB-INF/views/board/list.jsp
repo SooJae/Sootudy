@@ -42,11 +42,11 @@
   <c:choose>
   
 	  <c:when test="${board.like_cnt eq 0}">
-	    <div class="col-2 col-md-1"></div>
+	    <div class="col-2 col-md-1"><span class="badge badge-pill badge-secondary">0</span></div>
 	  </c:when>
 	  
 	  <c:otherwise>
-		  <div class="col-2 col-md-1"><span class="badge badge-pill badge-secondary">
+		  <div class="col-2 col-md-1"><span class="badge badge-pill badge-primary">
 		  <c:out value="${board.like_cnt}"/></span></div>
 	  </c:otherwise>
 	  
