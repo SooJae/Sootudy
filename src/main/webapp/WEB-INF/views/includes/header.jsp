@@ -116,16 +116,17 @@ color:white;
 
      
 <!-- <div class="content"> -->
-	 <nav class="navbar navbar-expand-lg navbar-dark">
+<div style="background-color:#0945b3;">
+	 <nav class="navbar navbar-expand-lg navbar-dark mx-auto">
 	
 	<button type="button" id="sidebarCollapse" class="btn">
 	    <i class="fa fa-align-justify" style="color:white;"></i> <span></span>
 	</button>
-	     <a class="navbar-brand" href="#" style="color: #fff; border: 1.5px solid; padding: 1.5px 10px 1.5px 10px; border-radius: 8px; margin-left:8px;">S</a> 
+	     <a class="navbar-brand" href="#" style="color: #fff; border: 1.5px solid; padding: 1.5px 10px 1.5px 10px; border-radius: 8px;">S</a> 
 	      <button class="navbar-toggler" id="pc-navbar" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="navbar-toggler-icon"></span>
 	      </button>
-	      <div class="collapse navbar-collapse justify-content-around" id="navbarNav">
+	      <div class="collapse navbar-collapse" id="navbarNav">
 	        <ul class="navbar-nav ">
 	          <li class="nav-item">
 	            <a class="nav-link btnc" href="#" data-oper="board">게시판</a>
@@ -133,11 +134,12 @@ color:white;
 	          <li class="nav-item">
 	            <a class="nav-link btnc" href="#" data-oper="study">스터디2</a>
 	          </li>
-	          
-	         
+	          </ul>
+	          <ul class="nav navbar-nav ml-auto">
+     
 	          <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-user"></i></a>
-					    <div class="dropdown-menu">
+					    <div class="dropdown-menu dropdown-menu-right">
 					      <a class="dropdown-item" href="#">회원 설정</a>
 					      <div class="dropdown-divider"></div>
 					        <sec:authorize access ="isAnonymous()">
@@ -151,11 +153,13 @@ color:white;
 								  </sec:authorize>
 					    </div>
 					  </li>
+					     </ul>
 					  <%-- <sec:authorize access="isAnonymous()"> --%>
 					  
 	        </ul>
 	      </div>
 	    </nav>
+</div>
 	    
 	<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
@@ -230,7 +234,7 @@ $(function(){
 		} else if(operation ==="login"){
       loc = "/member/login"; 
     } else if(operation ==="logout"){
-    	$(this).html(`<form action='<c:url value='/member/logout'/>' method="POST">
+    	$(this).html(`<form action="<c:url value='/member/logout'/>" method="POST">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
                 </form>`);
     	$(this).find("form").submit();
@@ -239,32 +243,32 @@ $(function(){
 		self.location=loc;
 	});
 	
-var result = '<c:out value="${result}"/>';  
-var resultFlag = '<c:out value="${result.flag}"/>';
-var resultMsg = '<c:out value="${result.msg}"/>';
- 
-checkAlert(result);
-
-history.replaceState({},null,null);
-
-function checkAlert(result) {
+	var result = '<c:out value="${result}"/>';  
+	var resultFlag = '<c:out value="${result.flag}"/>';
+	var resultMsg = '<c:out value="${result.msg}"/>';
+	 
+	checkAlert(result);
 	
-	  if(result ==='' || history.state){
-	    return;
-	  }
-	   if(result){ 
-		  if(resultFlag === "false"){
-			  var alert=`<div class="alert alert-danger fade show" role="alert" style="text-align:center; padding:1%;"> <strong>`+resultMsg+`<strong> <div>`;
-		  }else{
-			  var alert=`<div class="alert alert-success fade show" role="alert" style="text-align:center; padding:1%;"><strong>`+resultMsg+`<strong><div>`;
+	history.replaceState({},null,null);
+	
+	function checkAlert(result) {
+		
+		  if(result ==='' || history.state){
+		    return;
 		  }
-			  $(".alertForm").html(alert);
-	   } 
-	}
-
+		   if(result){ 
+			  if(resultFlag === "false"){
+				  var alert=`<div class="alert alert-danger fade show" role="alert" style="text-align:center; padding:1%;"> <strong>`+resultMsg+`<strong> <div>`;
+			  }else{
+				  var alert=`<div class="alert alert-success fade show" role="alert" style="text-align:center; padding:1%;"><strong>`+resultMsg+`<strong><div>`;
+			  }
+				  $(".alertForm").html(alert);
+		   } 
+		}
+	
 	$(".alert").on("click",function(){
 		$('.alert').alert('close');
-	})
+	});
 }); 
 
 </script>

@@ -75,7 +75,7 @@ var timer;
 			var focus = $(":focus");
 			var focusedInputID = $(":focus").attr("id");
 				joinCheckService.checkForm(focus);
-			},150); 
+			},100); 
 		});
 	
 $(".btn-secondary").on("click", function(e){
@@ -90,17 +90,16 @@ $(".btn-secondary").on("click", function(e){
 
 	for(var i in array){
 	      if(array[i]!=1){
-	        $("#dangerAlert").html("<strong>회원가입 폼</strong>을 확인해주세요");
-	          $("#dangerAlert").addClass("show");
+	    	  
+	    	    $(".alertForm").html(`<div class="alert alert-danger fade show" role="alert" style="text-align:center; padding:1%;"><strong>회원가입 폼을 확인해주세요<strong><div>`);
 	          $("html, body").stop().animate({scrollTop: 0}, 100); 
-	          
-	        return false;
+
+	          return false;
 	      }
 	    }
-	
+				
 	$("form").submit();
 });
-
 $("#btn2").on("click", function(){
     self.location = "/member/login";
   });
