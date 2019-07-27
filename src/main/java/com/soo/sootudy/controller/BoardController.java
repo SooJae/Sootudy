@@ -114,7 +114,7 @@ public class BoardController {
 		
 		return "redirect:/board/list" + cri.getListLink();
 	}
-	@PreAuthorize("principal.username == #writer")
+//	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, 
 			RedirectAttributes rttr, String writer) {

@@ -128,6 +128,7 @@ ul > li { list-style: none }
 			
                   
                <form id="operForm" action="/board/modify" method="get">
+              	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				<%--   <input type='hidden' id='bname' name='bname' value='<c:out value="${board.bname}"/>'> --%>
 				  <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
 				  <input type='hidden' name='page' value='<c:out value="${cri.page}"/>'>
@@ -297,7 +298,7 @@ $(function(){
 	showLikes();
 	
 	
-	 $(".board-detail-bottom").find(".btns").on("click",function(e){
+	 $(".btns").on("click",function(e){
 			e.preventDefault();
 			
 			replyForm.remove();
@@ -315,7 +316,9 @@ $(function(){
 			    operForm.attr("action","/board/list");
 			    document.body.appendChild(operForm[0]);
 			} else if(operation === "remove"){
-				
+				operForm.attr("method","post");
+				operForm.attr("action","/board/remove");
+				document.body.appendChild(operForm[0]);
 			}
 
 			 operForm.submit();
@@ -451,9 +454,9 @@ $(function(){
 			e.preventDefault();
 			operForm.remove(); 
 			replyForm.remove();
-			 var id = null;
+				 var id = null;
 			 <sec:authorize access="isAuthenticated()">
-			 id = '<sec:authentication property="principal.username"/>';
+			 	id = '<sec:authentication property="principal.username"/>';
 			 </sec:authorize>
 			 <sec:authorize access="isAnonymous()">
 				 customAlert("fail","로그인을 하신 후에 추천이 가능합니다");
