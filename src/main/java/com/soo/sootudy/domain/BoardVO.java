@@ -14,7 +14,9 @@ public class BoardVO {
 	private Date dt;
 	private Date udt_dt;
 	private String delete_flag;
+	private int v_cnt;
 	private int reply_cnt;
+	private int like_cnt;
 	
 	private List<BoardAttachVO> attachList;
 

@@ -39,11 +39,21 @@
 <c:forEach items="${list}" var="board">
  <div class="row board-list-body white">
   <div class="col-md-1 in-visible"><c:out value="${board.bno}"/></div>
-  <div class="col-2 col-md-1"><span class="badge badge-pill badge-secondary">${board.bno}</span></div>
+  <c:choose>
+  
+	  <c:when test="${board.like_cnt eq 0}">
+	    <div class="col-2 col-md-1" style="color:lightgray;"><i class="fas fa-fire"></i> 0</div>
+	  </c:when>
+	  
+	  <c:otherwise>
+		  <div class="col-2 col-md-1" style="color:#0945b3;"><i class="fas fa-fire"></i> <c:out value="${board.like_cnt}"/></div>
+	  </c:otherwise>
+	  
+  </c:choose>
   <div class="col-10 col-md-6 ellipsis title" style="text-align:left; padding-left:0"><a class="move" href='<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a> <span style="color:blue;"><c:if test="${board.reply_cnt ne 0}">&nbsp;&nbsp;[<c:out value="${board.reply_cnt}"/>]</c:if></span></div>
   <div class="col-6 col-md-2 ellipsis" id="nick"><a href="#"><c:out value="${board.writer}"/></a></div>
   <div class="col-3 col-md-1" id="date"><fmt:formatDate pattern="HH:mm" value="${board.udt_dt}"/></div>
-  <div class="col-3 col-md-1" id="count"><c:out value="${board.reply_cnt}"/></div>
+  <div class="col-3 col-md-1" id="count"><c:out value="${board.v_cnt}"/></div>
  </div>
 </c:forEach>
 
@@ -63,6 +73,8 @@
   
       <input type="text" size="20" name="keyword" class="form-control" style="width:10rem" value='<c:out value="${pageMaker.cri.keyword}"/>'/>&nbsp; 
      <%--  <input type="hidden" name="bname" value='<c:out value="${pageMaker.cri.bname}"/>'/> --%>
+      
+      <input type="hidden" name="filter_mode" value='<c:out value="${pageMaker.cri.filter_mode}"/>'/>
       <input type="hidden" name="page" value='<c:out value="${pageMaker.cri.page}"/>'/>
 	    <input type="hidden" name="perPageNum" value='<c:out value="${pageMaker.cri.perPageNum}"/>'/>
       <button class="btn btn-primary">검색</button>
@@ -73,6 +85,7 @@
 
 <form id='actionForm' action="/board/list" method='get'>
   <%--  <input type="hidden" name="bname" value='<c:out value="${pageMaker.cri.bname}"/>'/> --%>
+  <input type="hidden" name="filter_mode" value='<c:out value="${pageMaker.cri.filter_mode}"/>'/>
    <input type="hidden" name="type" value='<c:out value="${pageMaker.cri.type}"/>'>
    <input type="hidden" name="keyword" value='<c:out value="${pageMaker.cri.keyword}"/>'/>
    <input type="hidden" name="page" value='<c:out value="${pageMaker.cri.page}"/>'/>
@@ -82,7 +95,18 @@
 <!-- navigation -->
 <div class="row justify-content-between mt-3" >
   <div>
-  <button type="button" class="btn btn-outline-danger" onclick="changeForm(2)" style="font-color:red"><i class="fas fa-sun"></i>인기글</button>
+	  <form id="bestForm">
+ 	    <input type="hidden" name="filter_mode" value="<c:out value="${pageMaker.cri.filter_mode}"/>"/>
+ 	    <c:choose>
+ 	      <c:when test="${pageMaker.cri.filter_mode ne 'best'}">
+  		    <button type="button" class="btn btn-outline-danger" id="best" style="font-color:red"><i class="fas fa-sun"></i>인기글</button>
+ 	      </c:when>
+ 	      <c:otherwise>
+ 	        <button type="button" class="btn btn-danger" id="best" style="font-color:red"><i class="fas fa-sun"></i>인기글</button>
+ 	      </c:otherwise>
+ 	    </c:choose>
+		  
+	  </form>
   </div>
 <nav aria-label="...">
   <ul class="pagination">
@@ -109,32 +133,19 @@
 
 
    
-  <%@ include file="../includes/footer.jsp" %>
- 
-<!--  <script>
- $(document).ready(function(){
-     $('#sidebarCollapse').on('click', function(){
-         $('#sidebar').addClass('active');
-         $('.overlay').fadeIn();
-     });
-     $('.overlay').on('click',function(){
-         $('#sidebar').removeClass('active');
-         $('.overlay').fadeOut();
-     });
- });
- </script> -->
- 
+<%@ include file="../includes/footer.jsp" %>
+
+<script type="text/javascript" src="/resources/dist/js/board_like.js"></script>
  
 <script>
-  
-  $(function(){
 
-   
+  $(function(){
    $("#regBtn").on("click", function(){
      self.location = "/board/register";
    });
    
    var actionForm = $("#actionForm");
+   var bestForm = $("#bestForm");
    
    $(".paginate_button a").on("click", function(e){
     e.preventDefault();
@@ -150,6 +161,26 @@
      actionForm.submit();
    });
    
+   $("#best").on("click", function(e){
+	   e.preventDefault();
+	   
+	  // if(bestForm.find("input[value='best']")){
+	  if(bestForm.find("input[name='filter_mode']").val()==""){
+		   bestForm.find("input").attr("value","best");
+		   $(this).attr("class","btn btn-danger");
+	  }else{
+		  bestForm.find("input").attr("value","");
+	    $(this).attr("class","btn btn-outline-danger");
+	  }
+	   //}
+	   //else{
+	   //}
+	   
+	   /* else if(bestForm.find("input[name='filter_mode']").val("best")){
+	         console.log("메롱");
+	    }  */
+	  bestForm.submit();
+   });
    var searchForm =$("#searchForm");
    $("#searchForm button").on("click",function(e){
      e.preventDefault();

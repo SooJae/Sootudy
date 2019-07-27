@@ -16,7 +16,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -94,9 +93,6 @@ public class BoardController {
 	public void get(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri ,Model model) {
 		log.info("/get or modify");
 		
-		log.info("cri"+cri);
-		
-		log.info("보드값"+service.get(bno, cri));
 		model.addAttribute("board",service.get(bno, cri));
 	}
 	
@@ -207,18 +203,14 @@ public class BoardController {
 	
 	@ResponseBody
 	@PostMapping(value="/getLike",
-	produces = {MediaType.APPLICATION_XML_VALUE,
+	produces = {
 			MediaType.APPLICATION_JSON_UTF8_VALUE}
 			)
 	public ResponseEntity<Object> getLike(
 			@RequestBody Map<String,Integer> map){
 		
 		int bnoKey= map.get("bno");
-		
-		log.info("getLike122 : "+bnoKey);
-		int result = service.getLikes(bnoKey);
-		log.info("result"+result);
-		return new ResponseEntity<>(result, HttpStatus.OK);
+		return new ResponseEntity<>(service.getLikes(bnoKey), HttpStatus.OK);
 	}
 	
 

@@ -12,122 +12,56 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="read" resultType="com.soo.sootudy.domain.ReplyVO">
 		SELECT * 
 			FROM board_reply
-			WHERE RNO = #{rno}
+			WHERE rno = #{rno}
 	</select>
 	
 	<insert id="insert">
 		INSERT INTO board_reply
-				( BNO
-				, REPLY
-				, REPLYER)
-			VALUES( #{bno}
-				,	#{reply}
-				, 	#{replyer})
+					( bno
+					, reply
+					, replyer)
+			VALUES(#{bno}
+					,	 #{reply}
+					,  #{replyer})
 	</insert>
 	
 	<delete id="delete">
 		DELETE FROM board_reply
-				WHERE RNO = #{rno}
+		WHERE 
+		    rno = #{rno}
 	</delete>
 	
 	<update id="update">
 		UPDATE board_reply 
-			SET REPLY = #{reply}
-			WHERE RNO = #{rno}
+		SET 
+		    reply = #{reply}
+		WHERE 
+		    rno = #{rno}
 	</update>
-	<!-- 
+
 	<select id="getListWithPaging" resultType="com.soo.sootudy.domain.ReplyVO">
 		SELECT 
-			 RNO
-			,BNO
-			,REPLYTEXT
-			,REPLYER
-			,REPLYDATE
-			,REPLYudt_dt
+			 rno
+			,bno
+			,reply
+			,replyer
+			,reply_dt
+			,reply_udt_dt
 		FROM board_reply
-		WHERE BNO = #{bno}
-		ORDER BY RNO DESC
-	</select>
-	 -->
-	<select id="getListWithPaging" resultType="com.soo.sootudy.domain.ReplyVO">
-		SELECT 
-			 RNO
-			,BNO
-			,REPLY
-			,REPLYER
-			,REPLY_DT
-			,REPLY_UDT_DT
-		FROM board_reply
-		WHERE BNO = #{bno}
-		ORDER BY RNO DESC
+		WHERE 
+		    bno = #{bno}
+		ORDER BY rno DESC
 		<!-- limit #{pageStart}, #{perPageNum} -->
 		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	
 	<select id="getCountByBno" resultType="int">
-		select count(rno) from board_reply where bno = #{bno}
+		SELECT COUNT(rno) 
+		FROM board_reply 
+		WHERE 
+		    bno = #{bno}
 	</select>
 	
-	
-<!-- 	
-	<update id="update">
-		UPDATE board_reply
-			SET REPLYTEXT = #{replytext}
-			 ,	udt_dt = NOW()
-			 WHERE RNO = #{rno}
-	</update>
-	
-	<delete id="delete">
-		DELETE FROM board_reply
-			WHERE RNO = #{rno}
-	</delete>
-	
-	<select id="listPage" resultType="ReplyVO">
-		SELECT *
-		FROM board_reply
-		WHERE BNO = #{bno}
-		ORDER BY RNO DESC
-		LIMIT #{cri.pageStart}, #{cri.perPageNum}
-	</select>
-	
-	<select id="count" resultType="int">
-		SELECT COUNT(BNO)
-		FROM board_reply
-		WHERE BNO = #{bno}
-	</select>
-	 -->
-	 
-	<!--   <insert id="insertBoard6Reply" parameterType="com.soo.sootudy.domain.ReplyVO" >
-        <selectKey resultType="String" keyProperty="rno" order="BEFORE">
-            SELECT IFNULL(MAX(RNO),0)+1 FROM board_reply
-        </selectKey>
-    
-        INSERT INTO board_reply(BNO, RNO, REPLYER, REPLYORDER, REPLYPARENT, REPLYDEPTH)
-        VALUES (#{bno}, #{rno}, #{replyer}, #{replyOrder},
-                   <choose>
-                       <when test="replyParent==null">#{rno}, 0</when>
-                       <otherwise>#{replyParent}, #{replyDepth}</otherwise>
-                   </choose>
-               )
-    </insert>
-
-    <select id="selectBoard6ReplyParent" resultType="com.soo.sootudy.domain.ReplyVO" parameterType="String">
-        SELECT BNO, REPLYDEPTH+1 REPLYDEPTH, REPLYORDER 
-          FROM board_reply
-         WHERE RNO=#{replyParent}
-    </select>
-
-    <update id="updateBoard6ReplyOrder" parameterType="com.soo.sootudy.domain.ReplyVO"> 
-        UPDATE board_reply
-           SET REPLYORDER = REPLYORDER + 1 
-         WHERE BNO=#{bno} AND REPLYORDER>#{replyOrder}       
-    </update> 
-
-    <select id="selectBoard6ReplyMaxOrder" resultType="Integer" parameterType="String">
-        SELECT IFNULL(MAX(REPLYORDER),0)+1
-          FROM board_reply
-         WHERE BNO=#{bno}
-    </select> -->
 </mapper>
 
 

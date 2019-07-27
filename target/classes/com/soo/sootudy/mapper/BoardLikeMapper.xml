@@ -5,31 +5,34 @@
 <mapper namespace="com.soo.sootudy.mapper.BoardLikeMapper">
 
   <insert id="create">
-    INSERT INTO 
-      board_like(bno, id)
+    INSERT INTO board_like
+          ( bno
+          , id)
     VALUES
-     (#{bno}, #{id})
+          (#{bno}
+          , #{id})
   </insert>
 
   <select id="read" resultType="com.soo.sootudy.domain.BoardLikeVO">
-    SELECT * FROM 
-      board_like
+    SELECT * FROM board_like
     WHERE 
-      bno = #{bno} AND id = #{id}
+        bno = #{bno} 
+    AND 
+        id = #{id}
   </select>
   
   <delete id="delete">
-    DELETE FROM 
-      board_like
+    DELETE FROM board_like
     WHERE 
-      bno = #{bno} AND id = #{id}
+        bno = #{bno} 
+    AND 
+        id = #{id}
   </delete>
   
   <select id="getLikes" resultType="Integer">
- 	SELECT count(*) FROM
-	  board_like 
+ 	SELECT count(*) FROM board_like 
 	WHERE
-	  bno = #{bno}
+	    bno = #{bno}
   </select>
 
 

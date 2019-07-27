@@ -5,24 +5,41 @@
 <mapper namespace="com.soo.sootudy.mapper.BoardAttachMapper">
 
  	<insert id="insert">
-		INSERT INTO board_attach (uuid,uploadpath, filename, filetype, bno)
-		VALUES (#{uuid}, #{uploadPath}, #{fileName}, #{fileType}, #{bno})
+		INSERT INTO board_attach 
+		     ( uuid
+		     , uploadpath
+		     , filename
+		     , filetype
+		     , bno)
+		VALUES (#{uuid}
+		     ,  #{uploadPath}
+		     ,  #{fileName}
+		     ,  #{fileType}
+		     ,  #{bno})
 	</insert> 
 	
 	<delete id="delete">
-	DELETE FROM board_attach WHERE uuid = #{uuid}
+	DELETE FROM board_attach 
+	WHERE 
+	      uuid = #{uuid}
 	</delete>
 	
 	<delete id="deleteAll">
-		DELETE FROM board_attach WHERE bno=#{bno}
+		DELETE FROM board_attach 
+		WHERE 
+		    bno = #{bno}
 	</delete>
 
 	<select id="findByBno" resultType="com.soo.sootudy.domain.BoardAttachVO">
-	SELECT * FROM board_attach WHERE bno = #{bno}
+	SELECT * FROM board_attach 
+	WHERE 
+	      bno = #{bno}
 	</select>
 	
 	<select id="getOldFiles" resultType="com.soo.sootudy.domain.BoardAttachVO">
-		SELECT * FROM board_attach WHERE uploadpath = to_char(sysdate -1,'yyyy\mm\dd')
+		SELECT * FROM board_attach 
+		WHERE 
+		     uploadpath = to_char(sysdate -1,'yyyy\mm\dd')
 	</select>
 	
 </mapper>

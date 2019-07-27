@@ -47,9 +47,9 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+	@Transactional
 	public BoardVO get(int bno, Criteria cri) {
-		log.info("get......."+bno );
-		
+		mapper.updateViewCnt(bno, 1);
 		return mapper.read(bno);
 	}
 
@@ -104,12 +104,14 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	@Transactional
 	public int like(BoardLikeVO vo) {
-		if(likeMapper.read(vo)!=null) {
-			log.info("uplike: "+ vo);
-			return likeMapper.delete(vo);
-		}else {
-			log.info("downlike: "+ vo);
+		if(likeMapper.read(vo)==null) {
+			log.info("like: "+ vo);
+			mapper.updateLikeCnt(vo.getBno(), 1);
 			return likeMapper.create(vo);
+		}else {
+			log.info("dislike: "+ vo);
+			mapper.updateLikeCnt(vo.getBno(), -1);
+			return likeMapper.delete(vo);
 		}
 		
 	}

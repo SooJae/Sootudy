@@ -69,13 +69,17 @@
 	      <input class="form-control" type="text" maxlength="100" name="title" placeholder="글 제목을 입력하세요">
 	      </div>
 	      <div class="form-group">
-	       <textarea class="form-control" rows="10" placeholder="Enter ..." name="content"></textarea>
+	       <textarea class="form-control" rows="20" placeholder="Enter ..." name="content"></textarea>
 	      </div>
 <%--    <input class="form-control" name="writer" value='<sec:authentication property="principal.username"/>' readonly="readonly"> --%>
 	         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	         <input type="hidden" name="writer" value='<sec:authentication property="principal.username"/>'>
 	         <%-- <input type="hidden" name="bname" value="${pageMaker.cri.bname}"/> --%>
-           <button type="submit" class="btn btn-success btn-lg btn-block mt-5">글 쓰기</button>
+           <div style="text-align:right"> 
+           <button type="button" id="list" class="btn btn-secondary btn-lg mt-2">취소</button>
+           <button type="submit" class="btn btn-primary btn-lg mt-2">글 쓰기</button>
+           </div>
+	        
     </form>
   </div>
 </div>
@@ -107,6 +111,10 @@
 <script>
 $(function(){
 	var formObj = $("form[role='form']");
+	
+	$("#list").on("click", function(e){
+         self.location="list";
+	});
 	  
 	  $("button[type='submit']").on("click", function(e){
 	    
