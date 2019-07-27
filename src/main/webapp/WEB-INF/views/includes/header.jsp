@@ -164,63 +164,30 @@ color:white;
 	<!-- Content Wrapper. Contains page content -->
 <div class="content-wrapper">
  
-<%-- <c:if test="${!empty requestScope.fail||!empty requestScope.success}">
-		<c:choose>
-			<c:when test="${!empty requestScope.fail}">
-				<c:set var="errorMsg" value="${requestScope.fail}"/>
-			</c:when>
-			<c:otherwise>
-				<c:set var="successMsg" value="${requestScope.success}"/>
-			</c:otherwise>
-		</c:choose>
-	</c:if>
-	
-	
-	<c:choose>
-		<c:when test="${!empty errorMsg}">
-		<div class="container mt-2">
-		 	<div class="alert alert-danger alert-dismissible show fade" id="dangerAlert" role="alert" style="text-align:center; padding:1%;">
-			<strong>${errorMsg}</strong>
-  
-</div>
-			</div> 
-		</div>
-		</c:when>
-		<c:when test="${!empty successMsg}">
-			<div class="container mt-2">
-				<div class="alert alert-success alert-dismissible show fade" id="successAlert" role="alert" style="text-align:center; padding:1%;">
-				<strong>${successMsg}</strong>
-				</div>
-			</div>
-		</c:when>
-		<c:otherwise>
-			<div class="container mt-2">
-				<div class="alert alert-danger alert-dismissible fade" id="dangerAlert" role="alert" style="text-align:center; padding:1%;">
-				</div>
-			</div>
-		</c:otherwise>
-	</c:choose> 
-	 --%>
-	 
- <%-- <c:if test="${!empty result}">  --%>
 <div class="alertForm container mt-2">
-<!-- 
-	<div class="alert alert-danger alert-dismissible show" role="alert">
-	
-	  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-	    <span aria-hidden="true">&times;</span>
-	  </button>
-	</div>
-	 -->
+<div class="alert alert-danger alert-custom" role="alert" ><strong></strong></div>
+<div class="alert alert-success alert-custom" role="alert" ><strong></strong></div>
+
 </div>
-<%-- </c:if> --%>
 
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
+
+var customAlert = function(flag,msg){
+	if(flag === "fail"){
+		$(".alert-danger strong").html(msg);
+		$(".alert-danger").show();
+		 $("html, body").stop().animate({scrollTop: 0}, 100); 
+	}else{
+		  $(".alert-success strong").html(msg);
+		  $(".alert-success").show();
+		  $("html, body").stop().animate({scrollTop: 0}, 100); 
+	  }
+}
+
 $(function(){
-	
 	$(".btnc").on("click",function(e){
 		e.preventDefault();
 		
@@ -243,13 +210,18 @@ $(function(){
 		self.location=loc;
 	});
 	
+	
 	var result = '<c:out value="${result}"/>';  
 	var resultFlag = '<c:out value="${result.flag}"/>';
 	var resultMsg = '<c:out value="${result.msg}"/>';
-	 
+	
+	
+	
+	
 	checkAlert(result);
 	
 	history.replaceState({},null,null);
+	
 	
 	function checkAlert(result) {
 		
@@ -257,14 +229,11 @@ $(function(){
 		    return;
 		  }
 		   if(result){ 
-			  if(resultFlag === "false"){
-				  var alert=`<div class="alert alert-danger fade show" role="alert" style="text-align:center; padding:1%;"> <strong>`+resultMsg+`<strong> <div>`;
-			  }else{
-				  var alert=`<div class="alert alert-success fade show" role="alert" style="text-align:center; padding:1%;"><strong>`+resultMsg+`<strong><div>`;
-			  }
-				  $(".alertForm").html(alert);
+			   
+			   customAlert(resultFlag,resultMsg);
 		   } 
 		}
+	
 	
 	$(".alert").on("click",function(){
 		$('.alert').alert('close');

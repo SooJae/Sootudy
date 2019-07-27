@@ -69,9 +69,8 @@
 	      <input class="form-control" type="text" maxlength="100" name="title" placeholder="글 제목을 입력하세요">
 	      </div>
 	      <div class="form-group">
-	       <textarea class="form-control" rows="20" placeholder="Enter ..." name="content"></textarea>
+	       <textarea class="form-control" rows="20" placeholder="내용을 입력해주세요" name="content"></textarea>
 	      </div>
-<%--    <input class="form-control" name="writer" value='<sec:authentication property="principal.username"/>' readonly="readonly"> --%>
 	         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 	         <input type="hidden" name="writer" value='<sec:authentication property="principal.username"/>'>
 	         <%-- <input type="hidden" name="bname" value="${pageMaker.cri.bname}"/> --%>
@@ -121,6 +120,15 @@ $(function(){
 	    e.preventDefault();
 	    
 	    console.log("submit clicked");
+	    
+	    
+		if(!$("input[name='title']").val()){
+			customAlert("fail","제목을 입력해주세요");
+			return false;
+		}else if(!$("textarea[name='content']").val()){
+			customAlert("fail","내용을 입력해주세요");
+			return false;
+		}
 	    
 	    var str = "";
 	    
@@ -261,6 +269,9 @@ $(function(){
 				}
 			});
 		});
+	  
+	  
+	  
 	  
 });
 </script>

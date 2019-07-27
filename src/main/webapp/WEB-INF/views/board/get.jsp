@@ -90,7 +90,6 @@ ul > li { list-style: none }
 			</div>
 			<div class="row board-detail-headbt">
 				<div class="col-6 col-md-2" style="font-weigth:bold; text-alingh:left;"><i class="fas fa-user-circle"></i>${board.writer}</div>
-<%-- 				<div class="col-6 col-md-4"><i class="far fa-clock"></i> ${fn:substring(board.udt_dt,5,16)}</div> --%>
 				<div class="col-6 col-md-4"><i class="far fa-clock"></i> <fmt:formatDate value="${board.udt_dt}" type="both" pattern="MM-dd hh:mm"/></div>
 				<div class="col-md-2"></div> 
 				<div class="col-9 col-md-2 " style="text-align:right"><i class="far fa-eye"></i> ${board.v_cnt}</div>
@@ -110,27 +109,26 @@ ul > li { list-style: none }
 			</div>
 			<div class="row board-detail-bottom p-1">
 				<div>
-				 <button type="button" class="btn btn-outline-dark btn-sm"  data-oper="list"><i class="fas fa-clipboard-list"></i>&nbsp;목록</button> 
+				 <button type="button" class="btn btn-outline-dark btn-sm btns"  data-oper="list"><i class="fas fa-clipboard-list"></i>&nbsp;목록</button> 
 				</div>
+				
 				<div class="ml-auto">
-				<button type="button" class="btn btn-outline-dark btn-sm" onclick="doAction(1);"><i class="far fa-edit"></i>&nbsp;수정</button>
-				<button type="button" class="btn btn-outline-dark btn-sm" onclick="boDeleteOpen();"><i class="far fa-trash-alt"></i>&nbsp;삭제</button>
+					<sec:authentication property="principal" var="pinfo"/>
+	                  	<sec:authorize access="isAuthenticated()">
+		                  	<c:if test="${pinfo.username eq board.writer}">
+								<button type="button" class="btn btn-outline-dark btn-sm btns" data-oper="modify"><i class="far fa-edit"></i>&nbsp;수정</button>
+								<button type="button" class="btn btn-outline-danger btn-sm" data-toggle="modal" data-target="#deleteModal"><i class="far fa-trash-alt"></i>&nbsp;삭제</button>
+							</c:if>
+		                </sec:authorize>
 				</div>
 			</div>
 			
 			
 			
 			
-<%-- 
-                  <sec:authentication property="principal" var="pinfo"/>
-                  	<sec:authorize access="isAuthenticated()">
-                  		<c:if test="${pinfo.username eq board.writer}">
-	                  		<button data-oper="modify" class="btn btn-default "> Modify </button>
-	                  	</c:if>
-	                </sec:authorize>
-	                  --%>
                   
                <form id="operForm" action="/board/modify" method="get">
+              	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				<%--   <input type='hidden' id='bname' name='bname' value='<c:out value="${board.bname}"/>'> --%>
 				  <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
 				  <input type='hidden' name='page' value='<c:out value="${cri.page}"/>'>
@@ -151,7 +149,7 @@ ul > li { list-style: none }
 		  <div class="col-lg-12">
 		    <!-- <div class="card card-secondary"> -->
 			<div class="container board-whole m-full white">
-		      <div class="card-header">첨부 파일</div>
+		      <div class="card-header"><i class="fas fa-file-alt"></i> 첨부 파일</div>
 		      <!-- /.panel-heading -->
 		      <div class="card-body">
 		        
@@ -180,7 +178,7 @@ ul > li { list-style: none }
             <!-- general form elements disabled -->
             <div class="container board-whole m-full white">
               <div class="card-header">
-                <i class="fa fa-comments fa-fw"></i>댓글
+                <i class="fa fa-comments fa-fw"></i> 댓글
               </div>
               <!-- /.card-header -->
               <div class="card-body">
@@ -252,6 +250,26 @@ ul > li { list-style: none }
     
     
 
+<!-- Modal -->
+<div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalCenterTitle">Modal title</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">취소</button>
+        <button type="button" class="btn btn-danger btns" data-oper= "remove">삭제</button>
+      </div>
+    </div>
+  </div>
+</div>
     
     
     
@@ -268,7 +286,7 @@ ul > li { list-style: none }
 $(function(){
 	var bnoValue ='<c:out value="${board.bno}"/>';
 	var replyUL = $(".chat");
-	
+
 	//ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
 	 	var csrfHeaderName="${_csrf.headerName}";
 		var csrfTokenValue="${_csrf.token}";
@@ -279,6 +297,33 @@ $(function(){
 	showList(1);
 	showLikes();
 	
+	
+	 $(".btns").on("click",function(e){
+			e.preventDefault();
+			
+			replyForm.remove();
+			likeForm.remove();
+			
+
+			//operForm을 담아서 보냄
+			var operation = $(this).data("oper");
+			console.log(operation);
+			if(operation === "modify"){
+				operForm.attr("action","/board/modify");
+				document.body.appendChild(operForm[0]);
+			} else if(operation ==="list"){
+			    operForm.find("#bno").remove();
+			    operForm.attr("action","/board/list");
+			    document.body.appendChild(operForm[0]);
+			} else if(operation === "remove"){
+				operForm.attr("method","post");
+				operForm.attr("action","/board/remove");
+				document.body.appendChild(operForm[0]);
+			}
+
+			 operForm.submit();
+			 
+	  });
 	
 	function showLikes(){
 		var likeCount=$("#likeCount");
@@ -403,46 +448,20 @@ $(function(){
 		var likeForm = $("#likeForm");
 	  
 	 
-	  $(".board-detail-bottom").find("button").on("click",function(e){
-			e.preventDefault();
-			
-			replyForm.remove();
-			likeForm.remove();
-			
-
-			//operForm을 담아서 보냄
-			var operation = $(this).data("oper");
-			console.log(operation);
-			if(operation === "modify"){
-				operForm.attr("action","/board/modify");
-				document.body.appendChild(operForm[0]);
-			} else if(operation ==="list"){
-			    operForm.find("#bno").remove();
-			    operForm.attr("action","/board/list");
-			    document.body.appendChild(operForm[0]);
-			}
-
-			 operForm.submit();
-			 
-	  });
-	  
-	 /* 	var csrfHeaderName="${_csrf.headerName}";
-		var csrfTokenValue="${_csrf.token}";
-	  
-		//ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
-		$(document).ajaxSend(function(e, xhr, options){
-			xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-		}); */
 		
 		
 		$("#likeButton").on("click",function(e){
 			e.preventDefault();
 			operForm.remove(); 
 			replyForm.remove();
-			 var id = null;
+				 var id = null;
 			 <sec:authorize access="isAuthenticated()">
-			 id = '<sec:authentication property="principal.username"/>';
-			 </sec:authorize>	
+			 	id = '<sec:authentication property="principal.username"/>';
+			 </sec:authorize>
+			 <sec:authorize access="isAnonymous()">
+				 customAlert("fail","로그인을 하신 후에 추천이 가능합니다");
+				 return false;
+			 </sec:authorize>
 			
 			var like = {
 					bno:bnoValue,
@@ -450,9 +469,6 @@ $(function(){
 			}
 			
 			boardLikeService.like(like,function(result){
-				
-				//alert(result);
-				
 				showLikes();
 			});
 				
