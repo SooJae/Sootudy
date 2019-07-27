@@ -91,10 +91,8 @@ $(".btn-secondary").on("click", function(e){
 	for(var i in array){
 	      if(array[i]!=1){
 	    	  
-	    	    $(".alertForm").html(`<div class="alert alert-danger fade show" role="alert" style="text-align:center; padding:1%;"><strong>회원가입 폼을 확인해주세요<strong><div>`);
-	          $("html, body").stop().animate({scrollTop: 0}, 100); 
-
-	          return false;
+	    	  customAlert("fail","회원가입 폼을 확인해주세요");
+				return false;
 	      }
 	    }
 				

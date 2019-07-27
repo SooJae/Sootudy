@@ -67,16 +67,12 @@
 
 function checkValue(){
     if(!$("#id").val()){
-    	$("#dangerAlert").html("<strong>아이디</strong>를 입력해주세요");
-    	$("#dangerAlert").addClass("show");
-    	$("html, body").stop().animate({scrollTop: 0}, 100);
+    	customAlert("fail","아이디를 입력해주세요");
     	return false;
   }
     else if(!$("#pw").val()){
-   	$("#dangerAlert").html("<strong>비밀번호</strong>를 입력해주세요");
-    	$("#dangerAlert").addClass("show");
-    	$("html, body").stop().animate({scrollTop: 0}, 100);
-		return false;
+    	customAlert("fail","비밀번호를 입력해주세요");
+    	return false;
     }
 }
 

@@ -38,8 +38,8 @@
   </div> 
 <c:forEach items="${list}" var="board">
 <%--  <a class="row board-list-body white move "  href='<c:out value="${board.bno}"/>'></a> --%>
- <div class="row board-list-body white move" href='<c:out value="${board.bno}"/>'>
-  <div class="col-md-1 in-visible"><c:out value="${board.bno}"/></div>
+ <div class="row board-list-body white ">
+  <div class="col-md-1 in-visible"><c:out value="${board.bno}"/></div><a class="move" href='<c:out value="${board.bno}"/>'></a>
   <c:choose>
   
 	  <c:when test="${board.like_cnt eq 0}">
@@ -51,7 +51,7 @@
 	  </c:otherwise>
 	  
   </c:choose>
-  <div class="col-10 col-md-6 ellipsis title" style="text-align:left; padding-left:0"><a class="move" href='<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a> <span style="color:blue;"><c:if test="${board.reply_cnt ne 0}">&nbsp;&nbsp;[<c:out value="${board.reply_cnt}"/>]</c:if></span></div>
+  <div class="col-10 col-md-6 ellipsis title" style="text-align:left; padding-left:0"><c:out value="${board.title}"/><span style="color:blue;"><c:if test="${board.reply_cnt ne 0}">&nbsp;&nbsp;[<c:out value="${board.reply_cnt}"/>]</c:if></span></div>
 <%--   <div class="col-10 col-md-6 ellipsis title" style="text-align:left; padding-left:0"><c:out value="${board.title}"/> <span style="color:blue;"><c:if test="${board.reply_cnt ne 0}">&nbsp;&nbsp;[<c:out value="${board.reply_cnt}"/>]</c:if></span></div> --%>
   <div class="col-6 col-md-2 ellipsis" id="nick"><a href="#"><c:out value="${board.writer}"/></a></div>
   <div class="col-3 col-md-1" id="date"><fmt:formatDate pattern="HH:mm" value="${board.udt_dt}"/></div>
@@ -188,12 +188,12 @@
      e.preventDefault();
      
      if(!searchForm.find("option:selected").val()){
-    	 customAlert("fail","검색어 종류를 입력해주세요");
-//        alert("검색종류를 입력하세요");
-//        return false();
+       alert("검색종류를 입력하세요");
+       return false();
      }
      if(!searchForm.find("input[name='keyword']").val()){
-       customAlert("fail","키워드를 입력해주세요");
+       alert("키워드를 입력하세요");
+       return false;
      }
      searchForm.find("input[name='page']").val("1");
      searchForm.submit();

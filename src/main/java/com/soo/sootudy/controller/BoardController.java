@@ -106,7 +106,7 @@ public class BoardController {
 			map.put("msg","수정이 완료되었습니다");
 			
 		} else {
-			map.put("flag","false");
+			map.put("flag","fail");
 			map.put("msg","수정에 실패하였습니다");
 			
 		}
