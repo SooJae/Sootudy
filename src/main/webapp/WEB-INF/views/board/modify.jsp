@@ -303,7 +303,7 @@ ul > li { list-style: none }
 		    $.ajax({
 		      url: '/uploadAjaxAction',
 		      processData: false, 
-		      contentType: false,data: 
+		      contentType: false, data: 
 		      formData,type: 'POST',
 		      beforeSend: function(xhr){
 		    	  xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
