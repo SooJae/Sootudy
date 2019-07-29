@@ -66,7 +66,7 @@
   <div class="board-detail-body" style="border-top: 1px solid lightgray;">
     <form method="post" role="form" action="/board/register">
 	      <div class="form-group">
-	      <input class="form-control" type="text" maxlength="100" name="title" placeholder="글 제목을 입력하세요">
+	       <input class="form-control" type="text" maxlength="100" name="title" placeholder="글 제목을 입력하세요">
 	      </div>
 	      <div class="form-group">
 	       <textarea class="form-control" rows="20" placeholder="내용을 입력해주세요" name="content"></textarea>
@@ -107,6 +107,7 @@
     </section>
     <!-- section -->
     
+    <%@ include file="../includes/footer.jsp" %>
 <script>
 $(function(){
 	var formObj = $("form[role='form']");
@@ -283,4 +284,3 @@ $(function(){
 });
 </script>
 
-<%@ include file="../includes/footer.jsp" %>

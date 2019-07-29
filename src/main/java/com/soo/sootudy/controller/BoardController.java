@@ -100,22 +100,23 @@ public class BoardController {
 	@PreAuthorize("principal.username == #board.writer")
 	@PostMapping("/modify")
 	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri,RedirectAttributes rttr) {
-		log.info("modify :"+ board);
-		Map<String, Object> map = new HashMap<String,Object>();
+		log.info("modify... :"+ board);
+		Map<String, Object> map = null;
 		if(service.modify(board)) {
+			map = new HashMap<String,Object>();
 			map.put("flag","success");
 			map.put("msg","수정이 완료되었습니다");
-			
-		} else {
+		} 
+		else {
+			map = new HashMap<String,Object>();
 			map.put("flag","fail");
 			map.put("msg","수정에 실패하였습니다");
-			
 		}
 		rttr.addFlashAttribute("result",map);
 		
 		return "redirect:/board/list" + cri.getListLink();
 	}
-	// 위의 modify와는 달리 bno만 받았기 때문에 writer을 사용해준다. #writer == name='writer'
+	// 위의 modify와는 달리 bno만 받았기 때문에 writer을 사용해준다. #writer == <input name='writer'>
 	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, 

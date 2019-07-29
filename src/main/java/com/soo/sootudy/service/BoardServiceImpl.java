@@ -5,17 +5,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
 import com.soo.sootudy.domain.BoardAttachVO;
 import com.soo.sootudy.domain.BoardLikeVO;
 import com.soo.sootudy.domain.BoardVO;
 import com.soo.sootudy.domain.Criteria;
-
 import com.soo.sootudy.mapper.BoardAttachMapper;
 import com.soo.sootudy.mapper.BoardLikeMapper;
 import com.soo.sootudy.mapper.BoardMapper;
 
 import lombok.AllArgsConstructor;
-import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @Service
@@ -36,7 +35,7 @@ public class BoardServiceImpl implements BoardService {
 		log.info("register......" + board);
 		mapper.insertSelectKey(board);
 		
-		if(board.getAttachList() == null || board.getAttachList().isEmpty()) {
+		if(board.getAttachList() == null || board.getAttachList().size() <= 0) {
 			return;
 		}
 		board.getAttachList().forEach(attach->{
@@ -46,29 +45,33 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
-	@Override
 	@Transactional
+	@Override
 	public BoardVO get(int bno, Criteria cri) {
 		mapper.updateViewCnt(bno, 1);
 		return mapper.read(bno);
 	}
 
+	@Transactional
 	@Override
 	public boolean modify(BoardVO board) {
-		log.info("modify......" + board);
 
 		attachMapper.deleteAll(board.getBno());
 		boolean modifyResult = mapper.update(board) == 1;
 		
-		  if (modifyResult && !board.getAttachList().isEmpty()) {
-			  
+		log.info("modify......"+board);
+//		if(modifyResult && !board.getAttachList().isEmpty() ) {
+		
+		if (modifyResult && board.getAttachList().size()>0) {
+			  log.info("안뇽"+board);
 		  board.getAttachList().forEach(attach -> {
+			  log.info("안뇽3"+board);
 		  
 		  attach.setBno(board.getBno()); 
 		  attachMapper.insert(attach); 
 		  }); 
 		}
-		 
+		 log.info("안뇽안뇽"+board);
 
 		return modifyResult;
 	}

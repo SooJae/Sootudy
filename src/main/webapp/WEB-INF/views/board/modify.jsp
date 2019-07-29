@@ -85,22 +85,17 @@ ul > li { list-style: none }
         <input type='hidden' name="writer" value='<c:out value="${board.writer}"/>'>
         
          <div class="form-group">
-           <label>Title</label>
-           <input type="text" class="form-control"  maxlength="100" name="title" value='<c:out value="${board.title}"/>'>
-         </div>
-
-         <!-- textarea -->
+         <input class="form-control" type="text" maxlength="100" name="title" placeholder="글 제목을 입력하세요" value='<c:out value="${board.title}"/>'>
+        </div>
+        
          <div class="form-group">
-           <label>Textarea</label>
-           <textarea class="form-control" rows="3" name="content"><c:out value="${board.content}"/></textarea>
-         <!-- textarea는 value가 없다. -->
-         </div>
+         <textarea class="form-control" rows="20" placeholder="내용을 입력해주세요" name="content"><c:out value="${board.content}"/></textarea>
+        </div>
          
          <sec:authentication property="principal" var="pinfo"/>
          <sec:authorize access="isAuthenticated()">
            <c:if test="${pinfo.username eq board.writer}">
              <button type="submit" data-oper="modify" class="btn btn-default"> Modify</button>
-             <button type="submit" data-oper="remove" class="btn btn-danger"> Remove </button>
            </c:if>
          </sec:authorize>
          
@@ -130,13 +125,13 @@ ul > li { list-style: none }
           <!-- /.card-body -->
         </div>  
         <!--/.card  -->
-        </div>
+      </div>
 </section>
-
+<!-- 
         <div class='bigPictureWrapper'>
 		  <div class='bigPicture'>
 		  </div>
-		</div>
+		</div> -->
         
         
         
@@ -146,7 +141,7 @@ ul > li { list-style: none }
 
 <script>
 	$(function(){
-		var formObj = $("form");
+ 		var formObj = $("form"); 
 		
 		$("button").on("click", function(e){
 			e.preventDefault();
@@ -154,11 +149,34 @@ ul > li { list-style: none }
 			var operation = $(this).data("oper");
 			console.log(operation);
 			
-			if(operation === "remove"){
-				formObj.attr("action", "/board/remove");
+			if(operation === "modify"){
+				
+				 console.log("submit clicked");
+			        
+			        var str = "";
+			        
+			        $(".uploadResult ul li").each(function(i, obj){
+			          
+			          var jobj = $(obj);
+			          
+			          console.dir(jobj);
+			          console.log("-------------------------");
+			          console.log(jobj.data("filename"));
+			          
+			          
+			          str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
+			          str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
+			          str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data("path")+"'>";
+			          str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
+			          
+			        });
+			        
+			        console.log(str);
+			        
+			        formObj.append(str).submit();
+				
 			} else if(operation === "list"){
-			/* 	self.location = "/board/list";
-				return; */
+				
 				formObj.attr("action", "/board/list").attr("method","get");
 				var pageTag = $("input[name='page']").clone();
 				var perPageNumTag = $("input[name='perPageNum']").clone();
@@ -215,7 +233,7 @@ ul > li { list-style: none }
 		 
 		  var formObj = $("form[role='form']");
 		  
-		  $("button[type='submit']").on("click", function(e){
+/* 		  $("button[type='submit']").on("click", function(e){
 		    
 		    e.preventDefault();
 		    
@@ -243,7 +261,7 @@ ul > li { list-style: none }
 		    
 		    formObj.append(str).submit();
 		    
-		  });
+		  }); */
 		 
 		  var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 		  var maxSize = 5242880; //5MB
@@ -261,8 +279,9 @@ ul > li { list-style: none }
 		    }
 		    return true;
 		  }
-		  var csrfHeaderName="${_csrf.headerName}";
-		  var csrfTokenValue="${_csrf.token}";
+		  
+	      var csrfHeaderName="${_csrf.headerName}";
+	      var csrfTokenValue="${_csrf.token}";
 		  
 		  $("input[type='file']").change(function(e){
 
@@ -288,7 +307,7 @@ ul > li { list-style: none }
 		      formData,type: 'POST',
 		      beforeSend: function(xhr){
 		    	  xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-		      },
+		      }, 
 		      dataType:'json',
 		        success: function(result){
 		          console.log(result); 
@@ -340,7 +359,8 @@ ul > li { list-style: none }
 		    uploadUL.append(str);
 		  }
 		 
-		 $(".uploadResult").on("click","button",function(e){
+	// ajax로 삭제해버릴시, 사용자가 취소했을때 복구 할 수가 없다.
+ 		 $(".uploadResult").on("click","button",function(e){
 			//.uploadResult 밑의 button 을 누를시
 			 console.log("delete file");
 			 
@@ -350,6 +370,8 @@ ul > li { list-style: none }
 				 targetLi.remove();
 			 }
 		 });
-		
+		 
+		 
+		 
 	});
 </script>

@@ -62,12 +62,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			.key("SooJae")
 			.tokenRepository(persistentTokenRepository())
 			.tokenValiditySeconds(604800);
-		/*
-		 * .and()
-		 * 
-		 * .addFilterBefore((Filter)context.getBean("sso.filter"),
-		 * BasicAuthenticationFilter.class);
-		 */
+
 	}
 //자동 로그인 설정
 	private PersistentTokenRepository persistentTokenRepository() {
