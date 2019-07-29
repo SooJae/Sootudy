@@ -96,6 +96,7 @@ public class BoardController {
 		model.addAttribute("board",service.get(bno, cri));
 	}
 	
+	// boardVO를 인자로 받고있기때문에 쉽게 board.writer을 사용해서 확인해준다.
 	@PreAuthorize("principal.username == #board.writer")
 	@PostMapping("/modify")
 	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri,RedirectAttributes rttr) {
@@ -114,7 +115,8 @@ public class BoardController {
 		
 		return "redirect:/board/list" + cri.getListLink();
 	}
-//	@PreAuthorize("principal.username == #writer")
+	// 위의 modify와는 달리 bno만 받았기 때문에 writer을 사용해준다. #writer == name='writer'
+	@PreAuthorize("principal.username == #writer")
 	@PostMapping("/remove")
 	public String remove(@RequestParam("bno") int bno, @ModelAttribute("cri") Criteria cri, 
 			RedirectAttributes rttr, String writer) {

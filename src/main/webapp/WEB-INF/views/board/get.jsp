@@ -130,6 +130,7 @@ ul > li { list-style: none }
                <form id="operForm" action="/board/modify" method="get">
               	 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				<%--   <input type='hidden' id='bname' name='bname' value='<c:out value="${board.bname}"/>'> --%>
+				  <input type='hidden' name='writer' value='<c:out value="${board.writer}"/>'>
 				  <input type='hidden' id='bno' name='bno' value='<c:out value="${board.bno}"/>'>
 				  <input type='hidden' name='page' value='<c:out value="${cri.page}"/>'>
 				  <input type='hidden' name='perPageNum' value='<c:out value="${cri.perPageNum}"/>'>

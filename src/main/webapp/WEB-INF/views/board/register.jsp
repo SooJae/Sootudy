@@ -170,8 +170,15 @@ $(function(){
 		
 		//var cloneObj = $(".uploadDiv").clone();
 		
-		var csrfHeaderName="${_csrf.headerName}";
-		var csrfTokenValue="${_csrf.token}";
+		/* var csrfHeaderName="${_csrf.headerName}";
+		var csrfTokenValue="${_csrf.token}"; */
+		
+		//ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
+	    var csrfHeaderName="${_csrf.headerName}";
+	    var csrfTokenValue="${_csrf.token}";
+	    $(document).ajaxSend(function(e, xhr, options){
+	      xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+	    }); 
 		
 		$("input[type='file']").change(function(e){
 			var formData = new FormData();
@@ -194,9 +201,9 @@ $(function(){
 				url:'/uploadAjaxAction',
 				processData: false,
 				contentType: false,
-				beforeSend: function(xhr){
+				/* beforeSend: function(xhr){
 					xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-				},
+				}, */
 				data: formData,
 				type: 'POST',
 				dataType:'json',
@@ -257,9 +264,9 @@ $(function(){
 			$.ajax({
 				url:'/deleteFile',
 				data:{fileName:targetFile, type:type},
-				beforeSend: function(xhr){
+			/* 	beforeSend: function(xhr){
 					xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
-				},
+				}, */
 				
 				dataType:'text',
 				type:'POST',
