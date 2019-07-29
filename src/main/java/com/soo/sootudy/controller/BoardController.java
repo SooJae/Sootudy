@@ -73,7 +73,8 @@ public class BoardController {
 		
 		if(board.getAttachList() != null) {
   
-		board.getAttachList().forEach(attach -> log.info(""+attach)); }
+		board.getAttachList().forEach(attach -> log.info(""+attach)); 
+		}
 		 
 		
 		log.info("=======================");
@@ -159,7 +160,8 @@ public class BoardController {
 	
 	private void deleteFiles(List<BoardAttachVO> attachList) {
 		
-		if(attachList==null || attachList.isEmpty()) {
+//		if(attachList==null || attachList.size() == 0) {
+		if(attachList==null || attachList.size() <= 0) {
 			return;
 		}
 		

@@ -59,19 +59,19 @@ public class BoardServiceImpl implements BoardService {
 		attachMapper.deleteAll(board.getBno());
 		boolean modifyResult = mapper.update(board) == 1;
 		
-		log.info("modify......"+board);
-//		if(modifyResult && !board.getAttachList().isEmpty() ) {
+//		log.info("modify......!!"+board.getAttachList().size());
+//		log.info("modify222.!!"+(board.getAttachList().size() >0 && modifyResult));
 		
-		if (modifyResult && board.getAttachList().size()>0) {
-			  log.info("안뇽"+board);
+		//아예 생성이 안돼서 !=null로 바꿨다.
+		if(modifyResult && board.getAttachList() != null ) {
+		
+//		if (modifyResult && board.getAttachList().size()>0) {
 		  board.getAttachList().forEach(attach -> {
-			  log.info("안뇽3"+board);
 		  
-		  attach.setBno(board.getBno()); 
-		  attachMapper.insert(attach); 
+			  attach.setBno(board.getBno()); 
+			  attachMapper.insert(attach); 
 		  }); 
 		}
-		 log.info("안뇽안뇽"+board);
 
 		return modifyResult;
 	}
