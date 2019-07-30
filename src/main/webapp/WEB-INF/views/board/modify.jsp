@@ -92,14 +92,23 @@ ul > li { list-style: none }
          <textarea class="form-control" rows="20" placeholder="내용을 입력해주세요" name="content"><c:out value="${board.content}"/></textarea>
         </div>
          
+         <div class="row board-detail-bottom p-1">
+         <div>
+         <button type="button" class="btn btn-outline-dark btn-sm btns"  data-oper="list"><i class="fas fa-clipboard-list"></i>&nbsp;목록</button> 
+        </div>
+        
+        <div class="ml-auto">
          <sec:authentication property="principal" var="pinfo"/>
          <sec:authorize access="isAuthenticated()">
            <c:if test="${pinfo.username eq board.writer}">
-             <button type="submit" data-oper="modify" class="btn btn-default"> Modify</button>
+             <button type="button" class="btn btn-outline-dark btn-sm btns" data-oper="modify"><i class="far fa-edit"></i>&nbsp;수정</button>
            </c:if>
          </sec:authorize>
-         
-         <button type="submit" data-oper="list" class="btn btn-info"> List </button>
+         </div>
+         <!-- <button type="submit" data-oper="list" class="btn btn-info"> List </button> -->
+        </div>
+        
+        
         
     </form>
   </div>

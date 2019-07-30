@@ -59,6 +59,9 @@ public class ReplyController {
 		
 		log.info("cri"+cri);
 		
+//		ReplyPageDTO aa= service.getListPage(cri, bno);
+//		log.info("aaa:" + aa);
+//		return new ResponseEntity<>(aa, HttpStatus.OK);
 		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
 	}
 	

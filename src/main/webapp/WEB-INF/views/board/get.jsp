@@ -363,11 +363,11 @@ $(function(){
 				
 				for(var i = 0, len = list.length||0; i<len; i++){
 					str+="<li class='left clearfix' data-rno='"+list[i].rno+"' style='border-bottom:1px solid gray; margin-top:20px; margin-left: <c:out value='"+${20*list[i].replyDepth}+"'/>px;'>";
-					str+="<div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>";
+					str+="<div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>&nbsp;";
 					str+="<small class='pull-right text-muted'>"+replyService.displayTime(list[i].reply_udt_dt)+"</small>";
-/* 					str+="<small class='pull-right text-muted replyDelete'><a href='#'>삭제&nbsp;</a></small></div>"; */
 					str+="<sec:authentication property='principal' var='pinfo'/><sec:authorize access='isAuthenticated()'><c:if test='${pinfo.username eq board.writer}'>";
-					str+="<a href='#'><small class='pull-right text-muted replyDelete'>삭제&nbsp;</small></a></div></c:if></sec:authorize>";
+ 					str+="<a href='#'><small class='pull-right text-muted replyDelete'>&nbsp;삭제</small></a></div></c:if></sec:authorize>";
+					/*str+="<a href='#'><small class='pull-right text-muted replyDelete' data-toggle='modal' data-target='#deleteModal'>&nbsp;삭제</small></a></div></c:if></sec:authorize>";*/
 					str+="<p>"+list[i].reply+"</p></div></li>";
 				}
 				replyUL.html(str);
@@ -388,6 +388,7 @@ $(function(){
 	/* 	 var prev = startPage != 1;
 	     var next = false; */
 	      
+	     console.log("replyCntreplyCnt"+replyCnt);
 	     var realEnd = Math.ceil(replyCnt/10.0);
 	     
 	     if(realEnd < endPage ) {
@@ -412,7 +413,7 @@ $(function(){
 	      }
 	      
 	      for(var i = startPage ; i <= endPage; i++){
-	        
+
 	        var active = page == i? "active":"";
 	        
 	        str+= "<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"+i+"</a></li>";
@@ -485,6 +486,13 @@ $(function(){
 			 replyer = '<sec:authentication property="principal.username"/>';
 			 </sec:authorize>	
 		 	
+			 var reply = replyForm.find("input[name='reply']").val();
+			 if(reply == ""){
+				 customAlert("fail","댓글 내용을 입력해주세요");
+				 return false;
+	   }
+			 
+			 
 			 var reply = {
 					reply: replyForm.find("input[name='reply']").val(),
 			 		replyer : replyer,
@@ -495,7 +503,7 @@ $(function(){
 				 replyForm.find("input[name='reply']").val("");
 				 
 				 
-				 alert(result);
+				/*  customAlert("success","댓글이 작성되었습니다."); */
 				 
 				 showList(1);
 				 //showList(-1);
@@ -515,7 +523,7 @@ $(function(){
 		   console.log("Replyer:"+replyer);
 		   
 		   if(!replyer){
-				alert("로그인 후 삭제가 가능합니다.");
+			   customAlert("fail","로그인 후 삭제가 가능합니다");
 				return;
 		   }
 		   
@@ -532,7 +540,7 @@ $(function(){
 			
 		   replyService.remove(rno, originalReplyer, function(result){
 			  
-				alert(result);
+				/* alert(result); */
 				showList(page);
 		   });
 		   
