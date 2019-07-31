@@ -232,7 +232,9 @@ overflow-wrap: break-word;
 }
 
 @media (max-width: 767.98px) { 
-	
+.m-bread{
+	text-align:center;
+}	
 .in-visible{
 	display:none;
 	}

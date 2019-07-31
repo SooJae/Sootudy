@@ -36,7 +36,7 @@ import lombok.extern.slf4j.Slf4j;
 @Controller
 @Slf4j
 @RequestMapping("/board/*")
-@AllArgsConstructor
+//@AllArgsConstructor
 public class BoardController {
 	
 	@Autowired
@@ -49,9 +49,9 @@ public class BoardController {
 		model.addAttribute("list", service.getList(cri));
 		int total = service.getTotal(cri);
 		log.info("total:"+total);
+		log.info("키워드"+cri.getKeyword());
 		
 		model.addAttribute("pageMaker", new PageDTO(cri,total));
-		log.info("키워드"+cri.getKeyword());
 		
 		return "/board/list";
 	}

@@ -2,32 +2,10 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="../includes/header.jsp" %>
-<!-- <style>
-
-.board-list-body div{
-  padding:0;
-}
-</style> -->
-
-<!--     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Data Tables</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Data Tables</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </section> -->
 
 
 <!-- section -->
-<section class="container board-list m-full" style="text-align:center;">
+<section class="container board-list m-full m-bread" style="text-align:center;">
   <div class="row board-list-head white in-visible row-no-padding ">
     <div class="col-md-1">번호</div>
     <div class="col-md-1">추천</div>
@@ -38,8 +16,8 @@
   </div> 
 <c:forEach items="${list}" var="board">
 <%--  <a class="row board-list-body white move "  href='<c:out value="${board.bno}"/>'></a> --%>
- <div class="row board-list-body white ">
-  <div class="col-md-1 in-visible"><c:out value="${board.bno}"/></div><a class="move" href='<c:out value="${board.bno}"/>'></a>
+ <div class="row board-list-body white move" href='<c:out value="${board.bno}"/>'>
+  <div class="col-md-1 in-visible"><c:out value="${board.bno}"/></div>
   <c:choose>
   
 	  <c:when test="${board.like_cnt eq 0}">
@@ -51,7 +29,7 @@
 	  </c:otherwise>
 	  
   </c:choose>
-  <div class="col-10 col-md-6 ellipsis title" style="text-align:left; padding-left:0"><c:out value="${board.title}"/><span style="color:blue;"><c:if test="${board.reply_cnt ne 0}">&nbsp;&nbsp;[<c:out value="${board.reply_cnt}"/>]</c:if></span></div>
+  <div class="col-10 col-md-6 ellipsis title" style="text-align:left; padding-left:0"><a class="move" href='<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a> <span style="color:blue;"><c:if test="${board.reply_cnt ne 0}">&nbsp;&nbsp;[<c:out value="${board.reply_cnt}"/>]</c:if></span></div>
 <%--   <div class="col-10 col-md-6 ellipsis title" style="text-align:left; padding-left:0"><c:out value="${board.title}"/> <span style="color:blue;"><c:if test="${board.reply_cnt ne 0}">&nbsp;&nbsp;[<c:out value="${board.reply_cnt}"/>]</c:if></span></div> --%>
   <div class="col-6 col-md-2 ellipsis" id="nick"><a href="#"><c:out value="${board.writer}"/></a></div>
   <div class="col-3 col-md-1" id="date"><fmt:formatDate pattern="HH:mm" value="${board.udt_dt}"/></div>
@@ -188,12 +166,12 @@
      e.preventDefault();
      
      if(!searchForm.find("option:selected").val()){
-       alert("검색종류를 입력하세요");
-       return false();
+    	 customAlert("fail","검색어 종류를 입력해주세요");
+//        alert("검색종류를 입력하세요");
+//        return false();
      }
      if(!searchForm.find("input[name='keyword']").val()){
-       alert("키워드를 입력하세요");
-       return false;
+       customAlert("fail","키워드를 입력해주세요");
      }
      searchForm.find("input[name='page']").val("1");
      searchForm.submit();

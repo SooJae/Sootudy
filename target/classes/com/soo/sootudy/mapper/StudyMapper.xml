@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soo.sootudy.mapper.StudyMapper">
+
+<!-- 
+<insert id="insert">
+	insert into board (title,content,writer)
+	values (#{title}, #{content}, #{writer})
+</insert>
+ -->
+
+<insert id="insertSelectKey">
+	<selectKey keyProperty="bno" resultType="int" order="AFTER">
+		SELECT LAST_INSERT_ID()
+	</selectKey>
+		INSERT INTO board
+		        ( title
+		        , content
+		        , writer)
+		VALUES  (#{title}
+		        , #{content}
+		        , #{writer})
+</insert>
+
+<select id="read" resultType="com.soo.sootudy.domain.BoardVO">
+	SELECT * FROM board  
+	WHERE 
+	   delete_flag ='0' 
+	AND 
+	   bno = #{bno}
+</select>
+
+ 
+<delete id="delete">
+	UPDATE board 
+	SET 
+	   delete_flag = '1' 
+	WHERE 
+	   bno =#{bno}
+</delete>
+<update id="update">
+	UPDATE board 
+	SET title = #{title},
+			content = #{content}
+	WHERE 
+	    delete_flag ='0' 
+	AND 
+	    bno = #{bno}
+</update>
+
+<update id="updateViewCnt">
+  UPDATE board
+  SET 
+      v_cnt = v_cnt + #{amount}
+  WHERE 
+      bno =#{bno}
+</update>
+
+<update id="updateReplyCnt">
+	UPDATE board 
+	SET 
+	     reply_cnt = reply_cnt + #{amount} 
+	WHERE 
+	     bno = #{bno}
+</update>
+
+<update id="updateLikeCnt">
+  UPDATE board
+  SET 
+      like_cnt = like_cnt + #{amount}
+  WHERE 
+      bno=#{bno}
+</update>
+
+
+<select id="getListWithPaging" resultType="com.soo.sootudy.domain.BoardVO">
+	SELECT 
+	     bno
+	   , title
+	   , content
+	   , writer
+	   , dt
+	   , udt_dt
+	   , v_cnt
+	   , reply_cnt
+	   , like_cnt
+	FROM board 
+	WHERE 
+	     delete_flag ='0'
+
+	<include refid="criteria"></include>
+	<include refid="filter_mode"></include>
+	ORDER BY bno DESC, dt DESC
+	LIMIT #{pageStart}, #{perPageNum}
+</select>
+ 
+ 
+ <select id="getTotalCount" resultType="int">
+	SELECT COUNT(*) 
+	FROM board 
+	WHERE 
+	     delete_flag ='0' 
+ 	<include refid="criteria"></include>
+ 	<include refid="filter_mode"></include>
+ </select>
+ 
+
+<sql id="criteria">
+<!--
+  <trim prefix="AND (" suffix=") " prefixOverrides="AND |OR">
+   <if test="bname != null and bname !='' ">
+    bname = #{bname}
+   </if> 
+  </trim>
+-->
+	<trim prefix="AND (" suffix=") " prefixOverrides="AND |OR">
+		<foreach item="type" collection="typeArr">
+			<trim prefix="OR">
+				<choose>
+					<when test="type == 'T'.toString()">
+						title LIKE CONCAT('%', #{keyword}, '%')
+	 				</when>
+	 				<when test="type == 'C'.toString()">
+	 					content LIKE CONCAT('%', #{keyword}, '%')
+	 				</when>
+	 				<when test="type == 'W'.toString()">
+	 					writer LIKE CONCAT('%', #{keyword}, '%')
+	 				</when>
+				</choose>
+			</trim>
+		</foreach>
+	</trim>
+</sql>
+
+<sql id="filter_mode">
+  <trim prefix="AND (" suffix=") " prefixOverrides="AND | OR">
+    <if test="filter_mode == 'best'.toString()">
+      like_cnt &gt; 0
+    </if>
+  
+  </trim>
+</sql>
+
+
+</mapper>

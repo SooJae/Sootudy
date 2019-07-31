@@ -6,9 +6,6 @@ import lombok.Data;
 import lombok.extern.log4j.Log4j2;
 import lombok.extern.slf4j.Slf4j;
 
-/*@Getter
-@Setter
-@ToString*/
 @Slf4j
 @Data
 public class Criteria {
@@ -33,12 +30,6 @@ public class Criteria {
 		this.perPageNum = perPageNum;
 		this.filter_mode = filter_mode;
 	}
-	
-//	public Criteria(int page, int perPageNum, String bname) {
-//		this.page = page;
-//		this.perPageNum = perPageNum;
-//		this.bname = bname;
-//	}
 	
 	
 	public int getPageStart() { 

@@ -275,8 +275,6 @@ ul > li { list-style: none }
     
     
     
-    
-    
 <%@ include file="../includes/footer.jsp" %>
 
 <script type="text/javascript" src="/resources/dist/js/reply.js"></script>
@@ -363,11 +361,10 @@ $(function(){
 				
 				for(var i = 0, len = list.length||0; i<len; i++){
 					str+="<li class='left clearfix' data-rno='"+list[i].rno+"' style='border-bottom:1px solid gray; margin-top:20px; margin-left: <c:out value='"+${20*list[i].replyDepth}+"'/>px;'>";
-					str+="<div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>&nbsp;";
-					str+="<small class='pull-right text-muted'>"+replyService.displayTime(list[i].reply_udt_dt)+"</small>";
+					str+="<div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>";
+					str+="<small class='pull-right text-muted'> &nbsp;"+replyService.displayTime(list[i].reply_udt_dt)+"</small>";
 					str+="<sec:authentication property='principal' var='pinfo'/><sec:authorize access='isAuthenticated()'><c:if test='${pinfo.username eq board.writer}'>";
- 					str+="<a href='#'><small class='pull-right text-muted replyDelete'>&nbsp;삭제</small></a></div></c:if></sec:authorize>";
-					/*str+="<a href='#'><small class='pull-right text-muted replyDelete' data-toggle='modal' data-target='#deleteModal'>&nbsp;삭제</small></a></div></c:if></sec:authorize>";*/
+					str+="<a href='#'><small class='pull-right text-muted replyDelete'>&nbsp; 삭제</small></a></div></c:if></sec:authorize>";
 					str+="<p>"+list[i].reply+"</p></div></li>";
 				}
 				replyUL.html(str);

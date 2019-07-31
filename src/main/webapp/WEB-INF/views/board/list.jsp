@@ -2,32 +2,33 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <%@ include file="../includes/header.jsp" %>
-<!-- <style>
 
-.board-list-body div{
-  padding:0;
-}
-</style> -->
 
-<!--     <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1>Data Tables</h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Data Tables</li>
-            </ol>
-          </div>
-        </div>
-      </div>
-    </section> -->
+<!--  breadcrumb -->
+<section class="container board-list m-full">
+	<section class="content-header">
+	      <div class="container-fluid">
+	        <div class="row mb-2">
+	          <div class="col-sm-6">
+	            <h1>게시판</h1>
+	          </div>
+	          <div class="col-sm-6">
+	            <ol class="breadcrumb float-sm-right">
+	              <li class="breadcrumb-item"><a href="#">홈</a></li>
+	              <li class="breadcrumb-item active">게시판</li>
+	            </ol>
+	          </div>
+	        </div>
+	      </div>
+	    </section> 
+</section>
 
 
 <!-- section -->
+
+    
 <section class="container board-list m-full" style="text-align:center;">
+
   <div class="row board-list-head white in-visible row-no-padding ">
     <div class="col-md-1">번호</div>
     <div class="col-md-1">추천</div>

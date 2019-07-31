@@ -132,7 +132,7 @@ color:white;
 	            <a class="nav-link btnc" href="#" data-oper="board">게시판</a>
 	          </li>
 	          <li class="nav-item">
-	            <a class="nav-link btnc" href="#" data-oper="study">스터디2</a>
+	            <a class="nav-link btnc" href="#" data-oper="study">스터디</a>
 	          </li>
 	          </ul>
 	          <ul class="nav navbar-nav ml-auto">
