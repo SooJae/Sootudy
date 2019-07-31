@@ -1,4 +1,4 @@
-package com.soo.sootudy.controller;
+package com.soo.sootudy.service;
 
 import java.util.List;
 

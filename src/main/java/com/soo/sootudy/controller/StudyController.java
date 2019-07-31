@@ -28,4 +28,9 @@ public class StudyController {
 		return "/study/list";
 	}
 	
+	@GetMapping("/get")
+	public String get() {
+		return "/study/get";
+	}
+	
 }

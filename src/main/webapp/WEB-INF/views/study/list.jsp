@@ -34,7 +34,7 @@
 
       <!-- Default box -->
       <div class="card">
-        <div class="card-body p-0">
+        <div class="card-body table-responsive-md p-0">
           <table class="table table-striped projects">
               <thead>
                   <tr>
@@ -55,11 +55,11 @@
                   <tr class="study">
                       <td>
                           <a>
-                              AdminLTE v3
+                              스프링 공부
                           </a>
                           <br/>
                           <small>
-                              Created 01.01.2019
+                              개설일 01.01.2019
                           </small>
                       </td>
                       <td>
@@ -78,17 +78,17 @@
                           <a class="btn btn-primary btn-sm" href="#">
                               <i class="fas fa-folder">
                               </i>
-                              View
+                              보기
                           </a>
                           <a class="btn btn-info btn-sm" href="#">
                               <i class="fas fa-pencil-alt">
                               </i>
-                              Edit
+                              수정
                           </a>
                           <a class="btn btn-danger btn-sm" href="#">
                               <i class="fas fa-trash">
                               </i>
-                              Delete
+                              삭제
                           </a>
                       </td>
                   </tr>
