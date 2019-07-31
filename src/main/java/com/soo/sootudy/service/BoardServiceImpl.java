@@ -88,6 +88,7 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public List<BoardVO> getList(Criteria cri) {
+		
 		return mapper.getListWithPaging(cri);
 	}
 

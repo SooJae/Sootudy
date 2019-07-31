@@ -6,6 +6,7 @@
 
 <!--  breadcrumb -->
 <section class="container board-list m-full">
+	<section class="content-header">
 	      <div class="container-fluid">
 	        <div class="row mb-2">
 	          <div class="col-sm-6">
@@ -19,6 +20,7 @@
 	          </div>
 	        </div>
 	      </div>
+	    </section> 
 </section>
 
 
@@ -26,31 +28,34 @@
 
     
 <section class="container board-list m-full" style="text-align:center;">
+
   <div class="row board-list-head white in-visible row-no-padding ">
-<!--     <div class="col-md-1">번호</div> -->
+    <div class="col-md-1">번호</div>
     <div class="col-md-1">추천</div>
-    <div class="col-md-5">제목</div>
+    <div class="col-md-6">제목</div>
     <div class="col-md-2">닉네임</div>
-    <div class="col-md-3">날짜</div>
+    <div class="col-md-1">날짜</div>
     <div class="col-md-1">조회</div>
   </div> 
 <c:forEach items="${list}" var="board">
+<%--  <a class="row board-list-body white move "  href='<c:out value="${board.bno}"/>'></a> --%>
  <div class="row board-list-body white move" href='<c:out value="${board.bno}"/>'>
-<%--   <div class="col-md-1 in-visible"><c:out value="${board.bno}"/></div> --%>
+  <div class="col-md-1 in-visible"><c:out value="${board.bno}"/></div>
   <c:choose>
   
-    <c:when test="${board.like_cnt eq 0}">
-      <div class="col-2 col-md-1" style="color:lightgray;"><i class="fas fa-fire"></i> 0</div>
-    </c:when>
-    
-    <c:otherwise>
-      <div class="col-2 col-md-1" style="color:#0945b3;"><i class="fas fa-fire"></i> <c:out value="${board.like_cnt}"/></div>
-    </c:otherwise>
-    
+	  <c:when test="${board.like_cnt eq 0}">
+	    <div class="col-2 col-md-1" style="color:lightgray;"><i class="fas fa-fire"></i> 0</div>
+	  </c:when>
+	  
+	  <c:otherwise>
+		  <div class="col-2 col-md-1" style="color:#0945b3;"><i class="fas fa-fire"></i> <c:out value="${board.like_cnt}"/></div>
+	  </c:otherwise>
+	  
   </c:choose>
-  <div class="col-10 col-md-5 ellipsis title" style="text-align:left; padding-left:0"><a class="move" href='<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a> <span style="color:blue;"><c:if test="${board.reply_cnt ne 0}">&nbsp;&nbsp;[<c:out value="${board.reply_cnt}"/>]</c:if></span></div>
+  <div class="col-10 col-md-6 ellipsis title" style="text-align:left; padding-left:0"><a class="move" href='<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a> <span style="color:blue;"><c:if test="${board.reply_cnt ne 0}">&nbsp;&nbsp;[<c:out value="${board.reply_cnt}"/>]</c:if></span></div>
   <div class="col-6 col-md-2 ellipsis" id="nick"><a href="#"><c:out value="${board.writer}"/></a></div>
-  <div class="col-3 col-md-3" id="date"><fmt:formatDate pattern="MM-dd HH:mm" value="${board.udt_dt}"/></div>
+  <div class="col-3 col-md-1" id="date">+displayTime()+</div>
+<%--   <div class="col-3 col-md-1" id="date"><fmt:formatDate pattern="HH:mm" value="${board.udt_dt}"/></div> --%>
   <div class="col-3 col-md-1" id="count"><c:out value="${board.v_cnt}"/></div>
  </div>
 </c:forEach>

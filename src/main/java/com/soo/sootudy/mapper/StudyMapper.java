@@ -1,8 +1,8 @@
-package com.soo.sootudy.service;
+package com.soo.sootudy.mapper;
 
 import java.util.List;
 
-import com.soo.sootudy.controller.StudyVO;
+import com.soo.sootudy.domain.StudyVO;
 
 public interface StudyMapper {
 

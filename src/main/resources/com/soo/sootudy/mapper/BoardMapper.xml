@@ -105,7 +105,7 @@
  	<include refid="criteria"></include>
  	<include refid="filter_mode"></include>
  </select>
- 
+
 
 <sql id="criteria">
 <!--

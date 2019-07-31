@@ -7,8 +7,10 @@ import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.FilterType;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -18,6 +20,11 @@ import com.zaxxer.hikari.HikariDataSource;
 
 @Configuration
 @ComponentScan(basePackages= {"com.soo.sootudy.service", "com.soo.sootudy.controller","com.soo.sootudy.aop","com.soo.sootudy.task"})
+//@ComponentScan(basePackages= {"com.soo.sootudy.service", "com.soo.sootudy.controller","com.soo.sootudy.aop","com.soo.sootudy.task"},
+//				excludeFilters = {
+//						@Filter(type=FilterType.ASPECTJ, pattern="com.soo.sootudy.*.Study*")
+//				}
+//)
 
 @EnableAspectJAutoProxy
 @EnableScheduling
