@@ -75,7 +75,7 @@ var timer;
 			var focus = $(":focus");
 			var focusedInputID = $(":focus").attr("id");
 				joinCheckService.checkForm(focus);
-			},100); 
+			},70); 
 		});
 	
 $(".btn-secondary").on("click", function(e){

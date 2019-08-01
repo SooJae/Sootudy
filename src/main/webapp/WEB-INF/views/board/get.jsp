@@ -127,7 +127,7 @@ ul > li { list-style: none }
 			
 			
                   
-         <form id="operForm" action="/board/modify" method="get">
+         <form id="operForm" action="/board/modify" method="get" >
        	  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 				<%--   <input type='hidden' id='bname' name='bname' value='<c:out value="${board.bname}"/>'> --%>
 				  <input type='hidden' name='writer' value='<c:out value="${board.writer}"/>'>
@@ -188,14 +188,15 @@ ul > li { list-style: none }
 	              <sec:authorize access="isAuthenticated()"> 
 	             	 <c:choose>
              			 <c:when test="${pinfo.username ne null}">
-				              <form role="form" id="replyForm" action="/board/modify" method="post">
-				              	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
-		                    <input type="hidden" name="writer" value='<c:out value="${pinfo.member.id}"/>' />
+				              <form role="form" id="replyForm" method="post" onsubmit="return false;">
+<%-- 				              	<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/> --%>
+<%-- 		                    <input type="hidden" name="writer" value='<c:out value="${pinfo.member.nm}"/>' /> --%>
 				                  <!-- text input -->
 				                  <div class="input-group mb-3">
-				                    <input type="text" class="form-control" placeholder="댓글을 입력하세요" name="reply">
+				                    <input type="text" class="form-control" placeholder="댓글을 입력하세요" name="reply" onkeydown = "if (event.keyCode == 13)
+                        document.getElementById('replyButton').click()">
 				                     <div class="input-group-append">
-				                     <button type="submit" data-oper="replyWrite" class="btn btn-primary" id="replyButton"><i class="fas fa-pencil-alt"></i> 쓰기</button>
+				                     <button type="button" data-oper="replyWrite" class="btn btn-sm btn-primary" id="replyButton"><i class="fas fa-pencil-alt"></i> 쓰기</button>
 				                     </div>
 				                  </div>
 				                    <%-- <input class="form-control" name="writer" value='<c:out value="${pinfo.username}"/>' readonly="readonly"/> --%>
@@ -442,13 +443,19 @@ $(function(){
 		var replyForm = $("#replyForm");
 		var likeForm = $("#likeForm");
 	  
+// 		$("#reply").focusout(function(e) {
+// 			e.preventDefault();
+// 		    if (e.keyCode === 13) {
+// 		        $("#replyButton").click();
+// 		    }
+// 		});
 	 
 		
 		
 		$("#likeButton").on("click",function(e){
 			e.preventDefault();
 			operForm.remove(); 
-			replyForm.remove();
+			//replyForm.remove();
 				 var id = null;
 			 <sec:authorize access="isAuthenticated()">
 			 	id = '<sec:authentication property="principal.username"/>';
@@ -487,7 +494,7 @@ $(function(){
 			 
 			 
 			 var reply = {
-					reply: replyForm.find("input[name='reply']").val(),
+					reply: reply,
 			 		replyer : replyer,
 			 		bno:bnoValue
 			 };
@@ -526,6 +533,7 @@ $(function(){
 			
 			
 			if(replyer != originalReplyer){
+				customAlert("fail","해당 댓글을 작성한 사용자가 아닙니다");
 				return;
 			}
 			

@@ -240,11 +240,17 @@ overflow-wrap: break-word;
 	}
 .m-full{
 	border-top:1px solid lightgray;
-	width:100%;
+	width:100% !important;
 }	
 #date, #count{
 	padding:0;
 }
+
+.study-get{
+  font-size:0.85rem;
+	padding:0;
+  
+ }
 
 .board-list-body #nick:before{
 	font-family: 'Font Awesome 5 Free';
