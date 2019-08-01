@@ -340,13 +340,9 @@ $(function(){
 	function showList(page){
 		replyService.getList({bno:bnoValue,page:page||1}, 
 			function(replyCnt, list){
-				console.log("replyCnt"+replyCnt);
-				console.log("list:"+list);
-				console.log(list);
 				
 				if(page==-1){
 					page = Math.ceil(replyCnt/5.0);
-					console.log(page);
 					showList(page);
 					return;
 				}
@@ -500,10 +496,8 @@ $(function(){
 				 replyForm.find("input[name='reply']").val("");
 				 
 				 
-				/*  customAlert("success","댓글이 작성되었습니다."); */
 				 
 				 showList(1);
-				 //showList(-1);
 				 
 			 });
 		 

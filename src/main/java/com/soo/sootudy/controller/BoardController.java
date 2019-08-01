@@ -197,17 +197,6 @@ public class BoardController {
 	}
 	
 
-//	@ResponseBody
-//	@PostMapping(value="/getLike"
-//	)
-//	public int re(
-//			@RequestBody Map<String,Integer> map){
-//		
-//		int bnoKey= map.get("bno");
-//		
-//		log.info("getLike122 : "+bnoKey);
-//		return service.getLikes(bnoKey);
-//	}
 	
 	@ResponseBody
 	@PostMapping(value="/getLike",

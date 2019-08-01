@@ -30,7 +30,7 @@
 
 
     <!-- Main content -->
-    <section class="content">
+    <div class="content">
 
       <!-- Default box -->
       <div class="card">
@@ -180,7 +180,7 @@
       </div>
       <!-- /.card -->
 
-    </section>
+    </div>
     <!-- /.content -->
 
 

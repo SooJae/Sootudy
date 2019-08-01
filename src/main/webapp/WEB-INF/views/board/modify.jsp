@@ -242,35 +242,6 @@ ul > li { list-style: none }
 		 
 		  var formObj = $("form[role='form']");
 		  
-/* 		  $("button[type='submit']").on("click", function(e){
-		    
-		    e.preventDefault();
-		    
-		    console.log("submit clicked");
-		    
-		    var str = "";
-		    
-		    $(".uploadResult ul li").each(function(i, obj){
-		      
-		      var jobj = $(obj);
-		      
-		      console.dir(jobj);
-		      console.log("-------------------------");
-		      console.log(jobj.data("filename"));
-		      
-		      
-		      str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
-		      str += "<input type='hidden' name='attachList["+i+"].uuid' value='"+jobj.data("uuid")+"'>";
-		      str += "<input type='hidden' name='attachList["+i+"].uploadPath' value='"+jobj.data("path")+"'>";
-		      str += "<input type='hidden' name='attachList["+i+"].fileType' value='"+ jobj.data("type")+"'>";
-		      
-		    });
-		    
-		    console.log(str);
-		    
-		    formObj.append(str).submit();
-		    
-		  }); */
 		 
 		  var regex = new RegExp("(.*?)\.(exe|sh|zip|alz)$");
 		  var maxSize = 5242880; //5MB
