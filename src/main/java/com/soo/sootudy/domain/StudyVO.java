@@ -12,7 +12,7 @@ public class StudyVO {
 	private String title;
 	private String content;
 	private String leader;
-	private Date ut;
+	private Date dt;
 	private Date udt_dt;
 	private String delete_flag;
 	

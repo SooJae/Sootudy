@@ -51,7 +51,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		WHERE 
 		    bno = #{bno}
 		ORDER BY rno DESC
-		<!-- limit #{pageStart}, #{perPageNum} -->
+<!-- 		limit #{pageStart}, #{perPageNum} -->
 		limit #{cri.pageStart}, #{cri.perPageNum}
 	</select>
 	

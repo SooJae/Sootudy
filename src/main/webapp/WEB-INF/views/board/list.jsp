@@ -50,8 +50,8 @@
   </c:choose>
   <div class="col-10 col-md-5 ellipsis title" style="text-align:left; padding-left:0"><a class="move" href='<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a> <span style="color:blue;"><c:if test="${board.reply_cnt ne 0}">&nbsp;&nbsp;[<c:out value="${board.reply_cnt}"/>]</c:if></span></div>
   <div class="col-6 col-md-2 ellipsis" id="nick"><a href="#"><c:out value="${board.writer}"/></a></div>
-  <div class="col-3 col-md-3" id="date"><fmt:formatDate pattern="MM-dd HH:mm" value="${board.udt_dt}"/></div>
-  <div class="col-3 col-md-1" id="count"><c:out value="${board.v_cnt}"/></div>
+  <div class="col-3 col-md-3"><fmt:formatDate pattern="MM-dd HH:mm" value="${board.udt_dt}"/></div>
+  <div class="col-3 col-md-1"><c:out value="${board.v_cnt}"/></div>
  </div>
 </c:forEach>
 
@@ -143,36 +143,6 @@
 
 $(function(){
 	
-// 	function displayTime(timeValue){
-// 	    var today = new Date();
-	    
-// 	    var gap = today.getTime()-timeValue;
-	    
-// 	    var dateObj = new Date(timeValue);
-	    
-// 	    if(gap < (1000 * 60* 60 * 24)){
-	      
-// 	      var hh = dateObj.getHours();
-// 	      var mi = dateObj.getMinutes();
-// 	      var ss = dateObj.getSeconds();
-	      
-// 	      return [(hh > 9 ? '' : '0') + hh, ':', (mi>9 ? '' : '0') +mi,
-// 	        ':',(ss > 9 ? '' : '0') + ss ].join('');
-// 	    } else {
-// 	      var yy = dateObj.getFullYear();
-// 	      var mm = dateObj.getMonth() + 1; //getMonth() is zero-based
-// 	      var dd = dateObj.getDate();
-	      
-// 	      return [ yy, '/', (mm > 9 ? '' : '0') + mm, '/',
-// 	        ( dd > 9 ? '' : '0') + dd ].join('');
-// 	    }
-// 	  }
-	  
-// 	function showDisplayTime(timeValue){
-// 		$("#date").html(displayTime(timeValue));
-// 	}
-// 	var time = "${board.udt_dt}";
-// 	showDisplayTime(time);
 	
    $("#regBtn").on("click", function(){
      self.location = "/board/register";

@@ -31,7 +31,7 @@ public class ReplyController {
 	@Autowired
 	private ReplyService service;
 	
-//	@PreAuthorize("isAuthenticated()")
+	@PreAuthorize("isAuthenticated()")
 	@PostMapping(value = "/new",
 			consumes = "application/json",
 			produces = {MediaType.TEXT_PLAIN_VALUE})
@@ -59,9 +59,6 @@ public class ReplyController {
 		
 		log.info("cri"+cri);
 		
-//		ReplyPageDTO aa= service.getListPage(cri, bno);
-//		log.info("aaa:" + aa);
-//		return new ResponseEntity<>(aa, HttpStatus.OK);
 		return new ResponseEntity<>(service.getListPage(cri, bno), HttpStatus.OK);
 	}
 	
@@ -75,7 +72,6 @@ public class ReplyController {
 	}
 	
 	@PreAuthorize("principal.username == #vo.replyer")
-	/* @PreAuthorize("isAuthenticated()") */
 	@DeleteMapping(value="/{rno}")
 	public ResponseEntity<String> remove(@RequestBody ReplyVO vo, @PathVariable("rno") int rno){
 		log.info("remove"+rno);

@@ -1,48 +1,48 @@
 package com.soo.sootudy.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.ui.Model;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soo.sootudy.domain.StudyCriteria;
+import com.soo.sootudy.domain.StudyPageDTO;
 import com.soo.sootudy.service.StudyService;
 
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@RestController
-@Slf4j
 @RequestMapping("/study/*")
+@Slf4j
 @AllArgsConstructor
+@Controller
 public class StudyController {
 
 	@Autowired
 	private StudyService service;
 	
-//	@PostMapping(value = "/list",
-//	consumes = "application/json",
-//	produces = {MediaType.TEXT_PLAIN_VALUE})
-//	public ResponseEntity<String> list(StudyCriteria scri, Model model) {
-//		
-//		model.addAttribute("list",service.getList(scri));
-//		int total = service.getTotal(scri);
-//		
-//		return "/study/list";
-//	}
-	
+
 	@GetMapping("/list")
-	public String list() {
-		return "/study/list";
+	public void list() {
+		
 	}
 	
-	@GetMapping("/get")
-	public String get() {
-		return "/study/get";
+	@ResponseBody
+	@GetMapping(value = "/list/{page}",
+				produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<StudyPageDTO> getList(@PathVariable("page") int page) {
+		
+		StudyCriteria scri = new StudyCriteria(page,10);
+		
+		log.info("study cri"+scri);
+		
+		return new ResponseEntity<>(service.getListPage(scri), HttpStatus.OK);
 	}
+	
 	
 }

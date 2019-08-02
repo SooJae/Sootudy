@@ -443,12 +443,6 @@ $(function(){
 		var replyForm = $("#replyForm");
 		var likeForm = $("#likeForm");
 	  
-// 		$("#reply").focusout(function(e) {
-// 			e.preventDefault();
-// 		    if (e.keyCode === 13) {
-// 		        $("#replyButton").click();
-// 		    }
-// 		});
 	 
 		
 		

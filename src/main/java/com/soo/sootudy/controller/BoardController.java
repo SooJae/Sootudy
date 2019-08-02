@@ -30,7 +30,6 @@ import com.soo.sootudy.domain.Criteria;
 import com.soo.sootudy.domain.PageDTO;
 import com.soo.sootudy.service.BoardService;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
