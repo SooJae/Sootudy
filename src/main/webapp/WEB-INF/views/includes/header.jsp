@@ -147,14 +147,10 @@ color:white;
 								  </sec:authorize>
 								  <sec:authorize access ="isAuthenticated()">
   					       <a class="dropdown-item btnc" href="#" data-oper="logout">로그아웃</a>
-											<%-- <form id="logout" action='<c:url value='/member/logout'/>' method="POST">
-											   <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>
-											</form> --%>
 								  </sec:authorize>
 					    </div>
 					  </li>
 					     </ul>
-					  <%-- <sec:authorize access="isAnonymous()"> --%>
 					  
 	        </ul>
 	      </div>
@@ -215,7 +211,7 @@ $(function(){
 	var resultFlag = '<c:out value="${result.flag}"/>';
 	var resultMsg = '<c:out value="${result.msg}"/>';
 	
-	
+	console.log("result..",result);
 	
 	
 	checkAlert(result);
