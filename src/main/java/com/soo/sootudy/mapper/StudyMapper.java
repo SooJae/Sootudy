@@ -14,4 +14,7 @@ public interface StudyMapper {
 
 	public int getTotal();
 
+
+	public StudyVO read(int sno);
+
 }

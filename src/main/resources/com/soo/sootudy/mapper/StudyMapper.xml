@@ -17,5 +17,10 @@
     LIMIT #{scri.pageStart}, #{scri.perPageNum}
 	</select>
 	
-
+  <select id="read" resultType="com.soo.sootudy.domain.StudyVO">
+  SELECT
+      *
+  FROM study
+  WHERE sno = #{sno}
+  </select>
 </mapper>

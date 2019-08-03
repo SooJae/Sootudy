@@ -73,7 +73,10 @@ public class MemberController {
 		log.info("logout:" + logout);
 		
 		if(error!=null) {
-			model.addAttribute("error","Login Error Check Your Account");
+			Map<String, Object> map = new HashMap<String,Object>();
+			map.put("flag","fail");
+			map.put("msg","아이디 혹은 비밀번호를 확인해 주세요");	
+			model.addAttribute("result",map);
 		}
 		
 		if(logout!=null) {

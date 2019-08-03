@@ -28,7 +28,13 @@ public class CustomUserDetailsService implements UserDetailsService {
 
 		log.warn("멤버 정보 가져오기 " + vo);
 
-		return vo == null ? null : new CustomUser(vo);
+		if(vo == null) {
+			throw new UsernameNotFoundException("아이디 또는 비밀번호가 틀립니다.");
+		}
+		else {
+			return new CustomUser(vo);
+		}
+//		return vo == null ? null : new CustomUser(vo);
 	} 
 
 }

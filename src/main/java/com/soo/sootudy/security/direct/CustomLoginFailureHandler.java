@@ -11,6 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
 
 	@Override
@@ -22,8 +25,10 @@ public class CustomLoginFailureHandler implements AuthenticationFailureHandler {
 		map.put("msg","아이디 혹은 비밀번호가 틀렸습니다");	
 		
 		request.setAttribute("result", map);
+		log.info("map"+map);
+		request.getRequestDispatcher("/member/login").forward(request, response);;
 
-		response.sendRedirect("/member/login");
+//		response.sendRedirect("/member/login");
 	}
 
 }

@@ -144,6 +144,7 @@ color:white;
 					      <div class="dropdown-divider"></div>
 					        <sec:authorize access ="isAnonymous()">
   					       <a class="dropdown-item btnc" href="#" data-oper="login">로그인</a>
+<!--   					       <button type="button" class="btn btnc btn-primary" data-oper="login"><i class="fas fa-pencil-alt"></i>&nbsp;글쓰기</button> -->
 								  </sec:authorize>
 								  <sec:authorize access ="isAuthenticated()">
   					       <a class="dropdown-item btnc" href="#" data-oper="logout">로그아웃</a>

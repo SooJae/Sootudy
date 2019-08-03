@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.soo.sootudy.domain.Criteria;
 import com.soo.sootudy.domain.StudyCriteria;
 import com.soo.sootudy.domain.StudyPageDTO;
 import com.soo.sootudy.domain.StudyVO;
@@ -30,13 +31,19 @@ public class StudyServiceImpl implements StudyService {
 		log.info("getList"+scri);
 		return studyMapper.getListWithPaging(scri);
 	}
+
+	@Override
+	public StudyVO get(int sno, Criteria scri) {
+		return studyMapper.read(sno);
+	}
+
+	@Override
+	public int getTotal(StudyCriteria cri) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
 	
 	
 
-//	@Override
-//	public int getTotal(StudyCriteria scri) {
-//		log.info("get Total on study"+scri);
-//		return studyMapper.getTotalCount();
-//	}
 
 }

@@ -1,8 +1,7 @@
 package com.soo.sootudy.domain;
 
-import org.springframework.web.util.UriComponentsBuilder;	
-
 import lombok.Data;
+import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -31,6 +30,7 @@ public class StudyCriteria {
 	public int getPageStart() {
 		return (this.page-1) * perPageNum;
 	}
+
 	
 //	public String getListLink() {
 //		UriComponentsBuilder builder = UriComponentsBuilder.fromPath("")

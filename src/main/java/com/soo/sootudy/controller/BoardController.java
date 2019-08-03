@@ -51,8 +51,6 @@ public class BoardController {
 		log.info("total:"+total);
 		log.info("키워드"+cri.getKeyword());
 		
-		
-		
 		model.addAttribute("pageMaker", new PageDTO(cri,total));
 		
 		return "/board/list";

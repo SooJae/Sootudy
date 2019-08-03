@@ -53,75 +53,13 @@
               </thead>
               <tbody class="study-body">
               
-          <c:forEach items="${list}" var="study">     
-                <tr>
-              <td>
-                     <a class="move" href='<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a> 
-                  <br/>
-                  <small>
-                      개설일 <fmt:formatDate pattern="YY-MM-dd" value="${board.udt_dt}"/>
-                  </small>
-              </td>
-              <td>
-                  3/10
-              </td>
-              <td class="project_progress">
-                  <div class="progress progress-sm">
-                      <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: 57%">
-                      </div>
-                  </div>
-                  <small>
-                      57% Complete
-                  </small>
-              </td>
-              <td class="project-actions text-right">
-                <a class="btn btn-info btn-sm" href="#">
-                    <i class="fas fa-pencil-alt">
-                    </i>
-                    Edit
-                </a>
-            </td>
-              </tr>
-              </c:forEach>
+              
               </tbody>
           </table>
           
-          <!-- navigation -->
-	<%-- 	<div class="row justify-content-between mt-3" >
-		  <div>
-		    <form id="bestForm">
-		      <input type="hidden" name="filter_mode" value="<c:out value="${pageMaker.cri.filter_mode}"/>"/>
-		      <c:choose>
-		        <c:when test="${pageMaker.cri.filter_mode ne 'best'}">
-		          <button type="button" class="btn btn-outline-danger" id="best" style="font-color:red"><i class="fas fa-sun"></i>인기글</button>
-		        </c:when>
-		        <c:otherwise>
-		          <button type="button" class="btn btn-danger" id="best" style="font-color:red"><i class="fas fa-sun"></i>인기글</button>
-		        </c:otherwise>
-		      </c:choose>
-		      
-		    </form>
-		  </div> --%>
-		<nav aria-label="...">
-		  <ul class="pagination">
-		    <c:if test="${pageMaker.prev}">
-		     <li class="page-item paginate_button previous"><a class="page-link" href="${pageMaker.startPage-1 }">&laquo;</a></li>
-		    </c:if>
-		
-		    <c:forEach var="num" begin="${pageMaker.startPage}" end="${pageMaker.endPage }" >
-		     <li class="page-item paginate_button ${pageMaker.cri.page == num ? 'active': '' }"><a class="page-link" href="${num}">${num}</a></li>
-		    </c:forEach>
-		
-		    <c:if test="${pageMaker.next}">
-		     <li class="page-item paginate_button"><a class="page-link" href="${pageMaker.endPage+1 }">&raquo;</a></li>
-		    </c:if>
-		 </ul>
-		</nav>
-		   <div>
-		    <button type="button" class="btn btn-primary" id="regBtn"><i class="fas fa-pencil-alt"></i>&nbsp;글쓰기</button>
-		   </div>
-		</div>
-<!-- ./navigation -->
+          <div class="study-bottom"></div>
+          <!-- pagenation -->
+          <div class="study-footer"></div>
           
         </div>
         <!-- /.card-body -->
@@ -278,63 +216,127 @@ $(document).ajaxSend(function(e, xhr, options){
   xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 }); 
 
+showStudyList(1);
 
-  $("#regBtn").on("click", function(){
-    self.location = "/board/register";
-  });
+function showStudyList(page){
+	studyService.getList(page||1, 
+      function(studyTotal, list){
+        if(page==-1){
+          page = Math.ceil(studyTotal/5.0);
+          showList(page);
+          return;
+        }
+      
+       var tbody="";
+        
+        if(list == null || list.length==0){
+        	studyTable.html("");
+          
+          return;
+        }
+        
+        for(var i = 0, len = list.length||0; i<len; i++){
+        	
+        	tbody +=`<tr>
+        	    <td>
+        	        <a href="`+ list[i].sno +`" class="move">
+        	            `+list[i].title+`
+        	        </a>
+        	        <br/>
+        	        <small>
+        	            개설일 `+studyService.displayTime(list[i].dt)+`
+        	        </small>
+        	    </td>
+        	    <td>
+        	        3/10
+        	    </td>
+        	    <td class="project_progress">
+        	        <div class="progress progress-sm">
+        	            <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: 57%">
+        	            </div>
+        	        </div>
+        	        <small>
+        	            57% Complete
+        	        </small>
+        	    </td>
+        	    <td class="project-actions text-right">
+                <a class="btn btn-info btn-sm" href="#">
+                    <i class="fas fa-pencil-alt">
+                    </i>
+                    Edit
+                </a>
+            </td>
+        	    </tr>`;
+        	
+        }
+        studyTable.html(tbody);
+        
+        showReplyPage(studyTotal);
+    }); // end function
+  }
   
-  var actionForm = $("#actionForm");
-  var bestForm = $("#bestForm");
   
-  $(".paginate_button a").on("click", function(e){
-   e.preventDefault();
-   actionForm.find("input[name='page']").val($(this).attr("href"));
-   actionForm.submit();
-  });
+var page = 1;
+var displayPageNum = 5;
+let studyPagenation= $(".study-footer");
+function showReplyPage(studyTotal){
   
-  $(".move").on("click", function(e){
-    
-    e.preventDefault();
-    actionForm.append("<input type='hidden' name='bno' value='"+ $(this).attr("href")+"'>");
-    actionForm.attr("action","/board/get");
-    actionForm.submit();
-  });
+  var endPage = Math.ceil(page / parseFloat(displayPageNum) ) * displayPageNum;
+  var startPage = (endPage - displayPageNum) +1;
   
-  $("#best").on("click", function(e){
-    e.preventDefault();
-    
-   // if(bestForm.find("input[value='best']")){
-   if(bestForm.find("input[name='filter_mode']").val()==""){
-      bestForm.find("input").attr("value","best");
-      $(this).attr("class","btn btn-danger");
-   }else{
-     bestForm.find("input").attr("value","");
-     $(this).attr("class","btn btn-outline-danger");
+   console.log("studyTotal"+studyTotal);
+  var realEnd = Math.ceil(studyTotal/10.0);
+  
+  if(realEnd < endPage ) {
+    endPage = realEnd;
+  }
+	 var prev = startPage > 1;
+	 var next = (endPage * 10) < studyTotal;
+  
+   var str = "<ul class='pagination justify-content-center'>";
+   
+   if(prev){
+     str+= "<li class='page-item'><a class='page-link' href='"+(startPage -1)+"'>&laquo;</a></li>";
    }
-    //}
-    //else{
-    //}
+   
+   for(var i = startPage ; i <= endPage; i++){
+
+     var active = page == i? "active":"";
+     
+     str+= "<li class='page-item "+active+" '><a class='page-link' href='"+i+"'>"+i+"</a></li>";
+   }
+   
+   if(next){
+     str+= "<li class='page-item'><a class='page-link' href='"+(endPage + 1)+"'>&raquo;</a></li>";
+   }
+   
+   str += "</ul></div>";
+   
+   console.log(str);
+   
+   studyPagenation.html(str);
+      
+}
+
+studyPagenation.on("click","li a", function(e){
+       e.preventDefault();
+       console.log("page click");
+       
+       var targetPage = $(this).attr("href");
+       
+       console.log("targetPageNum: " + targetPage);
+       
+       page = targetPage;
+       
+       showList(page);
+     });
+
+$(".move").on("click", function(e){
     
-    /* else if(bestForm.find("input[name='filter_mode']").val("best")){
-          console.log("메롱");
-     }  */
-   bestForm.submit();
-  });
-  var searchForm =$("#searchForm");
-  $("#searchForm button").on("click",function(e){
     e.preventDefault();
-    
-    if(!searchForm.find("option:selected").val()){
-      customAlert("fail","검색어 종류를 입력해주세요");
-//       alert("검색종류를 입력하세요");
-//       return false();
-    }
-    if(!searchForm.find("input[name='keyword']").val()){
-      customAlert("fail","키워드를 입력해주세요");
-    }
-    searchForm.find("input[name='page']").val("1");
-    searchForm.submit();
-    
+    actionForm.append("<input type='hidden' name='sno' value='"+ $(this).attr("href")+"'>");
+    actionForm.attr("action","/list/get");
+    actionForm.submit();
   });
 
 });

@@ -11,13 +11,13 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
 import org.springframework.security.web.authentication.rememberme.JdbcTokenRepositoryImpl;
 import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.csrf.CsrfFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 
-import com.soo.sootudy.security.direct.CustomLoginFailureHandler;
+import com.soo.sootudy.security.direct.CustomLoginSuccessHandler;
 import com.soo.sootudy.security.direct.CustomUserDetailsService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -34,6 +34,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 //	@Bean
 //	public AuthenticationFailureHandler authenticationFailureHandler() {
 //		return new CustomLoginFailureHandler();
+//	}
+	
+//	@Bean
+//	public AuthenticationSuccessHandler authenticationSuccessHandler() {
+//		return new CustomLoginSuccessHandler();
 //	}
 	
 	@Bean
@@ -55,16 +60,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		
 		
 		http.formLogin()
-		.loginPage("/member/login")
-		.loginProcessingUrl("/login");
-//		.failureHandler(authenticationFailureHandler());
+			.loginPage("/member/login")
+			.loginProcessingUrl("/login")
+			.failureUrl("/member/login?error=true");
+//			.successHandler(authenticationSuccessHandler())
+	//		.failureHandler(authenticationFailureHandler());
 		
 		
 		
 		http.logout()
-		.logoutUrl("/member/logout")
-		.invalidateHttpSession(true)
-		.deleteCookies("remember-me","JSESSION_ID");
+			.logoutUrl("/member/logout")
+			.invalidateHttpSession(true)
+			.deleteCookies("remember-me","JSESSION_ID")
+			.logoutSuccessUrl("/member/login?logout=true");
 		
 		http.rememberMe()
 			.key("SooJae")

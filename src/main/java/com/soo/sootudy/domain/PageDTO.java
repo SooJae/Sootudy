@@ -7,7 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 @Getter
 @ToString
 @Slf4j
-public class PageDTO {
+public class PageDTO{
  
 	private int startPage;
 	private int endPage;
@@ -15,6 +15,7 @@ public class PageDTO {
 	
 	private int total; //전체 데이터의 수 
 	private Criteria cri;
+	
 	
 	private int displayPageNum = 5;
 	
