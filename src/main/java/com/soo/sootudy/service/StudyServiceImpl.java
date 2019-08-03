@@ -19,29 +19,26 @@ public class StudyServiceImpl implements StudyService {
 
 	@Autowired
 	StudyMapper studyMapper;
-	
-	@Override
-	public StudyPageDTO getListPage(StudyCriteria scri) {
-		log.info("getListPage.."+scri);
-		return new StudyPageDTO(studyMapper.getTotal(), studyMapper.getListWithPaging(scri));
-	}
 
 	@Override
 	public List<StudyVO> getList(StudyCriteria scri) {
-		log.info("getList"+scri);
+		// TODO Auto-generated method stub
 		return studyMapper.getListWithPaging(scri);
 	}
 
 	@Override
 	public StudyVO get(int sno, Criteria scri) {
+		// TODO Auto-generated method stub
 		return studyMapper.read(sno);
 	}
 
 	@Override
-	public int getTotal(StudyCriteria cri) {
+	public int getTotal(StudyCriteria scri) {
 		// TODO Auto-generated method stub
-		return 0;
+		return studyMapper.getTotalCount(scri);
 	}
+	
+
 	
 	
 

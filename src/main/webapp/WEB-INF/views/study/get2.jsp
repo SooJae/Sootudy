@@ -191,10 +191,10 @@
 }
   </style>
 
-  <section class="board-list study-get t-full" style="width:90%">
+  <section class="board-list study-get m-full" style="width:90%">
 <!-- <section> -->
     <div class="wrapper row" style="margin:0;">
-      <div class="hold-transition sidebar-mini layout-fixed col-lg-3" style="padding:0;">
+      <div class="hold-transition sidebar-mini layout-fixed col-md-3" style="padding:0;">
         <!-- TO DO List -->
         <div class="card">
           <div class="card-header">
@@ -316,7 +316,7 @@
       </div>
 
 
-      <div class="col-lg-9">
+      <div class="col-md-9">
         <!--  breadcrumb -->
         <!-- <section class="container board-list m-full"> -->
         <div>

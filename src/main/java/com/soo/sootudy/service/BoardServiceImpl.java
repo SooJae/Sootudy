@@ -29,6 +29,19 @@ public class BoardServiceImpl implements BoardService {
 	@Autowired
 	private BoardLikeMapper likeMapper;
 	
+	@Override
+	public List<BoardVO> getList(Criteria cri) {
+		
+		return mapper.getListWithPaging(cri);
+	}
+
+	@Override
+	public int getTotal(Criteria cri) {
+		log.info("get total count");
+		return mapper.getTotalCount(cri);
+	}
+	
+	
 	@Transactional
 	@Override
 	public void register(BoardVO board) {
@@ -86,17 +99,6 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 
-	@Override
-	public List<BoardVO> getList(Criteria cri) {
-		
-		return mapper.getListWithPaging(cri);
-	}
-
-	@Override
-	public int getTotal(Criteria cri) {
-		log.info("get total count");
-		return mapper.getTotalCount(cri);
-	}
 
 	@Override
 	public List<BoardAttachVO> getAttachList(int bno) {

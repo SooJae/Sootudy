@@ -11,10 +11,10 @@ public interface StudyMapper {
 
 	public List<StudyVO> getListWithPaging(@Param("scri") StudyCriteria scri) ;
 
-
-	public int getTotal();
-
-
+	public int getTotalCount(StudyCriteria scri);
+	
 	public StudyVO read(int sno);
+	
+	public void insertSelectKey(StudyVO study);
 
 }
