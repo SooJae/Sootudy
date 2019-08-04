@@ -134,7 +134,7 @@
 <%@ include file="../includes/footer.jsp" %>
 
 <script type="text/javascript" src="/resources/dist/js/board_like.js"></script>
-<script type="text/javascript" src="/resources/dist/js/moment.min.js"></script>
+<!-- <script type="text/javascript" src="/resources/dist/js/moment.min.js"></script> -->
  
 
 <script>

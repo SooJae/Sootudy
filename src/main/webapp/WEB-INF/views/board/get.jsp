@@ -86,14 +86,14 @@ ul > li { list-style: none }
  	<div class="container board-detail getbody">
 <!-- 			<div class="row board-head in-visible row-no-padding"> -->
 			<div class="row board-detail-head pb-3 pt-3">
-				<div class="col-12 col-md-12"><h3>${board.title}</h3></div>
+				<div class="col-12 col-md-12"><h3><c:out value="${board.title}"/></h3></div>
 			</div>
 			<div class="row board-detail-headbt">
-				<div class="col-6 col-md-2" style="font-weigth:bold; text-alingh:left;"><i class="fas fa-user-circle"></i>${board.writer}</div>
+				<div class="col-6 col-md-2" style="font-weigth:bold; text-alingh:left;"><i class="fas fa-user-circle"></i><c:out value="${board.writer}"/></div>
 				<div class="col-6 col-md-4"><i class="far fa-clock"></i> <fmt:formatDate value="${board.udt_dt}" type="both" pattern="MM-dd hh:mm"/></div>
 				<div class="col-md-2"></div> 
-				<div class="col-9 col-md-2 " style="text-align:right"><i class="far fa-eye"></i> ${board.v_cnt}</div>
-				<div class="col-3 col-md-2"><i class="fas fa-fire"></i>${board.like_cnt}</div>
+				<div class="col-9 col-md-2 " style="text-align:right"><i class="far fa-eye"></i><c:out value="${board.v_cnt}"/></div>
+				<div class="col-3 col-md-2"><i class="fas fa-fire"></i><c:out value="${board.like_cnt}"/></div>
 			</div>
 			<div class="row board-detail-body" style="min-height:300px;">
 				<div class="board-content">

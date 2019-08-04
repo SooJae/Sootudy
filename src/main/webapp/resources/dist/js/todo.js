@@ -1,6 +1,26 @@
-console.log("study module...");
+console.log("todo module...");
 //
-var studyService=(function(){
+var todoService=(function(){
+	
+	function check(tdno, callback, error){
+
+		$.ajax({
+			type:'put',
+			url :'/replies/'+reply.rno,
+			data:JSON.stringify(reply),
+			contentType:"application/json; charset=utf-8",
+			success : function(result,status,xhr){
+				if(callback){
+					callback(result);
+				}
+			},
+			error : function(xhr,status,err){
+				if(error){
+					error(err);
+				}
+			}
+		});
+	}
 	
 	function add(reply,callback,error){
 	console.log("add......");
@@ -107,6 +127,7 @@ var studyService=(function(){
 				( dd > 9 ? '' : '0') + dd ].join('');
 	}
 return{
+	check:check,
 	add: add,
 	getList:getList,
 	remove:remove,

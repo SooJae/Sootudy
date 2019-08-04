@@ -230,17 +230,8 @@ overflow-wrap: break-word;
 	padding:1%; 
 	display:none;
 }
-.study-get{
-  font-size:0.85rem;
-  padding:0;
-  
- }
-@media (max-width: 991.98px) { 
- 
-		.t-full{
-			width:100% !important;
-		}
-}
+
+
 
 
 @media (max-width: 767.98px) { 

@@ -8,188 +8,6 @@
 <%@ include file="../includes/header.jsp" %>
 
 
-  <style>
-    .todo-list {
-      list-style: none;
-      margin: 0;
-      overflow: auto;
-      padding: 0;
-    }
-
-    .todo-list>li {
-      border-radius: 2px;
-      background: #f8f9fa;
-      border-left: 2px solid #e9ecef;
-      color: #495057;
-      margin-bottom: 2px;
-      padding: 10px;
-    }
-
-    .todo-list>li:last-of-type {
-      margin-bottom: 0;
-    }
-
-    .todo-list>li>input[type='checkbox'] {
-      margin: 0 10px 0 5px;
-    }
-
-    .todo-list>li .text {
-      display: inline-block;
-      font-weight: 600;
-      margin-left: 5px;
-    }
-
-    .todo-list>li .badge {
-      font-size: .7rem;
-      margin-left: 10px;
-    }
-
-    .todo-list>li .tools {
-      color: #dc3545;
-      display: none;
-      float: right;
-    }
-
-    .todo-list>li .tools>.fa,
-    .todo-list>li .tools>.fas,
-    .todo-list>li .tools>.far,
-    .todo-list>li .tools>.fab,
-    .todo-list>li .tools>.glyphicon,
-    .todo-list>li .tools>.ion {
-      cursor: pointer;
-      margin-right: 5px;
-    }
-
-    .todo-list>li:hover .tools {
-      display: inline-block;
-    }
-
-    .todo-list>li.done {
-      color: #697582;
-    }
-
-    .todo-list>li.done .text {
-      font-weight: 500;
-      text-decoration: line-through;
-    }
-
-    .todo-list>li.done .badge {
-      background: #adb5bd !important;
-    }
-
-    .todo-list .primary {
-      border-left-color: #007bff;
-    }
-
-    .todo-list .secondary {
-      border-left-color: #6c757d;
-    }
-
-    .todo-list .success {
-      border-left-color: #28a745;
-    }
-
-    .todo-list .info {
-      border-left-color: #17a2b8;
-    }
-
-    .todo-list .warning {
-      border-left-color: #ffc107;
-    }
-
-    .todo-list .danger {
-      border-left-color: #dc3545;
-    }
-
-    .todo-list .light {
-      border-left-color: #f8f9fa;
-    }
-
-    .todo-list .dark {
-      border-left-color: #343a40;
-    }
-
-    .todo-list .navy {
-      border-left-color: #001f3f;
-    }
-
-    .todo-list .olive {
-      border-left-color: #3d9970;
-    }
-
-    .todo-list .lime {
-      border-left-color: #01ff70;
-    }
-
-    .todo-list .fuchsia {
-      border-left-color: #f012be;
-    }
-
-    .todo-list .maroon {
-      border-left-color: #d81b60;
-    }
-
-    .todo-list .blue {
-      border-left-color: #007bff;
-    }
-
-    .todo-list .indigo {
-      border-left-color: #6610f2;
-    }
-
-    .todo-list .purple {
-      border-left-color: #6f42c1;
-    }
-
-    .todo-list .pink {
-      border-left-color: #e83e8c;
-    }
-
-    .todo-list .red {
-      border-left-color: #dc3545;
-    }
-
-    .todo-list .orange {
-      border-left-color: #fd7e14;
-    }
-
-    .todo-list .yellow {
-      border-left-color: #ffc107;
-    }
-
-    .todo-list .green {
-      border-left-color: #28a745;
-    }
-
-    .todo-list .teal {
-      border-left-color: #20c997;
-    }
-
-    .todo-list .cyan {
-      border-left-color: #17a2b8;
-    }
-
-    .todo-list .white {
-      border-left-color: #ffffff;
-    }
-
-    .todo-list .gray {
-      border-left-color: #6c757d;
-    }
-
-    .todo-list .gray-dark {
-      border-left-color: #343a40;
-    }
-
-    .todo-list .handle {
-      cursor: move;
-      display: inline-block;
-      margin: 0 5px;
-    }
-*{
-  font-family:'Sans-serif';
-}
-  </style>
 
   <section class="board-list study-get t-full" style="width:90%">
 <!-- <section> -->
@@ -216,24 +34,9 @@
           <!-- /.card-header -->
           <div class="card-body">
             <ul class="todo-list" data-widget="todo-list">
-              <li>
-                <!-- checkbox -->
-                <div class="icheck-primary d-inline ml-2">
-                  <input type="checkbox" value="" name="todo" id="todoCheck1">
-                  <label for="todoCheck1"></label>
-                </div>
 
 
                 <!-- todo text -->
-                <span class="text">자바 공부</span>
-                <!-- Emphasis label -->
-                <small class="badge badge-danger"><i class="far fa-clock"></i> 2 mins</small>
-                <!-- General tools such as edit or delete-->
-                <div class="tools">
-                  <i class="fas fa-edit"></i>
-                  <i class="fas fa-trash-o"></i>
-                </div>
-              </li>
               <li>
                 <div class="custom-control custom-checkbox d-inline ml-2">
                   <input type="checkbox" class="custom-control-input" name="todo" id="customCheck" value="안녕" disabled>
@@ -273,30 +76,6 @@
                   <i class="fas fa-trash-o"></i>
                 </div>
               </li>
-              <li>
-                <div class="icheck-primary d-inline ml-2">
-                  <input type="checkbox" value="" name="todo5" id="todoCheck5">
-                  <label for="todoCheck5"></label>
-                </div>
-                <span class="text">Check your messages and notifications</span>
-                <small class="badge badge-primary"><i class="far fa-clock"></i> 1 week</small>
-                <div class="tools">
-                  <i class="fas fa-edit"></i>
-                  <i class="fas fa-trash-o"></i>
-                </div>
-              </li>
-              <li>
-                <div class="icheck-primary d-inline ml-2">
-                  <input type="checkbox" value="" name="todo6" id="todoCheck6">
-                  <label for="todoCheck6"></label>
-                </div>
-                <span class="text">Let theme shine like a star</span>
-                <small class="badge badge-secondary"><i class="far fa-clock"></i> 1 month</small>
-                <div class="tools">
-                  <i class="fas fa-edit"></i>
-                  <i class="fas fa-trash-o"></i>
-                </div>
-              </li>
             </ul>
           </div>
           <!-- /.card-body -->
@@ -316,34 +95,120 @@
       </div>
 
 
-      <div class="col-lg-9">
-        <!--  breadcrumb -->
-        <!-- <section class="container board-list m-full"> -->
-        <div>
-          <div class="row mb-2">
-            <div class="col-sm-6">
-              <h1>게시판</h1>
-            </div>
-            <div class="col-sm-6">
-              <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">홈</a></li>
-                <li class="breadcrumb-item active">스터디</li>
-              </ol>
-            </div>
-          </div>
-        </div>
-
-        <!--  -->
-
-
-
-
+      <div class="col-lg-9 custom-chat">
 
         <!-- Main content -->
-        <div class="content">
+        <div class="content t-full">
+        
+           <!-- DIRECT CHAT -->
+            <div class="card direct-chat direct-chat-primary">
+              <div class="card-header">
+                <h3 class="card-title"><i class="fas fa-comments"></i> 스터디 챗</h3>
+
+                <div class="card-tools">
+                  <span data-toggle="tooltip" title="3 New Messages" class="badge badge-primary">3</span>
+                  <button type="button" class="btn btn-tool" data-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Contacts"
+                          data-widget="chat-pane-toggle">
+                    <i class="fas fa-comments"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body">
+                <!-- Conversations are loaded here -->
+                <div class="direct-chat-messages">
+                  <!-- Message. Default to the left -->
+                  <div class="direct-chat-msg">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-left">Alexander Pierce</span>
+                      <span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    
+                    <!-- <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"> -->
+                    
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                      Is this template really for free? That's unbelievable!
+                    </div>
+                    <!-- /.direct-chat-text -->
+                  </div>
+                  <!-- /.direct-chat-msg -->
+
+                  <!-- Message to the right -->
+                  <div class="direct-chat-msg right">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-right">Sarah Bullock</span>
+                      <span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    <!-- <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"> -->
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                      You better believe it!
+                    </div>
+                    <!-- /.direct-chat-text -->
+                  </div>
+                  <!-- /.direct-chat-msg -->
+
+                  <!-- Message. Default to the left -->
+                  <div class="direct-chat-msg">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-left">Alexander Pierce</span>
+                      <span class="direct-chat-timestamp float-right">23 Jan 5:37 pm</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    <!-- <img class="direct-chat-img" src="dist/img/user1-128x128.jpg" alt="message user image"> -->
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                      Working with AdminLTE on a great new app! Wanna join?
+                    </div>
+                    <!-- /.direct-chat-text -->
+                  </div>
+                  <!-- /.direct-chat-msg -->
+
+                  <!-- Message to the right -->
+                  <div class="direct-chat-msg right">
+                    <div class="direct-chat-infos clearfix">
+                      <span class="direct-chat-name float-right">Sarah Bullock</span>
+                      <span class="direct-chat-timestamp float-left">23 Jan 6:10 pm</span>
+                    </div>
+                    <!-- /.direct-chat-infos -->
+                    <!-- <img class="direct-chat-img" src="dist/img/user3-128x128.jpg" alt="message user image"> -->
+                    <!-- /.direct-chat-img -->
+                    <div class="direct-chat-text">
+                      I would love to.
+                    </div>
+                    <!-- /.direct-chat-text -->
+                  </div>
+                  <!-- /.direct-chat-msg -->
+
+                </div>
+                <!--/.direct-chat-messages-->
+
+          
+              </div>
+              <!-- /.card-body -->
+              <div class="card-footer">
+                <form action="#" method="post">
+                  <div class="input-group">
+                    <input type="text" name="message" placeholder="Type Message ..." class="form-control">
+                    <span class="input-group-append">
+                      <button type="button" class="btn btn-primary">Send</button>
+                    </span>
+                  </div>
+                </form>
+              </div>
+        
+
 
           <!-- Default box -->
-          <div class="card">
+          <!-- <div class="card">
             <div class="card-body table-responsive-md p-0">
               <table class="table table-striped projects">
                 <thead>
@@ -489,10 +354,10 @@
                 </tbody>
               </table>
             </div>
-            <!-- /.card-body -->
+            /.card-body
           </div>
-          <!-- /.card -->
-
+          /.card
+ -->
 
           <!-- /.content -->
 
@@ -500,18 +365,55 @@
       </div>
 
       <script>
+      
+      var tdno ='<c:out value="${study.tdno}"/>';
+      var sno ='<c:out value="${study.sno}"/>';
+      
+      console.log("tdno", tdno,"sno", sno);
         $(function () {
 
+        	for(int i =0; i<4; i++){
+        	 $(".todo-list").append(`
+                     <li>
+                         <div class="custom-control custom-checkbox d-inline ml-2">
+                           <input type="checkbox" class="custom-control-input" name="todo" id="customCheck4" value="안녕" disabled>
+                           <label class="custom-control-label" for="customCheck4"></label>
+                         </div>
+
+                         <span class="text">Make the theme responsive</span>
+                         <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
+                         <div class="tools">
+                           <i class="fas fa-edit"></i>
+                           <i class="fas fa-trash-o"></i>
+                         </div>
+                       </li>
+                    `);
+        	}
+        	
+        	
+        	var todo = {
+        			  	sno:sno,
+        			  	tdno:tdno,
+        			  	todo:todo,
+        			  	achivement:achivement,
+        			};	
+        	
+        	
+            var todoCheck = {
+                    tdno:tdno,
+                    sno:sno,
+                };  
+        	
+        	
           $("input:checkbox[name='todo']").on("click", function (e) {
 
             if ($(this).is(":checked")) {
               $(this).prop("checked", true);
               $(this).parent().parent().attr("class", "done");
-              console.log(this.value);
+              $(this)
             } else {
               $(this).prop("checked", false);
               $(this).parent().parent().removeAttr("class");
-              console.log("꽝", this.value);
             }
             // $(this).attr("checked",true);
 
@@ -539,18 +441,7 @@
             }
           });
 
-          $(".todo-list").append(` <li>
-                            <div  class="icheck-primary d-inline ml-2">
-                              <input type="checkbox" value="" name="todo2" id="todoCheck2" checked>
-                              <label for="todoCheck2"></label>
-                            </div>
-                            <span class="text">Make the theme responsive</span>
-                            <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
-                            <div class="tools">
-                              <i class="fas fa-edit"></i>
-                              <i class="fas fa-trash-o"></i>
-                            </div>
-                          </li>`);
+         
 
 
         });

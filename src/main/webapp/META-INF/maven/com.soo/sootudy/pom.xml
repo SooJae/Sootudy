@@ -266,6 +266,8 @@
 			<scope>runtime</scope>
 		</dependency> -->
 
+
+
 				
 		<!-- Servlet -->
 		<!-- 기존 것을 삭제한다. -->
@@ -289,8 +291,31 @@
 			<version>1.2</version>
 		</dependency>
 	
+	<!-- https://mvnrepository.com/artifact/org.springframework/spring-websocket -->
+		<dependency>
+		    <groupId>org.springframework</groupId>
+		    <artifactId>spring-websocket</artifactId>
+		    <version>${org.springframework-version}</version>
+		</dependency>
 	
-	
+    
+<!-- WebSocketConfigurer설정에 필요-->
+		<dependency>
+		    <groupId>javax.websocket</groupId>
+		    <artifactId>javax.websocket-api</artifactId>
+		    <version>1.1</version>
+		    <scope>provided</scope>
+		</dependency>
+		
+		<!-- https://mvnrepository.com/artifact/org.webjars/sockjs-client -->
+    <dependency>
+        <groupId>org.webjars</groupId>
+        <artifactId>sockjs-client</artifactId>
+        <version>1.1.2</version>
+    </dependency>
+
+    
+  	
 		<!-- Test -->
 		<dependency>
 			<groupId>junit</groupId>
