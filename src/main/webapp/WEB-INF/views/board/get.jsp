@@ -347,7 +347,7 @@ $(function(){
 					showList(page);
 					return;
 				}
-			
+			console.log(list);
 			var str="";
 				
 				if(list ==null || list.length==0){

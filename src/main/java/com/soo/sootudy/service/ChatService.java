@@ -6,10 +6,10 @@ import com.soo.sootudy.domain.ChatRoomDTO;
 
 public interface ChatService {
 
-	public List<ChatRoomDTO> findAllRoom() ;
+	public List<ChatRoomDTO> getList();
 	 
-    public ChatRoomDTO findRoomById(String id) ;
+    public ChatRoomDTO findRoomById(String id);
  
-    public ChatRoomDTO createChatRoom(String name) ;
+    public int createChatRoom(String name);
 	
 }

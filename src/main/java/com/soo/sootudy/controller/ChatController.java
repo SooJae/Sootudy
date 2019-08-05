@@ -6,9 +6,11 @@ import org.springframework.stereotype.Controller;
 
 import com.soo.sootudy.domain.ChatVO;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 @Controller
+//@RequiredArgsConstructor
 @Slf4j
 public class ChatController {
 	
