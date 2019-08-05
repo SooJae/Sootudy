@@ -1,10 +1,10 @@
 package com.soo.sootudy.controller;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
+import org.springframework.messaging.handler.annotation.MessageMapping;
+import org.springframework.messaging.simp.SimpMessageSendingOperations;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.servlet.ModelAndView;
+
+import com.soo.sootudy.domain.ChatVO;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -12,21 +12,16 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ChatController {
 	
-	@GetMapping(value = "/chatrooms")
-	public ModelAndView chat(ModelAndView mv) {
-		mv.setViewName("/chatrooms");
-		
-		//사용자 정보 출력(세션)//
-		User user = (User) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		System.out.println("user name :" + user.getUsername());
-				
-		System.out.println("normal chat page");
-		
-		mv.addObject("userid", user.getUsername());
-		
-		return mv;
-	}
-
+	
+	private SimpMessageSendingOperations messagingTemplate;
+	 
+    @MessageMapping("/chat/message")
+    public void message(ChatVO message) {
+        if (ChatVO.MessageType.JOIN.equals(message.getType()))
+            message.setMessage(message.getSender() + "님이 입장하셨습니다.");
+        messagingTemplate.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
+    }
+	
 
 }
 

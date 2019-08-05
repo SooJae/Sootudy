@@ -4,7 +4,13 @@ import lombok.Data;
 
 @Data
 public class ChatVO {
-	private String name;
+	//메시지 타입 : 입장, 채팅
+	public enum MessageType{
+		JOIN, TALK
+	}
+	private MessageType type; //메세지 타입
+	private String RoomId; //방번호
+	private String sender;
 	private String message;
 	
 }
