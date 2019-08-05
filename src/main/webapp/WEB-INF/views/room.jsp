@@ -6,121 +6,95 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
 <!-- <script type="text/javascript" src="/resources/dist/js/webSocket.js"></script> -->
 
-<div class="container" id="app">
-        <div>
-            <h2>채팅방 리스트</h2>
+  <body>
+    <div class="container" id="app">
+        <div class="row">
+            <div class="col-md-12">
+                <h3>채팅방 리스트</h3>
+            </div>
         </div>
         <div class="input-group">
             <div class="input-group-prepend">
-                <label class="input-group-text">내용</label>
+                <label class="input-group-text">방제목</label>
             </div>
-            <input type="text" class="form-control">
+            <input type="text" class="form-control" v-model="room_name" onkeydown = "if (event.keyCode == 13) createRoom()">
             <div class="input-group-append">
-                <button class="btn btn-primary" type="button" onclick="sendMessage();">보내기</button>
+                <button class="btn btn-primary" type="button" onclick="createRoom()">채팅방 개설</button>
             </div>
         </div>
         <ul class="list-group">
-            <li class="list-group-item" id="greetings">
-                {{message.sender}} - {{message.message}}
+            <li class="list-group-item list-group-item-action" onclick="enterRoom(item.roomId)">
+                {{item.name}}
             </li>
         </ul>
-        <div></div>
     </div>
     <!-- JavaScript -->
-    <script src="/webjars/vue/2.5.16/dist/vue.min.js"></script>
-    <script src="/webjars/axios/0.17.1/dist/axios.min.js"></script>
-
+    
     <script>
-        //alert(document.title);
-        // websocket &amp; stomp initialize
-        var sock = new SockJS("/ws-stomp");
-        var ws = Stomp.over(sock);
-        var reconnect = 0;
-        // vue.js
-        
-         function sendMessage() {
-             ws.send("/pub/chat/message", {}, JSON.stringify({type:'TALK', roomId:this.roomId, sender:this.sender, message:this.message}));
-             this.message = '';
-            }
-        
-        
-         function showChat(chat) {
-        	    $("#greetings").append("<tr><td>" + chat.name + " : " + chat.message + "</td></tr>");
-        	  }
-        var vm = new Vue({
-            el: '#app',
-            data: {
-                roomId: '',
-                room: {},
-                sender: '',
-                message: '',
-                messages: []
-            },
-            created() {
-                this.roomId = localStorage.getItem('wschat.roomId');
-                this.sender = localStorage.getItem('wschat.sender');
-                this.findRoom();
-            },
-            methods: {
-                findRoom: function() {
-                    axios.get('/chat/room/'+this.roomId).then(response => { this.room = response.data; });
-                },
-               
-                recvMessage: function(recv) {
-                    this.messages.unshift({"type":recv.type,"sender":recv.type=='ENTER'?'[알림]':recv.sender,"message":recv.message})
-                }
-            }
-        });
- 
-        function connect() {
-            // pub/sub event
-            ws.connect({}, function(frame) {
-                ws.subscribe("/sub/chat/room/"+vm.$data.roomId, function(message) {
-                    var recv = JSON.parse(message.body);
-                    vm.recvMessage(recv);
+    
+    function findAllRoom(){
+    	$.getJSON("/chat/rooms",
+                function(data){
+                  if(callback){
+                    callback(this.chatrooms = data.data);
+                  }
+                }).fail(function(xhr,status,err){
+                  if(error){
+                    error();
+                  }
                 });
-                ws.send("/pub/chat/message", {}, JSON.stringify({type:'ENTER', roomId:vm.$data.roomId, sender:vm.$data.sender}));
-            }, function(error) {
-                if(reconnect++ <= 5) {
-                    setTimeout(function() {
-                        console.log("connection reconnect");
-                        sock = new SockJS("/ws-stomp");
-                        ws = Stomp.over(sock);
-                        connect();
-                    },10*1000);
-                }
-            });
+    	  }
+    
+    findAllRoom();
+    
+    function createRoom(){
+    	if("" === this.room_name) {
+            alert("방 제목을 입력해 주십시요.");
+            return;
         }
-        connect();
+    	else {
+            var params = new URLSearchParams();
+            params.append("name",this.room_name);
+            
+            $.ajax({
+                type:'post',
+                url:'/chat/room',
+                data:params,
+                contentType:"application/json; charset=utf-8",
+                success: function(data){
+                  if(callback){
+                	  alert(response.data.name+"방 개설에 성공하였습니다.")
+                      this.room_name = '';
+                      this.findAllRoom();
+                  }
+                },
+                error: function(xhr, status, err){
+                  if(error){
+                	  alert("채팅방 개설에 실패하였습니다.");
+                    error(err);
+                  } 
+                }
+              });
+            
+        }
+    }
+    
+    
+    function enterRoom(roomId) {
+        var sender = prompt('대화명을 입력해 주세요.');
+        if(sender != "") {
+            localStorage.setItem('wschat.sender',sender);
+            localStorage.setItem('wschat.roomId',roomId);
+            location.href="/chat/room/enter/"+roomId;
+        }
+    }
+    
+    
+    
     </script>
-<script>
-
-function connect() {
-	  var socket = new SockJS('/websocket');
-	  ws = Stomp.over(socket);
-	  ws.connect({}, function (frame) {
-	    // ...
-
-	    /* 이 부분 추가 */
-	    ws.subscribe('/topic/chat', function (chat) {
-	      showChat(JSON.parse(chat.body));
-	    });
-	  });
-	}
-
-	// ... 중략 ...
-
-	/* Chat과 관련된 메서드 추가 */
-	function sendChat() {
-		ws.send("/app/chat", {}, JSON.stringify({'name': $("#name").val(), 'message': $("#chatMessage").val()}));
-	}
+  </body>
+</html>
 
 
-	$(function () {
-	  // ...
-	  
-	  $( "#chatSend" ).click(function(){ sendChat(); }); // 추가
-	});
-</script>
 
 <%@ include file="includes/footer.jsp" %>
