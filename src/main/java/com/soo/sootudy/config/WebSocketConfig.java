@@ -15,7 +15,6 @@ import com.soo.sootudy.websocket.ChatHandler;
 @EnableWebSocket
 public class WebSocketConfig implements WebSocketConfigurer {
 
-	
 	@Bean
 	public ServletServerContainerFactoryBean configureWebSocketContainer() {
 		ServletServerContainerFactoryBean factory = new ServletServerContainerFactoryBean();
@@ -31,11 +30,11 @@ public class WebSocketConfig implements WebSocketConfigurer {
 		return new ChatHandler();
 	}
 	
-	
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
 		// TODO Auto-generated method stub
-		registry.addHandler(chatHandler(), "/echo").setAllowedOrigins("*").withSockJS();
+		// CORS : setAllowedOrigins("*")
+		registry.addHandler(chatHandler(), "/ws/chat").setAllowedOrigins("*").withSockJS();
 //		registry.addHandler(chatHandler(), "/ws").setAllowedOrigins("*").withSockJS();
 	}
 }
