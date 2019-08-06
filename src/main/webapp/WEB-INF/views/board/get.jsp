@@ -208,32 +208,12 @@ ul > li { list-style: none }
 			                </c:otherwise>
                		</c:choose>
                  </sec:authorize>
-				        <ul class="chat">
-				
-				        </ul>
+				        <ul class="chat"></ul>
 				        <!-- ./ end ul -->
                 
-                
-<!--                  <ul class="chat">
-                 	<li class="left clearfix" data-rno="12">
-	                 	<div>
-	                 		<div class="header">
-	                 			<strong class="primary-font">user00</strong>
-	                 			<small class="pull-right text-muted">2019-01-01 13: 13</small>
-	                 		</div>
-	                 		<p>Good Job!</p>
-	                 	</div>
-                 	</li>
-                 </ul> -->
-                 
-                 
-					
 					<div class="card-footer2"></div>
 			</div>
               <!-- /.card-body -->
-				
-						
-						
 
             </div>
             <!-- /.card -->
@@ -382,14 +362,13 @@ $(function(){
 	/* 	 var prev = startPage != 1;
 	     var next = false; */
 	      
-	     console.log("replyCntreplyCnt"+replyCnt);
 	     var realEnd = Math.ceil(replyCnt/10.0);
 	     
 	     if(realEnd < endPage ) {
 	    	 endPage = realEnd;
 	     }
 	    var prev = startPage > 1;
-		var next = (endPage * 10) < replyCnt;
+	    var next = (endPage * 10) < replyCnt;
 	     
 	    /*  
 	    if(endPage * displayPageNum >= replyCnt){
@@ -397,9 +376,8 @@ $(function(){
 	      }
 	      if(endPage * displayPageNum < replyCnt){
       	    next = true;
-	      }  
-	      
-	     */
+	      } */
+	     
 	      var str = "<ul class='pagination justify-content-center'>";
 	      
 	      if(prev){
@@ -505,39 +483,33 @@ $(function(){
 	  }); 
 	   
 	   $(".chat").on("click",".replyDelete",function(e){
-		   e.preventDefault();
-		   var rno = $(this).parent().parent().parent().parent().data("rno");
-		   var replyer = $(this).parent().parent().find(".primary-font").text();
-		   
-
-		   
-		   console.log("RNO:"+rno);
-		   console.log("Replyer:"+replyer);
-		   
-		   if(!replyer){
-			   customAlert("fail","로그인 후 삭제가 가능합니다");
-				return;
-		   }
-		   
-		   var originalReplyer=null;
-		   
- 			<sec:authorize access="isAuthenticated()">
-			originalReplyer = '<sec:authentication property="principal.username"/>';
-			</sec:authorize> 
+			   e.preventDefault();
+			   var rno = $(this).parent().parent().parent().parent().data("rno");
+			   var replyer = $(this).parent().parent().find(".primary-font").text();
+			   
+			   if(!replyer){
+				   customAlert("fail","로그인 후 삭제가 가능합니다");
+					return;
+			   }
+			   
+			   var originalReplyer=null;
+			   
+		 			<sec:authorize access="isAuthenticated()">
+					 originalReplyer = '<sec:authentication property="principal.username"/>';
+					</sec:authorize> 
+				
+				
+					if(replyer != originalReplyer){
+						customAlert("fail","해당 댓글을 작성한 사용자가 아닙니다");
+						return;
+					}
 			
-			
-			if(replyer != originalReplyer){
-				customAlert("fail","해당 댓글을 작성한 사용자가 아닙니다");
-				return;
-			}
-			
-		   replyService.remove(rno, originalReplyer, function(result){
+				   replyService.remove(rno, originalReplyer, function(result){
 			  
-				/* alert(result); */
-				showList(page);
-		   });
+		    	 showList(page);
+				  });
 		   
-	   });
+		    });
 	   
 	   (function(){
 		   var bno = '<c:out value="${board.bno}"/>';
