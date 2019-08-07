@@ -41,19 +41,9 @@
         var ws = Stomp.over(sock);
         var reconnect = 0;
 
-        getRoomDetail();
+//         getRoomDetail();
         
         
-           // pub/sub event
-//             ws.connect({}, function() {
-//             	ws.subscribe("/sub/chat/room/" + roomId, function(chat) {
-//                 	console.log('<li>안녕 난 이수재라고 해</li>');
-//                     var content = JSON.parse(chat.body);
-//                     chatBox.append('<li>' + content.message + '(' + content.sender + ')</li>');
-//                 });
-//             	  ws.send("/pub/chat/join", {}, JSON.stringify({roomId: roomId, type:'JOIN', sender:sender}));
-//            });
-           
           function connect() {
            // pub/sub event
             ws.connect({}, function() {
@@ -76,24 +66,18 @@
         }  
           connect();
         
-        function getRoomDetail(){
-        	  $.getJSON("/chat/room/"+roomId,
-        	            function(data){
-        	              let obj ={"roomId": data.roomId, "name": data.name};
-        	              console.log("obj"+data.roomId+"name"+data.name);
-        	  }).fail(function(xhr,status,err){
-        	              if(err){
-        	                console.log(err);
-        	              }
-        	            });
-        	  }
+//         function getRoomDetail(){
+//         	  $.getJSON("/chat/room/"+roomId,
+//         	            function(data){
+//         	              let obj ={"roomId": data.roomId, "name": data.name};
+//         	              console.log("obj"+data.roomId+"name"+data.name);
+//         	  }).fail(function(xhr,status,err){
+//         	              if(err){
+//         	                console.log(err);
+//         	              }
+//         	            });
+//         	  }
         
-//       sendBtn.click(function () {
-//         	//alert("메세지.body",message.body);
-//             var message = messageInput.val();
-//             ws.send('/pub/chat/message', {}, JSON.stringify({roomId: roomId, type: 'CHAT', message: message, sender: sender}));
-//             messageInput.val('');
-//         });
       
       function recvMessage(recv){
     	  var messages =[];

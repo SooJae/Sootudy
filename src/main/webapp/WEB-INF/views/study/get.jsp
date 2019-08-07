@@ -363,7 +363,7 @@
 
         </div>
       </div>
-
+</div>
       <script>
       
       var tdno ='<c:out value="${study.tdno}"/>';

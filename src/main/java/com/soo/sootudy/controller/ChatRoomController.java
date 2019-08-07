@@ -68,8 +68,8 @@ public class ChatRoomController {
     @GetMapping("/room/enter/{roomId}")
     public String roomDetail(@PathVariable String roomId, Model model) {
     	log.info("join room"+roomId);
-    	model.addAttribute("roomId", roomId);
-        return "/chat/roomdetail";
+    	model.addAttribute("room", service.getRoomInfo(roomId));
+        return "/chat/detail";
     }
     // 참가한 채팅방 정보 조회
     @GetMapping("/room/{roomId}")
