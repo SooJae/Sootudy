@@ -11,13 +11,13 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class[] { RootConfig.class, SecurityConfig.class};
+		return new Class[] { RootConfig.class, SecurityConfig.class, WebSocketConfig.class};
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
 
-		return new Class[] { ServletConfig.class, WebSocketConfig.class  };
+		return new Class[] { ServletConfig.class  };
 	}
 
 	@Override

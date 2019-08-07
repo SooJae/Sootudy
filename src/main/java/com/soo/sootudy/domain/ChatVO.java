@@ -6,10 +6,10 @@ import lombok.Data;
 public class ChatVO {
 	//메시지 타입 : 입장, 채팅
 	public enum MessageType{
-		JOIN, CHAT
+		JOIN, CHAT, LEAVE
 	}
 	private MessageType type; //메세지 타입
-	private String RoomId; //방번호
+	private String roomId; //방번호
 	private String sender;
 	private String message;
 	

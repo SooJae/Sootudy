@@ -36,97 +36,68 @@ $(function(){
 	    }); 
 	    
 	    
-	 
-	    /* function showList(page){
-	        chatService.getList(function(replyCnt, list){
-	            
-	            if(page==-1){
-	              page = Math.ceil(replyCnt/5.0);
-	              showList(page);
-	              return;
-	            }
-	          
-	          var str="";
-	            
-	            if(list ==null || list.length==0){
-	              replyUL.html("");
-	              
-	              return;
-	            }
-	            
-	            for(var i = 0, len = list.length||0; i<len; i++){
-	              str+="<li class='left clearfix' data-rno='"+list[i].rno+"' style='border-bottom:1px solid gray; margin-top:20px; margin-left: <c:out value='"+${20*list[i].replyDepth}+"'/>px;'>";
-	              str+="<div><div class='header'><strong class='primary-font'>"+list[i].replyer+"</strong>";
-	              str+="<small class='pull-right text-muted'> &nbsp;"+replyService.displayTime(list[i].reply_udt_dt)+"</small>";
-	              str+="<sec:authentication property='principal' var='pinfo'/><sec:authorize access='isAuthenticated()'><c:if test='${pinfo.username eq board.writer}'>";
-	              str+="<a href='#'><small class='pull-right text-muted replyDelete'>&nbsp; 삭제</small></a></div></c:if></sec:authorize>";
-	              str+="<p>"+list[i].reply+"</p></div></li>";
-	            }
-	            replyUL.html(str);
-	            
-	            showReplyPage(replyCnt);
-	        }); // end function
-	      } */
 	    showList();
 	    
-	    
-	    function showList(){
-	      $.getJSON("/chat/rooms.json",
-	                function(data){
-	                  var html="";
-	                  $.each(data, function(index, value) {
-	                     html+="<a href='#'><li class='list-group-item list-group-item-action chatList-li'";
-	                     html+=" data-cno='"+value.roomId+"'>"+value.name+"</li></a>";
-	                  });
-	                  $("#chatList-ul").html(html);
-	      }).fail(function(xhr,status,err){
-	                  if(err){
-	                    console.log(err);
-	                  }
-	                });
-	        }
-	    
+
 	    $("#chatList-ul").on("click",".chatList-li",function(e){
-	         e.preventDefault();
-	         var roomId =$(this).data("cno");  
-	       
-	         enterRoom(roomId);
-	        });
-	    
-	    
+	        e.preventDefault();
+	        var roomId =$(this).data("cno");  
 	      
-	    var room_name = $("input[name='room_name']");
-	    function createRoom(){
-	      console.log("챗안녕");
-	      if("" === room_name.val()) {
-	            alert("방 제목을 입력해 주십시요.");
-	            return;
-	        }
-	      else {
-	          chatService.add(room_name.val(),
-	              function(result){
-	              alert(room_name.val()+"방 개설에 성공하였습니다.");
-	              room_name.val("");
-	              showList();
-	          },
-	          function(){
-	            alert("채팅방 개설에 실패하였습니다.");
-	          });
-	      }
-	    }
+	        enterRoom(roomId);
+	       });
 	    
 	    function enterRoom(roomId) {
 	        var sender = prompt('대화명을 입력해 주세요.');
 	        if(sender != "") {
-	            localStorage.setItem('wschat.sender',sender);
-	            localStorage.setItem('wschat.roomId',roomId);
+	            localStorage.setItem('chatInfo.sender',sender);
+	            localStorage.setItem('chatInfo.roomId',roomId);
 	            location.href="/chat/room/enter/"+roomId;
 	        }
 	    }
+	    
+	     
 });
    
-    
-    
+
+
+var room_name = $("input[name='room_name']");
+
+function createRoom(){
+  console.log("챗안녕");
+  if("" === room_name.val()) {
+        alert("방 제목을 입력해 주십시요.");
+        return;
+    }
+  else {
+      chatService.add(room_name.val(),
+          function(result){
+          alert(room_name.val()+"방 개설에 성공하였습니다.");
+          room_name.val("");
+          showList();
+      },
+      function(){
+        alert("채팅방 개설에 실패하였습니다.");
+      });
+  }
+}
+ 
+
+
+function showList(){
+  $.getJSON("/chat/rooms.json",
+            function(data){
+              var html="";
+              $.each(data, function(index, value) {
+                 html+="<a href='#'><li class='list-group-item list-group-item-action chatList-li'";
+                 html+=" data-cno='"+value.roomId+"'>"+value.name+"</li></a>";
+              });
+              $("#chatList-ul").html(html);
+  }).fail(function(xhr,status,err){
+              if(err){
+                console.log(err);
+              }
+            });
+    }
     
     </script>
 

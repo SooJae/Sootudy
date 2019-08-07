@@ -8,7 +8,7 @@ public interface ChatService {
 
 	public List<ChatRoomDTO> getList();
 	 
-    public ChatRoomDTO findRoomById(String id);
+    public ChatRoomDTO getRoomInfo(String id);
  
     public int createChatRoom(String name);
 	

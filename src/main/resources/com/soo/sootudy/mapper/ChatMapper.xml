@@ -34,6 +34,13 @@
   FROM chat_rooms
   </select>
   
+  <select id="get" resultType="com.soo.sootudy.domain.ChatRoomDTO">
+  SELECT
+      *
+  FROM chat_rooms
+  WHERE roomId = #{roomId}
+  </select>
+  
   <insert id="insert">
     INSERT INTO chat_rooms
             ( roomId

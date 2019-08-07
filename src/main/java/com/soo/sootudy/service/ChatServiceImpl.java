@@ -25,7 +25,7 @@ public class ChatServiceImpl implements ChatService {
     }
   
     @Override
-    public ChatRoomDTO findRoomById(String id) {
+    public ChatRoomDTO getRoomInfo(String id) {
         return mapper.get(id);
     }
     
