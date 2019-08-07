@@ -11,5 +11,6 @@ public interface ChatService {
     public ChatRoomDTO getRoomInfo(String id);
  
     public int createChatRoom(String name);
+
 	
 }

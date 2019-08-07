@@ -184,7 +184,7 @@ public class BoardController {
 	}
 	
 	@ResponseBody
-	@PostMapping(value="/like")
+	@PostMapping("/like")
 	public ResponseEntity<String> upLike(
 			@RequestBody BoardLikeVO vo){
 		

@@ -1,6 +1,7 @@
 package com.soo.sootudy.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.soo.sootudy.domain.ChatRoomDTO;
+import com.soo.sootudy.domain.ChatVO;
 import com.soo.sootudy.service.ChatService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -78,7 +80,8 @@ public class ChatRoomController {
     	log.info("room get"+roomId);
         return service.getRoomInfo(roomId);
     }		
-	
+    
+
 
 }
 

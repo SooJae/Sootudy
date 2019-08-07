@@ -16,5 +16,6 @@ public interface StudyService {
 	public int getTotal(StudyCriteria scri);
 	
 
+//	public int changeCnt(ChatVO vo);
 	
 }

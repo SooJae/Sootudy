@@ -4,8 +4,10 @@ package com.soo.sootudy.service;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.soo.sootudy.domain.ChatRoomDTO;
+import com.soo.sootudy.domain.ChatVO;
 import com.soo.sootudy.mapper.ChatMapper;
 
 import lombok.AllArgsConstructor;
@@ -35,4 +37,5 @@ public class ChatServiceImpl implements ChatService {
     	ChatRoomDTO chatRoom = ChatRoomDTO.create(name);
     	return mapper.insert(chatRoom);
     }
+
 }

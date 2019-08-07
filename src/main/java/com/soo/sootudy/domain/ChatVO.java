@@ -12,5 +12,6 @@ public class ChatVO {
 	private String roomId; //방번호
 	private String sender;
 	private String message;
+	private int cnt;
 	
 }

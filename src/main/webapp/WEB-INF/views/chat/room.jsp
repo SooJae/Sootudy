@@ -6,7 +6,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
 <!-- <script type="text/javascript" src="/resources/dist/js/webSocket.js"></script> -->
 
-    <div class="container" id="app">
+    <div class="container" >
         <div class="row">
             <div class="col-md-12">
                 <h3>채팅방 리스트</h3>
@@ -47,12 +47,17 @@ $(function(){
 	       });
 	    
 	    function enterRoom(roomId) {
-	        var sender = prompt('대화명을 입력해 주세요.');
-	        if(sender != "") {
-	            localStorage.setItem('chatInfo.sender',sender);
-	            localStorage.setItem('chatInfo.roomId',roomId);
-	            location.href="/chat/room/enter/"+roomId;
-	        }
+	    	if(!sessionStorage.getItem('chatInfo.sender')){
+	    		var sender = prompt('대화명을 입력해 주세요.');
+	            if(sender != "") {
+	              sessionStorage.setItem('chatInfo.sender',sender);
+	              sessionStorage.setItem('chatInfo.roomId',roomId);
+                location.href="/chat/room/enter/"+roomId;
+	            }
+	    	} else {
+	    		location.href="/chat/room/enter/"+roomId;
+	    	}
+	        
 	    }
 	    
 	     

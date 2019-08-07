@@ -38,57 +38,47 @@ var chatService=(function(){
 		});
 	}
 	
-	function remove(rno, replyer, callback, error){
-		$.ajax({
-			type:'delete',
-			url:'/replies/'+rno,
-			data:JSON.stringify({rno:rno, replyer:replyer}),
-			contentType:"application/json; charset=utf-8",
-			success: function(deleteResult, status, xhr){
-				if(callback){
-					callback(deleteResult);
+	function cnt(room,callback,error){
+
+	$.ajax({
+		type:'post',
+		url:'/chat/room/cnt',
+//		data:JSON.stringify(room),
+		data:JSON.stringify(room),
+		contentType : "application/json; charset=utf-8",
+		success:function(result, status, xhr){
+			if(callback){
+				callback(result);
+			}
+		},
+		error : function(xhr, status, err){
+			if(error){
+				error(err);
 				}
-			},
-			error: function(xhr, status, err){
-				if(error){
-					error(err);
-				} 
 			}
 		});
 	}
 	
-	function update(reply, callback, error){
+	function getCnt(bno,callback, error){
 		
-		console.log("RNO: "+reply.rno);
-		
+
 		$.ajax({
-			type:'put',
-			url :'/replies/'+reply.rno,
-			data:JSON.stringify(reply),
+			type:'post',
+			url:'/chat/room/getCnt',
+			data:JSON.stringify({roomId:roomId}),
 			contentType:"application/json; charset=utf-8",
-			success : function(result,status,xhr){
+			//dataType:"text",
+			success:function(result, status, xhr){
 				if(callback){
 					callback(result);
 				}
 			},
-			error : function(xhr,status,err){
+			error : function(xhr, status, err){
 				if(error){
 					error(err);
+					}
 				}
-			}
-		});
-	}
-	
-	function get(rno, callback, error){
-		$.get("/replies/"+rno+".json",function(result){
-			if(callback){
-				callback(result);
-			}
-		}).fail(function(xhr,status,err){
-			if(error){
-				error();
-			}
-		});
+			});
 	}
 	
 	function displayTime(timeValue){
@@ -118,9 +108,8 @@ var chatService=(function(){
 return{
 	add: add,
 	getList:getList,
-	remove:remove,
-	update:update,
-	get:get,
+	cnt:cnt,
+	getCnt:getCnt,
 	displayTime : displayTime
 };
 })();

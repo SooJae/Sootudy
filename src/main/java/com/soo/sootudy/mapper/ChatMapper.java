@@ -12,4 +12,8 @@ public interface ChatMapper {
 
 	public List<ChatRoomDTO> getList();
 
+
+
+	public int updateCnt(String roomId, int cnt);
+
 }

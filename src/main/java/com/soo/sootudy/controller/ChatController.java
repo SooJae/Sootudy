@@ -33,6 +33,8 @@ public class ChatController {
         log.info("message..."+message);
         messagingTemplate.convertAndSend("/sub/chat/room/" + message.getRoomId(), message);
     }
+    
+    
 
 }
 

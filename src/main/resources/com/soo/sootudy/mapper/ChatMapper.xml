@@ -3,30 +3,6 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.soo.sootudy.mapper.ChatMapper">
-<!-- 
-	<select id="getTotalCount" resultType="int">
-	  SELECT COUNT(*)
-	  FROM study
-	</select>
-
-	<select id="getListWithPaging" resultType="com.soo.sootudy.domain.StudyVO">
-	 SELECT
-	     *
-	 FROM study
-	 WHERE
-	     delete_flag='0'
-	 <include refid="filter_mode"></include>
-	 ORDER BY sno DESC
-    LIMIT #{scri.pageStart}, #{scri.perPageNum}
-	</select>
-	
-	
-  <select id="read" resultType="com.soo.sootudy.domain.StudyVO">
-  SELECT
-      *
-  FROM study
-  WHERE sno = #{sno}
-  </select> -->
   
   <select id="getList" resultType="com.soo.sootudy.domain.ChatRoomDTO">
   SELECT
@@ -49,14 +25,11 @@
             , #{name} )
   </insert>
   
+  <update id="updateCnt">
   
-  <!-- <sql id="filter_mode">
-  <trim prefix="AND (" suffix=") " prefixOverrides="AND | OR">
-    <if test="filter_mode == 'joined'.toString()">
-      like_cnt &gt; 0
-    </if>
-  </trim>
-</sql> -->
-  
+  UPDATE chat_rooms
+  SET cnt = #{cnt}
+  WHERE roomId = #{roomId} 
+  </update>
   
 </mapper>

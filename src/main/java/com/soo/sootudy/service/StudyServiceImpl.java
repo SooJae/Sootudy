@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.soo.sootudy.domain.Criteria;
 import com.soo.sootudy.domain.StudyCriteria;
-import com.soo.sootudy.domain.StudyPageDTO;
 import com.soo.sootudy.domain.StudyVO;
 import com.soo.sootudy.mapper.StudyMapper;
 
@@ -39,6 +38,16 @@ public class StudyServiceImpl implements StudyService {
 	}
 	
 
+//	@Override
+//	@Transactional
+//	public int changeCnt(ChatVO vo) {
+//		String roomId = vo.getRoomId();
+//		if(mapper.get(roomId)==null) {
+//			return mapper.updateCnt(roomId, 1);
+//		}else {
+//			return mapper.updateCnt(roomId, -1);
+//		}
+//	}
 	
 	
 
