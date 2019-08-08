@@ -26,14 +26,10 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
+              
+              
                 <!-- Conversations are loaded here -->
-                <div class="direct-chat-messages chat-box">
-                  <!-- Message. Default to the left -->
-<!--                   <div class="direct-chat-msg"> </div> -->
-
-<!--                   <div class="direct-chat-msg right"> </div> -->
-                  <!-- /.direct-chat-msg -->
-                </div>
+                <div class="direct-chat-messages chat-box" id="app_chat_list" onscroll="chat_on_scroll()"> </div>
                 <!--/.direct-chat-messages-->
 
               </div>
@@ -88,6 +84,7 @@
             	ws.subscribe("/sub/chat/room/"+ss_roomId, function(chat) {
                     var recv = JSON.parse(chat.body);
                     recvMessage(recv);
+                    updated();
 
                 });
             	ws.send("/pub/chat/message", {}, JSON.stringify({roomId: ss_roomId, type:'JOIN', sender:ss_sender}));
@@ -105,15 +102,18 @@
           connect();
         
       var today = new Date();
+      
+      var maxScroll = $(".card-body").height();
       function recvMessage(recv){
     	  var messages =[];
 /*     	  messages.unshift({"type":recv.type,"sender":recv.type !='CHAT'?'[알림] - ':'',"message":recv.message}); */
     	  messages.unshift({"type":recv.type,"sender":recv.type !='CHAT'?'[알림] - ':'',"message":recv.message});
-
+    	  
     	  
           var date = (today.getMonth()+1)+'/'+today.getDate() +' '+ today.getHours() + ":" + today.getMinutes();      
           //$(".direct-chat-timestamp").html(date);
 
+         
           var str ="";
           if(recv.sender == '[알림]'){
               str += '<div class="direct-chat-msg notify"><div class="direct-chat-infos clearfix">';
@@ -131,10 +131,47 @@
         		str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
         		
           } 
-    	      var scrollHeight = $("html").height();
-    	      $(".chat-box").stop().animate({scrollTop: scrollHeight});
+          
+
+//           var maxScroll = $(".card-body").height() + $(".chat-box").height();
+//           $(".chat-box").scrollTop(maxScroll);
+        
           chatBox.append(str);
       }
+      
+      
+      var pre_diffHeight = 0;
+      var bottom_flag = true;
+      var chat_on_scroll = function(){
+              var objDiv = document.getElementById("app_chat_list");
+       
+              if((objDiv.scrollTop + objDiv.clientHeight) == objDiv.scrollHeight){
+                      // 채팅창 전체높이 + 스크롤높이가 스크롤 전체높이와 같다면
+                      // 이는 스크롤이 바닥을 향해있다는것이므로
+                      // 스크롤 바닥을 유지하도록 플래그 설정
+                      bottom_flag = true;
+              }
+
+       if(pre_diffHeight > objDiv.scrollTop + objDiv.clientHeight ){
+                      // 스크롤이 한번이라도 바닥이 아닌 위로 상승하는 액션이 발생할 경우
+                      // 스크롤 바닥유지 플래그 해제
+                      bottom_flag = false;  
+       }
+              //
+              pre_diffHeight = objDiv.scrollTop + objDiv.clientHeight
+      };
+
+      
+      function updated() {
+          // app_chat_list 의 변화가 발생할때마다 수행되는 영역
+
+          var objDiv = document.getElementById("app_chat_list");
+          if(bottom_flag){
+              // 채팅창 스크롤 바닥 유지
+              objDiv.scrollTop = objDiv.scrollHeight;
+          }
+      }
+      
       
       function sendMsg(){
     	  var message = messageInput.val();

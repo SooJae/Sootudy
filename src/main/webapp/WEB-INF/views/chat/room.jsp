@@ -45,11 +45,12 @@ $(function(){
 	      
 	        enterRoom(roomId);
 	       });
-	    
+	   
 	    function enterRoom(roomId) {
+	    	var pattern = /[\S]/i;
 	    	if(!sessionStorage.getItem('chatInfo.sender')){
 	    		var sender = prompt('대화명을 입력해 주세요.');
-            if(sender != ( "" || null)) {
+            if(pattern.test(sender) && sender != null ) {
               sessionStorage.setItem('chatInfo.sender',sender);
               sessionStorage.setItem('chatInfo.roomId',roomId);
               location.href="/chat/room/enter/"+roomId;
