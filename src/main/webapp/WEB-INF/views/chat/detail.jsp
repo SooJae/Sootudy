@@ -104,23 +104,35 @@
         }  
           connect();
         
-        
-      
+      var today = new Date();
       function recvMessage(recv){
     	  var messages =[];
+/*     	  messages.unshift({"type":recv.type,"sender":recv.type !='CHAT'?'[알림] - ':'',"message":recv.message}); */
     	  messages.unshift({"type":recv.type,"sender":recv.type !='CHAT'?'[알림] - ':'',"message":recv.message});
 
+    	  
+          var date = (today.getMonth()+1)+'/'+today.getDate() +' '+ today.getHours() + ":" + today.getMinutes();      
+          //$(".direct-chat-timestamp").html(date);
+
           var str ="";
-          if(ss_sender != recv.sender){
+          if(recv.sender == '[알림]'){
+              str += '<div class="direct-chat-msg notify"><div class="direct-chat-infos clearfix">';
+              /* str += '<span class="direct-chat-name float-right">'+recv.sender+'</span><span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span></div>';   */
+              str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
+            }
+            else if(ss_sender != recv.sender){
 	          str += '<div class="direct-chat-msg left"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-left">'+ recv.sender +'</span>';
-	        	str += '<span class="direct-chat-timestamp float-right">23 Jan 2:00 pm</span></div>';
+	        	str += '<span class="direct-chat-timestamp float-right">'+ date +'</span></div>';
 	        	str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
 	        	
           } else if(ss_sender == recv.sender){
         	  str += '<div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">'+recv.sender+'</span>';
-        		str += '<span class="direct-chat-timestamp float-left">23 Jan 2:05 pm</span></div>';  
+        		str += '<span class="direct-chat-timestamp float-left">'+ date +'</span></div>';  
         		str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
-          }
+        		
+          } 
+    	      var scrollHeight = $("html").height();
+    	      $(".chat-box").stop().animate({scrollTop: scrollHeight});
           chatBox.append(str);
       }
       
@@ -129,14 +141,17 @@
           ws.send('/pub/chat/message', {}, JSON.stringify({roomId: ss_roomId, type: 'CHAT', message: message, sender: ss_sender}));
           messageInput.val('');
       }
+
       
       $(window).bind("beforeunload", function (e){
 
     	  ws.send('/pub/chat/message', {}, JSON.stringify({roomId: ss_roomId, type: 'LEAVE', message: "나갑니다", sender: ss_sender}));
-    	  ws.disconnect();
     	  sessionStorage.clear(); // 세션 스토리지를 전부 지운다.
+    	  ws.disconnect();
     	});
 
+      
+     
 </script>        
 
 <%@ include file="../includes/footer.jsp" %>

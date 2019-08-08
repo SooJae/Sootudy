@@ -20,6 +20,22 @@
 	margin-right : auto;
 	width:50%;
 }
+.direct-chat-msg.notify{
+  margin-right : auto;
+  width:100%;
+}
+
+.direct-chat-msg.notify .direct-chat-text{
+	background:#0945B3;
+  color:white;
+  margin : 0;
+  text-align:center;
+}
+
+.direct-chat-msg.notify .direct-chat-text::after, .direct-chat-text::before{
+  border:none !important;
+}
+
 .direct-chat-infos.clearfix > .direct-chat-name{
 	font-size:1rem;
 }

@@ -49,11 +49,13 @@ $(function(){
 	    function enterRoom(roomId) {
 	    	if(!sessionStorage.getItem('chatInfo.sender')){
 	    		var sender = prompt('대화명을 입력해 주세요.');
-	            if(sender != "") {
-	              sessionStorage.setItem('chatInfo.sender',sender);
-	              sessionStorage.setItem('chatInfo.roomId',roomId);
-                location.href="/chat/room/enter/"+roomId;
-	            }
+            if(sender != ( "" || null)) {
+              sessionStorage.setItem('chatInfo.sender',sender);
+              sessionStorage.setItem('chatInfo.roomId',roomId);
+              location.href="/chat/room/enter/"+roomId;
+            } else{
+            	return;
+            }
 	    	} else {
 	    		location.href="/chat/room/enter/"+roomId;
 	    	}
