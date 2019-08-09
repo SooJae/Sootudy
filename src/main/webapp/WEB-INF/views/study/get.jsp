@@ -87,8 +87,7 @@
                    </div>
                 </div>
 
-            <button type="button" id="check-button" class="btn btn-info float-right"><i
-                class="fas fa-check"></i>체크</button>
+            <button type="button" id="check-button" class="btn btn-info float-right"><i class="fas fa-check"></i>체크</button>
           </div>
         </div>
         <!-- /.card -->
@@ -295,7 +294,6 @@
 
         </div>
       </div>
-</div>
       <script>
   $(function () {
     //ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
@@ -305,19 +303,26 @@
         xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
       }); 
       
+      var sno ='<c:out value="${study.sno}"/>';
+      var writer='<c:out value="${study.leader}"/>'
+      
       $(".btns").on("click",function(e){
           e.preventDefault();
           
           var operation = $(this).data("oper");
-          console.log(operation);
           if(operation === "todoWrite"){
         	  todoVal = $("input[name='todo-value']").val();
+              var todo = {
+                      sno:sno,
+                      todo:todo,
+                      writer:writer
+                  };  
              	  console.log(todoVal);
           } 
 
         });
     
-      var sno ='<c:out value="${study.sno}"/>';
+
       
 
         	for(i =0; i<4; i++){
@@ -333,10 +338,7 @@
         	}
         	
         	
-        	var todo = {
-        			  	sno:sno,
-        			  	todo:todo,
-        			};	
+
         	
         	
             var todoCheck = {
@@ -399,7 +401,6 @@
         // });
 
       </script>
-    </div>
   </section>
 
 <%@ include file="../includes/footer.jsp" %>

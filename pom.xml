@@ -13,6 +13,7 @@
 		<org.aspectj-version>1.9.0</org.aspectj-version>
 		<org.slf4j-version>1.7.25</org.slf4j-version>
 		<log4j.version>2.12.0</log4j.version>
+		<org.jackson-version>2.9.8</org.jackson-version>
 		  <!-- Build Encoding UTF-8 Setting -->
   <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -155,15 +156,23 @@
 		<dependency>
 		    <groupId>com.fasterxml.jackson.core</groupId>
 		    <artifactId>jackson-databind</artifactId>
-		    <version>2.9.8</version>
+		    <version>${org.jackson-version}</version>
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.dataformat/jackson-dataformat-xml -->
 		<dependency>
 		    <groupId>com.fasterxml.jackson.dataformat</groupId>
 		    <artifactId>jackson-dataformat-xml</artifactId>
-		    <version>2.9.8</version>
+		    <version>${org.jackson-version}</version>
 		</dependency>
+		
+		    <!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
+    <!-- import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule을 사용하기 위해 -->
+    <dependency>
+        <groupId>com.fasterxml.jackson.datatype</groupId>
+        <artifactId>jackson-datatype-jsr310</artifactId>
+        <version>${org.jackson-version}</version>
+    </dependency>
 		
 		<!-- 테스트할때는 직접 Java인스턴스를 JSON타입의 문자열로 변환하기위해 Gson 추가 -->
 		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
@@ -194,15 +203,6 @@
 		    <groupId>org.apache.commons</groupId>
 		    <artifactId>commons-text</artifactId>
 		    <version>1.7</version>
-		</dependency>
-		
-		
-		<!-- https://mvnrepository.com/artifact/com.fasterxml.jackson.datatype/jackson-datatype-jsr310 -->
-		<!-- import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule을 사용하기 위해 -->
-		<dependency>
-		    <groupId>com.fasterxml.jackson.datatype</groupId>
-		    <artifactId>jackson-datatype-jsr310</artifactId>
-		    <version>2.10.0.pr1</version>
 		</dependency>
 		
 		

@@ -97,7 +97,7 @@ ul > li { list-style: none }
 			</div>
 			<div class="row board-detail-body" style="min-height:300px;">
 				<div class="board-content">
-			${board.content}
+				<c:out value="${board.content}"/>
 				</div>
 			</div>
 <!-- 			<form id="likeForm" action="/board/like" method="post"> -->

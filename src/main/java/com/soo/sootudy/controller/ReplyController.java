@@ -34,7 +34,8 @@ public class ReplyController {
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping(value = "/new",
 			consumes = "application/json",
-			produces = {MediaType.TEXT_PLAIN_VALUE})
+					produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+//			produces = {MediaType.TEXT_PLAIN_VALUE})
 	public ResponseEntity<String> create(@RequestBody ReplyVO vo){
 		log.info("ReplyVO:" + vo);
 		

@@ -58,7 +58,8 @@ public class ChatRoomController {
     @ResponseBody
     @PostMapping(value = "/new",
 			consumes = "application/json",
-			produces = {MediaType.TEXT_PLAIN_VALUE})
+			produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+//			produces = {MediaType.TEXT_PLAIN_VALUE})
     public ResponseEntity<String> createRoom(@RequestBody ChatRoomDTO room) {
     	log.info("create room..."+room.getName());
         int insertCount = service.createChatRoom(room.getName());

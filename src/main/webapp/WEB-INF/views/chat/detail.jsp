@@ -111,6 +111,7 @@
 	    	  
 	          var date = (today.getMonth()+1)+'/'+today.getDate() +' '+ today.getHours() + ":" + today.getMinutes();      
 	
+	          
 	         
 	          var str ="";
 	          if(recv.sender == '[알림]'){
