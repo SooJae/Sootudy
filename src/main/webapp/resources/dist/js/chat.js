@@ -81,6 +81,8 @@ var chatService=(function(){
 			});
 	}
 	
+	
+	
 	function displayTime(timeValue){
 		var today = new Date();
 		

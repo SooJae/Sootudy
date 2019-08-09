@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.soo.sootudy.mapper.StudyTodoMapper">
+<!-- 
+	<select id="getTotalCount" resultType="int">
+	  SELECT COUNT(*)
+	  FROM study
+	</select>
+
+	<select id="getListWithPaging" resultType="com.soo.sootudy.domain.StudyVO">
+	 SELECT
+	     *
+	 FROM study
+	 WHERE
+	     delete_flag='0'
+	 <include refid="filter_mode"></include>
+	 ORDER BY sno DESC
+    LIMIT #{scri.pageStart}, #{scri.perPageNum}
+	</select>
+	 -->
+	
+  <select id="findBySno" resultType="com.soo.sootudy.domain.StudyTodoVO">
+  SELECT
+      *
+  FROM study_todo
+  WHERE sno = #{sno}
+  </select>
+  
+  
+  <insert id="insert">
+    INSERT INTO study_todo
+            ( todo
+            , writer
+            , sno)
+    VALUES  (#{todo}
+            , #{writer}
+            , #{sno})
+  </insert>
+  
+  <delete id="delete">
+    DELETE FROM study_todo
+    WHERE tdno = #{tdno}
+  </delete>
+  
+  
+  <!-- <sql id="filter_mode">
+  <trim prefix="AND (" suffix=") " prefixOverrides="AND | OR">
+    <if test="filter_mode == 'joined'.toString()">
+      like_cnt &gt; 0
+    </if>
+  </trim>
+</sql> -->
+  
+  
+</mapper>

@@ -41,8 +41,8 @@ public class ChatServiceImpl implements ChatService {
     }
     @Override
     public void sendChatMessage(ChatVO chatVO) {
-    	ChatRoomDTO getRoom = mapper.get(chatVO.getRoomId());
-    	chatVO.setUserCnt(getRoom.getCnt());
+//    	ChatRoomDTO getRoom = mapper.get(chatVO.getRoomId());
+//    	chatVO.setUserCnt(getRoom.getCnt());
         if (ChatVO.MessageType.JOIN.equals(chatVO.getType())) {
         	chatVO.setMessage(chatVO.getSender() + "님이 방에 입장했습니다.");
         	chatVO.setSender("[알림]");

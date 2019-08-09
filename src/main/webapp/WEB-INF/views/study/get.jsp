@@ -39,7 +39,7 @@
                 <!-- todo text -->
               <li>
                 <div class="custom-control custom-checkbox d-inline ml-2">
-                  <input type="checkbox" class="custom-control-input" name="todo" id="customCheck" value="안녕" disabled>
+                  <input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck" value="안녕" disabled>
                   <label class="custom-control-label" for="customCheck"></label>
                 </div>
 
@@ -52,7 +52,7 @@
               </li>
               <li>
                 <div class="custom-control custom-checkbox d-inline ml-2">
-                  <input type="checkbox" class="custom-control-input" name="todo" id="customCheck2" value="안녕2"
+                  <input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck2" value="안녕2"
                     disabled>
                   <label class="custom-control-label" for="customCheck2"></label>
                 </div>
@@ -65,7 +65,7 @@
               </li>
               <li>
                 <div class="custom-control custom-checkbox d-inline ml-2">
-                  <input type="checkbox" class="custom-control-input" name="todo" id="customCheck3" value="안녕3"
+                  <input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck3" value="안녕3"
                     disabled>
                   <label class="custom-control-label" for="customCheck3"></label>
                 </div>
@@ -81,9 +81,9 @@
           <!-- /.card-body -->
           <div class="card-footer clearfix">
               <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="할일을 적어주세요" name="todo">
+                  <input type="text" class="form-control" placeholder="할일을 적어주세요" name="todo-value">
                    <div class="input-group-append">
-                   <button type="button" data-oper="todoWrite" class="btn btn-primary" id="todoWrite"><i class="fas fa-pencil-alt"></i> 쓰기</button>
+                   <button type="button" data-oper="todoWrite" class="btn btn-primary btns"><i class="fas fa-pencil-alt"></i> 쓰기</button>
                    </div>
                 </div>
 
@@ -365,52 +365,59 @@
       </div>
 </div>
       <script>
+  $(function () {
+    //ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
+      var csrfHeaderName="${_csrf.headerName}";
+      var csrfTokenValue="${_csrf.token}";
+      $(document).ajaxSend(function(e, xhr, options){
+        xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
+      }); 
       
-      var tdno ='<c:out value="${study.tdno}"/>';
+      $(".btns").on("click",function(e){
+          e.preventDefault();
+          
+          var operation = $(this).data("oper");
+          console.log(operation);
+          if(operation === "todoWrite"){
+        	  todoVal = $("input[name='todo-value']").val();
+             	  console.log(todoVal);
+          } 
+
+        });
+    
       var sno ='<c:out value="${study.sno}"/>';
       
-      console.log("tdno", tdno,"sno", sno);
-        $(function () {
 
-        	for(int i =0; i<4; i++){
-        	 $(".todo-list").append(`
-                     <li>
-                         <div class="custom-control custom-checkbox d-inline ml-2">
-                           <input type="checkbox" class="custom-control-input" name="todo" id="customCheck4" value="안녕" disabled>
-                           <label class="custom-control-label" for="customCheck4"></label>
-                         </div>
-
-                         <span class="text">Make the theme responsive</span>
-                         <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
-                         <div class="tools">
-                           <i class="fas fa-edit"></i>
-                           <i class="fas fa-trash-o"></i>
-                         </div>
-                       </li>
-                    `);
+        	for(i =0; i<4; i++){
+        		  var str = "";
+        		      str+='<li><div class="custom-control custom-checkbox d-inline ml-2">';
+        		      str+='<input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck'+[i]+'" value="안녕" disabled>';
+        		      str+='<label class="custom-control-label" for="customCheck'+[i]+'"></label></div>';
+        		      str+='<span class="text">Make the theme responsive</span>';
+        		      str+=' <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>';
+        		      str+=' <div class="tools"><i class="fas fa-edit"></i><i class="fas fa-trash-o"></i> </div></li>';
+        		      
+        	 $(".todo-list").append(str);
         	}
         	
         	
         	var todo = {
         			  	sno:sno,
-        			  	tdno:tdno,
         			  	todo:todo,
-        			  	achivement:achivement,
         			};	
         	
         	
             var todoCheck = {
-                    tdno:tdno,
                     sno:sno,
                 };  
         	
         	
-          $("input:checkbox[name='todo']").on("click", function (e) {
+          $("input:checkbox[name='todo-check']").on("click", function (e) {
 
             if ($(this).is(":checked")) {
               $(this).prop("checked", true);
               $(this).parent().parent().attr("class", "done");
-              $(this)
+              //$(this)
             } else {
               $(this).prop("checked", false);
               $(this).parent().parent().removeAttr("class");
@@ -429,13 +436,13 @@
             if ($("#check-button").hasClass("active")) {
               $(this).removeClass("active");
               $(this).html(` <i class="fas fa-check"></i> 체크`);
-              $("ul li input[name='todo']").each(function (i, check) {
+              $("ul li input[name='todo-check']").each(function (i, check) {
                 $(check).attr("disabled", "disabled");
               });
             } else {
               $(this).addClass("active");
               $(this).html(`<i class="fas fa-check"></i> 완료`);
-              $("ul li input[name='todo']").each(function (i, check) {
+              $("ul li input[name='todo-check']").each(function (i, check) {
                 $(check).removeAttr("disabled");
               });
             }
