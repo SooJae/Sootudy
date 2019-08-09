@@ -76,7 +76,14 @@ color:white;
              <li>
                  <a class="btnc" href="#" data-oper="board">게시판</a>
              </li>    
+             
+             <li>
+                 <a class="btnc" href="#" data-oper="study">스터디</a>
+             </li>
 
+             <li>
+                 <a class="btnc" href="#" data-oper="chat">채팅방</a>
+             </li>
              <li>
                      <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Page</a>
                      <ul class="collapse list-unstyled" id="pageSubmenu">
@@ -135,6 +142,9 @@ color:white;
 	          </li>
 	          <li class="nav-item">
 	            <a class="nav-link btnc" href="#" data-oper="study">스터디</a>
+	          </li>
+	          <li class="nav-item">
+	            <a class="nav-link btnc" href="#" data-oper="chat">채팅방</a>
 	          </li>
 	          </ul>
 	          <ul class="nav navbar-nav ml-auto">
@@ -197,8 +207,10 @@ $(function(){
 			loc = "/board/list";
 		} else if(operation ==="study"){
 			loc = "/study/list" ;
+		} else if(operation ==="chat"){
+			loc = "/chat/room" ;
 		} else if(operation ==="login"){
-      loc = "/member/login"; 
+     		loc = "/member/login"; 
     } else if(operation ==="logout"){
     	$(this).html(`<form action="<c:url value='/member/logout'/>" method="POST">
                 <input name="${_csrf.parameterName}" type="hidden" value="${_csrf.token}"/>

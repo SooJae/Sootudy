@@ -60,11 +60,11 @@
 
     <div class="form-row justify-content-center">
       <select name="type">
-        <option value="" <c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option>
+<%--         <option value="" <c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option> --%>
         <option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
         <option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
         <option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자</option>
-        <option value="TC" <c:out value="${pageMaker.cri.type eq 'TC'?'selected':''}"/>>제목+내용</option>
+        <option value="TC" <c:out value="${(pageMaker.cri.type == null ||pageMaker.cri.type eq 'TC')?'selected':''}"/>>제목+내용</option>
         <option value="TW" <c:out value="${pageMaker.cri.type eq 'TW'?'selected':''}"/>>제목+작성자</option>
         <option value="TWC" <c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>제목+내용+작성자</option>
       </select>
