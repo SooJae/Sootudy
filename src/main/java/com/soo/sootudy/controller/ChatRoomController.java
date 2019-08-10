@@ -47,12 +47,6 @@ public class ChatRoomController {
     	return new ResponseEntity<>(service.getList(),HttpStatus.OK);
     }
     
-//    @ResponseBody
-//    public List<ChatRoomDTO> room() {
-//    	log.info("rooms");
-//        return service.getList();
-//    }
-    
     
     // 채팅방 생성
     @ResponseBody

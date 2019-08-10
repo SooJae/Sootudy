@@ -3,7 +3,6 @@ console.log("study module...");
 var studyService=(function(){
 	
 	function add(reply,callback,error){
-	console.log("add......");
 
 	$.ajax({
 		type:'post',
@@ -22,6 +21,31 @@ var studyService=(function(){
 			}
 		});
 	}
+	
+	
+	function join(study,callback,error){
+		console.log("join......");
+
+		$.ajax({
+			type:'post',
+			url:'/study/chat/'+study.sno,
+			data:JSON.stringify(study),
+			contentType : "application/json; charset=utf-8",
+			success:function(result, status, xhr){
+				if(callback){
+					callback(result);
+				}
+			},
+			error : function(xhr, status, err){
+				if(error){
+					error(err);
+					}
+				}
+			});
+		}
+	
+	
+	
 	
 	function getList(page, callback, error){
 		
@@ -112,6 +136,7 @@ return{
 	remove:remove,
 	update:update,
 	get:get,
-	displayTime : displayTime
+	displayTime : displayTime,
+	join : join
 };
 })();

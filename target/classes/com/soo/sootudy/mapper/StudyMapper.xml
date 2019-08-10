@@ -36,10 +36,10 @@
     INSERT INTO study
             ( title
             , content
-            , leader)
+            , member)
     VALUES  (#{title}
             , #{content}
-            , #{leader})
+            , #{member})
 </insert>
   
   

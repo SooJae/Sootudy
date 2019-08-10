@@ -181,7 +181,7 @@ color:white;
 
 
 <script src="https://code.jquery.com/jquery-3.4.0.min.js" integrity="sha256-BJeo0qm959uMBGb65z40ejJYGSgR7REI4+CW1fNKwOg=" crossorigin="anonymous"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 <script type="text/javascript">
 
 var customAlert = function(flag,msg){
@@ -206,9 +206,9 @@ $(function(){
 		if(operation === "board"){
 			loc = "/board/list";
 		} else if(operation ==="study"){
-			loc = "/study/list" ;
+			loc = "/study/list";
 		} else if(operation ==="chat"){
-			loc = "/chat/room" ;
+			loc = "/chat/room";
 		} else if(operation ==="login"){
      		loc = "/member/login"; 
     } else if(operation ==="logout"){

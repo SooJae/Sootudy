@@ -83,7 +83,7 @@
               <div class="input-group mb-3">
                   <input type="text" class="form-control" placeholder="할일을 적어주세요" name="todo-value">
                    <div class="input-group-append">
-                   <button type="button" data-oper="todoWrite" class="btn btn-primary btns"><i class="fas fa-pencil-alt"></i> 쓰기</button>
+                   <button type="button" data-oper="todoWrite" class="btn btn-primary btns"><i class="fas fa-pencil-alt"></i>쓰기</button>
                    </div>
                 </div>
 
@@ -97,10 +97,42 @@
       <div class="col-lg-9 custom-chat">
         
         <section class="content t-full">
+        
+        
+        <!-- BAR CHART -->
+            <div class="card card-success">
+              <div class="card-header">
+                <h3 class="card-title"> <c:out value="${study.title}"/></h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-times"></i></button>
+                </div>
+              </div>
+             <div id="chat-card">
+	              <div class="card-body">
+	                <div class="chart">
+	                  <canvas id="barChart" style="height:230px; min-height:230px"></canvas>
+	                </div>
+	              </div>
+	              <!-- /.card-body -->
+	               <div class="card-footer">
+	                 <div class="input-group justify-content-end">
+	                 <input type="hidden" name="sno" value='<c:out value="${study.sno}"/>' >
+	                     <button type="button" class="send btn btn-primary" id="join-chat">스터디 채팅 참여</button>
+	                 </div>
+	              </div>
+              <!-- /.card-footer-->
+              </div>
+            </div>
+            <!-- /.card -->
+        
+        <%-- 
             <!-- DIRECT CHAT -->
             <div class="card card-primary direct-chat direct-chat-primary ">
               <div class="card-header" style="text-align:center;">
-                <h3 class="card-title" ><c:out value="${room.name}"/></h3>
+                <h3 class="card-title" ><c:out value="${study.title}"/></h3>
 
                 <div class="card-tools">
                   <span data-toggle="tooltip" title="3 New Messages" class="badge bg-danger">3</span>
@@ -115,29 +147,20 @@
               </div>
               <!-- /.card-header -->
               <div class="card-body">
-              
-              
-                <!-- Conversations are loaded here -->
-                <div class="direct-chat-messages chat-box" id="app_chat_list" onscroll="chat_on_scroll()"> </div>
-                <!--/.direct-chat-messages-->
+              <c:out value="${study.content}"/>
 
-              </div>
-              <!-- /.card-body -->
-              <div class="card-footer">
-                  <div class="input-group">
-                    <input type="text" name="message" onkeydown="if (event.keyCode == 13) sendMsg()" class="form-control">
-                    <span class="input-group-append">
-                      <button class="send btn btn-primary" type="submit" onclick ="sendMsg()">쓰기</button>
-                    </span>
-                  </div>
-              </div>
               <!-- /.card-footer-->
+              
+              </div>
             </div>
             <!--/.direct-chat -->
+            
+             --%>
+            
           </section>
           <!-- /.col -->
 
-
+        </div>
           <!-- Default box -->
           <!-- <div class="card">
             <div class="card-body table-responsive-md p-0">
@@ -292,10 +315,12 @@
 
           <!-- /.content -->
 
-        </div>
+
       </div>
-      <script>
-  $(function () {
+   </section>
+<script type="text/javascript" src="/resources/dist/js/custom_chart.js"></script>
+<script type="text/javascript" src="/resources/dist/js/study.js"></script>
+<script>
     //ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
       var csrfHeaderName="${_csrf.headerName}";
       var csrfTokenValue="${_csrf.token}";
@@ -304,7 +329,7 @@
       }); 
       
       var sno ='<c:out value="${study.sno}"/>';
-      var writer='<c:out value="${study.leader}"/>'
+      var member='<c:out value="${study.member}"/>'
       
       $(".btns").on("click",function(e){
           e.preventDefault();
@@ -321,7 +346,33 @@
           } 
 
         });
+      
+      var study = {
+    		  sno:sno,
+    		  member:member
+    		  }
     
+      $("#join-chat").on("click",function(e){
+    	  e.preventDefault();
+    	  
+    	  studyService.join(study,function(result){
+    		  
+    		  
+    		  
+    		  var chatForm_str = '<div class="direct-chat-messages chat-box" id="custom-chat" onscroll="custom_chat_scroll()"> </div>';
+              chatForm_str += '<div class="card-footer"><div class="input-group"><input type="text" name="message" onkeydown="if (event.keyCode == 13) sendMsg()" class="form-control">';
+              chatForm_str += '<span class="input-group-append"><button class="send btn btn-primary" type="submit" onclick ="sendMsg()">쓰기</button></span></div></div>';
+         
+         
+          $("#chat-card").html(chatForm_str);
+    		  
+    	  },alert("채팅방에 입장할 수 없습니다."));
+    	 
+    	  
+    	  
+    	  
+    	 
+      });
 
       
 
@@ -382,26 +433,6 @@
             }
           });
 
-         
-
-
-        });
-        
-        
-        
-        
-        
-        // $(".custom-checkbox").on("click", function(e){
-        //   if($(this).prop("checked",false)) {
-        //     $(this).attr("checked",true);
-        //   } 
-        //   else if ($(this).prop("checked",true)){
-        //     $(".custom-checkbox").attr("checked","안녕");
-        //   }
-        // });
-
-      </script>
-  </section>
+</script>
 
 <%@ include file="../includes/footer.jsp" %>
-

@@ -35,14 +35,12 @@
               </div>
               <!-- /.card-body -->
               <div class="card-footer">
-<!--                 <form action="#" method="post"> -->
                   <div class="input-group">
                     <input type="text" name="message" onkeydown="if (event.keyCode == 13) sendMsg()" class="form-control">
                     <span class="input-group-append">
                       <button class="send btn btn-warning" type="submit" onclick ="sendMsg()">쓰기</button>
                     </span>
                   </div>
-<!--                 </form> -->
               </div>
               <!-- /.card-footer-->
             </div>
