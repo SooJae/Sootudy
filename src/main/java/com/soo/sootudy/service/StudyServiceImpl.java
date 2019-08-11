@@ -36,6 +36,12 @@ public class StudyServiceImpl implements StudyService {
 		// TODO Auto-generated method stub
 		return studyMapper.getTotalCount(scri);
 	}
+
+	@Override
+	public void register(StudyVO study) {
+		// TODO Auto-generated method stub
+		studyMapper.insertSelectKey(study);
+	}
 	
 
 //	@Override

@@ -24,7 +24,14 @@
     VALUES  (#{roomId}
             , #{name} )
   </insert>
+  <insert id="studyCreateChat">
+  INSERT INTO chat_rooms
+            ( roomId
+            , name )
+    VALUES  (#{sno}
+            , #{title} )
   
+  </insert>
   <update id="updateCnt">
   
   UPDATE chat_rooms

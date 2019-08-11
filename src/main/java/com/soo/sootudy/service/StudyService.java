@@ -14,6 +14,8 @@ public interface StudyService {
 	public StudyVO get(int sno, Criteria scri);
 
 	public int getTotal(StudyCriteria scri);
+
+	public void register(StudyVO study);
 	
 
 //	public int changeCnt(ChatVO vo);

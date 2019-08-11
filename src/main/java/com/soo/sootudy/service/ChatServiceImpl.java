@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.soo.sootudy.domain.ChatRoomDTO;
 import com.soo.sootudy.domain.ChatVO;
+import com.soo.sootudy.domain.StudyVO;
 import com.soo.sootudy.mapper.ChatMapper;
 
 import lombok.AllArgsConstructor;
@@ -33,6 +34,7 @@ public class ChatServiceImpl implements ChatService {
         return mapper.get(id);
     }
     
+    
     //채팅방 생성
     @Override
     public int createChatRoom(String name) {
@@ -52,6 +54,12 @@ public class ChatServiceImpl implements ChatService {
         } 
         messagingTemplate.convertAndSend("/sub/chat/room/" + chatVO.getRoomId(), chatVO);
     }
+
+	@Override
+	public void studyCreateChat(StudyVO study) {
+		mapper.studyCreateChat(study);
+	}
+
     
     
 //    @MessageMapping("/chat/message")

@@ -11,7 +11,7 @@ public class StudyVO {
 	private int sno;
 	private String title;
 	private String content;
-	private String member;
+	private String leader;
 	private Date dt;
 	private Date udt_dt;
 	private String delete_flag;

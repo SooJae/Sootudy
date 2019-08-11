@@ -28,7 +28,7 @@ var studyService=(function(){
 
 		$.ajax({
 			type:'post',
-			url:'/study/chat/'+study.sno,
+			url:'/study/enter/'+study.sno,
 			data:JSON.stringify(study),
 			contentType : "application/json; charset=utf-8",
 			success:function(result, status, xhr){

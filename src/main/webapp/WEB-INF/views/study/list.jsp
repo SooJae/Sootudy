@@ -70,7 +70,6 @@
 <!--                       <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: 57%"> -->
   <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 57%"></div>
                       </div>
-                  </div>
                   <small>
                       57% Complete
                   </small>
@@ -122,7 +121,7 @@
 		     </ul>
 		    </nav>
 		       <div>
-		        <button type="button" class="btn btn-primary" id="regBtn"><i class="fas fa-pencil-alt"></i>&nbsp;글쓰기</button>
+		        <button type="button" class="btn btn-primary" id="regBtn"> <i class="fas fa-users"></i>&nbsp;모임 만들기</button>
 		       </div>
     </div>
     <!-- ./navigation -->

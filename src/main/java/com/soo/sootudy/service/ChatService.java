@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.soo.sootudy.domain.ChatRoomDTO;
 import com.soo.sootudy.domain.ChatVO;
+import com.soo.sootudy.domain.StudyVO;
 
 public interface ChatService {
 
@@ -14,5 +15,8 @@ public interface ChatService {
     public int createChatRoom(String name);
 
     public void sendChatMessage(ChatVO chatVO) ;
+    
+
+	public void studyCreateChat(StudyVO study);
 	
 }

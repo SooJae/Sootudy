@@ -90,7 +90,7 @@
    <input type="hidden" name="perPageNum" value='<c:out value="${pageMaker.cri.perPageNum}"/>'/>
 </form>
 
-<!-- navigation -->
+<!-- pagination -->
 <div class="row justify-content-between mt-3" >
   <div>
 	  <form id="bestForm">
@@ -125,7 +125,7 @@
     <button type="button" class="btn btn-primary" id="regBtn"><i class="fas fa-pencil-alt"></i>&nbsp;글쓰기</button>
    </div>
 </div>
-<!-- ./navigation -->
+<!-- ./pagination -->
 </section>
 <!--./section  -->
 

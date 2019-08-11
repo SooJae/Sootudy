@@ -83,7 +83,7 @@
               <div class="input-group mb-3">
                   <input type="text" class="form-control" placeholder="할일을 적어주세요" name="todo-value">
                    <div class="input-group-append">
-                   <button type="button" data-oper="todoWrite" class="btn btn-primary btns"><i class="fas fa-pencil-alt"></i>쓰기</button>
+                   <button type="button" data-oper="todoWrite" class="btn btn-success btns"><i class="fas fa-pencil-alt"></i>쓰기</button>
                    </div>
                 </div>
 
@@ -99,8 +99,8 @@
         <section class="content t-full">
         
         
-        <!-- BAR CHART -->
-            <div class="card card-success">
+        
+            <div class="card card-success direct-chat direct-chat-success ">
               <div class="card-header">
                 <h3 class="card-title"> <c:out value="${study.title}"/></h3>
 
@@ -110,6 +110,7 @@
                   <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-times"></i></button>
                 </div>
               </div>
+              <!-- BAR CHART -->
              <div id="chat-card">
 	              <div class="card-body">
 	                <div class="chart">
@@ -122,7 +123,7 @@
 	                 <input type="hidden" name="sno" value='<c:out value="${study.sno}"/>' >
 	                     <button type="button" class="send btn btn-primary" id="join-chat">스터디 채팅 참여</button>
 	                 </div>
-	              </div>
+	               </div>
               <!-- /.card-footer-->
               </div>
             </div>
@@ -321,6 +322,10 @@
 <script type="text/javascript" src="/resources/dist/js/custom_chart.js"></script>
 <script type="text/javascript" src="/resources/dist/js/study.js"></script>
 <script>
+var sno ='<c:out value="${study.sno}"/>';
+var leader='<c:out value="${study.leader}"/>';
+var memberId = '<sec:authentication property="principal.username"/>';
+	
     //ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
       var csrfHeaderName="${_csrf.headerName}";
       var csrfTokenValue="${_csrf.token}";
@@ -328,8 +333,11 @@
         xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
       }); 
       
-      var sno ='<c:out value="${study.sno}"/>';
-      var member='<c:out value="${study.member}"/>'
+
+      
+      var sock = new SockJS("/ws-stomp");
+      var ws = Stomp.over(sock);
+      var reconnect = 0;
       
       $(".btns").on("click",function(e){
           e.preventDefault();
@@ -349,7 +357,7 @@
       
       var study = {
     		  sno:sno,
-    		  member:member
+    		  leader:leader
     		  }
     
       $("#join-chat").on("click",function(e){
@@ -365,12 +373,90 @@
          
          
           $("#chat-card").html(chatForm_str);
+          
+          
+          // websocket &amp; stomp initialize
+          var sock = new SockJS("/ws-stomp");
+          var ws = Stomp.over(sock);
+          var reconnect = 0;
+
+          
+          
+            function connect() {
+             // pub/sub event
+              ws.connect({}, function() {
+                //전챗
+                ws.subscribe("/sub/chat/room/"+sno, function(chat) {
+                      var recv = JSON.parse(chat.body);
+                      recvMessage(recv);
+                      updated();
+
+                  });
+                ws.send("/pub/chat/message", {}, JSON.stringify({roomId: sno, type:'JOIN', sender:memberId}));
+             }, function(error) {
+                 if(reconnect++ <= 5) {
+                     setTimeout(function() {
+                         console.log("connection reconnect");
+                         sock = new SockJS("/ws-stomp");
+                         ws = Stomp.over(sock);
+                         connect();
+                     },10*1000);
+                 }
+             });
+          }  
+            connect();
+          
+	          var today = new Date();
+	          
+	          var maxScroll = $(".card-body").height();
+	          function recvMessage(recv){
+	            var messages =[];
+	            messages.unshift({"type":recv.type,"sender":recv.type !='CHAT'?'[알림] - ':'',"message":recv.message});
+	            
+	            
+	              var date = (today.getMonth()+1)+'/'+today.getDate() +' '+ today.getHours() + ":" + today.getMinutes();      
+	    
+	              
+	             
+	              var str ="";
+	              if(recv.sender == '[알림]'){
+	                  str += '<div class="direct-chat-msg notify"><div class="direct-chat-infos clearfix">';
+	                  str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
+	                }
+	                else if(memberId != recv.sender){
+	                str += '<div class="direct-chat-msg left"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-left">'+ recv.sender +'</span>';
+	                str += '<span class="direct-chat-timestamp float-right">'+ date +'</span></div>';
+	                str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
+	                
+	              } else if(memberId == recv.sender){
+	                str += '<div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">'+recv.sender+'</span>';
+	                str += '<span class="direct-chat-timestamp float-left">'+ date +'</span></div>';  
+	                str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
+	                
+	              } 
+	              
+	    
+	              $(".chat-box").append(str);
+	          }
+	        
+// 	        function sendMsg(){
+// 	            var message = messageInput.val();
+// 	              ws.send('/pub/chat/message', {}, JSON.stringify({roomId: sno, type: 'CHAT', message: message, sender: leader}));
+// 	              messageInput.val('');
+// 	          }
+	          
+	          $(window).bind("beforeunload", function (e){
+	    
+	            ws.send('/pub/chat/message', {}, JSON.stringify({roomId: sno, type: 'LEAVE', message: "나갑니다", sender: memberId}));
+	            sessionStorage.clear(); // 세션 스토리지를 전부 지운다.
+	            ws.disconnect();
+	          });
+
+        
     		  
-    	  },alert("채팅방에 입장할 수 없습니다."));
-    	 
-    	  
-    	  
-    	  
+    	   }, function(error){
+    		  console.log(error);
+    	   });
     	 
       });
 
@@ -432,6 +518,12 @@
               });
             }
           });
+          
+          function sendMsg(){
+              var message = $('input[name="message"]').val();
+                ws.send('/pub/chat/message', {}, JSON.stringify({roomId: sno, type: 'CHAT', message: message, sender: memberId}));
+                $('input[name="message"]').val('');
+            }
 
 </script>
 

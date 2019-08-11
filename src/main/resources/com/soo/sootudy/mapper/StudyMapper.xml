@@ -36,11 +36,12 @@
     INSERT INTO study
             ( title
             , content
-            , member)
+            , leader)
     VALUES  (#{title}
             , #{content}
-            , #{member})
-</insert>
+            , #{leader})
+  </insert>
+  
   
   
   <!-- <sql id="filter_mode">

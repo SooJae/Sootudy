@@ -2,10 +2,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ include file="../includes/header.jsp" %>
 
-<script src="https://cdn.jsdelivr.net/npm/sockjs-client@1/dist/sockjs.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/stomp.js/2.3.3/stomp.js"></script>
-<script type="text/javascript" src="/resources/dist/js/chat.js"></script>
-<script type="text/javascript" src="/resources/dist/js/chat_scroll.js"></script>
 
  <section class="container chat-size t-full">
             <!-- DIRECT CHAT WARNING -->
