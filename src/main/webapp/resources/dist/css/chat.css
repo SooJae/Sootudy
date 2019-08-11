@@ -12,13 +12,15 @@
 }
 
 .direct-chat-msg.right{
-	 margin-left : auto;
-  max-width: 50%;
+	margin-left : auto;
+	max-width: 50%;
+	width: fit-content;
 }
  
 .direct-chat-msg.left{
 	margin-right : auto;
 	max-width:50%;
+	width: fit-content;
 }
 .direct-chat-msg.notify{
   margin-right : auto;

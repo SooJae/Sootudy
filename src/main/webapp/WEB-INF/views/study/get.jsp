@@ -83,7 +83,7 @@
               <div class="input-group mb-3">
                   <input type="text" class="form-control" placeholder="할일을 적어주세요" name="todo-value">
                    <div class="input-group-append">
-                   <button type="button" data-oper="todoWrite" class="btn btn-success btns"><i class="fas fa-pencil-alt"></i>쓰기</button>
+                   <button type="button" data-oper="todoWrite" class="btn btn-primary btns">쓰기</button>
                    </div>
                 </div>
 
@@ -334,6 +334,11 @@ var memberId = '<sec:authentication property="principal.username"/>';
       }); 
       
 
+      var study = {
+              sno:sno,
+              leader:leader
+              }
+      
       
       var sock = new SockJS("/ws-stomp");
       var ws = Stomp.over(sock);
@@ -347,18 +352,15 @@ var memberId = '<sec:authentication property="principal.username"/>';
         	  todoVal = $("input[name='todo-value']").val();
               var todo = {
                       sno:sno,
-                      todo:todo,
-                      writer:writer
+                      todo:todoVal,
+                      leader:leader
                   };  
              	  console.log(todoVal);
           } 
 
         });
       
-      var study = {
-    		  sno:sno,
-    		  leader:leader
-    		  }
+
     
       $("#join-chat").on("click",function(e){
     	  e.preventDefault();
@@ -369,7 +371,7 @@ var memberId = '<sec:authentication property="principal.username"/>';
     		  
     		  var chatForm_str = '<div class="direct-chat-messages chat-box" id="custom-chat" onscroll="custom_chat_scroll()"> </div>';
               chatForm_str += '<div class="card-footer"><div class="input-group"><input type="text" name="message" onkeydown="if (event.keyCode == 13) sendMsg()" class="form-control">';
-              chatForm_str += '<span class="input-group-append"><button class="send btn btn-primary" type="submit" onclick ="sendMsg()">쓰기</button></span></div></div>';
+              chatForm_str += '<span class="input-group-append"><button class="send btn btn-success" type="submit" onclick ="sendMsg()">쓰기</button></span></div></div>';
          
          
           $("#chat-card").html(chatForm_str);
