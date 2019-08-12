@@ -23,26 +23,6 @@ var studyService=(function(){
 	}
 	
 	
-	function join(study,callback,error){
-
-		$.ajax({
-			type:'post',
-			url:'/study/enter/'+study.sno,
-			data:JSON.stringify(study),
-			contentType : "application/json; charset=utf-8",
-			success:function(result, status, xhr){
-				if(callback){
-					callback(result);
-				}
-			},
-			error : function(xhr, status, err){
-				if(error){
-					error(err);
-					}
-				}
-			});
-		}
-	
 	
 	
 	
@@ -136,6 +116,5 @@ return{
 	update:update,
 	get:get,
 	displayTime : displayTime,
-	join : join
 };
 })();

@@ -321,6 +321,7 @@
    </section>
 <script type="text/javascript" src="/resources/dist/js/custom_chart.js"></script>
 <script type="text/javascript" src="/resources/dist/js/study.js"></script>
+<script type="text/javascript" src="/resources/dist/js/study_chat.js"></script>
 <script>
 var sno ='<c:out value="${study.sno}"/>';
 var leader='<c:out value="${study.leader}"/>';
@@ -337,18 +338,39 @@ var memberId = '<sec:authentication property="principal.username"/>';
       
 
       
-      function getMessage(){
-    	  console.log("getMessage...");
-          $.getJSON("/study/chat/"+sno,
-                    function(data){
-                      let obj ={"roomId": data.roomId, "name": data.name};
-                      console.log("obj"+data.roomId+"name"+data.name);
-          }).fail(function(xhr,status,err){
-                      if(err){
-                        console.log(err);
-                      }
-                    });
-          }
+//       function getMessage(){
+//     	  console.log("getMessage...");
+//           $.getJSON("/study/chat/"+sno+".json",
+//                     function(list){
+// 						        	  var str="";
+						              
+// 						              if(list ==null || list.length==0){
+// 						            	  $(".chat-box").html("");
+						                
+// 						                return;
+// 						              }
+        	  
+// 						        	  for(var i = 0, len = list.length||0; i<len; i++){
+// 								        		  if(list[i].sender != memberId){
+// 								        		      str += '<div class="direct-chat-msg left"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-left">'+ list[i].sender +'</span>';
+// 								                  str += '<span class="direct-chat-timestamp float-right">&nbsp;'+ list[i].dt +'</span></div>';
+// 								                  str += '<div class="direct-chat-text ">'+ list[i].message +'</div></div>';
+// 								        		  }
+// 								        		  else if(list[i].sender == memberId){   
+// 								                  str += '<div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">&nbsp;&nbsp;'+list[i].sender+'</span>';
+// 								                  str += '<span class="direct-chat-timestamp float-left">'+ list[i].dt +'</span></div>';  
+// 								                  str += '<div class="direct-chat-text ">'+list[i].message +'</div></div>';
+// 								        		  }
+// 		// 						                  str+="<small class='pull-right text-muted'> &nbsp;"+replyService.displayTime(list[i].dt)+"</small>";
+// 						                }
+        	  
+// 						        	  $(".chat-box").append(str);
+//           }).fail(function(xhr,status,err){
+//                       if(err){
+//                         console.log(err);
+//                       }
+//                     });
+//           }
       
       var study = {
               sno:sno,
@@ -381,10 +403,7 @@ var memberId = '<sec:authentication property="principal.username"/>';
       $("#join-chat").on("click",function(e){
     	  e.preventDefault();
     	  
-    	  studyService.join(study,function(result){
-    		  
-         
-    		  
+    	  studyChatService.join(study,function(result){
     		  
     		  var chatForm_str = '<div class="direct-chat-messages chat-box" id="custom-chat" onscroll="custom_chat_scroll()"> </div>';
               chatForm_str += '<div class="card-footer"><div class="input-group"><input type="text" name="message" onkeydown="if (event.keyCode == 13) sendMsg()" class="form-control">';
@@ -395,38 +414,63 @@ var memberId = '<sec:authentication property="principal.username"/>';
           
           
           
-          // websocket &amp; stomp initialize
-          var sock = new SockJS("/ws-stomp");
-          var ws = Stomp.over(sock);
-          var reconnect = 0;
-          
-            function connect() {
-            	ws.debug=null;
-             // pub/sub event
-              ws.connect({}, function() {
-                //전챗
-                ws.subscribe("/sub/chat/room/"+sno, function(chat) {
-                      var recv = JSON.parse(chat.body);
-                      recvMessage(recv);
-                      updated();
-
-                  });
-                ws.send("/pub/chat/studyMessage", {}, JSON.stringify({roomId: sno, type:'JOIN', sender:memberId}));
-             }, function(error) {
-                 if(reconnect++ <= 5) {
-                     setTimeout(function() {
-                         console.log("connection reconnect");
-                         sock = new SockJS("/ws-stomp");
-                         ws = Stomp.over(sock);
-                         connect();
-                     },10*1000);
-                 }
-             });
-          }  
+	          // websocket &amp; stomp initialize
+	          var sock = new SockJS("/ws-stomp");
+	          var ws = Stomp.over(sock);
+	          var reconnect = 0;
+	          ws.debug=null;
+	          function connect() {
+	          	
+	           // pub/sub event
+	            ws.connect({}, function() {
+	              //전챗
+	              ws.subscribe("/sub/chat/room/"+sno, function(chat) {
+	                    var recv = JSON.parse(chat.body);
+	                    recvMessage(recv);
+	                    updated();
+	
+	                });
+	              ws.send("/pub/chat/studyMessage", {}, JSON.stringify({roomId: sno, type:'JOIN', sender:memberId}));
+	           }, function(error) {
+	               if(reconnect++ <= 5) {
+	                   setTimeout(function() {
+	                       console.log("connection reconnect");
+	                       sock = new SockJS("/ws-stomp");
+	                       ws = Stomp.over(sock);
+	                       connect();
+	                   },10*1000);
+	               }
+	           });
+	        }  
             
             
-            getMessage();
             connect();
+            
+            studyChatService.getMessage(sno, function(list){
+            	 var str="";
+                 
+                 if(list == null || list.length==0){
+                   $(".chat-box").html("");
+                   
+                   return;
+                 }
+   
+               for(var i = 0, len = list.length||0; i<len; i++){
+                     if(list[i].sender != memberId){
+                         str += '<div class="direct-chat-msg left"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-left">'+ list[i].sender +'</span>';
+                         str += '<span class="direct-chat-timestamp float-right">&nbsp;'+ studyChatService.displayTime(list[i].dt) +'</span></div>';
+                         str += '<div class="direct-chat-text ">'+ list[i].message +'</div></div>';
+                     }
+                     else if(list[i].sender == memberId){   
+                         str += '<div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">&nbsp;&nbsp;'+list[i].sender+'</span>';
+                         str += '<span class="direct-chat-timestamp float-left">'+ studyChatService.displayTime(list[i].dt) +'</span></div>';  
+                         str += '<div class="direct-chat-text ">'+list[i].message +'</div></div>';
+                     }
+                   }
+   
+               $(".chat-box").append(str);
+            	
+            });
           
 	          var today = new Date();
 	          
@@ -438,7 +482,6 @@ var memberId = '<sec:authentication property="principal.username"/>';
 	            
 	              var date = (today.getMonth()+1)+'/'+today.getDate() +' '+ today.getHours() + ":" + today.getMinutes();      
 	    
-	              
 	             
 	              var str ="";
 	              if(recv.sender == '[알림]'){
@@ -447,12 +490,12 @@ var memberId = '<sec:authentication property="principal.username"/>';
 	                }
 	                else if(memberId != recv.sender){
 	                str += '<div class="direct-chat-msg left"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-left">'+ recv.sender +'</span>';
-	                str += '<span class="direct-chat-timestamp float-right">'+ date +'&nbsp;</span></div>';
+	                str += '<span class="direct-chat-timestamp float-right">&nbsp;'+ date +'</span></div>';
 	                str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
 	                
 	              } else if(memberId == recv.sender){
-	                str += '<div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">'+recv.sender+'</span>';
-	                str += '<span class="direct-chat-timestamp float-left">&nbsp;'+ date +'</span></div>';  
+	                str += '<div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">&nbsp;&nbsp;'+recv.sender+'</span>';
+	                str += '<span class="direct-chat-timestamp float-left">'+ date +'</span></div>';  
 	                str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
 	                
 	              } 
@@ -537,6 +580,7 @@ var memberId = '<sec:authentication property="principal.username"/>';
           });
           
           function sendMsg(){
+        	  ws.debug=null;
               var message = $('input[name="message"]').val();
               if(message == null || message =='') return ;
               else{
