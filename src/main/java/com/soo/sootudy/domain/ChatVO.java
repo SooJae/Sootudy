@@ -1,5 +1,7 @@
 package com.soo.sootudy.domain;
 
+import java.util.Date;
+
 import lombok.Data;
 
 @Data
@@ -12,9 +14,11 @@ public class ChatVO {
 		JOIN, CHAT, LEAVE
 	}
 	private MessageType type; //메세지 타입
+	private int s_cno; //채팅 번호
 	private String roomId; //방번호
 	private String sender;
 	private String message;
-	private int userCnt;
+	private Date dt;
+	private int chatCnt;
 	
 }

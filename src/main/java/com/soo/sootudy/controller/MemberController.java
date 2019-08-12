@@ -45,7 +45,7 @@ public class MemberController {
 		
 		rttr.addFlashAttribute("result",map);
 		
-		return "redirect:/board/list";
+		return "redirect:/member/join";
 	}
 	
 	

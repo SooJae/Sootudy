@@ -24,7 +24,6 @@ var studyService=(function(){
 	
 	
 	function join(study,callback,error){
-		console.log("join......");
 
 		$.ajax({
 			type:'post',

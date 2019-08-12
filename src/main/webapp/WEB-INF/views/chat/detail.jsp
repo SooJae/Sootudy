@@ -114,12 +114,12 @@
 	            }
 	            else if(ss_sender != recv.sender){
 		          str += '<div class="direct-chat-msg left"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-left">'+ recv.sender +'</span>';
-		        	str += '<span class="direct-chat-timestamp float-right">'+ date +'</span></div>';
+		        	str += '<span class="direct-chat-timestamp float-right">'+ date +'&nbsp;</span></div>';
 		        	str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
 		        	
 	          } else if(ss_sender == recv.sender){
 	        	  str += '<div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">'+recv.sender+'</span>';
-	        		str += '<span class="direct-chat-timestamp float-left">'+ date +'</span></div>';  
+	        		str += '<span class="direct-chat-timestamp float-left">&nbsp;'+ date +'</span></div>';  
 	        		str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
 	        		
 	          } 

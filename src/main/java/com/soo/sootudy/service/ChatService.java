@@ -16,7 +16,11 @@ public interface ChatService {
 
     public void sendChatMessage(ChatVO chatVO) ;
     
-
 	public void studyCreateChat(StudyVO study);
+
+	public void sendStudyChatMessage(ChatVO chatVO);
+
+
+	public List<ChatVO> getStudyChatMessage(int studyId);
 	
 }

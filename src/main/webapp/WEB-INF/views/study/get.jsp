@@ -326,6 +326,8 @@ var sno ='<c:out value="${study.sno}"/>';
 var leader='<c:out value="${study.leader}"/>';
 var memberId = '<sec:authentication property="principal.username"/>';
 	
+    
+    
     //ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
       var csrfHeaderName="${_csrf.headerName}";
       var csrfTokenValue="${_csrf.token}";
@@ -334,6 +336,20 @@ var memberId = '<sec:authentication property="principal.username"/>';
       }); 
       
 
+      
+      function getMessage(){
+    	  console.log("getMessage...");
+          $.getJSON("/study/chat/"+sno,
+                    function(data){
+                      let obj ={"roomId": data.roomId, "name": data.name};
+                      console.log("obj"+data.roomId+"name"+data.name);
+          }).fail(function(xhr,status,err){
+                      if(err){
+                        console.log(err);
+                      }
+                    });
+          }
+      
       var study = {
               sno:sno,
               leader:leader
@@ -367,6 +383,7 @@ var memberId = '<sec:authentication property="principal.username"/>';
     	  
     	  studyService.join(study,function(result){
     		  
+         
     		  
     		  
     		  var chatForm_str = '<div class="direct-chat-messages chat-box" id="custom-chat" onscroll="custom_chat_scroll()"> </div>';
@@ -377,14 +394,14 @@ var memberId = '<sec:authentication property="principal.username"/>';
           $("#chat-card").html(chatForm_str);
           
           
+          
           // websocket &amp; stomp initialize
           var sock = new SockJS("/ws-stomp");
           var ws = Stomp.over(sock);
           var reconnect = 0;
-
-          
           
             function connect() {
+            	ws.debug=null;
              // pub/sub event
               ws.connect({}, function() {
                 //전챗
@@ -394,7 +411,7 @@ var memberId = '<sec:authentication property="principal.username"/>';
                       updated();
 
                   });
-                ws.send("/pub/chat/message", {}, JSON.stringify({roomId: sno, type:'JOIN', sender:memberId}));
+                ws.send("/pub/chat/studyMessage", {}, JSON.stringify({roomId: sno, type:'JOIN', sender:memberId}));
              }, function(error) {
                  if(reconnect++ <= 5) {
                      setTimeout(function() {
@@ -406,6 +423,9 @@ var memberId = '<sec:authentication property="principal.username"/>';
                  }
              });
           }  
+            
+            
+            getMessage();
             connect();
           
 	          var today = new Date();
@@ -427,12 +447,12 @@ var memberId = '<sec:authentication property="principal.username"/>';
 	                }
 	                else if(memberId != recv.sender){
 	                str += '<div class="direct-chat-msg left"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-left">'+ recv.sender +'</span>';
-	                str += '<span class="direct-chat-timestamp float-right">'+ date +'</span></div>';
+	                str += '<span class="direct-chat-timestamp float-right">'+ date +'&nbsp;</span></div>';
 	                str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
 	                
 	              } else if(memberId == recv.sender){
 	                str += '<div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">'+recv.sender+'</span>';
-	                str += '<span class="direct-chat-timestamp float-left">'+ date +'</span></div>';  
+	                str += '<span class="direct-chat-timestamp float-left">&nbsp;'+ date +'</span></div>';  
 	                str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
 	                
 	              } 
@@ -441,15 +461,10 @@ var memberId = '<sec:authentication property="principal.username"/>';
 	              $(".chat-box").append(str);
 	          }
 	        
-// 	        function sendMsg(){
-// 	            var message = messageInput.val();
-// 	              ws.send('/pub/chat/message', {}, JSON.stringify({roomId: sno, type: 'CHAT', message: message, sender: leader}));
-// 	              messageInput.val('');
-// 	          }
 	          
 	          $(window).bind("beforeunload", function (e){
 	    
-	            ws.send('/pub/chat/message', {}, JSON.stringify({roomId: sno, type: 'LEAVE', message: "나갑니다", sender: memberId}));
+	            ws.send('/pub/chat/studyMessage', {}, JSON.stringify({roomId: sno, type: 'LEAVE', message: "나갑니다", sender: memberId}));
 	            sessionStorage.clear(); // 세션 스토리지를 전부 지운다.
 	            ws.disconnect();
 	          });
@@ -523,8 +538,11 @@ var memberId = '<sec:authentication property="principal.username"/>';
           
           function sendMsg(){
               var message = $('input[name="message"]').val();
-                ws.send('/pub/chat/message', {}, JSON.stringify({roomId: sno, type: 'CHAT', message: message, sender: memberId}));
+              if(message == null || message =='') return ;
+              else{
+                ws.send('/pub/chat/studyMessage', {}, JSON.stringify({roomId: sno, type: 'CHAT', message: message, sender: memberId}));
                 $('input[name="message"]').val('');
+              }
             }
 
 </script>

@@ -87,7 +87,7 @@ public class ReplyController {
 	@RequestMapping(method= {RequestMethod.PUT, RequestMethod.PATCH},
 			value="/{rno}",
 			consumes="application/json",
-			produces = {MediaType.TEXT_PLAIN_VALUE})
+					produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<String> modify(
 					@RequestBody ReplyVO vo,
 					@PathVariable("rno") int rno){

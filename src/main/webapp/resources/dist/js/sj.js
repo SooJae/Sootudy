@@ -1,5 +1,6 @@
 //let instance = null;
 let obj = {id :"아이디",nm:"닉네임",email:"이메일"};
+
 class Form{
 	constructor(focus){
 		this.focus=focus;
@@ -85,7 +86,7 @@ let joinCheckService =(function(){
         } 
           	 	
         else {
-    		throw new Error("아이디를 입력해주세요 (영어+숫자조합 4~12자))");
+    		throw new Error("아이디를 입력해주세요 (영어+숫자조합 4~12자)");
         }  
     };
 

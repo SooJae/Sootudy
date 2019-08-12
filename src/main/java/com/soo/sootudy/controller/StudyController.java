@@ -1,6 +1,7 @@
 package com.soo.sootudy.controller;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.soo.sootudy.domain.ChatRoomDTO;
+import com.soo.sootudy.domain.ChatVO;
 import com.soo.sootudy.domain.Criteria;
 import com.soo.sootudy.domain.StudyCriteria;
 import com.soo.sootudy.domain.StudyPageDTO;
@@ -66,8 +68,6 @@ public class StudyController {
 	@Transactional
 	public String register(StudyVO study, RedirectAttributes rttr) {
 		
-		
-		
 		studyService.register(study);
 		chatService.studyCreateChat(study);
 		Map<String, Object> map = new HashMap<String,Object>();
@@ -78,8 +78,8 @@ public class StudyController {
 		
 		return "redirect:/study/list";
 	}
-	
 	@GetMapping({"/get","/modify"})
+	@PreAuthorize("isAuthenticated()")
 	public void get(@RequestParam("sno") int sno, @ModelAttribute("scri") Criteria scri ,Model model) {
 		log.info("/get or modify");
 		
@@ -87,18 +87,20 @@ public class StudyController {
 	}
 	
 	 // 채팅방 입장 화면
+	@PreAuthorize("isAuthenticated()")
     @PostMapping("/enter/{studyId}")
     @ResponseBody
     public ResponseEntity<ChatRoomDTO> studyChatDetail(@PathVariable String studyId) {
     	log.info("join room"+studyId);
     	return new ResponseEntity<>(chatService.getRoomInfo(studyId), HttpStatus.OK);
     }
-    // 참가한 채팅방 정보 조회
-    @PostMapping("/chat/{studyId}")
+    // 이전 채팅 가져오기
+	@PreAuthorize("isAuthenticated()")
+    @GetMapping("/chat/{studyId}")
     @ResponseBody
-    public ResponseEntity<ChatRoomDTO> studyChatInfo(@PathVariable String studyId) {
+    public ResponseEntity<List<ChatVO>> studyChatInfo(@PathVariable int studyId) {
     	log.info("chat get"+studyId);
-    	return new ResponseEntity<>(chatService.getRoomInfo(studyId), HttpStatus.OK);
+    	return new ResponseEntity<>(chatService.getStudyChatMessage(studyId), HttpStatus.OK);
     }		
 //    @PostMapping("/room/cnt")
 //    @ResponseBody

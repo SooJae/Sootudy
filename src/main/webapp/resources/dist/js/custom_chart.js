@@ -1,12 +1,12 @@
  var tempChartData = {
-      labels  : ['1월', '2월', '3월'],
+      labels  : ['6월', '7월', '8월'],
       // labels  : ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
       datasets: [
         {
           label               : '이수재',
           backgroundColor     : 'navy',
           pointRadius          : false,
-          data                : [28, 48, 40],
+          data                : [28, 28, 20],
 //          borderColor         : 'rgba(60,141,188,0.8)',
 //          pointColor          : '#3b8bba',
 //          pointStrokeColor    : 'rgba(60,141,188,1)',
@@ -14,10 +14,10 @@
 //          pointHighlightStroke: 'rgba(60,141,188,1)',
         },
         {
-          label               : '김철수',
+          label               : '예지',
           backgroundColor     : 'green',
           pointRadius         : false,
-          data                : [88, 89, 7],
+          data                : [38, 29, 7],
 //          borderColor         : 'rgba(210, 214, 222, 1)',
 //          pointColor          : 'rgba(210, 214, 222, 1)',
 //          pointStrokeColor    : '#c1c7d1',
@@ -28,7 +28,7 @@
           label               : '아이유',
           backgroundColor     : 'tan',
           pointRadius         : false,
-          data                : [75, 33, 20],
+          data                : [15, 33, 20],
 //          borderColor         : 'rgba(210, 214, 222, 1)',
 //          pointColor          : 'rgba(210, 214, 222, 1)',
 //          pointStrokeColor    : '#c1c7d1',
@@ -36,10 +36,10 @@
 //          pointHighlightStroke: 'rgba(220,220,220,1)',
         },
         {
-          label               : '김태연',
+          label               : '태연',
           backgroundColor     : 'grey',
           pointRadius         : false,
-          data                : [65, 59, 80],
+          data                : [1, 32, 20],
 //          borderColor         : 'rgba(210, 214, 222, 1)',
 //          pointColor          : 'rgba(210, 214, 222, 1)',
 //          pointStrokeColor    : '#c1c7d1',
@@ -47,7 +47,7 @@
 //          pointHighlightStroke: 'rgba(220,220,220,1)',
         },
         {
-        	label               : '박준범',
+        	label               : '박보영',
         	backgroundColor     : 'plum',
         	borderColor         : 'rgba(210, 214, 222, 1)',
         	pointRadius         : false,
@@ -58,10 +58,10 @@
 //        	pointHighlightStroke: 'rgba(220,220,220,1)',
         },
         {
-        	label               : '장준호',
+        	label               : '연우',
         	backgroundColor     : 'brown',
         	pointRadius         : false,
-        	data                : [95, 79, 40]
+        	data                : [15, 9, 20]
 //        	borderColor         : 'rgba(210, 214, 222, 1)',
 //        	pointColor          : 'rgba(210, 214, 222, 1)',
 //        	pointStrokeColor    : '#c1c7d1',
@@ -69,10 +69,10 @@
 //        	pointHighlightStroke: 'rgba(220,220,220,1)',
         },
         {
-        	label               : '문규',
+        	label               : '윤아',
         	backgroundColor     : '#3C8DBC',
         	pointRadius         : false,
-        	data                : [70,22, 80]
+        	data                : [40,22, 10]
 //        	borderColor         : 'rgba(210, 214, 222, 1)',
 //        	pointColor          : 'rgba(210, 214, 222, 1)',
 //        	pointStrokeColor    : '#c1c7d1',
@@ -80,10 +80,10 @@
 //        	pointHighlightStroke: 'rgba(220,220,220,1)',
         },
         {
-        	label               : '남진우',
+        	label               : '수재리',
         	backgroundColor     : 'rgba(210, 214, 222, 1)',
         	pointRadius         : false,
-        	data                : [9, 9, 100]
+        	data                : [9, 9, 41]
 //        	borderColor         : 'rgba(210, 214, 222, 1)',
 //        	pointColor          : 'rgba(210, 214, 222, 1)',
 //        	pointStrokeColor    : '#c1c7d1',

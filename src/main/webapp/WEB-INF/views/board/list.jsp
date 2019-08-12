@@ -50,8 +50,8 @@
   </c:choose>
   <div class="col-10 col-md-5 ellipsis title" style="text-align:left; padding-left:0"><a class="move" href='<c:out value="${board.bno}"/>'><c:out value="${board.title}"/></a> <span style="color:blue;"><c:if test="${board.reply_cnt ne 0}">&nbsp;&nbsp;[<c:out value="${board.reply_cnt}"/>]</c:if></span></div>
   <div class="col-6 col-md-2 ellipsis" id="nick"><a href="#"><c:out value="${board.writer}"/></a></div>
-  <div class="col-3 col-md-3"><fmt:formatDate pattern="MM-dd HH:mm" value="${board.udt_dt}"/></div>
-  <div class="col-3 col-md-1"><c:out value="${board.v_cnt}"/></div>
+  <div class="col-3 col-md-3" id="date"><fmt:formatDate pattern="MM-dd HH:mm" value="${board.udt_dt}"/></div>
+  <div class="col-3 col-md-1" id="count"><c:out value="${board.v_cnt}"/></div>
  </div>
 </c:forEach>
 
@@ -61,12 +61,12 @@
     <div class="form-row justify-content-center">
       <select name="type">
 <%--         <option value="" <c:out value="${pageMaker.cri.type == null?'selected':''}"/>>--</option> --%>
+        <option value="TWC" <c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>전체</option>
+        <option value="TC" <c:out value="${(pageMaker.cri.type == null ||pageMaker.cri.type eq 'TC')?'selected':''}"/>>제목+내용</option>
         <option value="T" <c:out value="${pageMaker.cri.type eq 'T'?'selected':''}"/>>제목</option>
         <option value="C" <c:out value="${pageMaker.cri.type eq 'C'?'selected':''}"/>>내용</option>
         <option value="W" <c:out value="${pageMaker.cri.type eq 'W'?'selected':''}"/>>작성자</option>
-        <option value="TC" <c:out value="${(pageMaker.cri.type == null ||pageMaker.cri.type eq 'TC')?'selected':''}"/>>제목+내용</option>
-        <option value="TW" <c:out value="${pageMaker.cri.type eq 'TW'?'selected':''}"/>>제목+작성자</option>
-        <option value="TWC" <c:out value="${pageMaker.cri.type eq 'TWC'?'selected':''}"/>>제목+내용+작성자</option>
+<%--         <option value="TW" <c:out value="${pageMaker.cri.type eq 'TW'?'selected':''}"/>>제목+작성자</option> --%>
       </select>
   
       <input type="text" size="20" name="keyword" class="form-control" style="width:10rem" value='<c:out value="${pageMaker.cri.keyword}"/>'/>&nbsp; 
