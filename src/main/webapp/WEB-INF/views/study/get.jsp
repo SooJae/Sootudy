@@ -402,7 +402,7 @@ var sno ='<c:out value="${study.sno}"/>';
 var leader='<c:out value="${study.leader}"/>';
 var memberId = '<sec:authentication property="principal.username"/>';
 	
-    
+
     
     //ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
       var csrfHeaderName="${_csrf.headerName}";
@@ -411,6 +411,11 @@ var memberId = '<sec:authentication property="principal.username"/>';
         xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
       }); 
       
+      function showList() {
+    	  
+      }
+  	//로딩하자마자 todo 리스트 불러옴
+  	studyTodoService.getList(sno);
 
       
 //       function getMessage(){
@@ -464,7 +469,7 @@ var memberId = '<sec:authentication property="principal.username"/>';
           if(operation === "todoWrite"){
         	  todoVal = $("input[name='todo-value']").val();
         
-              /* 시간을 안 넣을 경우 작성해야됌 */
+              /* todo:시간을 안 넣을 경우 작성해야됌 */
               var todo_date = $("input[name='todo-date']").val();
               var todo_time =$("input[name='todo-time']").val();
               var tempDate = (todo_date+" "+todo_time);
@@ -480,14 +485,14 @@ var memberId = '<sec:authentication property="principal.username"/>';
               
               studyTodoService.add(todo,function(date){
             	  $("input[name='todo-value']").val("");
-            	  console.log("showList");
+            	  
+            	  studyTodoService.getList(sno);
               });
               
 //               var today = new Date();
               
 //               var gap = expiredDate - today.getTime();
               
-              console.log(customDate.getTime());
              	 // getday();
           } 
 
@@ -603,7 +608,6 @@ var memberId = '<sec:authentication property="principal.username"/>';
 	          $(window).bind("beforeunload", function (e){
 	    
 	            ws.send('/pub/chat/studyMessage', {}, JSON.stringify({roomId: sno, type: 'LEAVE', message: "나갑니다", sender: memberId}));
-	            sessionStorage.clear(); // 세션 스토리지를 전부 지운다.
 	            ws.disconnect();
 	          });
 
@@ -685,22 +689,6 @@ var memberId = '<sec:authentication property="principal.username"/>';
             }
           
           
-          function displayTime(timeValue){
-        	    var today = new Date();
-        	    
-        	    var gap = today.getTime()-timeValue;
-        	    
-        	    var dateObj = new Date(timeValue);
-        	    
-        	      var yy = dateObj.getFullYear();
-        	      var mm = dateObj.getMonth() + 1; //getMonth() is zero-based
-        	      var dd = dateObj.getDate();
-        	      var h = dateObj.getHours();
-        	      var m = dateObj.getMinutes();
-        	      
-        	      return [ (mm > 9 ? '' : '0') + mm, '/',
-        	        ( dd > 9 ? '' : '0') + dd, (h > 9 ? '' : '0'),' ', h,':', (m > 9 ? '' : '0'), m ].join('');
-        	  }
           
           
 

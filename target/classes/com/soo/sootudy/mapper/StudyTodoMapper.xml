@@ -21,22 +21,30 @@
 	</select>
 	 -->
 	
-  <select id="findBySno" resultType="com.soo.sootudy.domain.StudyTodoVO">
-  SELECT
-      *
-  FROM study_todo
-  WHERE sno = #{sno}
+  <select id="getList" resultType="com.soo.sootudy.domain.StudyTodoVO">
+	  SELECT
+	  	  tdno,
+	  	  todo,
+	      leader,
+	      reg_dt,
+	      exp_dt,
+	      achive,
+	      sno
+	  FROM study_todo
+	  WHERE sno = #{sno}
   </select>
   
   
   <insert id="insert">
     INSERT INTO study_todo
             ( todo
-            , writer
-            , sno)
+            , leader
+            , sno
+            , exp_dt)
     VALUES  (#{todo}
-            , #{writer}
-            , #{sno})
+            , #{leader}
+            , #{sno}
+            , #{exp_dt})
   </insert>
   
   <delete id="delete">
