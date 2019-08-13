@@ -118,7 +118,7 @@
 		        	str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
 		        	
 	          } else if(ss_sender == recv.sender){
-	        	  str += '<div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">'+recv.sender+'</span>';
+	        	  str += '<div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">&nbsp;'+recv.sender+'</span>';
 	        		str += '<span class="direct-chat-timestamp float-left">&nbsp;'+ date +'</span></div>';  
 	        		str += '<div class="direct-chat-text ">'+ messages[0].sender + messages[0].message +'</div></div>';
 	        		

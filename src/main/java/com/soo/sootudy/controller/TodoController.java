@@ -22,11 +22,11 @@ import com.soo.sootudy.service.ReplyService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@RequestMapping("/replies")
+@RequestMapping("/todo")
 @RestController
 @Slf4j
 @AllArgsConstructor
-public class ReplyController {
+public class TodoController {
 	
 	@Autowired
 	private ReplyService service;

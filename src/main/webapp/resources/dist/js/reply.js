@@ -6,24 +6,23 @@ var replyService=(function(){
 		console.log("reply......");
 
 		
-	$.ajax({
-		type:'post',
-		url:'/replies/new',
-		data:JSON.stringify(reply),
-		contentType : "application/json; charset=utf-8",
-		success:function(result, status, xhr){
-			console.log("replyt",result);
-			if(callback){
-				callback(result);
+			$.ajax({
+				type:'post',
+				url:'/replies/new',
+				data:JSON.stringify(reply),
+				contentType : "application/json; charset=utf-8",
+				success:function(result, status, xhr){
+					if(callback){
+						callback(result);
+					}
+				},
+				error : function(xhr, status, err){
+					if(error){
+						error(err);
+						}
+					}
+				});
 			}
-		},
-		error : function(xhr, status, err){
-			if(error){
-				error(err);
-				}
-			}
-		});
-	}
 	
 	function getList(param, callback, error){
 		

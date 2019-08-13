@@ -1,6 +1,6 @@
 console.log("todo module...");
 //
-var todoService=(function(){
+var studyTodoService=(function(){
 	
 	function check(tdno, callback, error){
 
@@ -22,7 +22,7 @@ var todoService=(function(){
 		});
 	}
 	
-	function add(reply,callback,error){
+	function add(todo,callback,error){
 	console.log("add......");
 
 	$.ajax({

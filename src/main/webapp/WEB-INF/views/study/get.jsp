@@ -76,6 +76,45 @@
                   <i class="fas fa-trash-o"></i>
                 </div>
               </li>
+              <li>
+                <div class="custom-control custom-checkbox d-inline ml-2">
+                  <input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck3" value="안녕3"
+                    disabled>
+                  <label class="custom-control-label" for="customCheck3"></label>
+                </div>
+                <span class="text">Let theme shine like a star</span>
+                <small class="badge badge-danger"><i class="far fa-clock"></i> 3 days</small>
+                <div class="tools">
+                  <i class="fas fa-edit"></i>
+                  <i class="fas fa-trash-o"></i>
+                </div>
+              </li>
+              <li>
+                <div class="custom-control custom-checkbox d-inline ml-2">
+                  <input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck3" value="안녕3"
+                    disabled>
+                  <label class="custom-control-label" for="customCheck3"></label>
+                </div>
+                <span class="text">Let theme shine like a star</span>
+                <small class="badge badge-primary"><i class="far fa-clock"></i> 3 days</small>
+                <div class="tools">
+                  <i class="fas fa-edit"></i>
+                  <i class="fas fa-trash-o"></i>
+                </div>
+              </li>
+              <li>
+                <div class="custom-control custom-checkbox d-inline ml-2">
+                  <input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck3" value="안녕3"
+                    disabled>
+                  <label class="custom-control-label" for="customCheck3"></label>
+                </div>
+                <span class="text">Let theme shine like a star</span>
+                <small class="badge badge-secondary"><i class="far fa-clock"></i> 3 days</small>
+                <div class="tools">
+                  <i class="fas fa-edit"></i>
+                  <i class="fas fa-trash-o"></i>
+                </div>
+              </li>
             </ul>
           </div>
           <!-- /.card-body -->
@@ -112,9 +151,15 @@
             <h4>Todo 내용</h4>
             <input class="form-control" type="text" placeholder="할일을 적어주세요" name="todo-value">
          </div>
-         <div class="form-group">
-            <h4>기한</h4>
-            <input class="form-control" type="date" name="todo-date">
+         <div class="form-row">
+	         <div class="form-group col-md-6">
+	            <h4>기한 날짜</h4>
+	            <input class="form-control" type="date" name="todo-date">
+	         </div>
+	         <div class="form-group col-md-4">
+	            <h4>기한 시간</h4>
+	            <input class="form-control" type="time" name="todo-time">
+	         </div>
          </div>
       </div>
       <div class="modal-footer">
@@ -351,6 +396,7 @@
 <script type="text/javascript" src="/resources/dist/js/custom_chart.js"></script>
 <script type="text/javascript" src="/resources/dist/js/study.js"></script>
 <script type="text/javascript" src="/resources/dist/js/study_chat.js"></script>
+<script type="text/javascript" src="/resources/dist/js/study_todo.js"></script>
 <script>
 var sno ='<c:out value="${study.sno}"/>';
 var leader='<c:out value="${study.leader}"/>';
@@ -417,12 +463,32 @@ var memberId = '<sec:authentication property="principal.username"/>';
           var operation = $(this).data("oper");
           if(operation === "todoWrite"){
         	  todoVal = $("input[name='todo-value']").val();
+        
+              /* 시간을 안 넣을 경우 작성해야됌 */
+              var todo_date = $("input[name='todo-date']").val();
+              var todo_time =$("input[name='todo-time']").val();
+              var tempDate = (todo_date+" "+todo_time);
+              var expiredDate = new Date(tempDate);
+              
+              
               var todo = {
                       sno:sno,
                       todo:todoVal,
-                      leader:leader
+                      leader:leader,
+                      exp_dt:expiredDate,
                   };  
-             	  console.log(todoVal);
+              
+              studyTodoService.add(todo,function(date){
+            	  $("input[name='todo-value']").val("");
+            	  console.log("showList");
+              });
+              
+//               var today = new Date();
+              
+//               var gap = expiredDate - today.getTime();
+              
+              console.log(customDate.getTime());
+             	 // getday();
           } 
 
         });
@@ -487,11 +553,11 @@ var memberId = '<sec:authentication property="principal.username"/>';
                for(var i = 0, len = list.length||0; i<len; i++){
                      if(list[i].sender != memberId){
                          str += '<div class="direct-chat-msg left"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-left">'+ list[i].sender +'</span>';
-                         str += '<span class="direct-chat-timestamp float-right">&nbsp;'+ studyChatService.displayTime(list[i].dt) +'</span></div>';
+                         str += '<span class="direct-chat-timestamp float-right">&nbsp;'+ studyChatService.displayTime(list[i].dt) +'&nbsp;</span></div>';
                          str += '<div class="direct-chat-text ">'+ list[i].message +'</div></div>';
                      }
                      else if(list[i].sender == memberId){   
-                         str += '<div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">&nbsp;&nbsp;'+list[i].sender+'</span>';
+                         str += '<div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">&nbsp;'+list[i].sender+'</span>';
                          str += '<span class="direct-chat-timestamp float-left">'+ studyChatService.displayTime(list[i].dt) +'</span></div>';  
                          str += '<div class="direct-chat-text ">'+list[i].message +'</div></div>';
                      }
@@ -617,6 +683,26 @@ var memberId = '<sec:authentication property="principal.username"/>';
                 $('input[name="message"]').val('');
               }
             }
+          
+          
+          function displayTime(timeValue){
+        	    var today = new Date();
+        	    
+        	    var gap = today.getTime()-timeValue;
+        	    
+        	    var dateObj = new Date(timeValue);
+        	    
+        	      var yy = dateObj.getFullYear();
+        	      var mm = dateObj.getMonth() + 1; //getMonth() is zero-based
+        	      var dd = dateObj.getDate();
+        	      var h = dateObj.getHours();
+        	      var m = dateObj.getMinutes();
+        	      
+        	      return [ (mm > 9 ? '' : '0') + mm, '/',
+        	        ( dd > 9 ? '' : '0') + dd, (h > 9 ? '' : '0'),' ', h,':', (m > 9 ? '' : '0'), m ].join('');
+        	  }
+          
+          
 
 </script>
 
