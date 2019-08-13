@@ -80,25 +80,54 @@
           </div>
           <!-- /.card-body -->
           <div class="card-footer clearfix">
-              <div class="input-group mb-3">
+             <!--  <div class="input-group mb-3">
                   <input type="text" class="form-control" placeholder="할일을 적어주세요" name="todo-value">
                    <div class="input-group-append">
                    <button type="button" data-oper="todoWrite" class="btn btn-primary btns">쓰기</button>
                    </div>
-                </div>
-
+                </div> -->
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#todoModal"> 등록</button>
             <button type="button" id="check-button" class="btn btn-info float-right"><i class="fas fa-check"></i>체크</button>
           </div>
         </div>
         <!-- /.card -->
       </div>
+      <!-- /.todo -->
+      
+      <!-- Button trigger modal -->
+
+
+<!-- Modal -->
+<div class="modal fade" id="todoModal" tabindex="-1" role="dialog" aria-labelledby="modalCenterTitle" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title" id="modalCenterTitle">Todo 등록</h2>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+         <div class="form-group">
+            <h4>Todo 내용</h4>
+            <input class="form-control" type="text" placeholder="할일을 적어주세요" name="todo-value">
+         </div>
+         <div class="form-group">
+            <h4>기한</h4>
+            <input class="form-control" type="date" name="todo-date">
+         </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary btns" data-oper="todoWrite">등록</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 
       <div class="col-lg-9 custom-chat">
-        
         <section class="content t-full">
-        
-        
         
             <div class="card card-success direct-chat direct-chat-success ">
               <div class="card-header">
