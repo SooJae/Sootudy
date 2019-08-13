@@ -35,8 +35,8 @@
           <div class="card-body">
             <ul class="todo-list" data-widget="todo-list">
 
-
-                <!-- todo text -->
+<!-- 
+                todo text
               <li>
                 <div class="custom-control custom-checkbox d-inline ml-2">
                   <input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck" value="안녕" disabled>
@@ -114,7 +114,7 @@
                   <i class="fas fa-edit"></i>
                   <i class="fas fa-trash-o"></i>
                 </div>
-              </li>
+              </li> -->
             </ul>
           </div>
           <!-- /.card-body -->
@@ -402,7 +402,7 @@ var sno ='<c:out value="${study.sno}"/>';
 var leader='<c:out value="${study.leader}"/>';
 var memberId = '<sec:authentication property="principal.username"/>';
 	
-
+var todoList = $(".todo-list");
     
     //ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
       var csrfHeaderName="${_csrf.headerName}";
@@ -411,11 +411,33 @@ var memberId = '<sec:authentication property="principal.username"/>';
         xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
       }); 
       
-      function showList() {
+      showTodoList();
+      function showTodoList() {
     	  
-      }
-  	//로딩하자마자 todo 리스트 불러옴
-  	studyTodoService.getList(sno);
+		  	//로딩하자마자 todo 리스트 불러옴
+			  	studyTodoService.getList(sno,function(todoList){
+			  		 var str="";
+			         
+			         if(todoList ==null || todoList.length==0){
+			        	 todoList.html("");
+			           
+			           return;
+			         }
+			         
+			         
+			         for(var i = 0, len = todoList.length||0; i<len; i++){
+			        	 str+='<li><div class="custom-control custom-checkbox d-inline ml-2">';
+                 str+='<input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck'+[i]+'" value="'+todoList[i].tdno+'" disabled>';
+                 str+='<label class="custom-control-label" for="customCheck'+[i]+'"></label></div>';
+                 str+='<span class="text">'+todoList[i].todo+'</span>';
+                 str+=' <small class="badge badge-primary"><i class="far fa-clock"></i> 4 hours</small>';
+                 str+=' <div class="tools"><i class="fas fa-edit"></i><i class="fas fa-trash-o"></i> </div></li>';
+			         }
+			         $(".todo-list").append(str);
+			  		
+			  		
+			  	});
+		  }
 
       
 //       function getMessage(){
@@ -486,7 +508,7 @@ var memberId = '<sec:authentication property="principal.username"/>';
               studyTodoService.add(todo,function(date){
             	  $("input[name='todo-value']").val("");
             	  
-            	  studyTodoService.getList(sno);
+            	  showTodoList();
               });
               
 //               var today = new Date();
@@ -619,22 +641,6 @@ var memberId = '<sec:authentication property="principal.username"/>';
     	 
       });
 
-      
-
-        	for(i =0; i<4; i++){
-        		  var str = "";
-        		      str+='<li><div class="custom-control custom-checkbox d-inline ml-2">';
-        		      str+='<input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck'+[i]+'" value="안녕" disabled>';
-        		      str+='<label class="custom-control-label" for="customCheck'+[i]+'"></label></div>';
-        		      str+='<span class="text">Make the theme responsive</span>';
-        		      str+=' <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>';
-        		      str+=' <div class="tools"><i class="fas fa-edit"></i><i class="fas fa-trash-o"></i> </div></li>';
-        		      
-        	 $(".todo-list").append(str);
-        	}
-        	
-        	
-
         	
         	
             var todoCheck = {
@@ -665,13 +671,13 @@ var memberId = '<sec:authentication property="principal.username"/>';
           $("#check-button").on("click", function (e) {
             if ($("#check-button").hasClass("active")) {
               $(this).removeClass("active");
-              $(this).html(` <i class="fas fa-check"></i> 체크`);
+              $(this).html(' <i class="fas fa-check"></i> 체크');
               $("ul li input[name='todo-check']").each(function (i, check) {
                 $(check).attr("disabled", "disabled");
               });
             } else {
               $(this).addClass("active");
-              $(this).html(`<i class="fas fa-check"></i> 완료`);
+              $(this).html('<i class="fas fa-check"></i> 완료');
               $("ul li input[name='todo-check']").each(function (i, check) {
                 $(check).removeAttr("disabled");
               });
