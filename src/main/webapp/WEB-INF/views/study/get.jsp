@@ -411,29 +411,46 @@ var todoList = $(".todo-list");
         xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
       }); 
       
+      let todo_checks = new Set();
+      function checkBox(){
+          $("input:checkbox[name='todo-check']").on("click", function (e) {
+                if ($(this).is(":checked")) {
+                  $(this).prop("checked", true);
+                  $(this).parent().parent().attr("class", "done");
+                  todo_checks.add($(this).parent().find("input").val());
+                } else {
+                  $(this).prop("checked", false);
+                  $(this).parent().parent().removeAttr("class");
+                  todo_checks.delete($(this).parent().find("input").val());
+                }
+
+              });
+         }
+      
       function showTodoList() {
 		  	//로딩하자마자 todo 리스트 불러옴
-			  	studyTodoService.getList(sno,function(todoList){
-			  		 var str="";
-			         
-			         if(todoList ==null || todoList.length==0){
-			        	 todoList.html("");
-			           return;
-			         }
-			         
-			         for(var i = 0, len = todoList.length||0; i<len; i++){
-			        	 str +='<li><div class="custom-control custom-checkbox d-inline ml-2">';
-		                 str +='<input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck'+[i]+'" value="'+todoList[i].tdno+'" disabled>';
-		                 str +='<label class="custom-control-label" for="customCheck'+[i]+'"></label></div>';
-		                 str +='<span class="text">'+todoList[i].todo+'</span>';
-		                 str += dateBadge(todoList[i].exp_dt);
-		                 str +='<div class="tools"><i class="far fa-trash-alt"></i></div></li>';
-			         }
-			         $(".todo-list").html(str);
-			         studyTodoService.checkBox();
-			  		});
-			  	}
-      
+	  	studyTodoService.getList(sno,function(todoList){
+	  		 var str="";
+	         
+	         if(todoList ==null || todoList.length==0){
+	        	 todoList.html("");
+	           return;
+	         }
+	         
+	         for(var i = 0, len = todoList.length||0; i<len; i++){
+	        	 str +='<li><div class="custom-control custom-checkbox d-inline ml-2">';
+                 str +='<input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck'+[i]+'" value="'+todoList[i].tdno+'" disabled>';
+                 str +='<label class="custom-control-label" for="customCheck'+[i]+'"></label></div>';
+                 str +='<span class="text">'+todoList[i].todo+'</span>';
+                 str += dateBadge(todoList[i].exp_dt);
+                 str +='<div class="tools"><i class="far fa-trash-alt"></i></div></li>';
+	         }
+	         $(".todo-list").html(str);
+	         checkBox();
+	  		});
+	  	}
+  		
+      //기간 뱃지
       function dateBadge(date){
     	 var tempDate = studyTodoService.displayTime(date);
     	 var badge ="";
@@ -482,25 +499,14 @@ var todoList = $(".todo-list");
             	  showTodoList();
               });
       
-
-
-      
-     
-      
-      
-
-              
-//               var today = new Date();
-              
-//               var gap = expiredDate - today.getTime();
-              
-             	 // getday();
           } 
 
         });
       
+      
       $("#check-button").on("click", function (e) {
           if ($("#check-button").hasClass("active")) {
+        	  studyTodoService.
             $(this).removeClass("active");
             $(this).html(' <i class="fas fa-check"></i> 체크');
             $("ul li input[name='todo-check']").each(function (i, check) {
@@ -515,9 +521,6 @@ var todoList = $(".todo-list");
           }
         });
 
-//       var sock = new SockJS("/ws-stomp");
-//       var ws = Stomp.over(sock);
-//       var reconnect = 0;
       var sock = null;
       var ws = null;
       var reconnect = 0;
@@ -589,6 +592,8 @@ var todoList = $(".todo-list");
                $(".chat-box").append(str);
             	
             });
+            
+            
           
 	          var today = new Date();
 	          
@@ -637,19 +642,7 @@ var todoList = $(".todo-list");
       });
 
         	
-        	
-            var todoCheck = {
-                    sno:sno,
-                };  
-        	
-        	
 
-
-          // $("button").on("click",function(){
-          //   $("ul li").each(function(index,item){
-          //     $(item).addClass("done");
-          //   })
-          // });
           
           
           

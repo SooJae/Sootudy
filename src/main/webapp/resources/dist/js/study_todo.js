@@ -2,26 +2,31 @@ console.log("todo module...");
 //
 var studyTodoService=(function(){
 	
-//	function check(tdno, callback, error){
-//
-//		$.ajax({
-//			type:'put',
-//			url :'/todo/check'+tdno,
-//			data:JSON.stringify(reply),
-//			contentType:"application/json; charset=utf-8",
-//			success : function(result,status,xhr){
-//				if(callback){
-//					callback(result);
-//				}
-//			},
-//			error : function(xhr,status,err){
-//				if(error){
-//					error(err);
-//				}
-//			}
-//		});
-//	}
+	function check(todo, callback, error){
+
+		$.ajax({
+			type:'put',
+			url :'/todo/check'+todo.sno,
+			data:JSON.stringify(reply),
+			contentType:"application/json; charset=utf-8",
+			success : function(result,status,xhr){
+				if(callback){
+					callback(result);
+				}
+			},
+			error : function(xhr,status,err){
+				if(error){
+					error(err);
+				}
+			}
+		});
+	}
 	function checkBox(){
+		
+		let todo_check = {
+				
+		}
+		
         $("input:checkbox[name='todo-check']").on("click", function (e) {
               if ($(this).is(":checked")) {
                 $(this).prop("checked", true);
@@ -137,6 +142,8 @@ var studyTodoService=(function(){
 		var gap = timeValue-today.getTime();
 		
 		var dateObj = new Date(timeValue);
+		
+		var gapObj = new Date(gap);
 		//하루 이내일시
 		if(gap <= 0){
 			return "기한 만료";
@@ -146,17 +153,17 @@ var studyTodoService=(function(){
 				var mi = dateObj.getMinutes();
 				var ss = dateObj.getSeconds();
 				
-				var thh = today.getHours();
-				var tmi = today.getMinutes();
-				var tss = today.getSeconds();
+				var gh = gapObj.getHours();
+				var gm = gapObj.getMinutes();
+				var gs = gapObj.getSeconds();
+				
 				//한시간 이내일시
 				if(gap < (1000 * 60 * 60)){
-					var gapMinute = mi - tmi;
-					return gapMinute+"분";
-				} else{
-					var gapHours = hh - thh;
-					return gapHours+"시간";
+					return gm+"분";
+				} else {
+					return gh+"시간";
 				}
+				
 			} else {
 				var yy = dateObj.getYearYY();
 				var mm = dateObj.getMonth() + 1; //getMonth() is zero-based

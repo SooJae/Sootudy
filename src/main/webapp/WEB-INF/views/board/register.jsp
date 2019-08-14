@@ -218,6 +218,7 @@ $(function(){
 	
 	  function showUploadResult(uploadResultArr){
 		    
+		  console.log("업로드 리절트",uploadResultArr);
 		    if(!uploadResultArr || uploadResultArr.length == 0){ return; }
 		    
 		    var uploadUL = $(".uploadResult ul");
