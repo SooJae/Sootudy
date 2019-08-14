@@ -10,4 +10,6 @@ public interface StudyTodoMapper {
 
 	public List<StudyTodoVO> getList(int sno);
 
+	public int check(StudyTodoVO vo);
+
 }

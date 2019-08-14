@@ -209,7 +209,6 @@ ul > li { list-style: none }
 			       console.log(arr);
 			       var str = "";
 			       $(arr).each(function(i, attach){
-			           
 			           //image type
 			           if(attach.fileType){
 			             var fileCallPath =  encodeURIComponent( attach.uploadPath+ "/s_"+attach.uuid +"_"+attach.fileName);
@@ -283,8 +282,9 @@ ul > li { list-style: none }
 		    $.ajax({
 		      url: '/uploadAjaxAction',
 		      processData: false, 
-		      contentType: false, data: 
-		      formData,type: 'POST',
+		      contentType: false, 
+		      data: formData,
+		      type: 'POST',
 		      beforeSend: function(xhr){
 		    	  xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 		      }, 

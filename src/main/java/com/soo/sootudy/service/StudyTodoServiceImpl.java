@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.soo.sootudy.domain.BoardLikeVO;
 import com.soo.sootudy.domain.StudyTodoVO;
 import com.soo.sootudy.mapper.StudyTodoMapper;
 
@@ -32,6 +33,14 @@ public class StudyTodoServiceImpl implements StudyTodoService {
 	public List<StudyTodoVO> getTodoList(int sno) {
 		return studyTodoMapper.getList(sno);
 	}
+
+
+	@Override
+	public int check(StudyTodoVO vo) {
+		// TODO Auto-generated method stub
+		return studyTodoMapper.check(vo);
+	}
+	
 
 //	@Override
 //	public ReplyVO get(int rno) {

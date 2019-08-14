@@ -52,7 +52,14 @@
     WHERE tdno = #{tdno}
   </delete>
   
-  
+  <update id="check">
+    UPDATE study_todo
+    SET 
+        check = check + #{amount}
+    WHERE
+        sno = #{sno}
+    
+  </update>
   <!-- <sql id="filter_mode">
   <trim prefix="AND (" suffix=") " prefixOverrides="AND | OR">
     <if test="filter_mode == 'joined'.toString()">

@@ -12,9 +12,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.soo.sootudy.domain.Criteria;
+import com.soo.sootudy.domain.ReplyVO;
 import com.soo.sootudy.domain.StudyTodoVO;
 import com.soo.sootudy.service.StudyTodoService;
 
@@ -75,22 +76,20 @@ public class TodoController {
 //			: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 //	}
 //	
-//	@RequestMapping(method= {RequestMethod.PUT, RequestMethod.PATCH},
-//			value="/{rno}",
-//			consumes="application/json",
-//					produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-//	public ResponseEntity<String> modify(
-//					@RequestBody ReplyVO vo,
-//					@PathVariable("rno") int rno){
-//		vo.setBno(rno);
-//		
-//		log.info("rno"+rno);
-//		log.info("modify"+vo);
-//		
-//		return service.modify(vo) ==1
+	@RequestMapping(method= {RequestMethod.PUT, RequestMethod.PATCH},
+			value="/{sno}",
+			consumes="application/json",
+					produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
+	public ResponseEntity<String> modify(@RequestBody List<String> vo, @PathVariable("sno") int sno){
+		
+		log.info("rno"+sno);
+		log.info("modify"+vo);
+		
+		return new ResponseEntity<>("success", HttpStatus.OK);
+//		return service.check(vo) ==1
 //			? new ResponseEntity<>("success", HttpStatus.OK)
 //			: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//	}
+	}
 	
 	
 

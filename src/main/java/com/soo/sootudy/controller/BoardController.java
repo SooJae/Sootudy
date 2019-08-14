@@ -41,6 +41,8 @@ public class BoardController {
 	@Autowired
 	private BoardService service;
 	
+	//alert값을 위한 map
+	Map<String, Object> map = new HashMap<String,Object>();
 	
 	@GetMapping("/list")
 	public String list(Criteria cri, Model model) {
@@ -48,8 +50,6 @@ public class BoardController {
 		
 		model.addAttribute("list", service.getList(cri));
 		int total = service.getTotal(cri);
-		log.info("total:"+total);
-		log.info("키워드"+cri.getKeyword());
 		
 		model.addAttribute("pageMaker", new PageDTO(cri,total));
 		
@@ -66,7 +66,6 @@ public class BoardController {
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	public String register(@ModelAttribute("cri") Criteria cri, BoardVO board, RedirectAttributes rttr) {
-		log.info("======================");
 		
 		log.info("register: " + board);
 		
@@ -75,13 +74,10 @@ public class BoardController {
   
 		board.getAttachList().forEach(attach -> log.info(""+attach)); 
 		}
-		 
-		
-		log.info("=======================");
 		
 		service.register(board);
 		
-		Map<String, Object> map = new HashMap<String,Object>();
+//		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("flag","success");
 		map.put("msg","등록이 완료되었습니다");
 		
@@ -102,14 +98,14 @@ public class BoardController {
 	@PostMapping("/modify")
 	public String modify(BoardVO board, @ModelAttribute("cri") Criteria cri,RedirectAttributes rttr) {
 		log.info("modify... :"+ board);
-		Map<String, Object> map = null;
+//		Map<String, Object> map = null;
 		if(service.modify(board)) {
-			map = new HashMap<String,Object>();
+//			map = new HashMap<String,Object>();
 			map.put("flag","success");
 			map.put("msg","수정이 완료되었습니다");
 		} 
 		else {
-			map = new HashMap<String,Object>();
+//			map = new HashMap<String,Object>();
 			map.put("flag","fail");
 			map.put("msg","수정에 실패하였습니다");
 		}
@@ -132,7 +128,7 @@ public class BoardController {
 			//delete Attach Files
 			deleteFiles(attachList);
 
-			Map<String, Object> map = new HashMap<String,Object>();
+//			Map<String, Object> map = new HashMap<String,Object>();
 			map.put("flag","success");
 			map.put("msg","삭제가 완료되었습니다");
 			

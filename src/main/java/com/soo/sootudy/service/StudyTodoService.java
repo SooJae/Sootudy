@@ -10,4 +10,7 @@ public interface StudyTodoService {
 
 	public List<StudyTodoVO> getTodoList(int sno);
 
+	public int check(StudyTodoVO vo);
+
+
 }

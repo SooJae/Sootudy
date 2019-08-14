@@ -2,13 +2,14 @@ console.log("todo module...");
 //
 var studyTodoService=(function(){
 	
-	function check(todo, callback, error){
+	function check(sno, todo, callback, error){
 
 		$.ajax({
 			type:'put',
-			url :'/todo/check'+todo.sno,
-			data:JSON.stringify(reply),
+			url :'/todo/'+sno,
+			data:JSON.stringify(todo),
 			contentType:"application/json; charset=utf-8",
+//			contentType:"application; charset=utf-8",
 			success : function(result,status,xhr){
 				if(callback){
 					callback(result);
@@ -22,11 +23,6 @@ var studyTodoService=(function(){
 		});
 	}
 	function checkBox(){
-		
-		let todo_check = {
-				
-		}
-		
         $("input:checkbox[name='todo-check']").on("click", function (e) {
               if ($(this).is(":checked")) {
                 $(this).prop("checked", true);
@@ -175,7 +171,7 @@ var studyTodoService=(function(){
 		}
 	}
 return{
-//	check:check,
+	check:check,
 	add: add,
 	getList:getList,
 	checkBox:checkBox,

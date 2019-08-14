@@ -203,191 +203,9 @@
             </div>
             <!-- /.card -->
         
-        <%-- 
-            <!-- DIRECT CHAT -->
-            <div class="card card-primary direct-chat direct-chat-primary ">
-              <div class="card-header" style="text-align:center;">
-                <h3 class="card-title" ><c:out value="${study.title}"/></h3>
-
-                <div class="card-tools">
-                  <span data-toggle="tooltip" title="3 New Messages" class="badge bg-danger">3</span>
-                  <button type="button" class="btn btn-tool" data-widget="collapse"><i class="fas fa-minus"></i>
-                  </button>
-                  <button type="button" class="btn btn-tool" data-toggle="tooltip" title="Contacts"
-                          data-widget="chat-pane-toggle">
-                    <i class="fas fa-comments"></i></button>
-                  <button type="button" class="btn btn-tool" data-widget="remove"><i class="fas fa-times"></i>
-                  </button>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body">
-              <c:out value="${study.content}"/>
-
-              <!-- /.card-footer-->
-              
-              </div>
-            </div>
-            <!--/.direct-chat -->
-            
-             --%>
-            
           </section>
           <!-- /.col -->
-
         </div>
-          <!-- Default box -->
-          <!-- <div class="card">
-            <div class="card-body table-responsive-md p-0">
-              <table class="table table-striped projects">
-                <thead>
-                  <tr>
-                    <th style="width: 45%">
-                      스터디 명
-                    </th>
-                    <th style="width: 2%">
-                      인원
-                    </th>
-                    <th>
-                      진행 률
-                    </th>
-                    <th style="width: 25%">
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="study">
-                    <td>
-                      <a>
-                        스프링 공부
-                      </a>
-                      <br />
-                      <small>
-                        개설일 01.01.2019
-                      </small>
-                    </td>
-                    <td>
-                      3/10
-                    </td>
-                    <td class="project_progress">
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0"
-                          aria-volumemax="100" style="width: 57%">
-                        </div>
-                      </div>
-                      <small>
-                        57% Complete
-                      </small>
-                    </td>
-                    <td class="project-actions text-right">
-                      <a class="btn btn-primary btn-sm" href="#">
-                        <i class="fas fa-folder">
-                        </i>
-                        보기
-                      </a>
-                      <a class="btn btn-info btn-sm" href="#">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        수정
-                      </a>
-                      <a class="btn btn-danger btn-sm" href="#">
-                        <i class="fas fa-trash">
-                        </i>
-                        삭제
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a>
-                        AdminLTE v3
-                      </a>
-                      <br />
-                      <small>
-                        Created 01.01.2019
-                      </small>
-                    </td>
-                    <td>
-                      0/30
-                    </td>
-                    <td class="project_progress">
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-green" role="progressbar" aria-volumenow="47" aria-volumemin="0"
-                          aria-volumemax="100" style="width: 47%">
-                        </div>
-                      </div>
-                      <small>
-                        47% Complete
-                      </small>
-                    </td>
-                    <td class="project-actions text-right">
-                      <a class="btn btn-primary btn-sm" href="#">
-                        <i class="fas fa-folder">
-                        </i>
-                        View
-                      </a>
-                      <a class="btn btn-info btn-sm" href="#">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Edit
-                      </a>
-                      <a class="btn btn-danger btn-sm" href="#">
-                        <i class="fas fa-trash">
-                        </i>
-                        Delete
-                      </a>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td>
-                      <a>
-                        AdminLTE v3
-                      </a>
-                      <br />
-                      <small>
-                        Created 01.01.2019
-                      </small>
-                    </td>
-                    <td>
-
-                      50/100
-                    </td>
-                    <td class="project_progress">
-                      <div class="progress progress-sm">
-                        <div class="progress-bar bg-green" role="progressbar" aria-volumenow="77" aria-volumemin="0"
-                          aria-volumemax="100" style="width: 77%">
-                        </div>
-                      </div>
-                      <small>
-                        77% Complete
-                      </small>
-                    </td>
-                    <td class="project-actions text-right">
-                      <a class="btn btn-primary btn-sm" href="#">
-                        <i class="fas fa-folder">
-                        </i>
-                        View
-                      </a>
-                      <a class="btn btn-info btn-sm" href="#">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Edit
-                      </a>
-                      <a class="btn btn-danger btn-sm" href="#">
-                        <i class="fas fa-trash">
-                        </i>
-                        Delete
-                      </a>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-            /.card-body
-          </div>
-          /.card
- -->
-
           <!-- /.content -->
 
 
@@ -411,19 +229,21 @@ var todoList = $(".todo-list");
         xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
       }); 
       
-      let todo_checks = new Set();
+      var todo_checks = new Set();
       function checkBox(){
           $("input:checkbox[name='todo-check']").on("click", function (e) {
+        	  
+        	  var todo_check_val = $(this).parent().find("input").val();
+        	  
                 if ($(this).is(":checked")) {
                   $(this).prop("checked", true);
                   $(this).parent().parent().attr("class", "done");
-                  todo_checks.add($(this).parent().find("input").val());
+                  todo_checks.add(todo_check_val);
                 } else {
                   $(this).prop("checked", false);
                   $(this).parent().parent().removeAttr("class");
-                  todo_checks.delete($(this).parent().find("input").val());
+                  todo_checks.delete(todo_check_val);
                 }
-
               });
          }
       
@@ -506,7 +326,9 @@ var todoList = $(".todo-list");
       
       $("#check-button").on("click", function (e) {
           if ($("#check-button").hasClass("active")) {
-        	  studyTodoService.
+        	  studyTodoService.check(sno,todo_checks,function(result){
+        		   console.log(result); 
+        	  });
             $(this).removeClass("active");
             $(this).html(' <i class="fas fa-check"></i> 체크');
             $("ul li input[name='todo-check']").each(function (i, check) {

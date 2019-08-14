@@ -209,7 +209,6 @@ $(function(){
 				type: 'POST',
 				dataType:'json',
 				success: function(result){
-					console.log(result);
 					showUploadResult(result);
 				}
 			});
@@ -218,7 +217,6 @@ $(function(){
 	
 	  function showUploadResult(uploadResultArr){
 		    
-		  console.log("업로드 리절트",uploadResultArr);
 		    if(!uploadResultArr || uploadResultArr.length == 0){ return; }
 		    
 		    var uploadUL = $(".uploadResult ul");
@@ -226,7 +224,6 @@ $(function(){
 		    var str ="";
 		    
 		    $(uploadResultArr).each(function(i, obj){
-		    
 				//image type
 				
 				if(obj.image){
