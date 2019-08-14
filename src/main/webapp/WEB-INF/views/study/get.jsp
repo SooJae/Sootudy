@@ -125,8 +125,8 @@
                    <button type="button" data-oper="todoWrite" class="btn btn-primary btns">쓰기</button>
                    </div>
                 </div> -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#todoModal"> 등록</button>
-            <button type="button" id="check-button" class="btn btn-info float-right"><i class="fas fa-check"></i>체크</button>
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#todoModal"><i class="fas fa-plus"></i> 등록</button>
+            <button type="button" id="check-button" class="btn btn-info float-right"><i class="fas fa-check"></i> 체크</button>
           </div>
         </div>
         <!-- /.card -->
@@ -422,18 +422,32 @@ var todoList = $(".todo-list");
 			         }
 			         
 			         for(var i = 0, len = todoList.length||0; i<len; i++){
-			        	 str+='<li><div class="custom-control custom-checkbox d-inline ml-2">';
-		                 str+='<input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck'+[i]+'" value="'+todoList[i].tdno+'" disabled>';
-		                 str+='<label class="custom-control-label" for="customCheck'+[i]+'"></label></div>';
-		                 str+='<span class="text">'+todoList[i].todo+'</span>';
-		                 str+='<small class="badge badge-info"><i class="far fa-clock"></i>'+studyTodoService.displayTime(todoList[i].exp_dt)+'</small>';
-		                 str+='<div class="tools"><i class="fas fa-edit"></i><i class="fas fa-trash-o"></i> </div></li>';
+			        	 str +='<li><div class="custom-control custom-checkbox d-inline ml-2">';
+		                 str +='<input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck'+[i]+'" value="'+todoList[i].tdno+'" disabled>';
+		                 str +='<label class="custom-control-label" for="customCheck'+[i]+'"></label></div>';
+		                 str +='<span class="text">'+todoList[i].todo+'</span>';
+		                 str += dateBadge(todoList[i].exp_dt);
+		                 str +='<div class="tools"><i class="far fa-trash-alt"></i></div></li>';
 			         }
 			         $(".todo-list").html(str);
 			         studyTodoService.checkBox();
 			  		});
 			  	}
       
+      function dateBadge(date){
+    	 var tempDate = studyTodoService.displayTime(date);
+    	 var badge ="";
+    	 if(tempDate.indexOf("분") != -1){
+    		 badge = "danger";
+    	 }else if(tempDate.indexOf("시간") != -1){
+    		 badge = "warning";
+    	 }else if(tempDate.indexOf("만료") != -1){
+    		 badge = "dark";
+    	 } else{
+    		 badge = "primary";
+    	 }
+    	 return '<small class="badge badge-'+badge+'"><i class="far fa-clock"></i> '+tempDate+'</small>';
+      }
       
       var study = {
               sno:sno,
