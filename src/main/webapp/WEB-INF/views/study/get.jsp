@@ -411,78 +411,36 @@ var todoList = $(".todo-list");
         xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
       }); 
       
-      showTodoList();
       function showTodoList() {
-    	  
 		  	//로딩하자마자 todo 리스트 불러옴
 			  	studyTodoService.getList(sno,function(todoList){
 			  		 var str="";
 			         
 			         if(todoList ==null || todoList.length==0){
 			        	 todoList.html("");
-			           
 			           return;
 			         }
 			         
-			         
 			         for(var i = 0, len = todoList.length||0; i<len; i++){
 			        	 str+='<li><div class="custom-control custom-checkbox d-inline ml-2">';
-                 str+='<input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck'+[i]+'" value="'+todoList[i].tdno+'" disabled>';
-                 str+='<label class="custom-control-label" for="customCheck'+[i]+'"></label></div>';
-                 str+='<span class="text">'+todoList[i].todo+'</span>';
-                 str+=' <small class="badge badge-primary"><i class="far fa-clock"></i> 4 hours</small>';
-                 str+=' <div class="tools"><i class="fas fa-edit"></i><i class="fas fa-trash-o"></i> </div></li>';
+		                 str+='<input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck'+[i]+'" value="'+todoList[i].tdno+'" disabled>';
+		                 str+='<label class="custom-control-label" for="customCheck'+[i]+'"></label></div>';
+		                 str+='<span class="text">'+todoList[i].todo+'</span>';
+		                 str+='<small class="badge badge-info"><i class="far fa-clock"></i>'+studyTodoService.displayTime(todoList[i].exp_dt)+'</small>';
+		                 str+='<div class="tools"><i class="fas fa-edit"></i><i class="fas fa-trash-o"></i> </div></li>';
 			         }
-			         $(".todo-list").append(str);
-			  		
-			  		
-			  	});
-		  }
-
+			         $(".todo-list").html(str);
+			         studyTodoService.checkBox();
+			  		});
+			  	}
       
-//       function getMessage(){
-//     	  console.log("getMessage...");
-//           $.getJSON("/study/chat/"+sno+".json",
-//                     function(list){
-// 						        	  var str="";
-						              
-// 						              if(list ==null || list.length==0){
-// 						            	  $(".chat-box").html("");
-						                
-// 						                return;
-// 						              }
-        	  
-// 						        	  for(var i = 0, len = list.length||0; i<len; i++){
-// 								        		  if(list[i].sender != memberId){
-// 								        		      str += '<div class="direct-chat-msg left"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-left">'+ list[i].sender +'</span>';
-// 								                  str += '<span class="direct-chat-timestamp float-right">&nbsp;'+ list[i].dt +'</span></div>';
-// 								                  str += '<div class="direct-chat-text ">'+ list[i].message +'</div></div>';
-// 								        		  }
-// 								        		  else if(list[i].sender == memberId){   
-// 								                  str += '<div class="direct-chat-msg right"><div class="direct-chat-infos clearfix"><span class="direct-chat-name float-right">&nbsp;&nbsp;'+list[i].sender+'</span>';
-// 								                  str += '<span class="direct-chat-timestamp float-left">'+ list[i].dt +'</span></div>';  
-// 								                  str += '<div class="direct-chat-text ">'+list[i].message +'</div></div>';
-// 								        		  }
-// 		// 						                  str+="<small class='pull-right text-muted'> &nbsp;"+replyService.displayTime(list[i].dt)+"</small>";
-// 						                }
-        	  
-// 						        	  $(".chat-box").append(str);
-//           }).fail(function(xhr,status,err){
-//                       if(err){
-//                         console.log(err);
-//                       }
-//                     });
-//           }
       
       var study = {
               sno:sno,
               leader:leader
               }
       
-      
-      var sock = new SockJS("/ws-stomp");
-      var ws = Stomp.over(sock);
-      var reconnect = 0;
+      showTodoList();
       
       $(".btns").on("click",function(e){
           e.preventDefault();
@@ -497,7 +455,6 @@ var todoList = $(".todo-list");
               var tempDate = (todo_date+" "+todo_time);
               var expiredDate = new Date(tempDate);
               
-              
               var todo = {
                       sno:sno,
                       todo:todoVal,
@@ -507,9 +464,17 @@ var todoList = $(".todo-list");
               
               studyTodoService.add(todo,function(date){
             	  $("input[name='todo-value']").val("");
-            	  
+            	  $('#todoModal').modal('hide');
             	  showTodoList();
               });
+      
+
+
+      
+     
+      
+      
+
               
 //               var today = new Date();
               
@@ -520,26 +485,43 @@ var todoList = $(".todo-list");
 
         });
       
+      $("#check-button").on("click", function (e) {
+          if ($("#check-button").hasClass("active")) {
+            $(this).removeClass("active");
+            $(this).html(' <i class="fas fa-check"></i> 체크');
+            $("ul li input[name='todo-check']").each(function (i, check) {
+              $(check).attr("disabled", "disabled");
+            });
+          } else {
+            $(this).addClass("active");
+            $(this).html('<i class="fas fa-check"></i> 완료');
+            $("ul li input[name='todo-check']").each(function (i, check) {
+              $(check).removeAttr("disabled");
+            });
+          }
+        });
 
-    
+//       var sock = new SockJS("/ws-stomp");
+//       var ws = Stomp.over(sock);
+//       var reconnect = 0;
+      var sock = null;
+      var ws = null;
+      var reconnect = 0;
+      
       $("#join-chat").on("click",function(e){
     	  e.preventDefault();
     	  
     	  studyChatService.join(study,function(result){
-    		  
     		  var chatForm_str = '<div class="direct-chat-messages chat-box" id="custom-chat" onscroll="custom_chat_scroll()"> </div>';
-              chatForm_str += '<div class="card-footer"><div class="input-group"><input type="text" name="message" onkeydown="if (event.keyCode == 13) sendMsg()" class="form-control">';
-              chatForm_str += '<span class="input-group-append"><button class="send btn btn-success" type="submit" onclick ="sendMsg()">쓰기</button></span></div></div>';
-         
+	              chatForm_str += '<div class="card-footer"><div class="input-group"><input type="text" name="message" onkeydown="if (event.keyCode == 13) sendMsg()" class="form-control">';
+	              chatForm_str += '<span class="input-group-append"><button class="send btn btn-success" type="submit" onclick ="sendMsg()">쓰기</button></span></div></div>';
          
           $("#chat-card").html(chatForm_str);
           
-          
-          
 	          // websocket &amp; stomp initialize
-	          var sock = new SockJS("/ws-stomp");
-	          var ws = Stomp.over(sock);
-	          var reconnect = 0;
+	          sock = new SockJS("/ws-stomp");
+	          ws = Stomp.over(sock);
+	          
 	          ws.debug=null;
 	          function connect() {
 	          	
@@ -596,7 +578,6 @@ var todoList = $(".todo-list");
           
 	          var today = new Date();
 	          
-	          var maxScroll = $(".card-body").height();
 	          function recvMessage(recv){
 	            var messages =[];
 	            messages.unshift({"type":recv.type,"sender":recv.type !='CHAT'?'[알림] - ':'',"message":recv.message});
@@ -648,41 +629,15 @@ var todoList = $(".todo-list");
                 };  
         	
         	
-          $("input:checkbox[name='todo-check']").on("click", function (e) {
 
-            if ($(this).is(":checked")) {
-              $(this).prop("checked", true);
-              $(this).parent().parent().attr("class", "done");
-              //$(this)
-            } else {
-              $(this).prop("checked", false);
-              $(this).parent().parent().removeAttr("class");
-            }
-            // $(this).attr("checked",true);
-
-          });
 
           // $("button").on("click",function(){
           //   $("ul li").each(function(index,item){
           //     $(item).addClass("done");
           //   })
           // });
-
-          $("#check-button").on("click", function (e) {
-            if ($("#check-button").hasClass("active")) {
-              $(this).removeClass("active");
-              $(this).html(' <i class="fas fa-check"></i> 체크');
-              $("ul li input[name='todo-check']").each(function (i, check) {
-                $(check).attr("disabled", "disabled");
-              });
-            } else {
-              $(this).addClass("active");
-              $(this).html('<i class="fas fa-check"></i> 완료');
-              $("ul li input[name='todo-check']").each(function (i, check) {
-                $(check).removeAttr("disabled");
-              });
-            }
-          });
+          
+          
           
           function sendMsg(){
         	  ws.debug=null;
