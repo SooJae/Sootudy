@@ -42,7 +42,7 @@ public class ServletConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}    
-	
+	 
 	// ajax & websocket xss 공격 방지 ver.2
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
 		
