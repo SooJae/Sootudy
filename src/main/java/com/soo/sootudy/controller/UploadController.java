@@ -155,6 +155,7 @@ public class UploadController {
 	
 
 	
+//	@GetMapping(value="/display",produces = { MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
 	@GetMapping("/display")
 	@ResponseBody
 	public ResponseEntity<byte[]> getFile(String fileName) {
