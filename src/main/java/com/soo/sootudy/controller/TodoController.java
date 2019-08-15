@@ -81,7 +81,7 @@ public class TodoController {
 			consumes="application/json",
 					produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 	public ResponseEntity<String> modify(@RequestBody List<String> vo, @PathVariable("sno") int sno){
-		
+		 
 		log.info("rno"+sno);
 		log.info("modify"+vo);
 		
