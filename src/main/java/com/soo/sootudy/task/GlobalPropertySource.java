@@ -14,7 +14,7 @@ import lombok.Getter;
 })
 @Getter
 public class GlobalPropertySource {
- 
+  
 	
     @Value("${spring.datasource.driverClassName}")
     private String driverClassName;
