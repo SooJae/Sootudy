@@ -24,7 +24,7 @@ public class GlobalPropertySource {
     
     @Value("${spring.datasource.username}")
     private String username;
-    
+     
     @Value("${spring.datasource.password}")
     private String password;
  
