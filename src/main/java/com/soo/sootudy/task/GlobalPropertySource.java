@@ -9,7 +9,10 @@ import lombok.Getter;
 
 @Configuration
 @PropertySources({
-//    @PropertySource( value = "file:c:/dev/config.properties", ignoreResourceNotFound = true ),
+	@PropertySource( value = "classpath:/application.properties", ignoreResourceNotFound = true ),
+//	window
+    @PropertySource( value = "file:c:/dev/config.properties", ignoreResourceNotFound = true ),
+// linux
     @PropertySource( value = "file:${catalina.home}/config/application.properties", ignoreResourceNotFound = true)
 })
 @Getter

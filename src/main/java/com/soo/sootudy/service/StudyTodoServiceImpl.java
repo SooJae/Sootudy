@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.soo.sootudy.domain.BoardLikeVO;
 import com.soo.sootudy.domain.StudyTodoVO;
 import com.soo.sootudy.mapper.StudyTodoMapper;
 
