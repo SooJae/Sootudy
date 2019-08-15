@@ -9,8 +9,8 @@ import lombok.Getter;
 
 @Configuration
 @PropertySources({
-    @PropertySource( value = "file:c:/dev/config.properties", ignoreResourceNotFound = true ),
-    @PropertySource( value = "classpath:/resources/application.properties", ignoreResourceNotFound = true)
+//    @PropertySource( value = "file:c:/dev/config.properties", ignoreResourceNotFound = true ),
+    @PropertySource( value = "classpath:/config/application.properties", ignoreResourceNotFound = true)
 })
 @Getter
 public class GlobalPropertySource {
