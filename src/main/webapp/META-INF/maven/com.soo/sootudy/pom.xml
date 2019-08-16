@@ -339,8 +339,25 @@
         <version>1.1.2</version>
     </dependency>
 
-    
+  <!-- aws-s3 -->
+<!-- 		<dependency>
+		    <groupId>org.springframework.cloud</groupId>
+		    <artifactId>spring-cloud-aws</artifactId>
+		    <version>2.1.2.RELEASE</version>
+		    <type>pom</type>
+		</dependency> -->
 
+<!-- aws-s3 -->
+<dependency>
+    <groupId>com.amazonaws</groupId>
+    <artifactId>aws-java-sdk</artifactId>
+    <version>1.11.611</version>
+</dependency>
+<!-- <dependency>
+    <groupId>com.amazonaws</groupId>
+    <artifactId>aws-java-sdk</artifactId>
+    <version>1.11.154</version>
+</dependency> -->
     
   	
 		<!-- Test -->
@@ -351,6 +368,7 @@
 			<scope>test</scope>
 		</dependency>        
 	</dependencies>
+	
     <build>
         <plugins>
             <plugin>

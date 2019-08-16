@@ -42,29 +42,30 @@ public class ServletConfig implements WebMvcConfigurer {
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}    
-	 
-	// ajax & websocket xss 공격 방지 ver.2
-	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
-		
-		//직접만든 escapeConverter 
-		converters.add(escapingConverter());
-		
-		//이미지를 위한 Converter(없으면 text/html로 변환되어 오류발생.)
-		converters.add(new ByteArrayHttpMessageConverter());
-		
-	}
-	
-	 private HttpMessageConverter<?> escapingConverter() {
-         ObjectMapper objectMapper = new ObjectMapper();
-         // 3. ObjectMapper에 특수 문자 처리 기능 적용
-         objectMapper.getFactory().setCharacterEscapes(new HTMLCharacterEscapes());
-
-         // 4. MessageConverter에 ObjectMapper 설정
-         MappingJackson2HttpMessageConverter htmlEscapingConverter =
-                 new MappingJackson2HttpMessageConverter();
-         htmlEscapingConverter.setObjectMapper(objectMapper);
-
-         return htmlEscapingConverter;
-     }
+//	 
+//	// ajax & websocket xss 공격 방지 ver.2
+//	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
+//		
+//		//직접만든 escapeConverter 
+//		converters.add(escapingConverter());
+//		
+//		//이미지를 위한 Converter(없으면 text/html로 변환되어 오류발생.)
+//		converters.add(new ByteArrayHttpMessageConverter());
+//		
+//	}
+//	
+//	
+//	 private HttpMessageConverter<?> escapingConverter() {
+//         ObjectMapper objectMapper = new ObjectMapper();
+//         //  ObjectMapper에 특수 문자 처리 기능 적용
+//         objectMapper.getFactory().setCharacterEscapes(new HTMLCharacterEscapes());
+//
+//         // MessageConverter에 ObjectMapper 설정
+//         MappingJackson2HttpMessageConverter htmlEscapingConverter =
+//                 new MappingJackson2HttpMessageConverter();
+//         htmlEscapingConverter.setObjectMapper(objectMapper);
+//
+//         return htmlEscapingConverter;
+//     }
 
 }

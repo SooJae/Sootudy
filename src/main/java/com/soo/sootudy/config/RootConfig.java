@@ -1,5 +1,8 @@
 package com.soo.sootudy.config;
 
+import java.util.Properties;
+
+import javax.rmi.CORBA.Util;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -43,13 +46,7 @@ public class RootConfig {
 	public DataSource dataSource() {
 		HikariConfig hikariConfig = new HikariConfig();
 		
-		log.info("global"+globalPropertySource);
 		
-//		hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
-//		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mariadb://sootudydb.c6v2froaotfn.ap-northeast-2.rds.amazonaws.com:3306/SOOTUDY");
-//		
-//		hikariConfig.setUsername("SOOJAE");
-//		hikariConfig.setPassword("tnwo3972!!");
 		hikariConfig.setDriverClassName(globalPropertySource.getDriverClassName());
 		hikariConfig.setJdbcUrl(globalPropertySource.getUrl());
 		 

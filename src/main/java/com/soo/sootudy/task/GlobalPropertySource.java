@@ -1,13 +1,13 @@
 package com.soo.sootudy.task;
 
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
+import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 
-@Configuration
+@Component
 @PropertySources({
 	@PropertySource( value = "classpath:/application.properties", ignoreResourceNotFound = true ),
 //	window
@@ -19,17 +19,30 @@ import lombok.Getter;
 public class GlobalPropertySource {
   
 	
-    @Value("${spring.datasource.driverClassName}")
+    @Value("${spring.aws.datasource.driverClassName}")
     private String driverClassName;
     
-    @Value("${spring.datasource.url}")
+    @Value("${spring.aws.datasource.url}")
     private String url;
     
-    @Value("${spring.datasource.username}")
+    @Value("${spring.aws.datasource.username}")
     private String username;
      
-    @Value("${spring.datasource.password}")
+    @Value("${spring.aws.datasource.password}")
     private String password;
- 
+    
+    @Value("${spring.aws.credentials.accessKey}")
+    private String accessKey;
+    
+    @Value("${spring.aws.credentials.secretKey}")
+    private String secretKey;
+    
+//    @Value("${spring.aws.region}")
+//    private String region;
+    
+    @Value("${spring.aws.s3.bucketName}")
+    private String bucketName;
+    
+
 }
 

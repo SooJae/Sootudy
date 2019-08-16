@@ -34,7 +34,6 @@ import com.soo.sootudy.domain.AttachFileDTO;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnailator;
 
-@Controller
 @Slf4j
 public class UploadController {
 	
