@@ -10,6 +10,6 @@ public interface StudyTodoMapper {
 
 	public List<StudyTodoVO> getList(int sno);
 
-	public int check(StudyTodoVO vo);
+	public void check(String tdno, String achive);
 
 }

@@ -3,13 +3,14 @@ console.log("todo module...");
 var studyTodoService=(function(){
 	
 	function check(sno, todo, callback, error){
-
+console.log(todo+"todo");
 		$.ajax({
 			type:'put',
 			url :'/todo/'+sno,
-			data:JSON.stringify(todo),
+			//Set은 Array.from()으로 받아야 한다.
+			data:JSON.stringify(Array.from(todo)),
+//			data:JSON.stringify(todo),
 			contentType:"application/json; charset=utf-8",
-//			contentType:"application; charset=utf-8",
 			success : function(result,status,xhr){
 				if(callback){
 					callback(result);

@@ -55,9 +55,12 @@
   <update id="check">
     UPDATE study_todo
     SET 
-        check = check + #{amount}
+    <choose>
+      <when test="achive == achive.equals('0')">achive = '1'</when>
+        <otherwise> achive = '0'</otherwise>
+    </choose>
     WHERE
-        sno = #{sno}
+        tdno = #{tdno}
     
   </update>
   <!-- <sql id="filter_mode">

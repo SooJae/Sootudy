@@ -57,7 +57,14 @@
    <!-- Content Header (Page header) -->
 
  <!-- Main content -->
- 
+ <!--  breadcrumb -->
+<section class="container board-list m-full">
+        <div class="container-fluid">
+            <div class="text-center">
+              <h1>게시판</h1>
+            </div>
+        </div>
+</section>
  
  <section>
  <div class="container board-whole m-full white">

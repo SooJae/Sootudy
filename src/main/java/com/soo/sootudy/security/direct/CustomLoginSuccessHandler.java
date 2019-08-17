@@ -22,17 +22,6 @@ import lombok.extern.slf4j.Slf4j;
 public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 	
-//	private String defaultUrl;
-//	 
-//	public String getDefaultUrl() {
-//	        return defaultUrl;
-//	    }
-//	 
-//    public void setDefaultUrl(String defaultUrl) {
-//        this.defaultUrl = defaultUrl;
-//    }
-
-	
 	public RequestCache requestCache = new HttpSessionRequestCache();
     public RedirectStrategy redirectStratgy = new DefaultRedirectStrategy();
 
@@ -46,30 +35,6 @@ public class CustomLoginSuccessHandler implements AuthenticationSuccessHandler {
 		
 		resultRedirectStrategy(request, response, auth);
 
-//		List<String> roleNames = new ArrayList<>();
-//
-//		auth.getAuthorities().forEach(authority -> {
-//
-//			roleNames.add(authority.getAuthority());
-//
-//		});
-//
-//		log.warn("ROLE NAMES: " + roleNames);
-//
-//		if (roleNames.contains("ROLE_ADMIN")) {
-//
-//			response.sendRedirect("/sample/admin");
-//			return;
-//		}
-//
-//		if (roleNames.contains("ROLE_MEMBER")) {
-//
-//			response.sendRedirect("/sample/member");
-//			return;
-//		}
-
-		
-//		response.sendRedirect("/");
 	}
 
 	private void resultRedirectStrategy(HttpServletRequest request, HttpServletResponse response, Authentication auth) throws IOException {

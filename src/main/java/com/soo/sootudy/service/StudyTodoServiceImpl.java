@@ -35,9 +35,11 @@ public class StudyTodoServiceImpl implements StudyTodoService {
 
 
 	@Override
-	public int check(StudyTodoVO vo) {
-		// TODO Auto-generated method stub
-		return studyTodoMapper.check(vo);
+	public int check(List<String> vo , String achive) {
+		vo.forEach(tdno->{
+			studyTodoMapper.check(tdno, achive);
+		});
+		return 1;
 	}
 	
 

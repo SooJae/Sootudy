@@ -78,8 +78,8 @@ public class StudyController {
 		
 		return "redirect:/study/list";
 	}
-	@GetMapping({"/get","/modify"})
 	@PreAuthorize("isAuthenticated()")
+	@GetMapping({"/get","/modify"})
 	public void get(@RequestParam("sno") int sno, @ModelAttribute("scri") Criteria scri ,Model model) {
 		log.info("/get or modify");
 		

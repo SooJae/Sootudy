@@ -34,7 +34,6 @@ public class CustomUserDetailsService implements UserDetailsService {
 		else {
 			return new CustomUser(vo);
 		}
-//		return vo == null ? null : new CustomUser(vo);
 	} 
 
 }

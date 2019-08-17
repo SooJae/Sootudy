@@ -1,6 +1,7 @@
 package com.soo.sootudy.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.soo.sootudy.domain.ReplyVO;
 import com.soo.sootudy.domain.StudyTodoVO;
 import com.soo.sootudy.service.StudyTodoService;
 
@@ -80,15 +80,16 @@ public class TodoController {
 			value="/{sno}",
 			consumes="application/json",
 					produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
-	public ResponseEntity<String> modify(@RequestBody List<String> vo, @PathVariable("sno") int sno){
+//	public ResponseEntity<String> modify(@RequestBody List<String> vo, @PathVariable("sno") int sno){
+	public ResponseEntity<String> modify(@RequestBody List<String> todo, @PathVariable("sno") int sno){
 		 
 		log.info("rno"+sno);
-		log.info("modify"+vo);
+		log.info("modify"+todo);
 		
-		return new ResponseEntity<>("success", HttpStatus.OK);
-//		return service.check(vo) ==1
-//			? new ResponseEntity<>("success", HttpStatus.OK)
-//			: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//		return new ResponseEntity<>("success", HttpStatus.OK);
+		return service.check(todo, sno) ==1
+			? new ResponseEntity<>("success", HttpStatus.OK)
+			: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	

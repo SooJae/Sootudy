@@ -7,22 +7,13 @@
 <!--  breadcrumb -->
 <section class="container board-list m-full">
 	      <div class="container-fluid">
-	        <div class="row mb-2">
-	          <div class="col-sm-6">
+	          <div class="text-center">
 	            <h1>게시판</h1>
 	          </div>
-	          <div class="col-sm-6">
-	            <ol class="breadcrumb float-sm-right">
-	              <li class="breadcrumb-item"><a href="#">홈</a></li>
-	              <li class="breadcrumb-item active">게시판</li>
-	            </ol>
-	          </div>
-	        </div>
 	      </div>
 </section>
 
 
-<!-- section -->
 
     
 <section class="container board-list m-full" style="text-align:center;">

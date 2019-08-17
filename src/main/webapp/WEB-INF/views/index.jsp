@@ -54,7 +54,7 @@ $(document).ajaxSend(function(e, xhr, options){
 
         $.ajax({
             type: 'POST',
-            url: '/uploadAjaxCert',
+            url: '/uploadh',
             data: formData,
             processData: false,
             contentType: false
