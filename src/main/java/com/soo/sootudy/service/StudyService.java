@@ -4,6 +4,8 @@ import java.util.List;
 
 import com.soo.sootudy.domain.Criteria;
 import com.soo.sootudy.domain.StudyCriteria;
+import com.soo.sootudy.domain.StudyMemberVO;
+import com.soo.sootudy.domain.StudyTodoVO;
 import com.soo.sootudy.domain.StudyVO;
 
 public interface StudyService {
@@ -16,6 +18,8 @@ public interface StudyService {
 	public int getTotal(StudyCriteria scri);
 
 	public void register(StudyVO study);
+
+	public void joinStudy(StudyMemberVO vo);
 	
 
 //	public int changeCnt(ChatVO vo);

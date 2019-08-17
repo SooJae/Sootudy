@@ -4,7 +4,7 @@
 <%@ include file="../includes/header.jsp" %>
 
 
-<h4><c:out value="${excpetion.geMessage() }"></c:out></h4>
+<h4><c:out value="${exception.getMessage() }"></c:out></h4>
 
 <ul>
   <c:forEach items="${exception.getStackTrace()}" var="stack">

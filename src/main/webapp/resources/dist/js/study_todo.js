@@ -8,8 +8,8 @@ console.log(todo+"todo");
 			type:'put',
 			url :'/todo/'+sno,
 			//Set은 Array.from()으로 받아야 한다.
-			data:JSON.stringify(Array.from(todo)),
-//			data:JSON.stringify(todo),
+//			data:JSON.stringify(Array.from(todo)),
+			data:JSON.stringify(todo),
 			contentType:"application/json; charset=utf-8",
 			success : function(result,status,xhr){
 				if(callback){

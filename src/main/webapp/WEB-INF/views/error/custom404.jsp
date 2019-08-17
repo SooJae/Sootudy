@@ -4,7 +4,7 @@
 <%@ include file="../includes/header.jsp" %>
 
 <div class="text-center">
-<h1>해당 페이지는 존재하지 않습니다.</h1>
+<h1><c:out value="${exception}"/></h1>
 <img src="/resources/img/lion.gif">
 </div>
 <%@ include file="../includes/footer.jsp" %>

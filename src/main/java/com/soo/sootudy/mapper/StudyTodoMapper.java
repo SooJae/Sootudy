@@ -2,6 +2,8 @@ package com.soo.sootudy.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.soo.sootudy.domain.StudyTodoVO;
 
 public interface StudyTodoMapper {
@@ -10,6 +12,7 @@ public interface StudyTodoMapper {
 
 	public List<StudyTodoVO> getList(int sno);
 
-	public void check(String tdno, String achive);
+
+	public void check(@Param("tdno") String tdno, @Param("achive") String achive);
 
 }

@@ -1,6 +1,7 @@
 package com.soo.sootudy.service;
 
 import java.util.List;
+import java.util.Map;
 
 import com.soo.sootudy.domain.StudyTodoVO;
 
@@ -12,9 +13,12 @@ public interface StudyTodoService {
 
 
 
-	public int check(List<String> vo, String achive);
 
-	public int check(List<String> todo, int sno);
+//	public int check(List<String> todo, int sno);
+
+//	public int check(Map<String, String> todo);
+
+	public int check(Map<String, String> todo, int sno);
 
 
 }

@@ -42,6 +42,16 @@
             , #{leader})
   </insert>
   
+  <insert id="joinStudy">
+  INSERT INTO study_members
+              ( member_id
+              , member_nm
+              , sno)
+  VALUES      ( #{member_id}
+              , #{member_nm}
+              , #{sno})
+  </insert>
+  
   
   
   <!-- <sql id="filter_mode">

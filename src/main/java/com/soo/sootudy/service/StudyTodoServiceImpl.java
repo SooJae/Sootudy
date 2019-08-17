@@ -1,6 +1,7 @@
 package com.soo.sootudy.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,11 +35,31 @@ public class StudyTodoServiceImpl implements StudyTodoService {
 	}
 
 
+//	@Override
+//	public int check(List<String> vo , String achive) {
+//		vo.forEach(tdno->{
+//			studyTodoMapper.check(tdno, achive);
+//		});
+//		return 1;
+//	}
+
+
+//	@Override
+//	public int check(List<String> todo, int sno) {
+//		todo.forEach(tdno->{
+//			log.info("tdno"+tdno);
+//			studyTodoMapper.check(tdno, sno);
+//		});
+//		return 1;
+//	}
+
+
 	@Override
-	public int check(List<String> vo , String achive) {
-		vo.forEach(tdno->{
-			studyTodoMapper.check(tdno, achive);
-		});
+	public int check(Map<String, String> todo, int sno) {
+		todo.forEach((k,v)->studyTodoMapper.check(k, v));
+//		todo.forEach(tdno->{
+//			studyTodoMapper.check(tdno, sno);
+//		});
 		return 1;
 	}
 	

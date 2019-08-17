@@ -24,6 +24,7 @@ import com.soo.sootudy.domain.ChatRoomDTO;
 import com.soo.sootudy.domain.ChatVO;
 import com.soo.sootudy.domain.Criteria;
 import com.soo.sootudy.domain.StudyCriteria;
+import com.soo.sootudy.domain.StudyMemberVO;
 import com.soo.sootudy.domain.StudyPageDTO;
 import com.soo.sootudy.domain.StudyVO;
 import com.soo.sootudy.service.ChatService;
@@ -44,6 +45,10 @@ public class StudyController {
 	private ChatService chatService;
 	
 
+	//alert값을 위한 map
+	Map<String, Object> map = new HashMap<String,Object>();
+	
+	@PreAuthorize("isAuthenticated()")
 	@GetMapping("/list")
 	public String list(StudyCriteria scri, Model model) {
 		
@@ -55,6 +60,20 @@ public class StudyController {
 		model.addAttribute("pageMaker", new StudyPageDTO(scri,total));
 		
 		return "/study/list";
+	}
+	//모임 가입
+	@PreAuthorize("isAuthenticated()")	
+	@PostMapping("join")
+	public String join(StudyMemberVO vo, StudyCriteria scri , RedirectAttributes rttr) {
+		
+		studyService.joinStudy(vo);
+		
+		map.put("flag","success");
+		map.put("msg","가입이 완료되었습니다");
+		
+		rttr.addFlashAttribute("result",map);
+		
+		return "redirect:/study/list" + scri.getListLink();
 	}
 	
 	@PreAuthorize("isAuthenticated()")	
@@ -102,6 +121,9 @@ public class StudyController {
     	log.info("chat get"+studyId);
     	return new ResponseEntity<>(chatService.getStudyChatMessage(studyId), HttpStatus.OK);
     }		
+	
+	
+	
 //    @PostMapping("/room/cnt")
 //    @ResponseBody
 //    public ResponseEntity<String> changeCnt(

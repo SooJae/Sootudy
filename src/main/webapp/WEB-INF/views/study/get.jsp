@@ -229,23 +229,34 @@ var todoList = $(".todo-list");
         xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
       }); 
       
-      var todo_checks = new Set();
+      var todo_checks = {};
       function checkBox(){
           $("input:checkbox[name='todo-check']").on("click", function (e) {
-        	  
         	  var todo_check_val = $(this).parent().find("input").val();
-        	  
                 if ($(this).is(":checked")) {
                   $(this).prop("checked", true);
                   $(this).parent().parent().attr("class", "done");
-                  todo_checks.add(todo_check_val);
+                  
+                  todo_checks[todo_check_val] = "1";
                 } else {
                   $(this).prop("checked", false);
                   $(this).parent().parent().removeAttr("class");
-                  todo_checks.delete(todo_check_val);
+                  todo_checks[todo_check_val] = "0";
                 }
               });
          }
+      
+      function checkFunc(arg){
+    	    arg.prop("checked", true);
+          arg.parent().parent().attr("class", "done");
+          console.log(todo_checks[arg.parent().find("input").val()] = arg.parent().find("input").attr("check"));
+      }
+      
+      function unCheckFunc(arg){
+    	    arg.prop("checked", false);
+          arg.parent().parent().removeAttr("class");
+          console.log(todo_checks[arg.parent().find("input").val()] = arg.parent().find("input").attr("check"));
+      }
       
       function showTodoList() {
 		  	//로딩하자마자 todo 리스트 불러옴
@@ -259,14 +270,23 @@ var todoList = $(".todo-list");
 	         
 	         for(var i = 0, len = todoList.length||0; i<len; i++){
 	        	 str +='<li><div class="custom-control custom-checkbox d-inline ml-2">';
-                 str +='<input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck'+[i]+'" value="'+todoList[i].tdno+'" disabled>';
+                 str +='<input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck'+[i]+'" value="'+todoList[i].tdno+'" check="'+todoList[i].achive+'" disabled>';
                  str +='<label class="custom-control-label" for="customCheck'+[i]+'"></label></div>';
                  str +='<span class="text">'+todoList[i].todo+'</span>';
                  str += dateBadge(todoList[i].exp_dt);
                  str +='<div class="tools"><i class="far fa-trash-alt"></i></div></li>';
+                 
 	         }
 	         $(".todo-list").html(str);
 	         checkBox();
+	         for(var i = 0, len = todoList.length||0; i<len; i++){
+	        	 
+	        	 if(todoList[i].achive == 1)
+	        		  checkFunc($("#customCheck"+[i]));
+	        	 else
+	        		 unCheckFunc($("#customCheck"+[i]));
+	        	 
+	         }
 	  		});
 	  	}
   		
@@ -327,7 +347,6 @@ var todoList = $(".todo-list");
       $("#check-button").on("click", function (e) {
           if ($("#check-button").hasClass("active")) {
         	  studyTodoService.check(sno,todo_checks,function(result){
-        		   console.log(result); 
         	  });
             $(this).removeClass("active");
             $(this).html(' <i class="fas fa-check"></i> 체크');

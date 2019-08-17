@@ -1,7 +1,7 @@
 package com.soo.sootudy.controller;
 
 import java.util.List;
-import java.util.Set;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -81,12 +81,10 @@ public class TodoController {
 			consumes="application/json",
 					produces = {MediaType.APPLICATION_JSON_UTF8_VALUE})
 //	public ResponseEntity<String> modify(@RequestBody List<String> vo, @PathVariable("sno") int sno){
-	public ResponseEntity<String> modify(@RequestBody List<String> todo, @PathVariable("sno") int sno){
+	public ResponseEntity<String> modify(@RequestBody Map<String, String> todo, @PathVariable("sno") int sno){
 		 
 		log.info("rno"+sno);
 		log.info("modify"+todo);
-		
-//		return new ResponseEntity<>("success", HttpStatus.OK);
 		return service.check(todo, sno) ==1
 			? new ResponseEntity<>("success", HttpStatus.OK)
 			: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);

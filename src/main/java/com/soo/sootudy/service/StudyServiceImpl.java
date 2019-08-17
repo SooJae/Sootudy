@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.soo.sootudy.domain.Criteria;
 import com.soo.sootudy.domain.StudyCriteria;
+import com.soo.sootudy.domain.StudyMemberVO;
 import com.soo.sootudy.domain.StudyVO;
 import com.soo.sootudy.mapper.StudyMapper;
 
@@ -41,6 +42,14 @@ public class StudyServiceImpl implements StudyService {
 	public void register(StudyVO study) {
 		// TODO Auto-generated method stub
 		studyMapper.insertSelectKey(study);
+	}
+
+
+	@Override
+	public void joinStudy(StudyMemberVO vo) {
+		// TODO Auto-generated method stub
+		studyMapper.joinStudy(vo);
+		
 	}
 	
 

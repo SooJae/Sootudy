@@ -5,7 +5,7 @@
 
 
 <!--  breadcrumb -->
-  <section class="container board-list m-full p-0">
+<!--   <section class="container board-list m-full p-0"> -->
 <!--  breadcrumb -->
 <section class="container board-list m-full">
         <div class="container-fluid">
@@ -14,7 +14,7 @@
             </div>
         </div>
 </section>
-      </section> 
+<!--       </section>  -->
 
 <section class="container board-list m-full">
 
@@ -42,7 +42,7 @@
                       <th>
                                            진행 률
                       </th>
-                      <th style="width: 20%">
+                      <th style="width: 25%">
                       </th>
                   </tr>
               </thead>
@@ -65,14 +65,19 @@
 <!--                       <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: 57%"> -->
             <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 57%"></div>
                       </div>
-                  <small>
-                      57% Complete
-                  </small>
+                  <div>
+                      57%
+                  </div>
               </td>
               <td class="project-actions text-right">
-                <a class="btn btn-info btn-sm" href="#">
-                    <i class="fas fa-users"></i>
-                      신청
+              
+                <a class="btn btn-success btn-sm" href="#" style="margin-bottom:2px">
+                    <i class="fas fa-folder"></i>
+                                    보기
+                </a>
+                <a class="btn btn-info btn-sm btns" href='<c:out value="${study.sno}"/>' style="margin-bottom:2px">
+                    <i class="fas fa-pencil-alt"></i>
+                                   신청
                 </a>
             </td>
               </tr>
@@ -116,7 +121,7 @@
 		     </ul>
 		    </nav>
 		       <div>
-		        <button type="button" class="btn btn-primary" id="regBtn"> <i class="fas fa-users"></i>&nbsp;모임 만들기</button>
+		        <button type="button" class="btn btn-primary" id="regBtn"> <i class="fas fa-users"></i>&nbsp;모임 개설</button>
 		       </div>
     </div>
     <!-- ./navigation -->
@@ -127,10 +132,12 @@
 
 <form id='actionForm' action="/study/list" method='get'>
   <input type="hidden" name="filter_mode" value='<c:out value="${pageMaker.scri.filter_mode}"/>'/>
+  <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}"/>
 <%--    <input type="hidden" name="type" value='<c:out value="${pageMaker.scri.type}"/>'> --%>
 <%--    <input type="hidden" name="keyword" value='<c:out value="${pageMaker.scri.keyword}"/>'/> --%>
-   <input type="hidden" name="page" value='<c:out value="${pageMaker.scri.page}"/>'/>
-   <input type="hidden" name="perPageNum" value='<c:out value="${pageMaker.scri.perPageNum}"/>'/>
+  <input type="hidden" name="member_id" value='<sec:authentication property="principal.username"/>'>
+  <input type="hidden" name="page" value='<c:out value="${pageMaker.scri.page}"/>'/>
+  <input type="hidden" name="perPageNum" value='<c:out value="${pageMaker.scri.perPageNum}"/>'/>
 </form>
    
 </section>
@@ -142,8 +149,6 @@
 let studyTable = $(".study-body");
 
 $(function(){
-	
-
 
 var csrfHeaderName="${_csrf.headerName}";
 var csrfTokenValue="${_csrf.token}";
@@ -151,7 +156,13 @@ $(document).ajaxSend(function(e, xhr, options){
   xhr.setRequestHeader(csrfHeaderName, csrfTokenValue);
 }); 
 
-
+	$(".btns").on("click", function(e){
+		  e.preventDefault();
+		  actionForm.append("<input type='hidden' name='sno' value='"+ $(this).attr("href")+"'>");
+		  actionForm.attr("action","/study/join");
+		  actionForm.attr("method","post");
+	    actionForm.submit();
+	});
   $("#regBtn").on("click", function(){
     self.location = "/study/register";
   });
@@ -166,7 +177,6 @@ $(document).ajaxSend(function(e, xhr, options){
   });
   
   $(".move").on("click", function(e){
-    
     e.preventDefault();
     actionForm.append("<input type='hidden' name='sno' value='"+ $(this).attr("href")+"'>");
     actionForm.attr("action","/study/get");
