@@ -36,7 +36,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
         messageConverters.add(escapingConverter());
         return true;
     }
-
+ 
     private MessageConverter escapingConverter() {
         ObjectMapper objectMapper = new ObjectMapper();
         objectMapper.getFactory().setCharacterEscapes(new HTMLCharacterEscapes());

@@ -1,14 +1,10 @@
 package com.soo.sootudy.config;
 
-import java.util.Properties;
-
-import javax.rmi.CORBA.Util;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -17,7 +13,6 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
-import com.soo.sootudy.task.GlobalPropertySource;
 import com.zaxxer.hikari.HikariConfig;
 import com.zaxxer.hikari.HikariDataSource;
 
@@ -54,7 +49,7 @@ public class RootConfig {
 		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mariadb://stddbinstance.c6v2froaotfn.ap-northeast-2.rds.amazonaws.com:3306/SOOTUDY");
 		 
 		hikariConfig.setUsername("SOOJAE");
-		hikariConfig.setPassword("suss11091!!");
+		hikariConfig.setPassword("suss1109!!");
 		
 		return new HikariDataSource(hikariConfig);
 	}
