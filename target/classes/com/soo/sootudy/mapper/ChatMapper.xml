@@ -17,6 +17,13 @@
   WHERE roomId = #{roomId}
   </select>
   
+  <select id="studyGet" resultType="com.soo.sootudy.domain.ChatRoomDTO">
+  SELECT
+      *
+  FROM study_chatroom
+  WHERE roomId = #{roomId}
+  </select>
+  
   <insert id="insert">
     INSERT INTO chat_rooms
             ( roomId
@@ -25,7 +32,7 @@
             , #{name} )
   </insert>
   <insert id="studyCreateChat">
-  INSERT INTO chat_rooms
+  INSERT INTO study_chatroom
             ( roomId
             , name )
     VALUES  (#{sno}

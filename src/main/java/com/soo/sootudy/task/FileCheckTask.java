@@ -47,12 +47,12 @@ public class FileCheckTask {
 		
 		//ready for check file in directory with datbase file list
 		List<Path> fileListPaths = fileList.stream()
-				.map(vo -> Paths.get("C:\\upload",vo.getUploadPath(), vo.getUuid() + "_" + vo.getFileName()))
+				.map(vo -> Paths.get("\\home\\ubuntu\\upload\\temp",vo.getUploadPath(), vo.getUuid() + "_" + vo.getFileName()))
 				.collect(Collectors.toList());
 		
 		//image file has thumbnail file
 		fileList.stream().filter(vo -> vo.isFileType() == true)
-		.map(vo -> Paths.get("C:\\upload", vo.getUploadPath(), "s_" + vo.getUuid() + "_" + vo.getFileName()))
+		.map(vo -> Paths.get("\\home\\ubuntu\\upload\\temp", vo.getUploadPath(), "s_" + vo.getUuid() + "_" + vo.getFileName()))
 		.forEach(p -> fileListPaths.add(p));
 		
 		log.warn("================================");
@@ -61,7 +61,7 @@ public class FileCheckTask {
 		
 		//files in yesterday directory
 		
-		File targetDir = Paths.get("C:\\upload", getFolderYesterDay()).toFile();
+		File targetDir = Paths.get("\\home\\ubuntu\\upload\\temp", getFolderYesterDay()).toFile();
 		
 		File[] removeFiles = targetDir.listFiles(file -> fileListPaths.contains(file.toPath())==false);
 		

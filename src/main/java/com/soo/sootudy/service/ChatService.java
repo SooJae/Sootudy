@@ -22,5 +22,7 @@ public interface ChatService {
 
 
 	public List<ChatVO> getStudyChatMessage(int studyId);
+
+	public ChatRoomDTO studyGetRoom(String id);
 	
 }

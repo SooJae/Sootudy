@@ -111,7 +111,7 @@ public class StudyController {
     @ResponseBody
     public ResponseEntity<ChatRoomDTO> studyChatDetail(@PathVariable String studyId) {
     	log.info("join room"+studyId);
-    	return new ResponseEntity<>(chatService.getRoomInfo(studyId), HttpStatus.OK);
+    	return new ResponseEntity<>(chatService.studyGetRoom(studyId), HttpStatus.OK);
     }
     // 이전 채팅 가져오기
 	@PreAuthorize("isAuthenticated()")

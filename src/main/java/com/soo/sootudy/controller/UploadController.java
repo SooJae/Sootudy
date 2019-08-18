@@ -35,6 +35,7 @@ import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnailator;
 
 @Slf4j
+@Controller
 public class UploadController {
 	
 	@GetMapping("/uploadForm")
@@ -44,7 +45,8 @@ public class UploadController {
 	
 	@PostMapping("/uploadFormAction")
 	public void uploadFormPost(MultipartFile[] uploadFile, Model model) {
-		String uploadFolder = "C:\\upload\\temp";
+//		String uploadFolder = "C:\\upload\\temp";
+		String uploadFolder = "\\home\\ubuntu\\upload\\temp";
 		
 		for(MultipartFile multipartFile : uploadFile) {
 			log.info("-------------------------------");
@@ -96,7 +98,7 @@ public class UploadController {
 	public ResponseEntity<List<AttachFileDTO>> uploadAjaxPost(MultipartFile[] uploadFile) {
 
 		List<AttachFileDTO> list = new ArrayList<>();
-		String uploadFolder = "C:\\upload";
+		String uploadFolder = "\\home\\ubuntu\\upload\\";
 
 		String uploadFolderPath = getFolder();
 		// make folder --------
@@ -161,7 +163,7 @@ public class UploadController {
 
 		log.info("fileName: " + fileName);
 
-		File file = new File("c:\\upload\\" + fileName);
+		File file = new File("\\home\\ubuntu\\upload\\" + fileName);
 
 		log.info("file: " + file);
 
@@ -185,7 +187,7 @@ public class UploadController {
 		
 		log.info("download file:"+ fileName);
 		
-		Resource resource = new FileSystemResource("c:\\upload\\"+fileName);
+		Resource resource = new FileSystemResource("\\home\\ubuntu\\upload\\temp"+fileName);
 		
 		if(resource.exists()==false) {
 			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
@@ -238,7 +240,7 @@ public class UploadController {
 		
 		try {
 			//썸네일 삭제
-			file = new File("c:\\upload\\"+URLDecoder.decode(fileName, "UTF-8"));
+			file = new File("\\home\\ubuntu\\upload\\temp"+URLDecoder.decode(fileName, "UTF-8"));
 			file.delete();
 			if(type.equals("image")) {
 				//실제 파일 삭제

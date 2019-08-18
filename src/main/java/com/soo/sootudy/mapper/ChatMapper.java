@@ -10,6 +10,7 @@ public interface ChatMapper {
 	public int insert(ChatRoomDTO chatRoom);
 
 	public ChatRoomDTO get(String roomId);
+	public ChatRoomDTO studyGet(String roomId);
 
 	public List<ChatRoomDTO> getList();
 

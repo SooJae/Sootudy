@@ -51,59 +51,22 @@ color:white;
 
          <ul class="list-unstyled components">
              <sec:authorize access ="isAnonymous()">
-              <p class="m-p btnc" data-oper="login">로그인을 해주세요</p>
+              <p class="m-p btnc" data-oper="login" >로그인을 해주세요</p>
              </sec:authorize>
               <sec:authorize access ="isAuthenticated()">
-                <p class="m-p" style="font-size: 1.5rem; margin-left:10px"><i class="fas fa-user-circle"></i>
+                <p class="m-p" style="font-size: 1.5rem; margin-left:10px;" ><i class="fas fa-user-circle"></i>
                 <sec:authentication property="principal.username"/>
                </p> 
              </sec:authorize>
              <li class="active">
-                 <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-                 <ul class="collapse list-unstyled" id="homeSubmenu">
-                     <li>
-                         <a href="#">home1</a>
-                     </li>
-                     <li>
-                         <a href="#">home2</a>
-                     </li>
-                     <li>
-                         <a href="#">home3</a>
-                     </li>
-                 </ul>
-             </li>
-
-             <li>
                  <a class="btnc" href="#" data-oper="board">게시판</a>
              </li>    
-             
-             <li>
+             <li >
                  <a class="btnc" href="#" data-oper="study">스터디</a>
              </li>
-
-             <li>
+             <li >
                  <a class="btnc" href="#" data-oper="chat">채팅방</a>
              </li>
-             <li>
-                     <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Page</a>
-                     <ul class="collapse list-unstyled" id="pageSubmenu">
-                         <li>
-                             <a href="#">page1</a>
-                         </li>
-                         <li>
-                             <a href="#">page2</a>
-                         </li>
-                         <li>
-                             <a href="#">page3</a>
-                         </li>
-                     </ul>
-                 </li>
-                 <li>
-                     <a href="#">Services</a>
-                 </li>
-                 <li>
-                     <a href="#">Contact Us</a>
-                 </li>  
          </ul>
 
          <ul class="list-unstyled CTAs">
@@ -116,9 +79,6 @@ color:white;
                      <span class="btnc" data-oper="login">로그인</span>
                  </sec:authorize> 
                   </a>
-             </li>
-             <li>
-                 <a href="#" class="article">article</a>
              </li>
          </ul>
      </nav>
@@ -152,7 +112,7 @@ color:white;
 	          <li class="nav-item dropdown">
 					    <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false"><i class="far fa-user"></i></a>
 					    <div class="dropdown-menu dropdown-menu-right">
-					      <a class="dropdown-item" href="#">회원 설정</a>
+<!-- 					      <a class="dropdown-item" href="#">회원 설정</a> -->
 					      <div class="dropdown-divider"></div>
 					        <sec:authorize access ="isAnonymous()">
   					       <a class="dropdown-item btnc" href="#" data-oper="login">로그인</a>

@@ -107,7 +107,7 @@ ul > li { list-style: none }
         <div class="ml-auto">
          <sec:authentication property="principal" var="pinfo"/>
          <sec:authorize access="isAuthenticated()">
-           <c:if test="${pinfo.member.nm eq board.writer}">
+           <c:if test="${pinfo.member.id eq board.writer}">
              <button type="button" class="btn btn-outline-dark btn-sm btns" data-oper="modify"><i class="far fa-edit"></i>&nbsp;수정</button>
            </c:if>
          </sec:authorize>

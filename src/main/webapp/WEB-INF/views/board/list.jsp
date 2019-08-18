@@ -4,7 +4,6 @@
 <%@ include file="../includes/header.jsp" %>
 
 
-<!--  breadcrumb -->
 <section class="container board-list m-full">
 	      <div class="container-fluid">
 	          <div class="text-center">

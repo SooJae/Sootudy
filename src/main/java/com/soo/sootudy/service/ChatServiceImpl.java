@@ -37,6 +37,12 @@ public class ChatServiceImpl implements ChatService {
     public ChatRoomDTO getRoomInfo(String id) {
         return mapper.get(id);
     }
+    @Override
+    public ChatRoomDTO studyGetRoom(String id) {
+    	return mapper.studyGet(id);
+    }
+    
+    
     
     
     //채팅방 생성
@@ -82,7 +88,7 @@ public class ChatServiceImpl implements ChatService {
     	messagingTemplate.convertAndSend("/sub/chat/room/" + chatVO.getRoomId(), chatVO);
     }
 
-
+//이전 채팅 가져오기
 	@Override
 	public List<ChatVO> getStudyChatMessage(int studyId) {
 		return studyChatMapper.read(studyId);

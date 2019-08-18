@@ -18,12 +18,6 @@
 
 <section class="container board-list m-full">
 
-<!--  -->
-
-
-
-
-
     <!-- Main content -->
     <div class="content">
 
@@ -97,10 +91,10 @@
 		          <input type="hidden" name="filter_mode" value="<c:out value="${pageMaker.scri.filter_mode}"/>"/>
 		          <c:choose>
 		            <c:when test="${pageMaker.scri.filter_mode ne 'joined'}">
-		              <button type="button" class="btn btn-outline-danger" id="best" style="font-color:red"><i class="fas fa-sun"></i>인기글</button>
+		              <button type="button" class="btn btn-outline-success" id="best""><i class="fas fa-sun"></i>내 모임</button>
 		            </c:when>
 		            <c:otherwise>
-		              <button type="button" class="btn btn-danger" id="best" style="font-color:red"><i class="fas fa-sun"></i>인기글</button>
+		              <button type="button" class="btn btn-success" id="best"><i class="fas fa-users"></i>내 모임</button>
 		            </c:otherwise>
 		          </c:choose>
 		        </form>
