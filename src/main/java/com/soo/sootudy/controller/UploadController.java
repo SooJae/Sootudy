@@ -240,7 +240,7 @@ public class UploadController {
 		
 		try {
 			//썸네일 삭제
-			file = new File("/home/ubuntu/upload/temp"+URLDecoder.decode(fileName, "UTF-8"));
+			file = new File("/home/ubuntu/upload/temp/"+URLDecoder.decode(fileName, "UTF-8"));
 			file.delete();
 			if(type.equals("image")) {
 				//실제 파일 삭제

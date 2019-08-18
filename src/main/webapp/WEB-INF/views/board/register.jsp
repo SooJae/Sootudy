@@ -217,7 +217,9 @@ $(function(){
 				dataType:'json',
 				success: function(result){
 					showUploadResult(result);
-				}
+				},error:function(request,status,error){
+			        console.log("code = "+ request.status + " message = " + request.responseText + " error = " + error); // 실패 시 처리
+			       }
 			});
 		});
 	
