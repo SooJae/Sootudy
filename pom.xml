@@ -342,16 +342,11 @@
 
 
 <!-- aws-s3 -->
-<!-- <dependency> -->
-<!--     <groupId>com.amazonaws</groupId> -->
-<!--     <artifactId>aws-java-sdk</artifactId> -->
-<!--     <version>1.11.611</version> -->
-<!-- </dependency> -->
-<!-- <dependency>
+<dependency>
     <groupId>com.amazonaws</groupId>
     <artifactId>aws-java-sdk</artifactId>
-    <version>1.11.154</version>
-</dependency> -->
+    <version>1.11.611</version>
+</dependency>
     
   	
 		<!-- Test -->
