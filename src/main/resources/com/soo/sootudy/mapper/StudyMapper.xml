@@ -28,6 +28,12 @@
   WHERE sno = #{sno}
   </select>
   
+  <update id="updateMemberCnt">
+   UPDATE study
+   SET cnt = cnt + #{amount}
+   WHERE sno = #{sno}
+  
+  </update>
   
   <insert id="insertSelectKey">
   <selectKey keyProperty="sno" resultType="int" order="AFTER">

@@ -52,7 +52,7 @@
                   </small>
               </td>
               <td>
-                  3/10
+                  <c:out value="${study.cnt}"/>/<c:out value="${study.cnt_max}"/>
               </td>
               <td class="project_progress">
                   <div class="progress progress-sm">

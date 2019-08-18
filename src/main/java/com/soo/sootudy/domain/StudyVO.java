@@ -15,6 +15,8 @@ public class StudyVO {
 	private Date dt;
 	private Date udt_dt;
 	private String delete_flag;
+	private int cnt;
+	private int cnt_max;
 	
 	private List<String> members;
 }

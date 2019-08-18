@@ -19,7 +19,9 @@ public interface StudyService {
 
 	public void register(StudyVO study);
 
-	public void joinStudy(StudyMemberVO vo);
+
+
+	void joinStudy(StudyMemberVO vo);
 	
 
 //	public int changeCnt(ChatVO vo);

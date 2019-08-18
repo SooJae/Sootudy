@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.soo.sootudy.domain.Criteria;
 import com.soo.sootudy.domain.StudyCriteria;
@@ -40,14 +41,17 @@ public class StudyServiceImpl implements StudyService {
 
 	@Override
 	public void register(StudyVO study) {
+		studyMapper.updateMemberCnt(study.getSno(), 1);
 		// TODO Auto-generated method stub
 		studyMapper.insertSelectKey(study);
 	}
 
-
+//모임 가입
+	@Transactional
 	@Override
 	public void joinStudy(StudyMemberVO vo) {
 		// TODO Auto-generated method stub
+		studyMapper.updateMemberCnt(vo.getSno(), 1);
 		studyMapper.joinStudy(vo);
 		
 	}

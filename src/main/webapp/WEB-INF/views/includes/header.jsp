@@ -91,7 +91,7 @@ color:white;
 	<button type="button" id="sidebarCollapse" class="btn">
 	    <i class="fa fa-align-justify" style="color:white;"></i> <span></span>
 	</button>
-	     <a class="navbar-brand" href="#" style="color: #fff; border: 1.5px solid; padding: 1.5px 10px 1.5px 10px; border-radius: 8px;">S</a> 
+	     <a class="navbar-brand" href="/" style="color: #fff; border: 1.5px solid; padding: 1.5px 10px 1.5px 10px; border-radius: 8px;">S</a> 
 	      <button class="navbar-toggler" id="pc-navbar" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
 	        <span class="navbar-toggler-icon"></span>
 	      </button>

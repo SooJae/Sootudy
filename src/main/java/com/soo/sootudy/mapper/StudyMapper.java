@@ -20,4 +20,6 @@ public interface StudyMapper {
 
 	public void joinStudy(StudyMemberVO vo);
 
+	public void updateMemberCnt(@Param("sno") int sno, @Param("amount") int amount);
+
 }

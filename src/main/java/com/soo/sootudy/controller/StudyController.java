@@ -30,13 +30,11 @@ import com.soo.sootudy.domain.StudyVO;
 import com.soo.sootudy.service.ChatService;
 import com.soo.sootudy.service.StudyService;
 
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-@RequestMapping("/study")
-@Slf4j
-@AllArgsConstructor
 @Controller
+@Slf4j
+@RequestMapping("/study")
 public class StudyController {
 
 	@Autowired
@@ -62,10 +60,10 @@ public class StudyController {
 		return "/study/list";
 	}
 	//모임 가입
+	@Transactional
 	@PreAuthorize("isAuthenticated()")	
-	@PostMapping("join")
+	@PostMapping("/join")
 	public String join(StudyMemberVO vo, StudyCriteria scri , RedirectAttributes rttr) {
-		
 		studyService.joinStudy(vo);
 		
 		map.put("flag","success");
@@ -89,7 +87,6 @@ public class StudyController {
 		
 		studyService.register(study);
 		chatService.studyCreateChat(study);
-		Map<String, Object> map = new HashMap<String,Object>();
 		map.put("flag","success");
 		map.put("msg","등록이 완료되었습니다");
 		
@@ -98,9 +95,15 @@ public class StudyController {
 		return "redirect:/study/list";
 	}
 	@PreAuthorize("isAuthenticated()")
-	@GetMapping({"/get","/modify"})
+	@GetMapping("/get")
 	public void get(@RequestParam("sno") int sno, @ModelAttribute("scri") Criteria scri ,Model model) {
 		log.info("/get or modify");
+		
+		model.addAttribute("study",studyService.get(sno, scri));
+	}
+	@PreAuthorize("isAuthenticated()")
+	@GetMapping("/modify")
+	public void modify(@RequestParam("sno") int sno, @ModelAttribute("scri") Criteria scri ,Model model) {
 		
 		model.addAttribute("study",studyService.get(sno, scri));
 	}
