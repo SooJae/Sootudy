@@ -1,13 +1,13 @@
 package com.soo.sootudy.task;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.annotation.PropertySources;
-import org.springframework.stereotype.Component;
 
 import lombok.Getter;
 
-@Component
+@Configuration
 @PropertySources({
 	@PropertySource( value = "classpath:/application.properties", ignoreResourceNotFound = true ),
 //	window
