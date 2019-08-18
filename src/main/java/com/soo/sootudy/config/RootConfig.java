@@ -39,13 +39,13 @@ import lombok.extern.slf4j.Slf4j;
 
 @MapperScan(basePackages = {"com.soo.sootudy.mapper"})
 @Slf4j
-@PropertySources({
-	@PropertySource( value = "classpath:/application.properties", ignoreResourceNotFound = true ),
-//	window
-    @PropertySource( value = "file:c:/dev/config.properties", ignoreResourceNotFound = true ),
-// linux 
-    @PropertySource( value = "file:${catalina.home}/config/application.properties", ignoreResourceNotFound = true)
-})
+//@PropertySources({
+//	@PropertySource( value = "classpath:/application.properties", ignoreResourceNotFound = true ),
+////	window
+//    @PropertySource( value = "file:c:/dev/config.properties", ignoreResourceNotFound = true ),
+//// linux 
+//    @PropertySource( value = "file:${catalina.home}/config/application.properties", ignoreResourceNotFound = true)
+//})
 public class RootConfig {
 	
 //	@Bean
@@ -54,17 +54,18 @@ public class RootConfig {
 //		ppc.setIgnoreUnresolvablePlaceholders(true);
 //		return ppc;
 //	}
-	@Value("${spring.aws.datasource.driverClassName}")
-    private String driverClassName;
-    
-    @Value("${spring.aws.datasource.url}")
-    private String url;
-    
-    @Value("${spring.aws.datasource.username}")
-    private String username;
-     
-    @Value("${spring.aws.datasource.password}")
-    private String password;
+	
+//	@Value("${spring.aws.datasource.driverClassName}")
+//    private String driverClassName;
+//    
+//    @Value("${spring.aws.datasource.url}")
+//    private String url;
+//    
+//    @Value("${spring.aws.datasource.username}")
+//    private String username;
+//     
+//    @Value("${spring.aws.datasource.password}")
+//    private String password;
 
 	@Bean
 	public DataSource dataSource() {
