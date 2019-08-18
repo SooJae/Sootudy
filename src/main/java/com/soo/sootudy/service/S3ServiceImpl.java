@@ -38,7 +38,6 @@ import com.amazonaws.util.IOUtils;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Service
 @PropertySources({
 	@PropertySource( value = "classpath:/application.properties", ignoreResourceNotFound = true ),
 //	window
