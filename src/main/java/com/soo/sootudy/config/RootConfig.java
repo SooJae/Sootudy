@@ -1,14 +1,21 @@
 package com.soo.sootudy.config;
 
+import javax.annotation.Resource;
 import javax.sql.DataSource;
 
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.annotation.MapperScan;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
@@ -32,24 +39,47 @@ import lombok.extern.slf4j.Slf4j;
 
 @MapperScan(basePackages = {"com.soo.sootudy.mapper"})
 @Slf4j
+@PropertySources({
+	@PropertySource( value = "classpath:/application.properties", ignoreResourceNotFound = true ),
+//	window
+    @PropertySource( value = "file:c:/dev/config.properties", ignoreResourceNotFound = true ),
+// linux 
+    @PropertySource( value = "file:${catalina.home}/config/application.properties", ignoreResourceNotFound = true)
+})
 public class RootConfig {
-
-//	@Autowired
-//	public GlobalPropertySource globalPropertySource;
 	
+//	@Bean
+//	public static PropertyPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+//		PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
+//		ppc.setIgnoreUnresolvablePlaceholders(true);
+//		return ppc;
+//	}
+	@Value("${spring.aws.datasource.driverClassName}")
+    private String driverClassName;
+    
+    @Value("${spring.aws.datasource.url}")
+    private String url;
+    
+    @Value("${spring.aws.datasource.username}")
+    private String username;
+     
+    @Value("${spring.aws.datasource.password}")
+    private String password;
+
 	@Bean
 	public DataSource dataSource() {
 		HikariConfig hikariConfig = new HikariConfig();
-//		spring.datasource.driverClassName=net.sf.log4jdbc.sql.jdbcapi.DriverSpy
-//				spring.datasource.url=jdbc:log4jdbc:mariadb://stddbinstance.c6v2froaotfn.ap-northeast-2.rds.amazonaws.com:3306/SOOTUDY
-//				spring.datasource.username=SOOJAE
-//				spring.datasource.password=suss1109!!
-		
-		hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
-		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mariadb://stddbinstance.c6v2froaotfn.ap-northeast-2.rds.amazonaws.com:3306/SOOTUDY");
+
+//		hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
+//		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mariadb://stddbinstance.c6v2froaotfn.ap-northeast-2.rds.amazonaws.com:3306/SOOTUDY");
+//		
+//		hikariConfig.setUsername("SOOJAE");
+//		hikariConfig.setPassword("suss1109!!");
+		hikariConfig.setDriverClassName(driverClassName);
+		hikariConfig.setJdbcUrl(url);
 		 
-		hikariConfig.setUsername("SOOJAE");
-		hikariConfig.setPassword("suss1109!!");
+		hikariConfig.setUsername(username);
+		hikariConfig.setPassword(password);
 		
 		return new HikariDataSource(hikariConfig);
 	}
