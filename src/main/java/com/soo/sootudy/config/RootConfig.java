@@ -48,12 +48,6 @@ import lombok.extern.slf4j.Slf4j;
 })
 public class RootConfig {
 	
-//	@Bean
-//	public static PropertyPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-//		PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
-//		ppc.setIgnoreUnresolvablePlaceholders(true);
-//		return ppc;
-//	}
 	@Value("${spring.aws.datasource.driverClassName}")
     private String driverClassName;
     
