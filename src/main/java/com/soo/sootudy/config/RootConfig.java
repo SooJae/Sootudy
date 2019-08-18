@@ -44,16 +44,16 @@ import lombok.extern.slf4j.Slf4j;
 //	window
     @PropertySource( value = "file:c:/dev/config.properties", ignoreResourceNotFound = true ),
 // linux 
-    @PropertySource( value = "file:${catalina.home}/config/application.properties", ignoreResourceNotFound = true)
+    @PropertySource( value = "file:${catalina.home}/property/application.properties", ignoreResourceNotFound = true)
 })
 public class RootConfig {
 	
-	@Bean
-	public static PropertyPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
-		PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
-		ppc.setIgnoreUnresolvablePlaceholders(true);
-		return ppc;
-	}
+//	@Bean
+//	public static PropertyPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
+//		PropertyPlaceholderConfigurer ppc = new PropertyPlaceholderConfigurer();
+//		ppc.setIgnoreUnresolvablePlaceholders(true);
+//		return ppc;
+//	}
 	@Value("${spring.aws.datasource.driverClassName}")
     private String driverClassName;
     
