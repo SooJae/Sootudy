@@ -34,7 +34,8 @@ public class WebConfig extends AbstractAnnotationConfigDispatcherServletInitiali
 		  
 //		MultipartConfigElement multipartConfig = new MultipartConfigElement("C:\\Users\\leesujae\\upload\\temp", 20971520, 41943040, 20971520);
 //		MultipartConfigElement multipartConfig = new MultipartConfigElement("C:\\upload\\temp", 20971520, 41943040, 20971520);
-		MultipartConfigElement multipartConfig = new MultipartConfigElement("\\home\\ubuntu\\upload\\temp", 20971520, 41943040, 20971520);
+		MultipartConfigElement multipartConfig = new MultipartConfigElement("/home/ubuntu/upload/temp", 20971520, 41943040, 20971520);
+//		MultipartConfigElement multipartConfig = new MultipartConfigElement("\\home\\ubuntu\\upload\\temp", 20971520, 41943040, 20971520);
 		registration.setMultipartConfig(multipartConfig);
 
 	}
