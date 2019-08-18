@@ -4,17 +4,13 @@
 <%@ include file="../includes/header.jsp" %>
 
 
-<!--  breadcrumb -->
-<!--   <section class="container board-list m-full p-0"> -->
-<!--  breadcrumb -->
-<section class="container board-list m-full">
-        <div class="container-fluid">
-            <div class="text-center">
-              <h1>스터디</h1>
-            </div>
-        </div>
-</section>
-<!--       </section>  -->
+<!-- <section class="container board-list m-full"> -->
+<!--         <div class="container-fluid"> -->
+<!--             <div class="text-center"> -->
+<!--               <h1>스터디</h1> -->
+<!--             </div> -->
+<!--         </div> -->
+<!-- </section> -->
 
 <section class="container board-list m-full">
 

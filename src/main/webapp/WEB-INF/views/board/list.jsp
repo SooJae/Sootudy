@@ -4,13 +4,13 @@
 <%@ include file="../includes/header.jsp" %>
 
 
-<section class="container board-list m-full">
-	      <div class="container-fluid">
-	          <div class="text-center">
-	            <h1>게시판</h1>
-	          </div>
-	      </div>
-</section>
+<!-- <section class="container board-list m-full"> -->
+<!-- 	      <div class="container-fluid"> -->
+<!-- 	          <div class="text-center"> -->
+<!-- 	            <h1>게시판</h1> -->
+<!-- 	          </div> -->
+<!-- 	      </div> -->
+<!-- </section> -->
 
 
 
