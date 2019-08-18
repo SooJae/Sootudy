@@ -39,19 +39,22 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class RootConfig {
 
-	@Autowired
-	public GlobalPropertySource globalPropertySource;
+//	@Autowired
+//	public GlobalPropertySource globalPropertySource;
 	
 	@Bean
 	public DataSource dataSource() {
 		HikariConfig hikariConfig = new HikariConfig();
+//		spring.datasource.driverClassName=net.sf.log4jdbc.sql.jdbcapi.DriverSpy
+//				spring.datasource.url=jdbc:log4jdbc:mariadb://stddbinstance.c6v2froaotfn.ap-northeast-2.rds.amazonaws.com:3306/SOOTUDY
+//				spring.datasource.username=SOOJAE
+//				spring.datasource.password=suss1109!!
 		
-		
-		hikariConfig.setDriverClassName(globalPropertySource.getDriverClassName());
-		hikariConfig.setJdbcUrl(globalPropertySource.getUrl());
+		hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
+		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mariadb://stddbinstance.c6v2froaotfn.ap-northeast-2.rds.amazonaws.com:3306/SOOTUDY");
 		 
-		hikariConfig.setUsername(globalPropertySource.getUsername());
-		hikariConfig.setPassword(globalPropertySource.getPassword());
+		hikariConfig.setUsername("SOOJAE");
+		hikariConfig.setPassword("suss11091!!");
 		
 		return new HikariDataSource(hikariConfig);
 	}
