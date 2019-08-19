@@ -9,7 +9,6 @@ Sootudy는 스터디 웹 사이트 입니다. 빼어날 수(秀)에 Study를 합
 ## BACK-END
 - JAVA
 - JSP
-- JSTL
 
 ## FRAMEWORK
 - SPRING
