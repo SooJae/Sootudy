@@ -60,11 +60,6 @@ public class RootConfig {
 	public DataSource dataSource() {
 		HikariConfig hikariConfig = new HikariConfig();
 
-//		hikariConfig.setDriverClassName("net.sf.log4jdbc.sql.jdbcapi.DriverSpy");
-//		hikariConfig.setJdbcUrl("jdbc:log4jdbc:mariadb://stddbinstance.c6v2froaotfn.ap-northeast-2.rds.amazonaws.com:3306/SOOTUDY");
-//		
-//		hikariConfig.setUsername("SOOJAE");
-//		hikariConfig.setPassword("suss1109!!");
 		hikariConfig.setDriverClassName(driverClassName);
 		hikariConfig.setJdbcUrl(url);
 		 

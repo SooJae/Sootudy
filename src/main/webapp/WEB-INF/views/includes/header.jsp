@@ -165,7 +165,6 @@ $(function(){
 		e.preventDefault();
 		
 		let operation = $(this).data("oper");
-		console.log(operation);
 		let loc;
 		if(operation === "board"){
 			loc = "/board/list";
@@ -189,8 +188,6 @@ $(function(){
 	var result = '<c:out value="${result}"/>';  
 	var resultFlag = '<c:out value="${result.flag}"/>';
 	var resultMsg = '<c:out value="${result.msg}"/>';
-	
-	console.log("result..",result);
 	
 	
 	checkAlert(result);

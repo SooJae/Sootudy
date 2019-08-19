@@ -1,9 +1,6 @@
-console.log("boardlike module...");
-//
 var boardLikeService=(function(){
 	
 	function like(like,callback,error){
-		console.log("like......");
 
 	$.ajax({
 		type:'post',
@@ -25,7 +22,6 @@ var boardLikeService=(function(){
 	
 	function getLike(bno,callback, error){
 		
-		console.log("getLike......");
 
 		$.ajax({
 			type:'post',

@@ -1,7 +1,6 @@
 var chatService=(function(){
 	
 	function add(room_name,callback,error){
-		console.log("chat add......"+room_name);
 
 		$.ajax({
 			type:'post',

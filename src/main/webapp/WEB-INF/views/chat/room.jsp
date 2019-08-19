@@ -71,7 +71,6 @@ $(function(){
 var room_name = $("input[name='room_name']");
 
 function createRoom(){
-  console.log("챗안녕");
   if("" === room_name.val()) {
         alert("방 제목을 입력해 주십시요.");
         return;

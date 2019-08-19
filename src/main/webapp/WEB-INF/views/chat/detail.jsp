@@ -74,7 +74,6 @@
            }, function(error) {
                if(reconnect++ <= 5) {
                    setTimeout(function() {
-                       console.log("connection reconnect");
                        sock = new SockJS("/ws-stomp");
                        ws = Stomp.over(sock);
                        connect();

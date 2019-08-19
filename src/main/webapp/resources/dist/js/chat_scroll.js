@@ -1,6 +1,7 @@
 var pre_diffHeight = 0;
       var bottom_flag = true;
       var custom_chat_scroll = function(){
+    	  //채팅창 크기
               var objDiv = document.getElementById("custom-chat");
        
               if((objDiv.scrollTop + objDiv.clientHeight) == objDiv.scrollHeight){
@@ -21,7 +22,7 @@ var pre_diffHeight = 0;
 
       
       function updated() {
-          // app_chat_list 의 변화가 발생할때마다 수행되는 영역
+          // 변화가 발생할때마다 수행되는 영역
 
           var objDiv = document.getElementById("custom-chat");
           if(bottom_flag){

@@ -163,11 +163,9 @@ ul > li { list-style: none }
 			e.preventDefault();
 			
 			var operation = $(this).data("oper");
-			console.log(operation);
 			
 			if(operation === "modify"){
 				
-				 console.log("submit clicked");
 			        
 			        var str = "";
 			        
@@ -176,8 +174,6 @@ ul > li { list-style: none }
 			          var jobj = $(obj);
 			          
 			          console.dir(jobj);
-			          console.log("-------------------------");
-			          console.log(jobj.data("filename"));
 			          
 			          
 			          str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
@@ -187,7 +183,6 @@ ul > li { list-style: none }
 			          
 			        });
 			        
-			        console.log(str);
 			        
 			        formObj.append(str).submit();
 				
@@ -213,7 +208,6 @@ ul > li { list-style: none }
 		 (function(){
 			   var bno = '<c:out value="${board.bno}"/>';
 			   $.getJSON("/board/getAttachList", {bno: bno}, function(arr){
-			       console.log(arr);
 			       var str = "";
 			       $(arr).each(function(i, attach){
 			           //image type
@@ -297,7 +291,6 @@ ul > li { list-style: none }
 		      }, 
 		      dataType:'json',
 		        success: function(result){
-		          console.log(result); 
 				  showUploadResult(result); //업로드 결과 처리 함수 
 
 		      }
@@ -349,7 +342,6 @@ ul > li { list-style: none }
 	// ajax로 삭제해버릴시, 사용자가 취소했을때 복구 할 수가 없다.
  		 $(".uploadResult").on("click","button",function(e){
 			//.uploadResult 밑의 button 을 누를시
-			 console.log("delete file");
 			 
 			 if(confirm("Remove this file?")){
 				 

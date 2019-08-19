@@ -127,7 +127,6 @@ $(function(){
 	    
 	    e.preventDefault();
 	    
-	    console.log("submit clicked");
 	    
 	    
 		if(!$("input[name='title']").val()){
@@ -145,8 +144,6 @@ $(function(){
 	      var jobj = $(obj);
 	      
 	      console.dir(jobj);
-	      console.log("-------------------------");
-	      console.log(jobj.data("filename"));
 	      
 	      
 	      str += "<input type='hidden' name='attachList["+i+"].fileName' value='"+jobj.data("filename")+"'>";
@@ -156,7 +153,6 @@ $(function(){
 	      
 	    });
 	    
-	    console.log(str);
 	    formObj.append(str).submit();
 	  });
 	

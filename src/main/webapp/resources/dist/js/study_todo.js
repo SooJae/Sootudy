@@ -1,9 +1,6 @@
-console.log("todo module...");
-//
 var studyTodoService=(function(){
 	
 	function check(sno, todo, callback, error){
-console.log(todo+"todo");
 		$.ajax({
 			type:'put',
 			url :'/todo/'+sno,
@@ -39,7 +36,6 @@ console.log(todo+"todo");
        }
 	
 	function add(todo,callback,error){
-	console.log("todo add......");
 
 	$.ajax({
 		type:'post',
@@ -95,7 +91,6 @@ console.log(todo+"todo");
 //	
 //	function update(reply, callback, error){
 //		
-//		console.log("RNO: "+reply.rno);
 //		
 //		$.ajax({
 //			type:'put',

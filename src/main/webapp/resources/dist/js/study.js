@@ -1,5 +1,3 @@
-console.log("study module...");
-//
 var studyService=(function(){
 	
 	function add(reply,callback,error){
@@ -62,8 +60,6 @@ var studyService=(function(){
 	}
 	
 	function update(reply, callback, error){
-		
-		console.log("RNO: "+reply.rno);
 		
 		$.ajax({
 			type:'put',

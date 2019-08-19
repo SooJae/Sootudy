@@ -66,13 +66,13 @@ ul > li { list-style: none }
 
 </style>
   <!--  breadcrumb -->
-<section class="container board-list m-full">
-        <div class="container-fluid">
-            <div class="text-center">
-              <h1>게시판</h1>
-            </div>
-        </div>
-</section>
+<%-- <section class="container board-list m-full"> --%>
+<!--         <div class="container-fluid"> -->
+<!--             <div class="text-center"> -->
+<!--               <h1>게시판</h1> -->
+<!--             </div> -->
+<!--         </div> -->
+<%-- </section> --%>
 <section>
 <div class="container board-whole m-full white">
  	<div class="container board-detail getbody">
@@ -279,7 +279,6 @@ $(function(){
 
 			//operForm을 담아서 보냄
 			var operation = $(this).data("oper");
-			console.log(operation);
 			if(operation === "modify"){
 				operForm.attr("action","/board/modify");
 				document.body.appendChild(operForm[0]);
@@ -389,7 +388,6 @@ $(function(){
 	      
 	      str += "</ul></div>";
 	      
-	      console.log(str);
 	      
 	      replyPageFooter.html(str);
 	      
@@ -397,11 +395,8 @@ $(function(){
 	
 	replyPageFooter.on("click","li a", function(e){
 	       e.preventDefault();
-	       console.log("page click");
 	       
 	       var targetPage = $(this).attr("href");
-	       
-	       console.log("targetPageNum: " + targetPage);
 	       
 	       page = targetPage;
 	       
@@ -506,7 +501,6 @@ $(function(){
 	   (function(){
 		   var bno = '<c:out value="${board.bno}"/>';
 		   $.getJSON("/board/getAttachList", {bno: bno}, function(arr){
-		       console.log(arr);
 		       var str = "";
 		       $(arr).each(function(i, attach){
 		       
@@ -535,7 +529,6 @@ $(function(){
 	   
 	   $(".uploadResult").on("click","li", function(e){
 		      
-		    console.log("view image");
 		    
 		    var liObj = $(this);
 		    

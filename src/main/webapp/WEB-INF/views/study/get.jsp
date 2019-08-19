@@ -249,13 +249,13 @@ var todoList = $(".todo-list");
       function checkFunc(arg){
     	    arg.prop("checked", true);
           arg.parent().parent().attr("class", "done");
-          console.log(todo_checks[arg.parent().find("input").val()] = arg.parent().find("input").attr("check"));
+          todo_checks[arg.parent().find("input").val()] = arg.parent().find("input").attr("check");
       }
       
       function unCheckFunc(arg){
     	    arg.prop("checked", false);
           arg.parent().parent().removeAttr("class");
-          console.log(todo_checks[arg.parent().find("input").val()] = arg.parent().find("input").attr("check"));
+          todo_checks[arg.parent().find("input").val()] = arg.parent().find("input").attr("check");
       }
       
       function showTodoList() {
@@ -396,7 +396,6 @@ var todoList = $(".todo-list");
 	           }, function(error) {
 	               if(reconnect++ <= 5) {
 	                   setTimeout(function() {
-	                       console.log("connection reconnect");
 	                       sock = new SockJS("/ws-stomp");
 	                       ws = Stomp.over(sock);
 	                       connect();

@@ -166,13 +166,6 @@ $(function(){
 		  bestForm.find("input").attr("value","");
 	    $(this).attr("class","btn btn-outline-danger");
 	  }
-	   //}
-	   //else{
-	   //}
-	   
-	   /* else if(bestForm.find("input[name='filter_mode']").val("best")){
-	         console.log("메롱");
-	    }  */
 	  bestForm.submit();
    });
    var searchForm =$("#searchForm");
