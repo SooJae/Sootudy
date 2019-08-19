@@ -16,11 +16,11 @@
               <img src="/resources/img/structure.png">
             </div>
             <!-- /.card -->
+            <div>
+            <h2>  기술 상세 설명 링크입니다 : <a href="https://github.com/SooJae/Sootudy">https://github.com/SooJae/Sootudy</a></h2>
+            </div>
             </div>
             
-            <h2>
-            기술 설명 : https://github.com/SooJae/Sootudy
-            </h2>
   </div>
  </section>
 
