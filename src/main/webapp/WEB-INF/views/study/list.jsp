@@ -53,10 +53,10 @@
               <td class="project_progress">
                   <div class="progress progress-sm">
 <!--                       <div class="progress-bar bg-green" role="progressbar" aria-volumenow="57" aria-volumemin="0" aria-volumemax="100" style="width: 57%"> -->
-            <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: 57%"></div>
+            <div class="progress-bar progress-bar-striped" role="progressbar" aria-valuenow="10" aria-valuemin="0" aria-valuemax="100" style="width: ${study.progress}%"></div>
                       </div>
                   <div>
-                      57%
+                      <c:out value="${study.progress}"/>% 
                   </div>
               </td>
               <td class="project-actions text-right">

@@ -22,4 +22,6 @@ public interface StudyMapper {
 
 	public void updateMemberCnt(@Param("sno") int sno, @Param("amount") int amount);
 
+	public void updateProgress(int sno);
+
 }

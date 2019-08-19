@@ -17,6 +17,7 @@ public class StudyVO {
 	private String delete_flag;
 	private int cnt;
 	private int cnt_max;
+	private int progress;
 	
 	private List<String> members;
 }

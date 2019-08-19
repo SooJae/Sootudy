@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.soo.sootudy.domain.StudyTodoVO;
+import com.soo.sootudy.mapper.StudyMapper;
 import com.soo.sootudy.mapper.StudyTodoMapper;
 
 import lombok.extern.slf4j.Slf4j;
@@ -19,6 +20,8 @@ public class StudyTodoServiceImpl implements StudyTodoService {
 	@Autowired
 	private StudyTodoMapper studyTodoMapper;
 
+	@Autowired 
+	private StudyMapper studyMapper;
 
 	@Transactional
 	@Override
@@ -35,31 +38,12 @@ public class StudyTodoServiceImpl implements StudyTodoService {
 	}
 
 
-//	@Override
-//	public int check(List<String> vo , String achive) {
-//		vo.forEach(tdno->{
-//			studyTodoMapper.check(tdno, achive);
-//		});
-//		return 1;
-//	}
-
-
-//	@Override
-//	public int check(List<String> todo, int sno) {
-//		todo.forEach(tdno->{
-//			log.info("tdno"+tdno);
-//			studyTodoMapper.check(tdno, sno);
-//		});
-//		return 1;
-//	}
 
 
 	@Override
 	public int check(Map<String, String> todo, int sno) {
 		todo.forEach((k,v)->studyTodoMapper.check(k, v));
-//		todo.forEach(tdno->{
-//			studyTodoMapper.check(tdno, sno);
-//		});
+		studyMapper.updateProgress(sno);
 		return 1;
 	}
 	

@@ -24,6 +24,7 @@ public class StudyServiceImpl implements StudyService {
 	@Override
 	public List<StudyVO> getList(StudyCriteria scri) {
 		// TODO Auto-generated method stub
+		
 		return studyMapper.getListWithPaging(scri);
 	}
 
@@ -57,18 +58,6 @@ public class StudyServiceImpl implements StudyService {
 	}
 	
 
-//	@Override
-//	@Transactional
-//	public int changeCnt(ChatVO vo) {
-//		String roomId = vo.getRoomId();
-//		if(mapper.get(roomId)==null) {
-//			return mapper.updateCnt(roomId, 1);
-//		}else {
-//			return mapper.updateCnt(roomId, -1);
-//		}
-//	}
-	
-	
 
 
 }

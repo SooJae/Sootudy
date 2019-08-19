@@ -58,7 +58,15 @@
               , #{sno})
   </insert>
   
+  <update id="updateProgress">
+  UPDATE study
+	SET progress = 
+	(SELECT count(*) FROM study_todo WHERE sno=#{sno} and achive = '1')
+	/
+	(SELECT COUNT(*) FROM study_todo WHERE sno=#{sno}) * 100
+	WHERE sno = #{sno}
   
+  </update>
   
   <!-- <sql id="filter_mode">
   <trim prefix="AND (" suffix=") " prefixOverrides="AND | OR">

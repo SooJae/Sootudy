@@ -50,7 +50,6 @@ public class StudyController {
 	@GetMapping("/list")
 	public String list(StudyCriteria scri, Model model) {
 		
-		
 		model.addAttribute("list", studyService.getList(scri));
 		int total = studyService.getTotal(scri);
 		log.info("total:"+total);

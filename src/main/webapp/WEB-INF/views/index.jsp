@@ -11,13 +11,13 @@
                    프로젝트 구성
                 </h3>
               </div>
-              <div class="card-body">
+              <div class="card-body row justify-content-center">
               
-              <img src="/resources/img/structure.png">
+              <img src="/resources/img/structure.png" class="col-12 col-md-8">
             </div>
             <!-- /.card -->
             <div>
-            <h2>  기술 상세 설명 링크입니다 : <a href="https://github.com/SooJae/Sootudy">https://github.com/SooJae/Sootudy</a></h2>
+            <h3>  기술 상세 설명 링크입니다 : <a href="https://github.com/SooJae/Sootudy">https://github.com/SooJae/Sootudy</a></h3>
             </div>
             </div>
             
