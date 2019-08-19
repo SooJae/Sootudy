@@ -17,6 +17,10 @@
             </div>
             <!-- /.card -->
             </div>
+            
+            <h2>
+            기술 설명 : https://github.com/SooJae/Sootudy
+            </h2>
   </div>
  </section>
 
