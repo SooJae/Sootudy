@@ -58,7 +58,7 @@ public class MemberController {
 		
 		return readCount ==null? 1 :0;
 		 
-	}
+	} 
 	
 	
 	@GetMapping("/accessError")
