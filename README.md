@@ -56,7 +56,7 @@ Sootudy는 스터디 웹 사이트 입니다. 빼어날 수(秀)에 Study를 합
 ![structure](https://github.com/SooJae/Study/blob/master/portfolio/sootudy/img/structure.png)
 
 # 스크린샷이 첨부된 간단한 설명만 보고 싶으시면 눌러주세요! 
-[스크린샷 보기](https://github.com/SooJae/Study/tree/master/portfolio/sootudy)
+[스크린샷 버전으로 보기](https://github.com/SooJae/Study/tree/master/portfolio/sootudy)
 
 # 서비스
 ## 전체 디자인
