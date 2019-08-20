@@ -46,6 +46,12 @@ Sootudy는 스터디 웹 사이트 입니다. 빼어날 수(秀)에 Study를 합
 - AWS CERTIFICATE MANAGER(SSL 생성용입니다.)
 - ELASTIC LOAD BALANCER (http로 접속시 https로 redirect를 해주기 위해서 만들었습니다.)
 
+## LIBRARY
+- JSTL
+- WEBSTOMP
+- SOCKJS
+- CHARTJS
+
 # 프로젝트 구성
 ![structure](https://github.com/SooJae/Study/blob/master/portfolio/sootudy/img/structure.png)
 
