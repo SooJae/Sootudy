@@ -12,7 +12,7 @@
                 </h3>
               </div>
               <div class="card-body row justify-content-center">
-              
+               
               <img src="/resources/img/structure.png" class="col-12 col-md-8">
             </div>
             <!-- /.card -->
