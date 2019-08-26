@@ -21,110 +21,14 @@
               To Do
             </h3>
 
-            <!-- <div class="card-tools">
-              <ul class="pagination pagination-sm">
-                <li class="page-item"><a href="#" class="page-link">&laquo;</a></li>
-                <li class="page-item"><a href="#" class="page-link">1</a></li>
-                <li class="page-item"><a href="#" class="page-link">2</a></li>
-                <li class="page-item"><a href="#" class="page-link">3</a></li>
-                <li class="page-item"><a href="#" class="page-link">&raquo;</a></li>
-              </ul>
-            </div> -->
           </div>
           <!-- /.card-header -->
           <div class="card-body">
             <ul class="todo-list" data-widget="todo-list">
-
-<!-- 
-                todo text
-              <li>
-                <div class="custom-control custom-checkbox d-inline ml-2">
-                  <input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck" value="안녕" disabled>
-                  <label class="custom-control-label" for="customCheck"></label>
-                </div>
-
-                <span class="text">Make the theme responsive</span>
-                <small class="badge badge-info"><i class="far fa-clock"></i> 4 hours</small>
-                <div class="tools">
-                  <i class="fas fa-edit"></i>
-                  <i class="fas fa-trash-o"></i>
-                </div>
-              </li>
-              <li>
-                <div class="custom-control custom-checkbox d-inline ml-2">
-                  <input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck2" value="안녕2"
-                    disabled>
-                  <label class="custom-control-label" for="customCheck2"></label>
-                </div>
-                <span class="text">Let theme shine like a star</span>
-                <small class="badge badge-warning"><i class="far fa-clock"></i> 1 day</small>
-                <div class="tools">
-                  <i class="fas fa-edit"></i>
-                  <i class="fas fa-trash-o"></i>
-                </div>
-              </li>
-              <li>
-                <div class="custom-control custom-checkbox d-inline ml-2">
-                  <input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck3" value="안녕3"
-                    disabled>
-                  <label class="custom-control-label" for="customCheck3"></label>
-                </div>
-                <span class="text">Let theme shine like a star</span>
-                <small class="badge badge-success"><i class="far fa-clock"></i> 3 days</small>
-                <div class="tools">
-                  <i class="fas fa-edit"></i>
-                  <i class="fas fa-trash-o"></i>
-                </div>
-              </li>
-              <li>
-                <div class="custom-control custom-checkbox d-inline ml-2">
-                  <input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck3" value="안녕3"
-                    disabled>
-                  <label class="custom-control-label" for="customCheck3"></label>
-                </div>
-                <span class="text">Let theme shine like a star</span>
-                <small class="badge badge-danger"><i class="far fa-clock"></i> 3 days</small>
-                <div class="tools">
-                  <i class="fas fa-edit"></i>
-                  <i class="fas fa-trash-o"></i>
-                </div>
-              </li>
-              <li>
-                <div class="custom-control custom-checkbox d-inline ml-2">
-                  <input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck3" value="안녕3"
-                    disabled>
-                  <label class="custom-control-label" for="customCheck3"></label>
-                </div>
-                <span class="text">Let theme shine like a star</span>
-                <small class="badge badge-primary"><i class="far fa-clock"></i> 3 days</small>
-                <div class="tools">
-                  <i class="fas fa-edit"></i>
-                  <i class="fas fa-trash-o"></i>
-                </div>
-              </li>
-              <li>
-                <div class="custom-control custom-checkbox d-inline ml-2">
-                  <input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck3" value="안녕3"
-                    disabled>
-                  <label class="custom-control-label" for="customCheck3"></label>
-                </div>
-                <span class="text">Let theme shine like a star</span>
-                <small class="badge badge-secondary"><i class="far fa-clock"></i> 3 days</small>
-                <div class="tools">
-                  <i class="fas fa-edit"></i>
-                  <i class="fas fa-trash-o"></i>
-                </div>
-              </li> -->
             </ul>
           </div>
           <!-- /.card-body -->
           <div class="card-footer clearfix">
-             <!--  <div class="input-group mb-3">
-                  <input type="text" class="form-control" placeholder="할일을 적어주세요" name="todo-value">
-                   <div class="input-group-append">
-                   <button type="button" data-oper="todoWrite" class="btn btn-primary btns">쓰기</button>
-                   </div>
-                </div> -->
             <button type="button" class="btn btn-success" data-toggle="modal" data-target="#todoModal"><i class="fas fa-plus"></i> 등록</button>
             <button type="button" id="check-button" class="btn btn-info float-right"><i class="fas fa-check"></i> 체크</button>
           </div>
@@ -236,7 +140,7 @@ var todoList = $(".todo-list");
                 if ($(this).is(":checked")) {
                   $(this).prop("checked", true);
                   $(this).parent().parent().attr("class", "done");
-                  
+                  //체크 했다면  1 삽입
                   todo_checks[todo_check_val] = "1";
                 } else {
                   $(this).prop("checked", false);
@@ -260,28 +164,28 @@ var todoList = $(".todo-list");
       
       function showTodoList() {
 		  	//로딩하자마자 todo 리스트 불러옴
-	  	studyTodoService.getList(sno,function(todoList){
+	  	studyTodoService.getList(sno,function(todoListResult){
 	  		 var str="";
 	         
-	         if(todoList ==null || todoList.length==0){
+	         if(todoListResult ==null || todoListResult.length==0){
 	        	 todoList.html("");
 	           return;
 	         }
 	         
-	         for(var i = 0, len = todoList.length||0; i<len; i++){
+	         for(var i = 0, len = todoListResult.length||0; i<len; i++){
 	        	 str +='<li><div class="custom-control custom-checkbox d-inline ml-2">';
-                 str +='<input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck'+[i]+'" value="'+todoList[i].tdno+'" check="'+todoList[i].achive+'" disabled>';
+                 str +='<input type="checkbox" class="custom-control-input" name="todo-check" id="customCheck'+[i]+'" value="'+todoListResult[i].tdno+'" check="'+todoListResult[i].achive+'" disabled>';
                  str +='<label class="custom-control-label" for="customCheck'+[i]+'"></label></div>';
-                 str +='<span class="text">'+todoList[i].todo+'</span>';
-                 str += dateBadge(todoList[i].exp_dt);
+                 str +='<span class="text">'+todoListResult[i].todo+'</span>';
+                 str += dateBadge(todoListResult[i].exp_dt);
                  str +='<div class="tools"><i class="far fa-trash-alt"></i></div></li>';
                  
 	         }
 	         $(".todo-list").html(str);
 	         checkBox();
-	         for(var i = 0, len = todoList.length||0; i<len; i++){
+	         for(var i = 0, len = todoListResult.length||0; i<len; i++){
 	        	 
-	        	 if(todoList[i].achive == 1)
+	        	 if(todoListResult[i].achive == 1)
 	        		  checkFunc($("#customCheck"+[i]));
 	        	 else
 	        		 unCheckFunc($("#customCheck"+[i]));
@@ -485,7 +389,6 @@ var todoList = $(".todo-list");
 
           
           
-          
           function sendMsg(){
         	  ws.debug=null;
               var message = $('input[name="message"]').val();
@@ -496,8 +399,16 @@ var todoList = $(".todo-list");
               }
             }
           
-          
-          
+$(function(){
+     $(".fa-trash-alt").on("click", function(e){
+   	  e.preventDefault();
+   	  var tdno = $(this).parent().parent().find("input[name='todo-check']").val();
+   	  
+   	  studyTodoService.remove(tdno, function(deleteResult){
+   		  showTodoList();
+   	  });
+     });
+});
           
 
 </script>

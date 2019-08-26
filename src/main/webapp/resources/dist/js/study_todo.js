@@ -69,59 +69,26 @@ var studyTodoService=(function(){
 			}
 		});
 	}
-//	
-//	function remove(rno, replyer, callback, error){
-//		$.ajax({
-//			type:'delete',
-//			url:'/replies/'+rno,
-//			data:JSON.stringify({rno:rno, replyer:replyer}),
-//			contentType:"application/json; charset=utf-8",
-//			success: function(deleteResult, status, xhr){
-//				if(callback){
-//					callback(deleteResult);
-//				}
-//			},
-//			error: function(xhr, status, err){
-//				if(error){
-//					error(err);
-//				} 
-//			}
-//		});
-//	}
-//	
-//	function update(reply, callback, error){
-//		
-//		
-//		$.ajax({
-//			type:'put',
-//			url :'/replies/'+reply.rno,
-//			data:JSON.stringify(reply),
-//			contentType:"application/json; charset=utf-8",
-//			success : function(result,status,xhr){
-//				if(callback){
-//					callback(result);
-//				}
-//			},
-//			error : function(xhr,status,err){
-//				if(error){
-//					error(err);
-//				}
-//			}
-//		});
-//	}
-//	
-//	function get(rno, callback, error){
-//		$.get("/replies/"+rno+".json",function(result){
-//			if(callback){
-//				callback(result);
-//			}
-//		}).fail(function(xhr,status,err){
-//			if(error){
-//				error();
-//			}
-//		});
-//	}
-//	
+	
+	function remove(tdno, callback, error){
+		$.ajax({
+			type:'delete',
+			url:'/todo/'+tdno,
+//			data:JSON.stringify({tdno:tdno}),
+			contentType:"application/json; charset=utf-8",
+			success: function(deleteResult, status, xhr){
+				if(callback){
+					callback(deleteResult);
+				}
+			},
+			error: function(xhr, status, err){
+				if(error){
+					error(err);
+				} 
+			}
+		});
+	}
+	
 	function displayTime(timeValue){
 		var today = new Date();
 		
@@ -171,9 +138,7 @@ return{
 	add: add,
 	getList:getList,
 	checkBox:checkBox,
-//	remove:remove,
-//	update:update,
-//	get:get,
+	remove:remove,
 	displayTime : displayTime
 };
 })();

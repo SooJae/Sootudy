@@ -12,13 +12,9 @@ public interface StudyTodoService {
 	public List<StudyTodoVO> getTodoList(int sno);
 
 
-
-
-//	public int check(List<String> todo, int sno);
-
-//	public int check(Map<String, String> todo);
-
 	public int check(Map<String, String> todo, int sno);
+
+	public int remove(int tdno);
 
 
 }

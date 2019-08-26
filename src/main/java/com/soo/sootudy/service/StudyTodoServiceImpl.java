@@ -23,7 +23,6 @@ public class StudyTodoServiceImpl implements StudyTodoService {
 	@Autowired 
 	private StudyMapper studyMapper;
 
-	@Transactional
 	@Override
 	public int register(StudyTodoVO vo) {
 		log.info("register...." + vo);
@@ -45,6 +44,12 @@ public class StudyTodoServiceImpl implements StudyTodoService {
 		todo.forEach((k,v)->studyTodoMapper.check(k, v));
 		studyMapper.updateProgress(sno);
 		return 1;
+	}
+
+
+	@Override
+	public int remove(int tdno) {
+		return studyTodoMapper.delete(tdno);
 	}
 	
 

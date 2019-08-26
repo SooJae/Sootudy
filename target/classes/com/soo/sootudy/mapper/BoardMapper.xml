@@ -139,7 +139,6 @@
     <if test="filter_mode == 'best'.toString()">
       like_cnt &gt; 0
     </if>
-  
   </trim>
 </sql>
 

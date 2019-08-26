@@ -12,7 +12,8 @@ public interface StudyTodoMapper {
 
 	public List<StudyTodoVO> getList(int sno);
 
-
 	public void check(@Param("tdno") String tdno, @Param("achive") String achive);
+
+	public int delete(int tdno);
 
 }

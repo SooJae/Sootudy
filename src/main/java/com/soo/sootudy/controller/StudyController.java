@@ -72,13 +72,13 @@ public class StudyController {
 		
 		return "redirect:/study/list" + scri.getListLink();
 	}
-	
+	//등록화면
 	@PreAuthorize("isAuthenticated()")	
 	@GetMapping("/register")
 	public String register() {
 		return "/study/register";
 	}
-	
+	//등록
 	@PreAuthorize("isAuthenticated()")
 	@PostMapping("/register")
 	@Transactional

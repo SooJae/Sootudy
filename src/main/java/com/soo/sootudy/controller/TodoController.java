@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -64,18 +65,15 @@ public class TodoController {
 //		return new ResponseEntity<>(service.get(rno), HttpStatus.OK);
 //	}
 //	
-//	@PreAuthorize("principal.username == #vo.replyer")
-//	@DeleteMapping(value="/{rno}")
-//	public ResponseEntity<String> remove(@RequestBody ReplyVO vo, @PathVariable("rno") int rno){
-//		log.info("remove"+rno);
-//		
-//		log.info("replyer: " + vo.getReplyer());
-//		
-//		return service.remove(rno) ==1
-//			? new ResponseEntity<>("success", HttpStatus.OK)
-//			: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//	}
-//	
+	@PreAuthorize("isAuthenticated()")
+	@DeleteMapping(value="/{tdno}")
+	public ResponseEntity<String> remove(@PathVariable("tdno") int tdno){
+		log.info(tdno+"tdno");
+		return service.remove(tdno) ==1
+			? new ResponseEntity<>("success", HttpStatus.OK)
+			: new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+	}
+	
 	@RequestMapping(method= {RequestMethod.PUT, RequestMethod.PATCH},
 			value="/{sno}",
 			consumes="application/json",

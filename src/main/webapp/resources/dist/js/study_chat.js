@@ -1,4 +1,3 @@
-console.log("study module...");
 //
 var studyChatService=(function(){
 	
