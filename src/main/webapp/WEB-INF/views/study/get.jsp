@@ -400,9 +400,9 @@ var todoList = $(".todo-list");
             }
             
 $(function(){
-     $(".fa-trash-alt").on("click", function(e){
+     $(".tools").on("click", function(e){
    	  e.preventDefault();
-   	  var tdno = $(this).parent().parent().find("input[name='todo-check']").val();
+   	  var tdno = $(this).parent().find("input[name='todo-check']").val();
    	  
    	  studyTodoService.remove(tdno, function(deleteResult){
    		  showTodoList();
