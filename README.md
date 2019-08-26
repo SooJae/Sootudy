@@ -2,8 +2,14 @@
 
 Sootudy는 스터디 웹 사이트 입니다. 빼어날 수(秀)에 Study를 합쳐 '뛰어난 개발을 하는 모임'이라는 뜻 입니다.
 
-
 테스트용 아이디 : test 비밀번호 : test0000
+
+# 이전 프로젝트와 비교하여 발전한 부분
+스프링 : AOP와 Spring Security, Restful 방식으로 설계   
+웹 소켓 통신 : Stomp와 SockJS 사용법   
+AWS : EC2, S3, RDS, Router53, load balancer, ACM   
+Javascript : Keyup이벤트 발생시 정규식 + Ajax통신 (callback을 사용하지 않고 async-await을 사용)을 이용한 유효성 검사   
+기타 : Github, Jenkins, Slack 연동
 
 # 개발 환경
 
