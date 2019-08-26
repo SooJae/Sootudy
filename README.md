@@ -173,7 +173,7 @@ private void initializeAmazon() {
 위와 같이 해결하지 못할 것 같은 문제들이 닥쳤을 때 적지 않은 스트레스를 받지만, 노력 끝에 해결하면 그 보람과 성취감은 이루어 말할 수 없다고 느꼈습니다.   
 개발하며 성취감을 자주 느끼는 개발자가 되고 싶습니다.
 
-## 저의 또 다른 프로젝트가 보고싶으시다면 링크를 클릭해주세요. 감사합니다.
-[모바일 게임 공략사이트](https://github.com/SooJae/Study/tree/master/portfolio/DDB/README.md)
-[Ajax 통신을 이용한 웹 메신저 사이트](https://github.com/SooJae/Study/blob/master/portfolio/WebTalk/README.md)
-[강의평가 사이트(SMTP 활용한 사이트)](https://github.com/SooJae/Study/tree/master/portfolio/LectureEvaluation/README.md)
+## 저의 또 다른 프로젝트가 보고 싶으시다면 링크를 클릭해주세요. 감사합니다.
+[모바일 게임 공략사이트](https://github.com/SooJae/Study/tree/master/portfolio/DDB/README.md)   
+[Ajax 통신을 이용한 웹 메신저 사이트](https://github.com/SooJae/Study/blob/master/portfolio/WebTalk/README.md)   
+[강의평가 사이트(SMTP 활용한 사이트)](https://github.com/SooJae/Study/tree/master/portfolio/LectureEvaluation/README.md)   
