@@ -398,7 +398,7 @@ var todoList = $(".todo-list");
                 $('input[name="message"]').val('');
               }
             }
-           
+            
 $(function(){
      $(".fa-trash-alt").on("click", function(e){
    	  e.preventDefault();
