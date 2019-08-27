@@ -136,7 +136,7 @@
 
 <script charset="UTF-8">
 
-let studyTable = $(".study-body");
+var studyTable = $(".study-body");
 
 $(function(){
 

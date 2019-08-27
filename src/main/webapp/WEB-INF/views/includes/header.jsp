@@ -163,8 +163,8 @@ $(function(){
 	$(".btnc").on("click",function(e){
 		e.preventDefault();
 		
-		let operation = $(this).data("oper");
-		let loc;
+		var operation = $(this).data("oper");
+		var loc;
 		if(operation === "board"){
 			loc = "/board/list";
 		} else if(operation ==="study"){

@@ -37,8 +37,8 @@
 
 
 <script>
-    	  let ss_roomId = sessionStorage.getItem("chatInfo.roomId");
-    	  let ss_sender = sessionStorage.getItem("chatInfo.sender");
+    	  var ss_roomId = sessionStorage.getItem("chatInfo.roomId");
+    	  var ss_sender = sessionStorage.getItem("chatInfo.sender");
     	
     	//ajaxSend()를 이용한 코드는 모든 AJAX 전송시 CSRF 토큰을 같이 전송하도록 세팅되기 때문에 매번 AJAX 사용 시 beforeSend를 호출해야하는 번거로움을 줄일 수 있다.
         var csrfHeaderName="${_csrf.headerName}";
